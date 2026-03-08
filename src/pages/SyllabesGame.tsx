@@ -55,12 +55,12 @@ const SyllabesGame = () => {
 
   const current = ROUNDS[round];
 
-  const handleSelect = useCallback((syl: string) => {
+  const handleSelect = useCallback((syl: string, idx: number) => {
     if (feedback || !current) return;
-    const newSelected = [...selected, syl];
+    const newSelected = [...selected, { index: idx, value: syl }];
     setSelected(newSelected);
     if (newSelected.length === current.syllables.length) {
-      const isCorrect = newSelected.join("") === current.syllables.join("");
+      const isCorrect = newSelected.map(s => s.value).join("") === current.syllables.join("");
       setFeedback(isCorrect ? "correct" : "wrong");
       if (isCorrect) { setScore((s) => s + 1); sounds.correct(); }
       else { errorsRef.current += 1; sounds.wrong(); }
