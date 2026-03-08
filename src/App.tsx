@@ -23,6 +23,7 @@ import GraphemesGame from "./pages/GraphemesGame";
 import TrainGame from "./pages/TrainGame";
 import MiroirGame from "./pages/MiroirGame";
 import FauxAmisGame from "./pages/FauxAmisGame";
+import PhareGame from "./pages/PhareGame";
 
 const queryClient = new QueryClient();
 
