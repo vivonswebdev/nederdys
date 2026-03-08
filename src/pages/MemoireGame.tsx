@@ -1,8 +1,9 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Star, RotateCcw, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGameSession } from "@/hooks/useGameSession";
 
 const PAIRS = [
   { word: "huis", emoji: "🏠" },
