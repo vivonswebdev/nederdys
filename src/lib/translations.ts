@@ -349,6 +349,15 @@ const t = {
   "chrono.wrong": { fr: "❌ C'était :", nl: "❌ Het was:" },
   "chrono.totalTime": { fr: "Temps total", nl: "Totale tijd" },
   "chrono.bravo": { fr: "Tu es un champion bilingue ! 🏆", nl: "Je bent een tweetalige kampioen! 🏆" },
+
+  // Mouton Noir game
+  "game.mouton.title": { fr: "Le Mouton Noir", nl: "Het Zwarte Schaap" },
+  "game.mouton.desc": { fr: "Trouve l'intrus parmi les mots NL !", nl: "Vind het buitenbeentje tussen de NL-woorden!" },
+  "mouton.instruction": { fr: "Un mot ne va pas avec les autres… Trouve-le ! 🐑", nl: "Eén woord hoort er niet bij… Vind het! 🐑" },
+  "mouton.hint": { fr: "Clique sur le mot qui n'appartient pas à la catégorie", nl: "Klik op het woord dat niet bij de categorie hoort" },
+  "mouton.correct": { fr: "✅ Bien vu ! L'intrus était", nl: "✅ Goed gezien! Het buitenbeentje was" },
+  "mouton.wrong": { fr: "❌ Ce mot appartient à la catégorie ! Essaie encore", nl: "❌ Dit woord hoort bij de categorie! Probeer opnieuw" },
+  "mouton.bravo": { fr: "Tu as trouvé tous les moutons noirs ! 🐑🖤", nl: "Je hebt alle zwarte schapen gevonden! 🐑🖤" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
