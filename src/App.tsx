@@ -33,6 +33,7 @@ import MurGame from "./pages/MurGame";
 import OreilleMagiqueGame from "./pages/OreilleMagiqueGame";
 import TirGame from "./pages/TirGame";
 import MotTroueGame from "./pages/MotTroueGame";
+import ChronoBilingueGame from "./pages/ChronoBilingueGame";
 
 const queryClient = new QueryClient();
 
