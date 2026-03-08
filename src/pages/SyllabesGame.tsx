@@ -37,7 +37,7 @@ const ROUNDS_BY_DIFFICULTY: Record<Difficulty, { audio: string; syllables: strin
 const SyllabesGame = () => {
   const { t } = useLanguage();
   const [round, setRound] = useState(0);
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected, setSelected] = useState<{ index: number; value: string }[]>([]);
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
   const [gameOver, setGameOver] = useState(false);
