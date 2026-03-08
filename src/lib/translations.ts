@@ -209,6 +209,20 @@ const t = {
   "miroir.listen": { fr: "Réécouter le son", nl: "Luister opnieuw" },
   "miroir.correct": { fr: "✅ Bien vu ! Tu as trouvé !", nl: "✅ Goed gezien! Je hebt het gevonden!" },
   "miroir.wrong": { fr: "❌ Regarde bien la forme !", nl: "❌ Kijk goed naar de vorm!" },
+
+  // Faux-Amis game
+  "game.fauxamis.title": { fr: "Mots Amis / Ennemis", nl: "Ware & Valse Vrienden" },
+  "game.fauxamis.desc": { fr: "Boom = arbre ou explosion ? Débusque les faux-amis !", nl: "Boom = boom of explosie? Ontdek de valse vrienden!" },
+  "fauxamis.instruction": { fr: "Ce mot ressemble au français… mais a-t-il le même sens ? 🤔", nl: "Dit woord lijkt op het Frans… maar heeft het dezelfde betekenis? 🤔" },
+  "fauxamis.hint": { fr: "Choisis si ce mot est un Vrai Ami ou un Faux Ami !", nl: "Kies of dit woord een Ware Vriend of een Valse Vriend is!" },
+  "fauxamis.listen": { fr: "Écouter le mot", nl: "Luister naar het woord" },
+  "fauxamis.question": { fr: "Ce mot veut-il dire la même chose en FR et NL ?", nl: "Betekent dit woord hetzelfde in FR en NL?" },
+  "fauxamis.vraiAmi": { fr: "Vrai Ami !", nl: "Ware Vriend!" },
+  "fauxamis.vraiAmiDesc": { fr: "Même sens en FR & NL", nl: "Zelfde betekenis in FR & NL" },
+  "fauxamis.fauxAmi": { fr: "Faux Ami !", nl: "Valse Vriend!" },
+  "fauxamis.fauxAmiDesc": { fr: "Sens différent !", nl: "Andere betekenis!" },
+  "fauxamis.correct": { fr: "✅ Bien joué !", nl: "✅ Goed gespeeld!" },
+  "fauxamis.wrong": { fr: "❌ Raté ! Regarde la vraie signification :", nl: "❌ Fout! Kijk naar de echte betekenis:" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
