@@ -8,12 +8,12 @@ import { GameCard } from "@/components/GameCard";
 import { Navbar } from "@/components/Navbar";
 
 const games = [
-  { id: "syllabes", title: "Syllabes Magiques", desc: "Glisse les syllabes dans les bonnes cases !", icon: "✨", color: "bg-kids-green-light", level: "Facile", route: "/jeu/syllabes" },
-  { id: "chasse", title: "Chasse aux Mots", desc: "Attrape les bons mots qui volent !", icon: "🎈", color: "bg-kids-yellow", level: "Moyen", route: "/jeu/chasse" },
-  { id: "memoire", title: "Mémoire Sonore", desc: "Retrouve les paires de sons NL !", icon: "🔊", color: "bg-kids-blue", level: "Facile", route: "/jeu/memoire" },
-  { id: "phonemes", title: "Phonèmes Danseurs", desc: "Clique les sons dans le bon ordre !", icon: "💃", color: "bg-kids-pink", level: "Moyen", route: "/jeu/phonemes" },
-  { id: "dictee", title: "Dictée IA Visuelle", desc: "Écoute et choisis la bonne phrase !", icon: "📝", color: "bg-kids-purple", level: "Difficile", route: "/jeu/dictee" },
-  { id: "planetes", title: "Vocabulaire Planètes", desc: "Explore l'espace des mots NL !", icon: "🪐", color: "bg-kids-orange", level: "Facile", route: "/jeu/planetes" },
+  { id: "syllabes", title: "Syllabes Magiques", desc: "Glisse les syllabes dans les bonnes cases !", icon: "✨", color: "bg-kids-green-light", level: "Adaptatif", route: "/jeu/syllabes" },
+  { id: "chasse", title: "Chasse aux Mots", desc: "Attrape les bons mots qui volent !", icon: "🎈", color: "bg-kids-yellow", level: "Adaptatif", route: "/jeu/chasse" },
+  { id: "memoire", title: "Mémoire Sonore", desc: "Retrouve les paires de sons NL !", icon: "🔊", color: "bg-kids-blue", level: "Adaptatif", route: "/jeu/memoire" },
+  { id: "phonemes", title: "Phonèmes Danseurs", desc: "Clique les sons dans le bon ordre !", icon: "💃", color: "bg-kids-pink", level: "Adaptatif", route: "/jeu/phonemes" },
+  { id: "dictee", title: "Dictée IA Visuelle", desc: "Écoute et choisis la bonne phrase !", icon: "📝", color: "bg-kids-purple", level: "Adaptatif", route: "/jeu/dictee" },
+  { id: "lettres", title: "Lettres Magnétiques", desc: "Construis des mots NL lettre par lettre !", icon: "🧲", color: "bg-kids-orange", level: "Adaptatif", route: "/jeu/lettres" },
 ];
 
 const Index = () => {

@@ -15,6 +15,9 @@ const GAME_LABELS: Record<string, string> = {
   syllabes: "Syllabes Magiques",
   chasse: "Chasse aux Mots",
   memoire: "Mémoire Sonore",
+  phonemes: "Phonèmes Danseurs",
+  dictee: "Dictée IA Visuelle",
+  lettres: "Lettres Magnétiques",
 };
 
 const ParentsDashboard = () => {
