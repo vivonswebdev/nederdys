@@ -118,7 +118,7 @@ const MurGame = () => {
 
   const handleWordClick = (word: string, idx: number) => {
     if (feedback) return;
-    sounds.pop?.() || sounds.correct();
+    sounds.click();
     setPlacedWords((prev) => [...prev, word]);
     setShuffledWords((prev) => prev.filter((_, i) => i !== idx));
   };
