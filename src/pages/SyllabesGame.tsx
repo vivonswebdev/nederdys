@@ -19,6 +19,9 @@ const SyllabesGame = () => {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
   const [gameOver, setGameOver] = useState(false);
+  const { saveSession, resetTimer } = useGameSession("syllabes");
+  const errorsRef = useRef(0);
+  const savedRef = useRef(false);
 
   const current = ROUNDS[round];
   const allOptions = [...current.syllables, ...current.distractors].sort(() => Math.random() - 0.5);
