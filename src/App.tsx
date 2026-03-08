@@ -18,6 +18,7 @@ import AddChild from "./pages/AddChild";
 import PhonemesGame from "./pages/PhonemesGame";
 import DicteeGame from "./pages/DicteeGame";
 import LettresGame from "./pages/LettresGame";
+import BurgerGame from "./pages/BurgerGame";
 
 const queryClient = new QueryClient();
 
