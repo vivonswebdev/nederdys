@@ -302,6 +302,16 @@ const t = {
   "mur.correct": { fr: "✅ Mur parfait !", nl: "✅ Perfecte muur!" },
   "mur.wrong": { fr: "❌ L'ordre n'est pas bon ! Regarde la bonne phrase", nl: "❌ De volgorde klopt niet! Kijk naar de juiste zin" },
   "mur.bravo": { fr: "Le mur est complet, bravo ! 🏗️", nl: "De muur is compleet, bravo! 🏗️" },
+
+  // Oreille Magique game
+  "game.oreille.title": { fr: "L'Oreille Magique", nl: "Het Magische Oor" },
+  "game.oreille.desc": { fr: "Écoute le mot NL et trouve la bonne image !", nl: "Luister naar het NL-woord en vind het juiste plaatje!" },
+  "oreille.instruction": { fr: "Écoute bien et clique sur la bonne image ! 👂", nl: "Luister goed en klik op het juiste plaatje! 👂" },
+  "oreille.hint": { fr: "Choisis l'image qui correspond au mot entendu", nl: "Kies het plaatje dat bij het gehoorde woord past" },
+  "oreille.listen": { fr: "Réécouter le mot", nl: "Luister opnieuw" },
+  "oreille.correct": { fr: "✅ Bien entendu !", nl: "✅ Goed gehoord!" },
+  "oreille.wrong": { fr: "❌ Ce n'est pas ça ! C'était", nl: "❌ Dat is het niet! Het was" },
+  "oreille.bravo": { fr: "Tes oreilles sont magiques ! 🎧", nl: "Je oren zijn magisch! 🎧" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
