@@ -6,6 +6,7 @@ import { sounds } from "@/lib/sounds";
 
 interface XpGainPopupProps {
   xpGained: number | null;
+  coinsGained?: number | null;
   leveledUp: boolean;
   newLevel?: number;
 }
