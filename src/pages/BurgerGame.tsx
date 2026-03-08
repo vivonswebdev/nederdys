@@ -315,20 +315,6 @@ const BurgerGame = () => {
                         className={`${item.color} rounded-xl p-4 cursor-grab active:cursor-grabbing flex items-center gap-3 shadow-md border-2 border-white/30 select-none ${
                           showHint ? "ring-2 ring-offset-2" : ""
                         }`}
-                        style={
-                          showHint
-                            ? {
-                                ringColor:
-                                  item.type === "subject"
-                                    ? "#38bdf8"
-                                    : item.type === "verb"
-                                    ? "#f87171"
-                                    : item.type === "complement"
-                                    ? "#4ade80"
-                                    : "#d97706",
-                              }
-                            : {}
-                        }
                       >
                         <span className="text-2xl">{item.emoji}</span>
                         <div className="flex-1">
