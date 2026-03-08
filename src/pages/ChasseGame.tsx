@@ -65,6 +65,13 @@ const ChasseGame = () => {
     if (lives <= 0) setGameOver(true);
   }, [lives]);
 
+  useEffect(() => {
+    if (gameOver && !savedRef.current) {
+      savedRef.current = true;
+      saveSession({ score, maxScore: Math.max(score + errorsRef.current, 1), errorsCount: errorsRef.current, completed: true });
+    }
+  }, [gameOver, score, saveSession]);
+
   const handleClick = (balloon: Balloon) => {
     if (balloon.correct) {
       setScore((s) => s + 1);
