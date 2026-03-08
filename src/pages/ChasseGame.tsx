@@ -35,6 +35,9 @@ const ChasseGame = () => {
   const [lives, setLives] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [nextId, setNextId] = useState(0);
+  const { saveSession, resetTimer } = useGameSession("chasse");
+  const errorsRef = useRef(0);
+  const savedRef = useRef(false);
 
   const spawnBalloon = useCallback(() => {
     const wordData = WORDS[Math.floor(Math.random() * WORDS.length)];
