@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Star, RotateCcw, Volume2 } from "lucide-react";
@@ -7,6 +7,7 @@ import { useGameSession } from "@/hooks/useGameSession";
 import { DifficultyIndicator } from "@/components/DifficultyIndicator";
 import { XpGainPopup } from "@/components/XpGainPopup";
 import { Difficulty } from "@/lib/database";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface DicteeRound {
   audio: string;
@@ -39,6 +40,7 @@ const ROUNDS_BY_DIFFICULTY: Record<Difficulty, DicteeRound[]> = {
 };
 
 const DicteeGame = () => {
+  const { t } = useLanguage();
   const [round, setRound] = useState(0);
   const [score, setScore] = useState(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -59,7 +61,6 @@ const DicteeGame = () => {
     speechSynthesis.speak(u);
   };
 
-  // Auto-speak on new round
   useEffect(() => {
     if (!gameOver && current) {
       const timer = setTimeout(speakSentence, 500);
@@ -104,7 +105,6 @@ const DicteeGame = () => {
     resetTimer();
   };
 
-  // Highlight syllables in text
   const highlightSyllables = (text: string) => {
     return text.split(" ").map((word, wi) => (
       <span key={wi}>
@@ -121,8 +121,8 @@ const DicteeGame = () => {
         <div className="container max-w-lg mx-auto px-4 py-16 text-center">
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
             <span className="text-6xl block mb-4">📝</span>
-            <h2 className="text-3xl font-bold text-foreground mb-2">Bravo !</h2>
-            <p className="text-xl text-muted-foreground mb-2">Score : {score}/{ROUNDS.length}</p>
+            <h2 className="text-3xl font-bold text-foreground mb-2">{t("game.bravo")}</h2>
+            <p className="text-xl text-muted-foreground mb-2">{t("game.score")} : {score}/{ROUNDS.length}</p>
             <DifficultyIndicator difficulty={difficulty} />
             <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">
@@ -132,9 +132,9 @@ const DicteeGame = () => {
             </div>
             <div className="flex gap-4 justify-center">
               <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2">
-                <RotateCcw className="w-4 h-4" /> Rejouer
+                <RotateCcw className="w-4 h-4" /> {t("game.replay")}
               </button>
-              <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold">Accueil</Link>
+              <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold">{t("game.home")}</Link>
             </div>
           </motion.div>
         </div>
@@ -150,7 +150,7 @@ const DicteeGame = () => {
       <div className="container max-w-lg mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="w-4 h-4" /> Retour
+            <ArrowLeft className="w-4 h-4" /> {t("game.back")}
           </Link>
           <DifficultyIndicator difficulty={difficulty} />
         </div>
@@ -163,9 +163,9 @@ const DicteeGame = () => {
         </div>
 
         <motion.div key={round} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-4">Écoute et choisis la bonne phrase ! 📝</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-4">{t("dictee.instruction")}</h2>
           <button onClick={speakSentence} className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-8 py-4 rounded-full text-lg font-bold hover:bg-accent/80 transition-colors">
-            <Volume2 className="w-6 h-6" /> Écouter la phrase
+            <Volume2 className="w-6 h-6" /> {t("dictee.listen")}
           </button>
         </motion.div>
 
@@ -200,7 +200,7 @@ const DicteeGame = () => {
         <AnimatePresence>
           {feedback && (
             <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-center mt-6">
-              <span className="text-3xl">{feedback === "correct" ? "✅ Correct !" : "❌ Ce n'est pas ça !"}</span>
+              <span className="text-3xl">{feedback === "correct" ? t("dictee.correct") : t("dictee.wrong")}</span>
             </motion.div>
           )}
         </AnimatePresence>
