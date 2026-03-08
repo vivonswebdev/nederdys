@@ -86,7 +86,7 @@ const BoatIcon = ({ saved, index }: { saved: boolean; index: number }) => (
 
 const PhareGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("phare");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("phare");
 
   const getChallenges = useCallback(() => {
     if (difficulty === "hard") return [...EASY, ...MEDIUM, ...HARD];
