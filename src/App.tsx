@@ -29,6 +29,7 @@ import PeintreGame from "./pages/PeintreGame";
 import PuzzleGame from "./pages/PuzzleGame";
 import PontGame from "./pages/PontGame";
 import TrieurGame from "./pages/TrieurGame";
+import MurGame from "./pages/MurGame";
 
 const queryClient = new QueryClient();
 
