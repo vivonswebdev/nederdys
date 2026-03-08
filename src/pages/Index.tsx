@@ -19,6 +19,7 @@ const Index = () => {
     { id: "dictee", title: t("game.dictee.title"), desc: t("game.dictee.desc"), icon: "📝", color: "bg-kids-purple", level: t("games.adaptive"), route: "/jeu/dictee" },
     { id: "lettres", title: t("game.lettres.title"), desc: t("game.lettres.desc"), icon: "🧲", color: "bg-kids-orange", level: t("games.adaptive"), route: "/jeu/lettres" },
     { id: "burger", title: t("game.burger.title"), desc: t("game.burger.desc"), icon: "🍔", color: "bg-kids-red", level: t("games.adaptive"), route: "/jeu/burger" },
+    { id: "graphemes", title: t("game.graphemes.title"), desc: t("game.graphemes.desc"), icon: "🏴‍☠️", color: "bg-sky-700", level: t("games.adaptive"), route: "/jeu/graphemes" },
   ];
 
   return (
