@@ -28,6 +28,7 @@ import ShopPage from "./pages/ShopPage";
 import PeintreGame from "./pages/PeintreGame";
 import PuzzleGame from "./pages/PuzzleGame";
 import PontGame from "./pages/PontGame";
+import TrieurGame from "./pages/TrieurGame";
 
 const queryClient = new QueryClient();
 
