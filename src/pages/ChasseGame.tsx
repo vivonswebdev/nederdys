@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Star, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGameSession } from "@/hooks/useGameSession";
 
 const WORDS = [
   { word: "kat", correct: true, emoji: "🐱" },
@@ -34,6 +35,9 @@ const ChasseGame = () => {
   const [lives, setLives] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [nextId, setNextId] = useState(0);
+  const { saveSession, resetTimer } = useGameSession("chasse");
+  const errorsRef = useRef(0);
+  const savedRef = useRef(false);
 
   const spawnBalloon = useCallback(() => {
     const wordData = WORDS[Math.floor(Math.random() * WORDS.length)];
@@ -61,11 +65,19 @@ const ChasseGame = () => {
     if (lives <= 0) setGameOver(true);
   }, [lives]);
 
+  useEffect(() => {
+    if (gameOver && !savedRef.current) {
+      savedRef.current = true;
+      saveSession({ score, maxScore: Math.max(score + errorsRef.current, 1), errorsCount: errorsRef.current, completed: true });
+    }
+  }, [gameOver, score, saveSession]);
+
   const handleClick = (balloon: Balloon) => {
     if (balloon.correct) {
       setScore((s) => s + 1);
     } else {
       setLives((l) => l - 1);
+      errorsRef.current += 1;
     }
     setBalloons((prev) => prev.filter((b) => b.id !== balloon.id));
   };
@@ -76,6 +88,9 @@ const ChasseGame = () => {
     setLives(3);
     setGameOver(false);
     setNextId(0);
+    errorsRef.current = 0;
+    savedRef.current = false;
+    resetTimer();
   };
 
   if (gameOver) {

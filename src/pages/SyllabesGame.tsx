@@ -1,8 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Volume2, Star, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGameSession } from "@/hooks/useGameSession";
 
 const ROUNDS = [
   { audio: "kaatje", syllables: ["kaat", "je"], distractors: ["ka", "tje"] },
@@ -18,6 +19,9 @@ const SyllabesGame = () => {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
   const [gameOver, setGameOver] = useState(false);
+  const { saveSession, resetTimer } = useGameSession("syllabes");
+  const errorsRef = useRef(0);
+  const savedRef = useRef(false);
 
   const current = ROUNDS[round];
   const allOptions = [...current.syllables, ...current.distractors].sort(() => Math.random() - 0.5);
@@ -31,6 +35,7 @@ const SyllabesGame = () => {
       const isCorrect = newSelected.join("") === current.syllables.join("");
       setFeedback(isCorrect ? "correct" : "wrong");
       if (isCorrect) setScore((s) => s + 1);
+      else errorsRef.current += 1;
 
       setTimeout(() => {
         if (round < ROUNDS.length - 1) {
@@ -44,12 +49,23 @@ const SyllabesGame = () => {
     }
   }, [selected, feedback, current, round]);
 
+  // Save when game ends
+  useEffect(() => {
+    if (gameOver && !savedRef.current) {
+      savedRef.current = true;
+      saveSession({ score, maxScore: ROUNDS.length, errorsCount: errorsRef.current, completed: true });
+    }
+  }, [gameOver, score, saveSession]);
+
   const reset = () => {
     setRound(0);
     setSelected([]);
     setScore(0);
     setFeedback(null);
     setGameOver(false);
+    errorsRef.current = 0;
+    savedRef.current = false;
+    resetTimer();
   };
 
   const speakWord = () => {
