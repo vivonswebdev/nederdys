@@ -1,8 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Volume2, Star, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGameSession } from "@/hooks/useGameSession";
 
 const ROUNDS = [
   { audio: "kaatje", syllables: ["kaat", "je"], distractors: ["ka", "tje"] },
