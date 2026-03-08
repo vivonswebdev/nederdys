@@ -14,6 +14,47 @@ export type Database = {
   }
   public: {
     Tables: {
+      child_levels: {
+        Row: {
+          child_id: string
+          created_at: string
+          games_played: number
+          id: string
+          level: number
+          updated_at: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          games_played?: number
+          id?: string
+          level?: number
+          updated_at?: string
+          user_id: string
+          xp?: number
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          games_played?: number
+          id?: string
+          level?: number
+          updated_at?: string
+          user_id?: string
+          xp?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_levels_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       children: {
         Row: {
           age: number
@@ -52,6 +93,47 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      game_difficulties: {
+        Row: {
+          child_id: string
+          created_at: string
+          difficulty: string
+          game_type: string
+          id: string
+          recent_error_rate: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          difficulty?: string
+          game_type: string
+          id?: string
+          recent_error_rate?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          difficulty?: string
+          game_type?: string
+          id?: string
+          recent_error_rate?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_difficulties_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       game_sessions: {
         Row: {
