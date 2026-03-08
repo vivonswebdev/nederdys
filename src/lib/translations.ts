@@ -260,6 +260,17 @@ const t = {
   "peintre.wrong": { fr: "❌ Pas cette syllabe ! La bonne est", nl: "❌ Niet die lettergreep! De juiste is" },
   "peintre.stressHint": { fr: "Syllabe accentuée", nl: "Beklemtoonde lettergreep" },
   "peintre.bravo": { fr: "Tu es un vrai artiste des sons ! 🖌️", nl: "Je bent een echte klankkunstenaar! 🖌️" },
+
+  // Puzzle game
+  "game.puzzle.title": { fr: "Le Puzzle des Phrases", nl: "De Zinnen-Puzzel" },
+  "game.puzzle.desc": { fr: "Trouve le mot manquant dans la phrase NL !", nl: "Vind het ontbrekende woord in de NL-zin!" },
+  "puzzle.instruction": { fr: "Trouve la pièce manquante ! 🧩", nl: "Vind het ontbrekende stukje! 🧩" },
+  "puzzle.hint": { fr: "Lis la phrase et choisis le mot qui complète le puzzle", nl: "Lees de zin en kies het woord dat de puzzel compleet maakt" },
+  "puzzle.listen": { fr: "Écouter la phrase", nl: "Luister naar de zin" },
+  "puzzle.correct": { fr: "✅ Pièce parfaite !", nl: "✅ Perfect puzzelstukje!" },
+  "puzzle.wrong": { fr: "❌ Ce n'est pas le bon mot !", nl: "❌ Dat is niet het juiste woord!" },
+  "puzzle.answerWas": { fr: "La bonne réponse était", nl: "Het juiste antwoord was" },
+  "puzzle.bravo": { fr: "Puzzle complété, bravo ! 🎉", nl: "Puzzel compleet, bravo! 🎉" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
