@@ -44,7 +44,7 @@ const HARD_CHALLENGES: GraphemeChallenge[] = [
 
 const GraphemesGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("graphemes");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("graphemes");
 
   const getChallenges = useCallback(() => {
     if (difficulty === "hard") return [...EASY_CHALLENGES, ...MEDIUM_CHALLENGES, ...HARD_CHALLENGES];
