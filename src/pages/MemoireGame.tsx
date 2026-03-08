@@ -93,6 +93,7 @@ const MemoireGame = () => {
     const card = gameCards.find((c) => c.id === id);
     if (!card || card.flipped || card.matched) return;
 
+    sounds.flip();
     const newCards = gameCards.map((c) => (c.id === id ? { ...c, flipped: true } : c));
     setGameCards(newCards);
     const newFlipped = [...flippedIds, id];
