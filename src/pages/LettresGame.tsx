@@ -68,7 +68,7 @@ const LettresGame = () => {
   const [available, setAvailable] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
   const [gameOver, setGameOver] = useState(false);
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("lettres");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("lettres");
   const errorsRef = useRef(0);
   const savedRef = useRef(false);
 
