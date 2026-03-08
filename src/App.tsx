@@ -34,6 +34,7 @@ import OreilleMagiqueGame from "./pages/OreilleMagiqueGame";
 import TirGame from "./pages/TirGame";
 import MotTroueGame from "./pages/MotTroueGame";
 import ChronoBilingueGame from "./pages/ChronoBilingueGame";
+import MoutonNoirGame from "./pages/MoutonNoirGame";
 
 const queryClient = new QueryClient();
 
