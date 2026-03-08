@@ -32,6 +32,7 @@ import TrieurGame from "./pages/TrieurGame";
 import MurGame from "./pages/MurGame";
 import OreilleMagiqueGame from "./pages/OreilleMagiqueGame";
 import TirGame from "./pages/TirGame";
+import MotTroueGame from "./pages/MotTroueGame";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,7 @@ const App = () => (
               <Route path="/jeu/mur" element={<MurGame />} />
               <Route path="/jeu/oreille" element={<OreilleMagiqueGame />} />
               <Route path="/jeu/tir" element={<TirGame />} />
+              <Route path="/jeu/mot-troue" element={<MotTroueGame />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

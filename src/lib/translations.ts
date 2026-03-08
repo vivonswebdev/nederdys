@@ -324,6 +324,16 @@ const t = {
   "tir.correct": { fr: "✅ Dans le mille !", nl: "✅ In de roos!" },
   "tir.wrong": { fr: "❌ Raté ! C'était", nl: "❌ Gemist! Het was" },
   "tir.bravo": { fr: "Tu es un tireur d'élite des mots ! 🏆", nl: "Je bent een woordenscherpschutter! 🏆" },
+
+  // Mot Troué game
+  "game.mottroue.title": { fr: "Le Mot Troué", nl: "Het Gatenwoord" },
+  "game.mottroue.desc": { fr: "Complète les mots NL avec les bonnes lettres !", nl: "Vul de NL-woorden aan met de juiste letters!" },
+  "mottroue.instruction": { fr: "Écoute le mot et bouche les trous ! 🕳️", nl: "Luister naar het woord en vul de gaten! 🕳️" },
+  "mottroue.hint": { fr: "Choisis les lettres qui manquent dans le mot", nl: "Kies de ontbrekende letters in het woord" },
+  "mottroue.listen": { fr: "Écouter le mot", nl: "Luister naar het woord" },
+  "mottroue.correct": { fr: "✅ Parfait ! C'était", nl: "✅ Perfect! Het was" },
+  "mottroue.wrong": { fr: "❌ Pas ces lettres ! Essaie encore", nl: "❌ Niet die letters! Probeer opnieuw" },
+  "mottroue.bravo": { fr: "Tous les trous sont bouchés ! 🎉", nl: "Alle gaten zijn gevuld! 🎉" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
