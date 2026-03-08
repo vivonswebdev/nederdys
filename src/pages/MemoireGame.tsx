@@ -48,7 +48,7 @@ interface Card {
 
 const MemoireGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("memoire");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("memoire");
   const savedRef = useRef(false);
 
   const PAIRS = PAIRS_BY_DIFFICULTY[difficulty];
@@ -156,7 +156,7 @@ const MemoireGame = () => {
             <h2 className="text-3xl font-bold text-foreground mb-2">{t("memoire.found")}</h2>
             <p className="text-xl text-muted-foreground mb-2">{t("memoire.moves")} {moves} {t("memoire.movesUnit")}</p>
             <DifficultyIndicator difficulty={difficulty} />
-            <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
+            <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">
               {Array.from({ length: stars }).map((_, i) => (
                 <Star key={i} className="w-8 h-8 text-secondary fill-secondary" />

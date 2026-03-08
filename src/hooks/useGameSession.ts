@@ -8,6 +8,8 @@ import {
   upsertChildLevel,
   getGameDifficulty,
   updateGameDifficulty,
+  calculateCoinsGain,
+  addCoins,
   Difficulty,
 } from "@/lib/database";
 
@@ -17,7 +19,9 @@ export const useGameSession = (gameType: string) => {
   const startTime = useRef(Date.now());
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [xpGained, setXpGained] = useState<number | null>(null);
+  const [coinsGained, setCoinsGained] = useState<number | null>(null);
   const [leveledUp, setLeveledUp] = useState(false);
+  const streakRef = useRef(0);
 
   const { data: children = [] } = useQuery({
     queryKey: ["children", user?.id],
@@ -36,7 +40,13 @@ export const useGameSession = (gameType: string) => {
   const resetTimer = useCallback(() => {
     startTime.current = Date.now();
     setXpGained(null);
+    setCoinsGained(null);
     setLeveledUp(false);
+    streakRef.current = 0;
+  }, []);
+
+  const setStreak = useCallback((s: number) => {
+    streakRef.current = s;
   }, []);
 
   const saveSession = useCallback(
@@ -72,6 +82,11 @@ export const useGameSession = (gameType: string) => {
       setXpGained(xp);
       setLeveledUp(result.leveledUp);
 
+      // Award Mouche-Coins
+      const coins = calculateCoinsGain(score, maxScore, streakRef.current);
+      await addCoins(user.id, activeChild.id, coins);
+      setCoinsGained(coins);
+
       // Adapt difficulty
       const errorRate = maxScore > 0 ? errorsCount / maxScore : 0;
       const newDiff = await updateGameDifficulty(user.id, activeChild.id, gameType, errorRate);
@@ -80,9 +95,10 @@ export const useGameSession = (gameType: string) => {
       // Invalidate queries
       queryClient.invalidateQueries({ queryKey: ["sessions"] });
       queryClient.invalidateQueries({ queryKey: ["childLevel"] });
+      queryClient.invalidateQueries({ queryKey: ["childCoins"] });
     },
     [user, activeChild, gameType, queryClient]
   );
 
-  return { saveSession, resetTimer, hasChild: !!activeChild, difficulty, xpGained, leveledUp };
+  return { saveSession, resetTimer, setStreak, hasChild: !!activeChild, difficulty, xpGained, coinsGained, leveledUp };
 };

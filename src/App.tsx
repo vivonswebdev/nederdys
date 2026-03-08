@@ -24,6 +24,7 @@ import TrainGame from "./pages/TrainGame";
 import MiroirGame from "./pages/MiroirGame";
 import FauxAmisGame from "./pages/FauxAmisGame";
 import PhareGame from "./pages/PhareGame";
+import ShopPage from "./pages/ShopPage";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ const App = () => (
               <Route path="/jeu/miroir" element={<MiroirGame />} />
               <Route path="/jeu/faux-amis" element={<FauxAmisGame />} />
               <Route path="/jeu/phare" element={<PhareGame />} />
+              <Route path="/boutique" element={<ShopPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

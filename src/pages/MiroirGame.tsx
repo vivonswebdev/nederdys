@@ -46,7 +46,7 @@ const HARD_CHALLENGES: MirrorChallenge[] = [
 
 const MiroirGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("miroir");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("miroir");
 
   const getChallenges = useCallback(() => {
     if (difficulty === "hard") return [...EASY_CHALLENGES, ...MEDIUM_CHALLENGES, ...HARD_CHALLENGES];
@@ -215,7 +215,7 @@ const MiroirGame = () => {
               <p className="text-xl text-purple-200">
                 {t("game.score")}: {score}/{totalRounds}
               </p>
-              <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
+              <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-purple-500 hover:bg-purple-600 text-white">
                   <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}

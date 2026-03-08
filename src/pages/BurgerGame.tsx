@@ -128,7 +128,7 @@ const HARD_SENTENCES: SentenceChallenge[] = [
 
 const BurgerGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("burger");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("burger");
 
   const getSentences = useCallback(() => {
     if (difficulty === "hard") return [...EASY_SENTENCES, ...MEDIUM_SENTENCES, ...HARD_SENTENCES];
@@ -259,7 +259,7 @@ const BurgerGame = () => {
               <p className="text-xl text-muted-foreground">
                 {t("game.score")}: {score}/{totalRounds}
               </p>
-              <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
+              <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg">
                   <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}

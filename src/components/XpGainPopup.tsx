@@ -6,11 +6,12 @@ import { sounds } from "@/lib/sounds";
 
 interface XpGainPopupProps {
   xpGained: number | null;
+  coinsGained?: number | null;
   leveledUp: boolean;
   newLevel?: number;
 }
 
-export const XpGainPopup = ({ xpGained, leveledUp, newLevel }: XpGainPopupProps) => {
+export const XpGainPopup = ({ xpGained, coinsGained, leveledUp, newLevel }: XpGainPopupProps) => {
   useEffect(() => {
     if (xpGained !== null) sounds.xp();
     if (leveledUp) setTimeout(() => sounds.levelUp(), 300);
@@ -25,15 +26,27 @@ export const XpGainPopup = ({ xpGained, leveledUp, newLevel }: XpGainPopupProps)
           exit={{ opacity: 0, y: -20 }}
           className="flex flex-col items-center gap-2 my-4"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: [0, 1.3, 1] }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full font-bold"
-          >
-            <Zap className="w-5 h-5" />
-            +{xpGained} XP
-          </motion.div>
+          <div className="flex items-center gap-3">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: [0, 1.3, 1] }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full font-bold"
+            >
+              <Zap className="w-5 h-5" />
+              +{xpGained} XP
+            </motion.div>
+            {coinsGained != null && coinsGained > 0 && (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: [0, 1.3, 1] }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex items-center gap-2 bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 px-4 py-2 rounded-full font-bold"
+              >
+                🪙 +{coinsGained}
+              </motion.div>
+            )}
+          </div>
 
           {leveledUp && newLevel && (
             <motion.div

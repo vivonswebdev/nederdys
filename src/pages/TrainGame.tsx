@@ -57,7 +57,7 @@ interface Wagon {
 
 const TrainGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("train");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("train");
 
   const getWords = useCallback(() => {
     if (difficulty === "hard") return [...EASY_WORDS, ...MEDIUM_WORDS, ...HARD_WORDS];
@@ -229,7 +229,7 @@ const TrainGame = () => {
               <p className="text-lg text-muted-foreground">
                 {t("game.score")}: {score}/{totalRounds}
               </p>
-              <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
+              <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white">
                   <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}

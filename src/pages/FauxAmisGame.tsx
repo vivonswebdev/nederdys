@@ -47,7 +47,7 @@ const HARD_CHALLENGES: FauxAmiChallenge[] = [
 
 const FauxAmisGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("fauxamis");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("fauxamis");
 
   const getChallenges = useCallback(() => {
     if (difficulty === "hard") return [...EASY_CHALLENGES, ...MEDIUM_CHALLENGES, ...HARD_CHALLENGES];
@@ -189,7 +189,7 @@ const FauxAmisGame = () => {
               <p className="text-xl text-amber-200">
                 {t("game.score")}: {score}/{totalRounds}
               </p>
-              <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
+              <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-amber-500 hover:bg-amber-600 text-white">
                   <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}

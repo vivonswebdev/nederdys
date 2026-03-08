@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Gamepad2, BarChart3, Home, LogIn, LogOut, UserPlus, Globe } from "lucide-react";
+import { Gamepad2, BarChart3, Home, LogIn, LogOut, UserPlus, Globe, ShoppingBag } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
-import { getChildren, getChildLevel } from "@/lib/database";
+import { getChildren, getChildLevel, getChildCoins } from "@/lib/database";
 import { LevelBadge } from "./LevelBadge";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -23,6 +23,12 @@ export const Navbar = () => {
   const { data: childLevel } = useQuery({
     queryKey: ["childLevel", activeChild?.id],
     queryFn: () => getChildLevel(activeChild!.id),
+    enabled: !!activeChild,
+  });
+
+  const { data: coinsData } = useQuery({
+    queryKey: ["childCoins", activeChild?.id],
+    queryFn: () => getChildCoins(activeChild!.id),
     enabled: !!activeChild,
   });
   
@@ -73,6 +79,11 @@ export const Navbar = () => {
               {childLevel && (
                 <LevelBadge level={childLevel.level} xp={childLevel.xp} compact />
               )}
+              <Link to="/boutique"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+                <ShoppingBag className="w-4 h-4" />
+                <span className="hidden sm:inline">🪙 {coinsData?.coins ?? 0}</span>
+              </Link>
               <Link to="/ajouter-enfant"
                 className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground">
                 <UserPlus className="w-4 h-4" />

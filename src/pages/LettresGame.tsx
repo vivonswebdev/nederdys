@@ -68,7 +68,7 @@ const LettresGame = () => {
   const [available, setAvailable] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
   const [gameOver, setGameOver] = useState(false);
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("lettres");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("lettres");
   const errorsRef = useRef(0);
   const savedRef = useRef(false);
 
@@ -114,7 +114,7 @@ const LettresGame = () => {
             <span className="text-6xl block mb-4">🧲</span>
             <h2 className="text-3xl font-bold text-foreground mb-2">{t("lettres.great")}</h2>
             <p className="text-xl text-muted-foreground mb-2">{t("game.score")} : {score}/{ROUNDS.length}</p>
-            <DifficultyIndicator difficulty={difficulty} /><XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
+            <DifficultyIndicator difficulty={difficulty} /><XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">{Array.from({ length: score }).map((_, i) => (<Star key={i} className="w-8 h-8 text-secondary fill-secondary" />))}</div>
             <div className="flex gap-4 justify-center">
               <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2"><RotateCcw className="w-4 h-4" /> {t("game.replay")}</button>

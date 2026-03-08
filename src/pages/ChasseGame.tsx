@@ -43,7 +43,7 @@ const ChasseGame = () => {
   const [lives, setLives] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [nextId, setNextId] = useState(0);
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("chasse");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("chasse");
   const errorsRef = useRef(0);
   const savedRef = useRef(false);
 
@@ -76,7 +76,7 @@ const ChasseGame = () => {
             <h2 className="text-3xl font-bold text-foreground mb-2">{score >= 5 ? t("chasse.super") : t("chasse.tryagain")}</h2>
             <p className="text-xl text-muted-foreground mb-2">{t("chasse.caught")} {score} {t("chasse.words")}</p>
             <DifficultyIndicator difficulty={difficulty} />
-            <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
+            <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">{Array.from({ length: Math.min(score, 10) }).map((_, i) => (<Star key={i} className="w-6 h-6 text-secondary fill-secondary" />))}</div>
             <div className="flex gap-4 justify-center">
               <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2"><RotateCcw className="w-4 h-4" /> {t("game.replay")}</button>

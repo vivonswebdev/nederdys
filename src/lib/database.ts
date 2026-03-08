@@ -170,3 +170,114 @@ export const updateGameDifficulty = async (
 
   return newDifficulty;
 };
+
+// --- Mouche-Coins ---
+
+const COINS_BASE = 10;
+const COINS_PER_STAR = 5; // stars: 0-3 based on score ratio
+const COINS_STREAK_BONUS = 3;
+
+export const calculateCoinsGain = (
+  score: number,
+  maxScore: number,
+  streak: number
+): number => {
+  if (maxScore === 0) return COINS_BASE;
+  const ratio = score / maxScore;
+  const stars = ratio >= 0.9 ? 3 : ratio >= 0.7 ? 2 : ratio >= 0.4 ? 1 : 0;
+  const streakBonus = streak >= 3 ? COINS_STREAK_BONUS * 2 : streak >= 2 ? COINS_STREAK_BONUS : 0;
+  return COINS_BASE + stars * COINS_PER_STAR + streakBonus;
+};
+
+export const getChildCoins = async (childId: string) => {
+  const { data, error } = await supabase
+    .from("child_coins")
+    .select("*")
+    .eq("child_id", childId)
+    .maybeSingle();
+  if (error) console.error("Error fetching child coins:", error);
+  return data;
+};
+
+export const addCoins = async (
+  userId: string,
+  childId: string,
+  amount: number
+) => {
+  const existing = await getChildCoins(childId);
+  if (existing) {
+    const { error } = await supabase
+      .from("child_coins")
+      .update({
+        coins: existing.coins + amount,
+        total_earned: existing.total_earned + amount,
+      })
+      .eq("child_id", childId);
+    if (error) console.error("Error updating coins:", error);
+    return existing.coins + amount;
+  } else {
+    const { error } = await supabase.from("child_coins").insert({
+      user_id: userId,
+      child_id: childId,
+      coins: amount,
+      total_earned: amount,
+    });
+    if (error) console.error("Error inserting coins:", error);
+    return amount;
+  }
+};
+
+export const spendCoins = async (
+  childId: string,
+  amount: number
+): Promise<boolean> => {
+  const existing = await getChildCoins(childId);
+  if (!existing || existing.coins < amount) return false;
+  const { error } = await supabase
+    .from("child_coins")
+    .update({ coins: existing.coins - amount })
+    .eq("child_id", childId);
+  if (error) {
+    console.error("Error spending coins:", error);
+    return false;
+  }
+  return true;
+};
+
+export const getPurchasedItems = async (childId: string) => {
+  const { data, error } = await supabase
+    .from("purchased_items")
+    .select("*")
+    .eq("child_id", childId);
+  if (error) console.error("Error fetching purchased items:", error);
+  return data || [];
+};
+
+export const purchaseItem = async (
+  userId: string,
+  childId: string,
+  itemId: string
+) => {
+  const { error } = await supabase.from("purchased_items").insert({
+    user_id: userId,
+    child_id: childId,
+    item_id: itemId,
+    equipped: false,
+  });
+  if (error) console.error("Error purchasing item:", error);
+  return !error;
+};
+
+export const toggleEquipItem = async (
+  childId: string,
+  itemId: string,
+  equipped: boolean
+) => {
+  const { error } = await supabase
+    .from("purchased_items")
+    .update({ equipped })
+    .eq("child_id", childId)
+    .eq("item_id", itemId);
+  if (error) console.error("Error equipping item:", error);
+  return !error;
+};
