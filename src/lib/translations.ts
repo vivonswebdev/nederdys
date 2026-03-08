@@ -235,6 +235,17 @@ const t = {
   "phare.bravo": { fr: "Tu as guidé tous les bateaux au port ! 🚢", nl: "Je hebt alle boten naar de haven geleid! 🚢" },
   "phare.boatSaved": { fr: "Un bateau sauvé !", nl: "Een boot gered!" },
   "phare.boatsSaved": { fr: "Bateaux guidés au port :", nl: "Boten naar de haven geleid:" },
+
+  // Shop
+  "nav.shop": { fr: "Boutique", nl: "Winkel" },
+  "shop.title": { fr: "Boutique de la Grenouille 🐸", nl: "Kikkerwinkel 🐸" },
+  "shop.coins": { fr: "Mouche-Coins", nl: "Vlieg-Munten" },
+  "shop.buy": { fr: "Acheter", nl: "Kopen" },
+  "shop.equipped": { fr: "Équipé", nl: "Uitgerust" },
+  "shop.equip": { fr: "Équiper", nl: "Uitrusten" },
+  "shop.notEnough": { fr: "Pas assez de Mouche-Coins !", nl: "Niet genoeg Vlieg-Munten!" },
+  "shop.purchased": { fr: "Acheté ! 🎉", nl: "Gekocht! 🎉" },
+  "shop.coinsEarned": { fr: "Mouche-Coins gagnés !", nl: "Vlieg-Munten verdiend!" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
