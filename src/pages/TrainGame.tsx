@@ -57,7 +57,7 @@ interface Wagon {
 
 const TrainGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("train");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("train");
 
   const getWords = useCallback(() => {
     if (difficulty === "hard") return [...EASY_WORDS, ...MEDIUM_WORDS, ...HARD_WORDS];
