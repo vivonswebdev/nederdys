@@ -11,6 +11,11 @@ interface XpGainPopupProps {
 }
 
 export const XpGainPopup = ({ xpGained, leveledUp, newLevel }: XpGainPopupProps) => {
+  useEffect(() => {
+    if (xpGained !== null) sounds.xp();
+    if (leveledUp) setTimeout(() => sounds.levelUp(), 300);
+  }, [xpGained, leveledUp]);
+
   return (
     <AnimatePresence>
       {xpGained !== null && (

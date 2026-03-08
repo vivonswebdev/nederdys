@@ -75,8 +75,8 @@ const PhonemesGame = () => {
     if (newSelected.length === current.phonemes.length) {
       const isCorrect = JSON.stringify(newSelected) === JSON.stringify(current.phonemes);
       setFeedback(isCorrect ? "correct" : "wrong");
-      if (isCorrect) setScore((s) => s + 1);
-      else errorsRef.current += 1;
+      if (isCorrect) { setScore((s) => s + 1); sounds.correct(); }
+      else { errorsRef.current += 1; sounds.wrong(); }
 
       setTimeout(() => {
         if (round < ROUNDS.length - 1) {

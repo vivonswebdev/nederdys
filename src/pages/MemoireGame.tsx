@@ -83,6 +83,7 @@ const MemoireGame = () => {
   useEffect(() => {
     if (gameOver && !savedRef.current) {
       savedRef.current = true;
+      sounds.victory();
       const stars = moves <= PAIRS.length + 2 ? 5 : moves <= PAIRS.length * 2 ? 4 : moves <= PAIRS.length * 3 ? 3 : 2;
       saveSession({ score: stars, maxScore: 5, errorsCount: Math.max(moves - PAIRS.length, 0), completed: true });
     }

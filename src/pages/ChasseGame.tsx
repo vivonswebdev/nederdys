@@ -63,7 +63,7 @@ const ChasseGame = () => {
   useEffect(() => { if (lives <= 0) setGameOver(true); }, [lives]);
   useEffect(() => { if (gameOver && !savedRef.current) { savedRef.current = true; saveSession({ score, maxScore: Math.max(score + errorsRef.current, 1), errorsCount: errorsRef.current, completed: true }); } }, [gameOver, score, saveSession]);
 
-  const handleClick = (balloon: Balloon) => { if (balloon.correct) setScore((s) => s + 1); else { setLives((l) => l - 1); errorsRef.current += 1; } setBalloons((prev) => prev.filter((b) => b.id !== balloon.id)); };
+  const handleClick = (balloon: Balloon) => { if (balloon.correct) { setScore((s) => s + 1); sounds.correct(); } else { setLives((l) => l - 1); errorsRef.current += 1; sounds.wrong(); } setBalloons((prev) => prev.filter((b) => b.id !== balloon.id)); };
   const reset = () => { setBalloons([]); setScore(0); setLives(3); setGameOver(false); setNextId(0); errorsRef.current = 0; savedRef.current = false; resetTimer(); };
 
   if (gameOver) {

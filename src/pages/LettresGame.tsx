@@ -90,7 +90,7 @@ const LettresGame = () => {
   }, [round, difficulty]);
 
   const speakWord = () => { if (!current) return; const u = new SpeechSynthesisUtterance(current.word); u.lang = "nl-NL"; u.rate = 0.6; speechSynthesis.speak(u); };
-  const handleLetterClick = (letter: string, index: number) => { if (feedback) return; const newAvail = [...available]; newAvail.splice(index, 1); setAvailable(newAvail); setPlaced([...placed, letter]); };
+  const handleLetterClick = (letter: string, index: number) => { if (feedback) return; sounds.click(); const newAvail = [...available]; newAvail.splice(index, 1); setAvailable(newAvail); setPlaced([...placed, letter]); };
   const handlePlacedClick = (letter: string, index: number) => { if (feedback) return; const newPlaced = [...placed]; newPlaced.splice(index, 1); setPlaced(newPlaced); setAvailable([...available, letter]); };
 
   const handleSubmit = () => {
