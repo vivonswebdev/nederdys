@@ -99,6 +99,8 @@ const MemoireGame = () => {
     setMatches(0);
     setMoves(0);
     setLocked(false);
+    savedRef.current = false;
+    resetTimer();
   };
 
   if (gameOver) {

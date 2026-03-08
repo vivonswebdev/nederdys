@@ -35,6 +35,7 @@ const SyllabesGame = () => {
       const isCorrect = newSelected.join("") === current.syllables.join("");
       setFeedback(isCorrect ? "correct" : "wrong");
       if (isCorrect) setScore((s) => s + 1);
+      else errorsRef.current += 1;
 
       setTimeout(() => {
         if (round < ROUNDS.length - 1) {

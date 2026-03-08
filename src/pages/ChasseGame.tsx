@@ -88,6 +88,9 @@ const ChasseGame = () => {
     setLives(3);
     setGameOver(false);
     setNextId(0);
+    errorsRef.current = 0;
+    savedRef.current = false;
+    resetTimer();
   };
 
   if (gameOver) {
