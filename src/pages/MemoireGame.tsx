@@ -38,8 +38,19 @@ const MemoireGame = () => {
   const [matches, setMatches] = useState(0);
   const [moves, setMoves] = useState(0);
   const [locked, setLocked] = useState(false);
+  const { saveSession, resetTimer } = useGameSession("memoire");
+  const savedRef = useRef(false);
 
   const gameOver = matches === PAIRS.length;
+
+  useEffect(() => {
+    if (gameOver && !savedRef.current) {
+      savedRef.current = true;
+      const stars = moves <= 8 ? 5 : moves <= 12 ? 4 : moves <= 16 ? 3 : 2;
+      const errorsCount = moves - PAIRS.length; // moves beyond perfect
+      saveSession({ score: stars, maxScore: 5, errorsCount: Math.max(errorsCount, 0), completed: true });
+    }
+  }, [gameOver, moves, saveSession]);
 
   const handleFlip = (id: number) => {
     if (locked) return;
