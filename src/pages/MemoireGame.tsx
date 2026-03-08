@@ -112,6 +112,7 @@ const MemoireGame = () => {
           setLocked(false);
         }, 500);
       } else {
+        sounds.wrong();
         setTimeout(() => {
           setGameCards((prev) => prev.map((c) => (newFlipped.includes(c.id) ? { ...c, flipped: false } : c)));
           setFlippedIds([]);
