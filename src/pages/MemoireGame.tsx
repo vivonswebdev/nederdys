@@ -8,6 +8,7 @@ import { DifficultyIndicator } from "@/components/DifficultyIndicator";
 import { XpGainPopup } from "@/components/XpGainPopup";
 import { Difficulty } from "@/lib/database";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { sounds } from "@/lib/sounds";
 
 const PAIRS_BY_DIFFICULTY: Record<Difficulty, { word: string; emoji: string }[]> = {
   easy: [
@@ -82,6 +83,7 @@ const MemoireGame = () => {
   useEffect(() => {
     if (gameOver && !savedRef.current) {
       savedRef.current = true;
+      sounds.victory();
       const stars = moves <= PAIRS.length + 2 ? 5 : moves <= PAIRS.length * 2 ? 4 : moves <= PAIRS.length * 3 ? 3 : 2;
       saveSession({ score: stars, maxScore: 5, errorsCount: Math.max(moves - PAIRS.length, 0), completed: true });
     }
@@ -92,6 +94,7 @@ const MemoireGame = () => {
     const card = gameCards.find((c) => c.id === id);
     if (!card || card.flipped || card.matched) return;
 
+    sounds.flip();
     const newCards = gameCards.map((c) => (c.id === id ? { ...c, flipped: true } : c));
     setGameCards(newCards);
     const newFlipped = [...flippedIds, id];
@@ -103,6 +106,7 @@ const MemoireGame = () => {
       const [first, second] = newFlipped.map((fid) => newCards.find((c) => c.id === fid)!);
 
       if (first.pairId === second.pairId) {
+        sounds.match();
         setTimeout(() => {
           setGameCards((prev) => prev.map((c) => (c.pairId === first.pairId ? { ...c, matched: true } : c)));
           setMatches((m) => m + 1);
@@ -110,6 +114,7 @@ const MemoireGame = () => {
           setLocked(false);
         }, 500);
       } else {
+        sounds.wrong();
         setTimeout(() => {
           setGameCards((prev) => prev.map((c) => (newFlipped.includes(c.id) ? { ...c, flipped: false } : c)));
           setFlippedIds([]);

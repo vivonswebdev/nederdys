@@ -8,6 +8,7 @@ import { DifficultyIndicator } from "@/components/DifficultyIndicator";
 import { XpGainPopup } from "@/components/XpGainPopup";
 import { Difficulty } from "@/lib/database";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { sounds } from "@/lib/sounds";
 
 const ROUNDS_BY_DIFFICULTY: Record<Difficulty, { audio: string; syllables: string[]; distractors: string[] }[]> = {
   easy: [
@@ -61,8 +62,8 @@ const SyllabesGame = () => {
     if (newSelected.length === current.syllables.length) {
       const isCorrect = newSelected.join("") === current.syllables.join("");
       setFeedback(isCorrect ? "correct" : "wrong");
-      if (isCorrect) setScore((s) => s + 1);
-      else errorsRef.current += 1;
+      if (isCorrect) { setScore((s) => s + 1); sounds.correct(); }
+      else { errorsRef.current += 1; sounds.wrong(); }
       setTimeout(() => {
         if (round < ROUNDS.length - 1) { setRound((r) => r + 1); setSelected([]); setFeedback(null); }
         else setGameOver(true);
@@ -73,6 +74,7 @@ const SyllabesGame = () => {
   useEffect(() => {
     if (gameOver && !savedRef.current) {
       savedRef.current = true;
+      sounds.victory();
       saveSession({ score, maxScore: ROUNDS.length, errorsCount: errorsRef.current, completed: true });
     }
   }, [gameOver, score, saveSession, ROUNDS.length]);

@@ -8,6 +8,7 @@ import { DifficultyIndicator } from "@/components/DifficultyIndicator";
 import { XpGainPopup } from "@/components/XpGainPopup";
 import { Difficulty } from "@/lib/database";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { sounds } from "@/lib/sounds";
 
 interface LetterRound { word: string; emoji: string; hint: string; }
 
@@ -89,14 +90,15 @@ const LettresGame = () => {
   }, [round, difficulty]);
 
   const speakWord = () => { if (!current) return; const u = new SpeechSynthesisUtterance(current.word); u.lang = "nl-NL"; u.rate = 0.6; speechSynthesis.speak(u); };
-  const handleLetterClick = (letter: string, index: number) => { if (feedback) return; const newAvail = [...available]; newAvail.splice(index, 1); setAvailable(newAvail); setPlaced([...placed, letter]); };
+  const handleLetterClick = (letter: string, index: number) => { if (feedback) return; sounds.click(); const newAvail = [...available]; newAvail.splice(index, 1); setAvailable(newAvail); setPlaced([...placed, letter]); };
   const handlePlacedClick = (letter: string, index: number) => { if (feedback) return; const newPlaced = [...placed]; newPlaced.splice(index, 1); setPlaced(newPlaced); setAvailable([...available, letter]); };
 
   const handleSubmit = () => {
     if (feedback || !current) return;
     const isCorrect = placed.join("") === current.word;
     setFeedback(isCorrect ? "correct" : "wrong");
-    if (isCorrect) setScore((s) => s + 1); else errorsRef.current += 1;
+    if (isCorrect) { setScore((s) => s + 1); sounds.correct(); }
+    else { errorsRef.current += 1; sounds.wrong(); }
     setTimeout(() => { if (round < ROUNDS.length - 1) setRound((r) => r + 1); else setGameOver(true); }, 1500);
   };
 

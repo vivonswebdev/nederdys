@@ -8,6 +8,7 @@ import { DifficultyIndicator } from "@/components/DifficultyIndicator";
 import { XpGainPopup } from "@/components/XpGainPopup";
 import { Difficulty } from "@/lib/database";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { sounds } from "@/lib/sounds";
 
 interface DicteeRound {
   audio: string;
@@ -73,8 +74,8 @@ const DicteeGame = () => {
     setSelectedOption(index);
     const isCorrect = index === current.correct;
     setFeedback(isCorrect ? "correct" : "wrong");
-    if (isCorrect) setScore((s) => s + 1);
-    else errorsRef.current += 1;
+    if (isCorrect) { setScore((s) => s + 1); sounds.correct(); }
+    else { errorsRef.current += 1; sounds.wrong(); }
 
     setTimeout(() => {
       if (round < ROUNDS.length - 1) {

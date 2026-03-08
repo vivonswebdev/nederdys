@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Zap, ArrowUp } from "lucide-react";
 import { getLevelTitle } from "./LevelBadge";
+import { useEffect } from "react";
+import { sounds } from "@/lib/sounds";
 
 interface XpGainPopupProps {
   xpGained: number | null;
@@ -9,6 +11,11 @@ interface XpGainPopupProps {
 }
 
 export const XpGainPopup = ({ xpGained, leveledUp, newLevel }: XpGainPopupProps) => {
+  useEffect(() => {
+    if (xpGained !== null) sounds.xp();
+    if (leveledUp) setTimeout(() => sounds.levelUp(), 300);
+  }, [xpGained, leveledUp]);
+
   return (
     <AnimatePresence>
       {xpGained !== null && (
