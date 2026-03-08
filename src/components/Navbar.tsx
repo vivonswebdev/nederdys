@@ -79,6 +79,11 @@ export const Navbar = () => {
               {childLevel && (
                 <LevelBadge level={childLevel.level} xp={childLevel.xp} compact />
               )}
+              <Link to="/boutique"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+                <ShoppingBag className="w-4 h-4" />
+                <span className="hidden sm:inline">🪙 {coinsData?.coins ?? 0}</span>
+              </Link>
               <Link to="/ajouter-enfant"
                 className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground">
                 <UserPlus className="w-4 h-4" />
