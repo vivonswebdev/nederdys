@@ -180,6 +180,16 @@ const t = {
   "burger.serve": { fr: "Servir !", nl: "Serveren!" },
   "burger.correct": { fr: "✅ Burger parfait !", nl: "✅ Perfecte burger!" },
   "burger.wrong": { fr: "❌ L'ordre n'est pas bon, regarde les couleurs !", nl: "❌ De volgorde klopt niet, kijk naar de kleuren!" },
+  // Graphemes game
+  "game.graphemes.title": { fr: "Trésor des Sons", nl: "De Klank-Schat" },
+  "game.graphemes.desc": { fr: "Écoute bien et attrape les bonnes lettres dans l'océan !", nl: "Luister goed en vang de juiste letters in de oceaan!" },
+  "graphemes.instruction": { fr: "Le perroquet dit un son... Trouve la bonne bulle ! 🏴‍☠️", nl: "De papegaai zegt een klank... Vind de juiste bel! 🏴‍☠️" },
+  "graphemes.listenCarefully": { fr: "Clique sur la bulle avec la bonne graphie", nl: "Klik op de bel met de juiste spelling" },
+  "graphemes.listen": { fr: "Réécouter le mot", nl: "Luister opnieuw" },
+  "graphemes.example": { fr: "Exemple", nl: "Voorbeeld" },
+  "graphemes.correct": { fr: "Pièce d'or gagnée !", nl: "Gouden munt gewonnen!" },
+  "graphemes.wrong": { fr: "Pas cette bulle !", nl: "Niet die bel!" },
+  "graphemes.coins": { fr: "pièces d'or", nl: "gouden munten" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
