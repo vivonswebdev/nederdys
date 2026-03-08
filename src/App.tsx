@@ -32,6 +32,7 @@ import TrieurGame from "./pages/TrieurGame";
 import MurGame from "./pages/MurGame";
 import OreilleMagiqueGame from "./pages/OreilleMagiqueGame";
 import TirGame from "./pages/TirGame";
+import MotTroueGame from "./pages/MotTroueGame";
 
 const queryClient = new QueryClient();
 
