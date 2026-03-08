@@ -58,6 +58,9 @@ export const Navbar = () => {
           
           {user ? (
             <>
+              {childLevel && (
+                <LevelBadge level={childLevel.level} xp={childLevel.xp} compact />
+              )}
               <Link to="/ajouter-enfant"
                 className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground">
                 <UserPlus className="w-4 h-4" />
