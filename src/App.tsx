@@ -20,6 +20,7 @@ import DicteeGame from "./pages/DicteeGame";
 import LettresGame from "./pages/LettresGame";
 import BurgerGame from "./pages/BurgerGame";
 import GraphemesGame from "./pages/GraphemesGame";
+import TrainGame from "./pages/TrainGame";
 
 const queryClient = new QueryClient();
 
