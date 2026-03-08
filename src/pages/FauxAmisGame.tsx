@@ -47,7 +47,7 @@ const HARD_CHALLENGES: FauxAmiChallenge[] = [
 
 const FauxAmisGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("fauxamis");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("fauxamis");
 
   const getChallenges = useCallback(() => {
     if (difficulty === "hard") return [...EASY_CHALLENGES, ...MEDIUM_CHALLENGES, ...HARD_CHALLENGES];
