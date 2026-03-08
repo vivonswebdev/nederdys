@@ -128,7 +128,7 @@ const HARD_SENTENCES: SentenceChallenge[] = [
 
 const BurgerGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("burger");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("burger");
 
   const getSentences = useCallback(() => {
     if (difficulty === "hard") return [...EASY_SENTENCES, ...MEDIUM_SENTENCES, ...HARD_SENTENCES];
