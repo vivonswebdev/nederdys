@@ -33,6 +33,7 @@ const Index = () => {
     { id: "tir", title: t("game.tir.title"), desc: t("game.tir.desc"), icon: "🎯", color: "bg-rose-700", level: t("games.adaptive"), route: "/jeu/tir" },
     { id: "mottroue", title: t("game.mottroue.title"), desc: t("game.mottroue.desc"), icon: "🕳️", color: "bg-stone-700", level: t("games.adaptive"), route: "/jeu/mot-troue" },
     { id: "chrono", title: t("game.chrono.title"), desc: t("game.chrono.desc"), icon: "⏱️", color: "bg-blue-800", level: t("games.adaptive"), route: "/jeu/chrono" },
+    { id: "mouton", title: t("game.mouton.title"), desc: t("game.mouton.desc"), icon: "🐑", color: "bg-neutral-800", level: t("games.adaptive"), route: "/jeu/mouton" },
   ];
 
   return (
