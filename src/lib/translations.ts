@@ -271,6 +271,16 @@ const t = {
   "puzzle.wrong": { fr: "❌ Ce n'est pas le bon mot !", nl: "❌ Dat is niet het juiste woord!" },
   "puzzle.answerWas": { fr: "La bonne réponse était", nl: "Het juiste antwoord was" },
   "puzzle.bravo": { fr: "Puzzle complété, bravo ! 🎉", nl: "Puzzel compleet, bravo! 🎉" },
+
+  // Pont game
+  "game.pont.title": { fr: "Le Pont des Mots", nl: "De Woordenbrug" },
+  "game.pont.desc": { fr: "Relie chaque mot NL à la bonne image !", nl: "Verbind elk NL-woord met het juiste plaatje!" },
+  "pont.instruction": { fr: "Construis le pont ! 🌉", nl: "Bouw de brug! 🌉" },
+  "pont.hint": { fr: "Clique sur un mot puis sur l'image correspondante", nl: "Klik op een woord en dan op het bijpassende plaatje" },
+  "pont.words": { fr: "Mots", nl: "Woorden" },
+  "pont.images": { fr: "Images", nl: "Plaatjes" },
+  "pont.linked": { fr: "reliés", nl: "verbonden" },
+  "pont.bravo": { fr: "Tous les ponts sont construits ! 🌉", nl: "Alle bruggen zijn gebouwd! 🌉" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
