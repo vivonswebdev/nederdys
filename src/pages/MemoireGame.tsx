@@ -7,6 +7,7 @@ import { useGameSession } from "@/hooks/useGameSession";
 import { DifficultyIndicator } from "@/components/DifficultyIndicator";
 import { XpGainPopup } from "@/components/XpGainPopup";
 import { Difficulty } from "@/lib/database";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PAIRS_BY_DIFFICULTY: Record<Difficulty, { word: string; emoji: string }[]> = {
   easy: [
@@ -45,6 +46,7 @@ interface Card {
 }
 
 const MemoireGame = () => {
+  const { t } = useLanguage();
   const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("memoire");
   const savedRef = useRef(false);
 
@@ -81,8 +83,7 @@ const MemoireGame = () => {
     if (gameOver && !savedRef.current) {
       savedRef.current = true;
       const stars = moves <= PAIRS.length + 2 ? 5 : moves <= PAIRS.length * 2 ? 4 : moves <= PAIRS.length * 3 ? 3 : 2;
-      const errorsCount = moves - PAIRS.length;
-      saveSession({ score: stars, maxScore: 5, errorsCount: Math.max(errorsCount, 0), completed: true });
+      saveSession({ score: stars, maxScore: 5, errorsCount: Math.max(moves - PAIRS.length, 0), completed: true });
     }
   }, [gameOver, moves, saveSession, PAIRS.length]);
 
@@ -147,8 +148,8 @@ const MemoireGame = () => {
         <div className="container max-w-lg mx-auto px-4 py-16 text-center">
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
             <span className="text-6xl block mb-4">🎉</span>
-            <h2 className="text-3xl font-bold text-foreground mb-2">Toutes les paires trouvées !</h2>
-            <p className="text-xl text-muted-foreground mb-2">En {moves} coups</p>
+            <h2 className="text-3xl font-bold text-foreground mb-2">{t("memoire.found")}</h2>
+            <p className="text-xl text-muted-foreground mb-2">{t("memoire.moves")} {moves} {t("memoire.movesUnit")}</p>
             <DifficultyIndicator difficulty={difficulty} />
             <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">
@@ -158,10 +159,10 @@ const MemoireGame = () => {
             </div>
             <div className="flex gap-4 justify-center">
               <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2">
-                <RotateCcw className="w-4 h-4" /> Rejouer
+                <RotateCcw className="w-4 h-4" /> {t("game.replay")}
               </button>
               <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold">
-                Accueil
+                {t("game.home")}
               </Link>
             </div>
           </motion.div>
@@ -176,14 +177,14 @@ const MemoireGame = () => {
       <div className="container max-w-lg mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="w-4 h-4" /> Retour
+            <ArrowLeft className="w-4 h-4" /> {t("game.back")}
           </Link>
           <DifficultyIndicator difficulty={difficulty} />
-          <span className="text-lg font-bold text-foreground">Coups : {moves}</span>
+          <span className="text-lg font-bold text-foreground">{t("memoire.movesLabel")} : {moves}</span>
         </div>
 
-        <h2 className="text-2xl font-bold text-foreground text-center mb-2">Mémoire Sonore 🔊</h2>
-        <p className="text-center text-muted-foreground mb-6 font-dyslexic">Trouve les paires de mots NL !</p>
+        <h2 className="text-2xl font-bold text-foreground text-center mb-2">{t("memoire.title")}</h2>
+        <p className="text-center text-muted-foreground mb-6 font-dyslexic">{t("memoire.instruction")}</p>
 
         <div className={`grid ${gridCols} gap-3`}>
           {gameCards.map((card) => (
@@ -216,7 +217,7 @@ const MemoireGame = () => {
         </div>
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-muted-foreground">Paires trouvées : {matches}/{PAIRS.length}</p>
+          <p className="text-sm text-muted-foreground">{t("memoire.pairs")} : {matches}/{PAIRS.length}</p>
         </div>
       </div>
     </div>

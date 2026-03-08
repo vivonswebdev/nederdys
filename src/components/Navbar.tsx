@@ -1,14 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Gamepad2, BarChart3, Home, LogIn, LogOut, UserPlus } from "lucide-react";
+import { Gamepad2, BarChart3, Home, LogIn, LogOut, UserPlus, Globe } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { getChildren, getChildLevel } from "@/lib/database";
 import { LevelBadge } from "./LevelBadge";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Navbar = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const { lang, setLang, t } = useLanguage();
 
   const { data: children = [] } = useQuery({
     queryKey: ["children", user?.id],
@@ -38,9 +40,9 @@ export const Navbar = () => {
         
         <div className="flex items-center gap-1">
           {[
-            { to: "/", icon: <Home className="w-4 h-4" />, label: "Accueil" },
-            { to: "/jeu/syllabes", icon: <Gamepad2 className="w-4 h-4" />, label: "Jouer" },
-            { to: "/parents", icon: <BarChart3 className="w-4 h-4" />, label: "Parents" },
+            { to: "/", icon: <Home className="w-4 h-4" />, label: t("nav.home") },
+            { to: "/jeu/syllabes", icon: <Gamepad2 className="w-4 h-4" />, label: t("nav.play") },
+            { to: "/parents", icon: <BarChart3 className="w-4 h-4" />, label: t("nav.parents") },
           ].map((link) => (
             <Link
               key={link.to}
@@ -55,6 +57,16 @@ export const Navbar = () => {
               <span className="hidden sm:inline">{link.label}</span>
             </Link>
           ))}
+
+          {/* Language selector */}
+          <button
+            onClick={() => setLang(lang === "fr" ? "nl" : "fr")}
+            className="flex items-center gap-1 px-2 py-2 rounded-full text-sm font-bold text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            title={lang === "fr" ? "Switch to Nederlands" : "Passer en français"}
+          >
+            <Globe className="w-4 h-4" />
+            <span className="uppercase">{lang === "fr" ? "NL" : "FR"}</span>
+          </button>
           
           {user ? (
             <>
@@ -64,19 +76,19 @@ export const Navbar = () => {
               <Link to="/ajouter-enfant"
                 className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground">
                 <UserPlus className="w-4 h-4" />
-                <span className="hidden sm:inline">+ Enfant</span>
+                <span className="hidden sm:inline">{t("nav.child")}</span>
               </Link>
               <button onClick={signOut}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive">
                 <LogOut className="w-4 h-4" />
-                <span className="hidden sm:inline">Déco</span>
+                <span className="hidden sm:inline">{t("nav.logout")}</span>
               </button>
             </>
           ) : (
             <Link to="/auth"
               className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium bg-secondary text-secondary-foreground">
               <LogIn className="w-4 h-4" />
-              <span className="hidden sm:inline">Connexion</span>
+              <span className="hidden sm:inline">{t("nav.login")}</span>
             </Link>
           )}
         </div>
