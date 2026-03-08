@@ -48,12 +48,23 @@ const SyllabesGame = () => {
     }
   }, [selected, feedback, current, round]);
 
+  // Save when game ends
+  useEffect(() => {
+    if (gameOver && !savedRef.current) {
+      savedRef.current = true;
+      saveSession({ score, maxScore: ROUNDS.length, errorsCount: errorsRef.current, completed: true });
+    }
+  }, [gameOver, score, saveSession]);
+
   const reset = () => {
     setRound(0);
     setSelected([]);
     setScore(0);
     setFeedback(null);
     setGameOver(false);
+    errorsRef.current = 0;
+    savedRef.current = false;
+    resetTimer();
   };
 
   const speakWord = () => {
