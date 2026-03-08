@@ -25,6 +25,12 @@ export const Navbar = () => {
     queryFn: () => getChildLevel(activeChild!.id),
     enabled: !!activeChild,
   });
+
+  const { data: coinsData } = useQuery({
+    queryKey: ["childCoins", activeChild?.id],
+    queryFn: () => getChildCoins(activeChild!.id),
+    enabled: !!activeChild,
+  });
   
   return (
     <motion.nav
