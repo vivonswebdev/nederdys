@@ -97,7 +97,8 @@ const LettresGame = () => {
     if (feedback || !current) return;
     const isCorrect = placed.join("") === current.word;
     setFeedback(isCorrect ? "correct" : "wrong");
-    if (isCorrect) setScore((s) => s + 1); else errorsRef.current += 1;
+    if (isCorrect) { setScore((s) => s + 1); sounds.correct(); }
+    else { errorsRef.current += 1; sounds.wrong(); }
     setTimeout(() => { if (round < ROUNDS.length - 1) setRound((r) => r + 1); else setGameOver(true); }, 1500);
   };
 
