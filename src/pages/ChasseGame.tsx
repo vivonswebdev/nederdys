@@ -77,6 +77,7 @@ const ChasseGame = () => {
       setScore((s) => s + 1);
     } else {
       setLives((l) => l - 1);
+      errorsRef.current += 1;
     }
     setBalloons((prev) => prev.filter((b) => b.id !== balloon.id));
   };
