@@ -14,7 +14,119 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      children: {
+        Row: {
+          age: number
+          avatar_emoji: string
+          created_at: string
+          dys_level: string
+          first_name: string
+          font_preference: string
+          high_contrast: boolean
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          age?: number
+          avatar_emoji?: string
+          created_at?: string
+          dys_level?: string
+          first_name: string
+          font_preference?: string
+          high_contrast?: boolean
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          age?: number
+          avatar_emoji?: string
+          created_at?: string
+          dys_level?: string
+          first_name?: string
+          font_preference?: string
+          high_contrast?: boolean
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      game_sessions: {
+        Row: {
+          child_id: string
+          completed: boolean
+          created_at: string
+          duration_seconds: number
+          errors_count: number
+          game_type: string
+          id: string
+          max_score: number
+          score: number
+          user_id: string
+        }
+        Insert: {
+          child_id: string
+          completed?: boolean
+          created_at?: string
+          duration_seconds?: number
+          errors_count?: number
+          game_type: string
+          id?: string
+          max_score?: number
+          score?: number
+          user_id: string
+        }
+        Update: {
+          child_id?: string
+          completed?: boolean
+          created_at?: string
+          duration_seconds?: number
+          errors_count?: number
+          game_type?: string
+          id?: string
+          max_score?: number
+          score?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_sessions_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
