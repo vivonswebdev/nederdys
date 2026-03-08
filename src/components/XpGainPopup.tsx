@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Zap, ArrowUp } from "lucide-react";
 import { getLevelTitle } from "./LevelBadge";
+import { useEffect } from "react";
+import { sounds } from "@/lib/sounds";
 
 interface XpGainPopupProps {
   xpGained: number | null;
