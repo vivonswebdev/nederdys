@@ -190,6 +190,16 @@ const t = {
   "graphemes.correct": { fr: "Pièce d'or gagnée !", nl: "Gouden munt gewonnen!" },
   "graphemes.wrong": { fr: "Pas cette bulle !", nl: "Niet die bel!" },
   "graphemes.coins": { fr: "pièces d'or", nl: "gouden munten" },
+
+  // Train game
+  "game.train.title": { fr: "Le Train des Syllabes", nl: "De Lettergreep-Trein" },
+  "game.train.desc": { fr: "Écoute le mot et accroche les wagons dans le bon ordre !", nl: "Luister naar het woord en haak de wagons in de juiste volgorde!" },
+  "train.instruction": { fr: "Remets les wagons dans l'ordre ! 🚂", nl: "Zet de wagons in de juiste volgorde! 🚂" },
+  "train.hint": { fr: "Clique sur un wagon pour entendre la syllabe, puis glisse-les dans l'ordre", nl: "Klik op een wagon om de lettergreep te horen, sleep ze dan in de juiste volgorde" },
+  "train.listenWord": { fr: "Écouter le mot complet", nl: "Luister naar het hele woord" },
+  "train.depart": { fr: "Faire partir le train !", nl: "Laat de trein vertrekken!" },
+  "train.correct": { fr: "Goed gedaan ! Le train part !", nl: "Goed gedaan! De trein vertrekt!" },
+  "train.wrong": { fr: "Prouti ! Les wagons ne sont pas dans l'ordre !", nl: "Toet toet! De wagons staan niet in de juiste volgorde!" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
