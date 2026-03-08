@@ -47,7 +47,7 @@ const PhonemesGame = () => {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
   const [gameOver, setGameOver] = useState(false);
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("phonemes");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("phonemes");
   const errorsRef = useRef(0);
   const savedRef = useRef(false);
 
