@@ -169,6 +169,17 @@ const t = {
   "difficulty.easy": { fr: "Facile 🟢", nl: "Makkelijk 🟢" },
   "difficulty.medium": { fr: "Moyen 🟡", nl: "Gemiddeld 🟡" },
   "difficulty.hard": { fr: "Difficile 🔴", nl: "Moeilijk 🔴" },
+
+  // Burger game
+  "game.burger.title": { fr: "Burger des Phrases", nl: "De Zinnen-Burger" },
+  "game.burger.desc": { fr: "Construis tes phrases NL ingrédient par ingrédient !", nl: "Bouw je NL-zinnen ingrediënt voor ingrediënt!" },
+  "burger.instruction": { fr: "Construis ton burger-phrase ! 🍔", nl: "Bouw je zin-burger! 🍔" },
+  "burger.hint": { fr: "Glisse les ingrédients dans le bon ordre pour servir la commande", nl: "Sleep de ingrediënten in de juiste volgorde om de bestelling te serveren" },
+  "burger.listen": { fr: "Écouter la phrase", nl: "Luister naar de zin" },
+  "burger.drag": { fr: "↕️ Glisse les ingrédients dans le bon ordre", nl: "↕️ Sleep de ingrediënten in de juiste volgorde" },
+  "burger.serve": { fr: "Servir !", nl: "Serveren!" },
+  "burger.correct": { fr: "✅ Burger parfait !", nl: "✅ Perfecte burger!" },
+  "burger.wrong": { fr: "❌ L'ordre n'est pas bon, regarde les couleurs !", nl: "❌ De volgorde klopt niet, kijk naar de kleuren!" },
 } as const;
 
 export type TranslationKey = keyof typeof t;

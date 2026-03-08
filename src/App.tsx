@@ -18,6 +18,7 @@ import AddChild from "./pages/AddChild";
 import PhonemesGame from "./pages/PhonemesGame";
 import DicteeGame from "./pages/DicteeGame";
 import LettresGame from "./pages/LettresGame";
+import BurgerGame from "./pages/BurgerGame";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
               <Route path="/jeu/phonemes" element={<PhonemesGame />} />
               <Route path="/jeu/dictee" element={<DicteeGame />} />
               <Route path="/jeu/lettres" element={<LettresGame />} />
+              <Route path="/jeu/burger" element={<BurgerGame />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

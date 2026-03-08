@@ -18,6 +18,7 @@ const Index = () => {
     { id: "phonemes", title: t("game.phonemes.title"), desc: t("game.phonemes.desc"), icon: "💃", color: "bg-kids-pink", level: t("games.adaptive"), route: "/jeu/phonemes" },
     { id: "dictee", title: t("game.dictee.title"), desc: t("game.dictee.desc"), icon: "📝", color: "bg-kids-purple", level: t("games.adaptive"), route: "/jeu/dictee" },
     { id: "lettres", title: t("game.lettres.title"), desc: t("game.lettres.desc"), icon: "🧲", color: "bg-kids-orange", level: t("games.adaptive"), route: "/jeu/lettres" },
+    { id: "burger", title: t("game.burger.title"), desc: t("game.burger.desc"), icon: "🍔", color: "bg-kids-red", level: t("games.adaptive"), route: "/jeu/burger" },
   ];
 
   return (
