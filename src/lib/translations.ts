@@ -281,6 +281,15 @@ const t = {
   "pont.images": { fr: "Images", nl: "Plaatjes" },
   "pont.linked": { fr: "reliés", nl: "verbonden" },
   "pont.bravo": { fr: "Tous les ponts sont construits ! 🌉", nl: "Alle bruggen zijn gebouwd! 🌉" },
+
+  // Trieur game
+  "game.trieur.title": { fr: "Le Trieur Magique", nl: "De Magische Sorteerder" },
+  "game.trieur.desc": { fr: "Trie les mots NL dans la bonne catégorie !", nl: "Sorteer de NL-woorden in de juiste categorie!" },
+  "trieur.instruction": { fr: "Sélectionne un mot puis clique sur la bonne boîte ! 🗂️", nl: "Selecteer een woord en klik op de juiste doos! 🗂️" },
+  "trieur.hint": { fr: "Clique un mot, écoute-le, puis place-le dans la bonne catégorie", nl: "Klik op een woord, luister ernaar en plaats het in de juiste categorie" },
+  "trieur.correct": { fr: "✅ Bien trié !", nl: "✅ Goed gesorteerd!" },
+  "trieur.wrong": { fr: "❌ Mauvaise boîte ! Essaie encore", nl: "❌ Verkeerde doos! Probeer opnieuw" },
+  "trieur.bravo": { fr: "Tout est parfaitement trié ! 🎉", nl: "Alles is perfect gesorteerd! 🎉" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
