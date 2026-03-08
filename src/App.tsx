@@ -30,6 +30,7 @@ import PuzzleGame from "./pages/PuzzleGame";
 import PontGame from "./pages/PontGame";
 import TrieurGame from "./pages/TrieurGame";
 import MurGame from "./pages/MurGame";
+import OreilleMagiqueGame from "./pages/OreilleMagiqueGame";
 
 const queryClient = new QueryClient();
 
