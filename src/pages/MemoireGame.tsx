@@ -104,6 +104,7 @@ const MemoireGame = () => {
       const [first, second] = newFlipped.map((fid) => newCards.find((c) => c.id === fid)!);
 
       if (first.pairId === second.pairId) {
+        sounds.match();
         setTimeout(() => {
           setGameCards((prev) => prev.map((c) => (c.pairId === first.pairId ? { ...c, matched: true } : c)));
           setMatches((m) => m + 1);
