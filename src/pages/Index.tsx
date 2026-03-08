@@ -25,6 +25,7 @@ const Index = () => {
     { id: "fauxamis", title: t("game.fauxamis.title"), desc: t("game.fauxamis.desc"), icon: "🤝", color: "bg-amber-700", level: t("games.adaptive"), route: "/jeu/faux-amis" },
     { id: "phare", title: t("game.phare.title"), desc: t("game.phare.desc"), icon: "🏠", color: "bg-cyan-800", level: t("games.adaptive"), route: "/jeu/phare" },
     { id: "peintre", title: t("game.peintre.title"), desc: t("game.peintre.desc"), icon: "🎨", color: "bg-pink-700", level: t("games.adaptive"), route: "/jeu/peintre" },
+    { id: "puzzle", title: t("game.puzzle.title"), desc: t("game.puzzle.desc"), icon: "🧩", color: "bg-teal-700", level: t("games.adaptive"), route: "/jeu/puzzle" },
   ];
 
   return (
