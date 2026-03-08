@@ -233,6 +233,8 @@ const t = {
   "phare.correct": { fr: "✅ Le phare brille pour toi !", nl: "✅ De vuurtoren schijnt voor jou!" },
   "phare.wrong": { fr: "❌ Relis bien la phrase !", nl: "❌ Lees de zin nog eens goed!" },
   "phare.bravo": { fr: "Tu as guidé tous les bateaux au port ! 🚢", nl: "Je hebt alle boten naar de haven geleid! 🚢" },
+  "phare.boatSaved": { fr: "Un bateau sauvé !", nl: "Een boot gered!" },
+  "phare.boatsSaved": { fr: "Bateaux guidés au port :", nl: "Boten naar de haven geleid:" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
