@@ -246,6 +246,20 @@ const t = {
   "shop.notEnough": { fr: "Pas assez de Mouche-Coins !", nl: "Niet genoeg Vlieg-Munten!" },
   "shop.purchased": { fr: "Acheté ! 🎉", nl: "Gekocht! 🎉" },
   "shop.coinsEarned": { fr: "Mouche-Coins gagnés !", nl: "Vlieg-Munten verdiend!" },
+
+  // Peintre game
+  "game.peintre.title": { fr: "Le Peintre des Sons", nl: "De Klankenschilder" },
+  "game.peintre.desc": { fr: "Colorie la syllabe accentuée du mot NL !", nl: "Kleur de beklemtoonde lettergreep van het NL-woord!" },
+  "peintre.instruction": { fr: "Peins la syllabe accentuée ! 🎨", nl: "Verf de beklemtoonde lettergreep! 🎨" },
+  "peintre.hint": { fr: "Écoute bien le mot et colorie la syllabe la plus forte avec une couleur unique", nl: "Luister goed naar het woord en kleur de sterkste lettergreep met een unieke kleur" },
+  "peintre.listen": { fr: "Écouter le mot", nl: "Luister naar het woord" },
+  "peintre.validate": { fr: "Valider ma peinture", nl: "Mijn schilderij bevestigen" },
+  "peintre.tapHint": { fr: "Clique sur chaque syllabe pour l'entendre et la colorier", nl: "Klik op elke lettergreep om hem te horen en te kleuren" },
+  "peintre.specialSound": { fr: "Son spécial NL", nl: "Speciaal NL-geluid" },
+  "peintre.correct": { fr: "✅ Magnifique tableau !", nl: "✅ Prachtig schilderij!" },
+  "peintre.wrong": { fr: "❌ Pas cette syllabe ! La bonne est", nl: "❌ Niet die lettergreep! De juiste is" },
+  "peintre.stressHint": { fr: "Syllabe accentuée", nl: "Beklemtoonde lettergreep" },
+  "peintre.bravo": { fr: "Tu es un vrai artiste des sons ! 🖌️", nl: "Je bent een echte klankkunstenaar! 🖌️" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
