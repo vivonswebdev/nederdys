@@ -340,7 +340,7 @@ const PhareGame = () => {
               </div>
 
               <p className="text-cyan-300">{t("phare.bravo")}</p>
-              <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
+              <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
 
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-white">
