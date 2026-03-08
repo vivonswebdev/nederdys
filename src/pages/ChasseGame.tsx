@@ -43,7 +43,7 @@ const ChasseGame = () => {
   const [lives, setLives] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [nextId, setNextId] = useState(0);
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("chasse");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("chasse");
   const errorsRef = useRef(0);
   const savedRef = useRef(false);
 
