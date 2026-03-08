@@ -8,6 +8,7 @@ import { DifficultyIndicator } from "@/components/DifficultyIndicator";
 import { XpGainPopup } from "@/components/XpGainPopup";
 import { Difficulty } from "@/lib/database";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { sounds } from "@/lib/sounds";
 
 const ROUNDS_BY_DIFFICULTY: Record<Difficulty, { audio: string; syllables: string[]; distractors: string[] }[]> = {
   easy: [
