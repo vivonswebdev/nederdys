@@ -4,21 +4,47 @@ import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Star, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGameSession } from "@/hooks/useGameSession";
+import { DifficultyIndicator } from "@/components/DifficultyIndicator";
+import { XpGainPopup } from "@/components/XpGainPopup";
+import { Difficulty } from "@/lib/database";
 
-const WORDS = [
-  { word: "kat", correct: true, emoji: "🐱" },
-  { word: "hond", correct: true, emoji: "🐶" },
-  { word: "huis", correct: true, emoji: "🏠" },
-  { word: "boom", correct: true, emoji: "🌳" },
-  { word: "vis", correct: true, emoji: "🐟" },
-  { word: "xyz", correct: false, emoji: "❌" },
-  { word: "qwp", correct: false, emoji: "❌" },
-  { word: "rrk", correct: false, emoji: "❌" },
-  { word: "boek", correct: true, emoji: "📖" },
-  { word: "zon", correct: true, emoji: "☀️" },
-  { word: "mfk", correct: false, emoji: "❌" },
-  { word: "bloem", correct: true, emoji: "🌸" },
-];
+const WORDS_BY_DIFFICULTY: Record<Difficulty, { word: string; correct: boolean; emoji: string }[]> = {
+  easy: [
+    { word: "kat", correct: true, emoji: "🐱" },
+    { word: "hond", correct: true, emoji: "🐶" },
+    { word: "huis", correct: true, emoji: "🏠" },
+    { word: "vis", correct: true, emoji: "🐟" },
+    { word: "zon", correct: true, emoji: "☀️" },
+    { word: "xyz", correct: false, emoji: "❌" },
+    { word: "qwp", correct: false, emoji: "❌" },
+    { word: "rrk", correct: false, emoji: "❌" },
+  ],
+  medium: [
+    { word: "boom", correct: true, emoji: "🌳" },
+    { word: "boek", correct: true, emoji: "📖" },
+    { word: "bloem", correct: true, emoji: "🌸" },
+    { word: "stoel", correct: true, emoji: "🪑" },
+    { word: "fiets", correct: true, emoji: "🚲" },
+    { word: "trein", correct: true, emoji: "🚂" },
+    { word: "mfk", correct: false, emoji: "❌" },
+    { word: "plxz", correct: false, emoji: "❌" },
+    { word: "brkn", correct: false, emoji: "❌" },
+    { word: "zwtl", correct: false, emoji: "❌" },
+  ],
+  hard: [
+    { word: "vlinder", correct: true, emoji: "🦋" },
+    { word: "konijn", correct: true, emoji: "🐰" },
+    { word: "olifant", correct: true, emoji: "🐘" },
+    { word: "schildpad", correct: true, emoji: "🐢" },
+    { word: "vliegtuig", correct: true, emoji: "✈️" },
+    { word: "bibliotheek", correct: true, emoji: "📚" },
+    { word: "grntk", correct: false, emoji: "❌" },
+    { word: "vlpxm", correct: false, emoji: "❌" },
+    { word: "schldp", correct: false, emoji: "❌" },
+    { word: "bblthk", correct: false, emoji: "❌" },
+    { word: "krstms", correct: false, emoji: "❌" },
+  ],
+};
 
 interface Balloon {
   id: number;
@@ -35,9 +61,13 @@ const ChasseGame = () => {
   const [lives, setLives] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [nextId, setNextId] = useState(0);
-  const { saveSession, resetTimer } = useGameSession("chasse");
+  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("chasse");
   const errorsRef = useRef(0);
   const savedRef = useRef(false);
+
+  const WORDS = WORDS_BY_DIFFICULTY[difficulty];
+  const spawnSpeed = difficulty === "easy" ? 2000 : difficulty === "medium" ? 1500 : 1000;
+  const balloonBaseSpeed = difficulty === "easy" ? 5 : difficulty === "medium" ? 4 : 3;
 
   const spawnBalloon = useCallback(() => {
     const wordData = WORDS[Math.floor(Math.random() * WORDS.length)];
@@ -45,21 +75,20 @@ const ChasseGame = () => {
       id: nextId,
       ...wordData,
       x: 10 + Math.random() * 70,
-      speed: 4 + Math.random() * 4,
+      speed: balloonBaseSpeed + Math.random() * 3,
     };
     setNextId((n) => n + 1);
     setBalloons((prev) => [...prev, balloon]);
-
     setTimeout(() => {
       setBalloons((prev) => prev.filter((b) => b.id !== balloon.id));
     }, balloon.speed * 1000);
-  }, [nextId]);
+  }, [nextId, WORDS, balloonBaseSpeed]);
 
   useEffect(() => {
     if (gameOver) return;
-    const interval = setInterval(spawnBalloon, 1500);
+    const interval = setInterval(spawnBalloon, spawnSpeed);
     return () => clearInterval(interval);
-  }, [spawnBalloon, gameOver]);
+  }, [spawnBalloon, gameOver, spawnSpeed]);
 
   useEffect(() => {
     if (lives <= 0) setGameOver(true);
@@ -101,7 +130,9 @@ const ChasseGame = () => {
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
             <span className="text-6xl block mb-4">{score >= 5 ? "🎉" : "💪"}</span>
             <h2 className="text-3xl font-bold text-foreground mb-2">{score >= 5 ? "Super !" : "Bien essayé !"}</h2>
-            <p className="text-xl text-muted-foreground mb-4">Tu as attrapé {score} mots !</p>
+            <p className="text-xl text-muted-foreground mb-2">Tu as attrapé {score} mots !</p>
+            <DifficultyIndicator difficulty={difficulty} />
+            <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">
               {Array.from({ length: Math.min(score, 10) }).map((_, i) => (
                 <Star key={i} className="w-6 h-6 text-secondary fill-secondary" />
@@ -129,6 +160,7 @@ const ChasseGame = () => {
           <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground">
             <ArrowLeft className="w-4 h-4" /> Retour
           </Link>
+          <DifficultyIndicator difficulty={difficulty} />
           <div className="flex items-center gap-4">
             <span className="text-lg font-bold text-foreground">⭐ {score}</span>
             <span className="text-lg font-bold text-foreground">

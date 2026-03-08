@@ -1,17 +1,36 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Volume2, Star, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGameSession } from "@/hooks/useGameSession";
+import { DifficultyIndicator } from "@/components/DifficultyIndicator";
+import { XpGainPopup } from "@/components/XpGainPopup";
+import { Difficulty } from "@/lib/database";
 
-const ROUNDS = [
-  { audio: "kaatje", syllables: ["kaat", "je"], distractors: ["ka", "tje"] },
-  { audio: "konijn", syllables: ["ko", "nijn"], distractors: ["kon", "ij"] },
-  { audio: "vlinder", syllables: ["vlin", "der"], distractors: ["vli", "ner"] },
-  { audio: "appel", syllables: ["ap", "pel"], distractors: ["a", "ppel"] },
-  { audio: "olifant", syllables: ["o", "li", "fant"], distractors: ["ol", "if"] },
-];
+const ROUNDS_BY_DIFFICULTY: Record<Difficulty, { audio: string; syllables: string[]; distractors: string[] }[]> = {
+  easy: [
+    { audio: "kaatje", syllables: ["kaat", "je"], distractors: ["ka", "tje"] },
+    { audio: "appel", syllables: ["ap", "pel"], distractors: ["a", "ppel"] },
+    { audio: "mama", syllables: ["ma", "ma"], distractors: ["mam", "a"] },
+    { audio: "papa", syllables: ["pa", "pa"], distractors: ["pap", "a"] },
+    { audio: "auto", syllables: ["au", "to"], distractors: ["aut", "o"] },
+  ],
+  medium: [
+    { audio: "konijn", syllables: ["ko", "nijn"], distractors: ["kon", "ij"] },
+    { audio: "vlinder", syllables: ["vlin", "der"], distractors: ["vli", "ner"] },
+    { audio: "koffie", syllables: ["kof", "fie"], distractors: ["ko", "ffie"] },
+    { audio: "ballon", syllables: ["bal", "lon"], distractors: ["ba", "llon"] },
+    { audio: "tafel", syllables: ["ta", "fel"], distractors: ["taf", "el"] },
+  ],
+  hard: [
+    { audio: "olifant", syllables: ["o", "li", "fant"], distractors: ["ol", "if"] },
+    { audio: "chocolade", syllables: ["cho", "co", "la", "de"], distractors: ["choc", "ol"] },
+    { audio: "verjaardag", syllables: ["ver", "jaar", "dag"], distractors: ["verj", "aard"] },
+    { audio: "bibliotheek", syllables: ["bi", "bli", "o", "theek"], distractors: ["bib", "lio"] },
+    { audio: "vliegtuig", syllables: ["vlieg", "tuig"], distractors: ["vlie", "gtu"] },
+  ],
+};
 
 const SyllabesGame = () => {
   const [round, setRound] = useState(0);
@@ -19,15 +38,22 @@ const SyllabesGame = () => {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null);
   const [gameOver, setGameOver] = useState(false);
-  const { saveSession, resetTimer } = useGameSession("syllabes");
+  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("syllabes");
   const errorsRef = useRef(0);
   const savedRef = useRef(false);
 
+  const ROUNDS = ROUNDS_BY_DIFFICULTY[difficulty];
+
+  const allOptions = useMemo(() => {
+    const current = ROUNDS[round];
+    if (!current) return [];
+    return [...current.syllables, ...current.distractors].sort(() => Math.random() - 0.5);
+  }, [round, difficulty]);
+
   const current = ROUNDS[round];
-  const allOptions = [...current.syllables, ...current.distractors].sort(() => Math.random() - 0.5);
 
   const handleSelect = useCallback((syl: string) => {
-    if (feedback) return;
+    if (feedback || !current) return;
     const newSelected = [...selected, syl];
     setSelected(newSelected);
 
@@ -47,15 +73,14 @@ const SyllabesGame = () => {
         }
       }, 1200);
     }
-  }, [selected, feedback, current, round]);
+  }, [selected, feedback, current, round, ROUNDS]);
 
-  // Save when game ends
   useEffect(() => {
     if (gameOver && !savedRef.current) {
       savedRef.current = true;
       saveSession({ score, maxScore: ROUNDS.length, errorsCount: errorsRef.current, completed: true });
     }
-  }, [gameOver, score, saveSession]);
+  }, [gameOver, score, saveSession, ROUNDS.length]);
 
   const reset = () => {
     setRound(0);
@@ -69,6 +94,7 @@ const SyllabesGame = () => {
   };
 
   const speakWord = () => {
+    if (!current) return;
     const utterance = new SpeechSynthesisUtterance(current.audio);
     utterance.lang = "nl-NL";
     utterance.rate = 0.7;
@@ -86,6 +112,8 @@ const SyllabesGame = () => {
             <p className="text-xl text-muted-foreground mb-2">
               Score : {score}/{ROUNDS.length}
             </p>
+            <DifficultyIndicator difficulty={difficulty} />
+            <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">
               {Array.from({ length: score }).map((_, i) => (
                 <Star key={i} className="w-8 h-8 text-secondary fill-secondary" />
@@ -105,15 +133,19 @@ const SyllabesGame = () => {
     );
   }
 
+  if (!current) return null;
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container max-w-lg mx-auto px-4 py-8">
-        <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground mb-6">
-          <ArrowLeft className="w-4 h-4" /> Retour
-        </Link>
+        <div className="flex items-center justify-between mb-6">
+          <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="w-4 h-4" /> Retour
+          </Link>
+          <DifficultyIndicator difficulty={difficulty} />
+        </div>
 
-        {/* Progress */}
         <div className="flex items-center gap-3 mb-8">
           <div className="flex-1 bg-muted rounded-full h-3 overflow-hidden">
             <motion.div
@@ -125,13 +157,7 @@ const SyllabesGame = () => {
           <span className="text-sm font-bold text-foreground">{round + 1}/{ROUNDS.length}</span>
         </div>
 
-        {/* Word */}
-        <motion.div
-          key={round}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
-        >
+        <motion.div key={round} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
           <h2 className="text-2xl font-bold text-foreground mb-2">Découpe le mot en syllabes !</h2>
           <button
             onClick={speakWord}
@@ -142,7 +168,6 @@ const SyllabesGame = () => {
           </button>
         </motion.div>
 
-        {/* Drop zone */}
         <div className="flex gap-2 justify-center mb-8 min-h-[60px]">
           {selected.map((s, i) => (
             <motion.div
@@ -150,10 +175,8 @@ const SyllabesGame = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               className={`px-5 py-3 rounded-xl text-lg font-bold font-dyslexic ${
-                feedback === "correct"
-                  ? "bg-primary text-primary-foreground"
-                  : feedback === "wrong"
-                  ? "bg-destructive text-destructive-foreground"
+                feedback === "correct" ? "bg-primary text-primary-foreground"
+                  : feedback === "wrong" ? "bg-destructive text-destructive-foreground"
                   : "bg-accent text-accent-foreground"
               }`}
             >
@@ -167,21 +190,14 @@ const SyllabesGame = () => {
           )}
         </div>
 
-        {/* Feedback */}
         <AnimatePresence>
           {feedback && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center mb-6"
-            >
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-center mb-6">
               <span className="text-4xl">{feedback === "correct" ? "✅ Super !" : "❌ Essaie encore !"}</span>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Options */}
         <div className="flex flex-wrap gap-3 justify-center">
           {allOptions.map((syl, i) => {
             const isUsed = selected.includes(syl);
@@ -204,7 +220,6 @@ const SyllabesGame = () => {
           })}
         </div>
 
-        {/* Score */}
         <div className="mt-8 text-center">
           <div className="flex justify-center gap-1">
             {Array.from({ length: score }).map((_, i) => (
