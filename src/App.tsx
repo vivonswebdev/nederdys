@@ -19,6 +19,7 @@ import PhonemesGame from "./pages/PhonemesGame";
 import DicteeGame from "./pages/DicteeGame";
 import LettresGame from "./pages/LettresGame";
 import BurgerGame from "./pages/BurgerGame";
+import GraphemesGame from "./pages/GraphemesGame";
 
 const queryClient = new QueryClient();
 
