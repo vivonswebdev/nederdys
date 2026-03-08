@@ -74,6 +74,7 @@ const SyllabesGame = () => {
   useEffect(() => {
     if (gameOver && !savedRef.current) {
       savedRef.current = true;
+      sounds.victory();
       saveSession({ score, maxScore: ROUNDS.length, errorsCount: errorsRef.current, completed: true });
     }
   }, [gameOver, score, saveSession, ROUNDS.length]);
