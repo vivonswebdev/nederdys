@@ -26,6 +26,7 @@ import FauxAmisGame from "./pages/FauxAmisGame";
 import PhareGame from "./pages/PhareGame";
 import ShopPage from "./pages/ShopPage";
 import PeintreGame from "./pages/PeintreGame";
+import PuzzleGame from "./pages/PuzzleGame";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => (
               <Route path="/jeu/phare" element={<PhareGame />} />
               <Route path="/boutique" element={<ShopPage />} />
               <Route path="/jeu/peintre" element={<PeintreGame />} />
+              <Route path="/jeu/puzzle" element={<PuzzleGame />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
