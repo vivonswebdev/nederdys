@@ -48,7 +48,7 @@ interface Card {
 
 const MemoireGame = () => {
   const { t } = useLanguage();
-  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("memoire");
+  const { saveSession, resetTimer, difficulty, xpGained, coinsGained, leveledUp } = useGameSession("memoire");
   const savedRef = useRef(false);
 
   const PAIRS = PAIRS_BY_DIFFICULTY[difficulty];
