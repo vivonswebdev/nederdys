@@ -4,15 +4,36 @@ import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Star, RotateCcw, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGameSession } from "@/hooks/useGameSession";
+import { DifficultyIndicator } from "@/components/DifficultyIndicator";
+import { XpGainPopup } from "@/components/XpGainPopup";
+import { Difficulty } from "@/lib/database";
 
-const PAIRS = [
-  { word: "huis", emoji: "🏠" },
-  { word: "boom", emoji: "🌳" },
-  { word: "kat", emoji: "🐱" },
-  { word: "zon", emoji: "☀️" },
-  { word: "vis", emoji: "🐟" },
-  { word: "bloem", emoji: "🌸" },
-];
+const PAIRS_BY_DIFFICULTY: Record<Difficulty, { word: string; emoji: string }[]> = {
+  easy: [
+    { word: "huis", emoji: "🏠" },
+    { word: "kat", emoji: "🐱" },
+    { word: "zon", emoji: "☀️" },
+    { word: "vis", emoji: "🐟" },
+  ],
+  medium: [
+    { word: "huis", emoji: "🏠" },
+    { word: "boom", emoji: "🌳" },
+    { word: "kat", emoji: "🐱" },
+    { word: "zon", emoji: "☀️" },
+    { word: "vis", emoji: "🐟" },
+    { word: "bloem", emoji: "🌸" },
+  ],
+  hard: [
+    { word: "huis", emoji: "🏠" },
+    { word: "boom", emoji: "🌳" },
+    { word: "kat", emoji: "🐱" },
+    { word: "zon", emoji: "☀️" },
+    { word: "vis", emoji: "🐟" },
+    { word: "bloem", emoji: "🌸" },
+    { word: "fiets", emoji: "🚲" },
+    { word: "boek", emoji: "📖" },
+  ],
+};
 
 interface Card {
   id: number;
@@ -24,6 +45,11 @@ interface Card {
 }
 
 const MemoireGame = () => {
+  const { saveSession, resetTimer, difficulty, xpGained, leveledUp } = useGameSession("memoire");
+  const savedRef = useRef(false);
+
+  const PAIRS = PAIRS_BY_DIFFICULTY[difficulty];
+
   const cards = useMemo(() => {
     const deck: Card[] = [];
     PAIRS.forEach((pair, i) => {
@@ -31,26 +57,34 @@ const MemoireGame = () => {
       deck.push({ id: i * 2 + 1, word: pair.word, emoji: pair.emoji, pairId: i, flipped: false, matched: false });
     });
     return deck.sort(() => Math.random() - 0.5);
-  }, []);
+  }, [difficulty]);
 
   const [gameCards, setGameCards] = useState<Card[]>(cards);
   const [flippedIds, setFlippedIds] = useState<number[]>([]);
   const [matches, setMatches] = useState(0);
   const [moves, setMoves] = useState(0);
   const [locked, setLocked] = useState(false);
-  const { saveSession, resetTimer } = useGameSession("memoire");
-  const savedRef = useRef(false);
+
+  // Reset cards when difficulty changes
+  useEffect(() => {
+    setGameCards(cards);
+    setMatches(0);
+    setMoves(0);
+    setFlippedIds([]);
+    setLocked(false);
+    savedRef.current = false;
+  }, [cards]);
 
   const gameOver = matches === PAIRS.length;
 
   useEffect(() => {
     if (gameOver && !savedRef.current) {
       savedRef.current = true;
-      const stars = moves <= 8 ? 5 : moves <= 12 ? 4 : moves <= 16 ? 3 : 2;
-      const errorsCount = moves - PAIRS.length; // moves beyond perfect
+      const stars = moves <= PAIRS.length + 2 ? 5 : moves <= PAIRS.length * 2 ? 4 : moves <= PAIRS.length * 3 ? 3 : 2;
+      const errorsCount = moves - PAIRS.length;
       saveSession({ score: stars, maxScore: 5, errorsCount: Math.max(errorsCount, 0), completed: true });
     }
-  }, [gameOver, moves, saveSession]);
+  }, [gameOver, moves, saveSession, PAIRS.length]);
 
   const handleFlip = (id: number) => {
     if (locked) return;
@@ -66,7 +100,7 @@ const MemoireGame = () => {
       setMoves((m) => m + 1);
       setLocked(true);
       const [first, second] = newFlipped.map((fid) => newCards.find((c) => c.id === fid)!);
-      
+
       if (first.pairId === second.pairId) {
         setTimeout(() => {
           setGameCards((prev) => prev.map((c) => (c.pairId === first.pairId ? { ...c, matched: true } : c)));
@@ -93,7 +127,7 @@ const MemoireGame = () => {
   };
 
   const reset = () => {
-    const reshuffled = [...cards].sort(() => Math.random() - 0.5).map(c => ({ ...c, flipped: false, matched: false }));
+    const reshuffled = [...cards].sort(() => Math.random() - 0.5).map((c) => ({ ...c, flipped: false, matched: false }));
     setGameCards(reshuffled);
     setFlippedIds([]);
     setMatches(0);
@@ -103,8 +137,10 @@ const MemoireGame = () => {
     resetTimer();
   };
 
+  const gridCols = PAIRS.length <= 4 ? "grid-cols-2 sm:grid-cols-4" : PAIRS.length <= 6 ? "grid-cols-3" : "grid-cols-4";
+
   if (gameOver) {
-    const stars = moves <= 8 ? 5 : moves <= 12 ? 4 : moves <= 16 ? 3 : 2;
+    const stars = moves <= PAIRS.length + 2 ? 5 : moves <= PAIRS.length * 2 ? 4 : moves <= PAIRS.length * 3 ? 3 : 2;
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
@@ -113,6 +149,8 @@ const MemoireGame = () => {
             <span className="text-6xl block mb-4">🎉</span>
             <h2 className="text-3xl font-bold text-foreground mb-2">Toutes les paires trouvées !</h2>
             <p className="text-xl text-muted-foreground mb-2">En {moves} coups</p>
+            <DifficultyIndicator difficulty={difficulty} />
+            <XpGainPopup xpGained={xpGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">
               {Array.from({ length: stars }).map((_, i) => (
                 <Star key={i} className="w-8 h-8 text-secondary fill-secondary" />
@@ -140,13 +178,14 @@ const MemoireGame = () => {
           <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground">
             <ArrowLeft className="w-4 h-4" /> Retour
           </Link>
+          <DifficultyIndicator difficulty={difficulty} />
           <span className="text-lg font-bold text-foreground">Coups : {moves}</span>
         </div>
 
         <h2 className="text-2xl font-bold text-foreground text-center mb-2">Mémoire Sonore 🔊</h2>
         <p className="text-center text-muted-foreground mb-6 font-dyslexic">Trouve les paires de mots NL !</p>
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className={`grid ${gridCols} gap-3`}>
           {gameCards.map((card) => (
             <motion.button
               key={card.id}
