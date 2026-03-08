@@ -290,6 +290,18 @@ const t = {
   "trieur.correct": { fr: "✅ Bien trié !", nl: "✅ Goed gesorteerd!" },
   "trieur.wrong": { fr: "❌ Mauvaise boîte ! Essaie encore", nl: "❌ Verkeerde doos! Probeer opnieuw" },
   "trieur.bravo": { fr: "Tout est parfaitement trié ! 🎉", nl: "Alles is perfect gesorteerd! 🎉" },
+
+  // Mur game
+  "game.mur.title": { fr: "Le Mur des Mots", nl: "De Woordenmuur" },
+  "game.mur.desc": { fr: "Remets les mots de la phrase NL dans le bon ordre !", nl: "Zet de woorden van de NL-zin in de juiste volgorde!" },
+  "mur.instruction": { fr: "Écoute la phrase et reconstruit le mur ! 🧱", nl: "Luister naar de zin en bouw de muur! 🧱" },
+  "mur.hint": { fr: "Clique les briques dans l'ordre pour reformer la phrase", nl: "Klik de stenen in de juiste volgorde om de zin te vormen" },
+  "mur.listen": { fr: "Écouter la phrase", nl: "Luister naar de zin" },
+  "mur.validate": { fr: "Vérifier mon mur !", nl: "Controleer mijn muur!" },
+  "mur.wallEmpty": { fr: "Clique les mots pour construire le mur...", nl: "Klik op de woorden om de muur te bouwen..." },
+  "mur.correct": { fr: "✅ Mur parfait !", nl: "✅ Perfecte muur!" },
+  "mur.wrong": { fr: "❌ L'ordre n'est pas bon ! Regarde la bonne phrase", nl: "❌ De volgorde klopt niet! Kijk naar de juiste zin" },
+  "mur.bravo": { fr: "Le mur est complet, bravo ! 🏗️", nl: "De muur is compleet, bravo! 🏗️" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
