@@ -200,6 +200,15 @@ const t = {
   "train.depart": { fr: "Faire partir le train !", nl: "Laat de trein vertrekken!" },
   "train.correct": { fr: "Goed gedaan ! Le train part !", nl: "Goed gedaan! De trein vertrekt!" },
   "train.wrong": { fr: "Prouti ! Les wagons ne sont pas dans l'ordre !", nl: "Toet toet! De wagons staan niet in de juiste volgorde!" },
+
+  // Miroir game
+  "game.miroir.title": { fr: "Le Miroir Magique", nl: "De Magische Spiegel" },
+  "game.miroir.desc": { fr: "Ne te laisse pas piéger par les lettres qui se ressemblent !", nl: "Laat je niet misleiden door letters die op elkaar lijken!" },
+  "miroir.instruction": { fr: "Le miroir prononce un son... Trouve la bonne lettre ! 🪞", nl: "De spiegel zegt een klank... Vind de juiste letter! 🪞" },
+  "miroir.hint": { fr: "Attention aux lettres miroir : b, d, p, q !", nl: "Let op de spiegelletters: b, d, p, q!" },
+  "miroir.listen": { fr: "Réécouter le son", nl: "Luister opnieuw" },
+  "miroir.correct": { fr: "✅ Bien vu ! Tu as trouvé !", nl: "✅ Goed gezien! Je hebt het gevonden!" },
+  "miroir.wrong": { fr: "❌ Regarde bien la forme !", nl: "❌ Kijk goed naar de vorm!" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
