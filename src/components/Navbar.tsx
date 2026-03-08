@@ -2,10 +2,27 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Gamepad2, BarChart3, Home, LogIn, LogOut, UserPlus } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import { getChildren, getChildLevel } from "@/lib/database";
+import { LevelBadge } from "./LevelBadge";
 
 export const Navbar = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
+
+  const { data: children = [] } = useQuery({
+    queryKey: ["children", user?.id],
+    queryFn: () => getChildren(user!.id),
+    enabled: !!user,
+  });
+
+  const activeChild = children[0];
+
+  const { data: childLevel } = useQuery({
+    queryKey: ["childLevel", activeChild?.id],
+    queryFn: () => getChildLevel(activeChild!.id),
+    enabled: !!activeChild,
+  });
   
   return (
     <motion.nav
