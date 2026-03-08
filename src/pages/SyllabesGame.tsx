@@ -132,7 +132,7 @@ const SyllabesGame = () => {
         <div className="flex gap-2 justify-center mb-8 min-h-[60px]">
           {selected.map((s, i) => (
             <motion.div key={i} initial={{ scale: 0 }} animate={{ scale: 1 }} className={`px-5 py-3 rounded-xl text-lg font-bold font-dyslexic ${feedback === "correct" ? "bg-primary text-primary-foreground" : feedback === "wrong" ? "bg-destructive text-destructive-foreground" : "bg-accent text-accent-foreground"}`}>
-              <span className="syllable-highlight">{s}</span>
+              <span className="syllable-highlight">{s.value}</span>
             </motion.div>
           ))}
           {!selected.length && (<div className="px-5 py-3 rounded-xl border-2 border-dashed border-border text-muted-foreground text-lg">{t("syllabes.placeholder")}</div>)}
@@ -142,8 +142,8 @@ const SyllabesGame = () => {
         </AnimatePresence>
         <div className="flex flex-wrap gap-3 justify-center">
           {allOptions.map((syl, i) => {
-            const isUsed = selected.includes(syl);
-            return (<motion.button key={`${round}-${syl}-${i}`} whileHover={{ scale: isUsed ? 1 : 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => !isUsed && handleSelect(syl)} disabled={isUsed || !!feedback} className={`px-6 py-3 rounded-xl text-lg font-bold font-dyslexic transition-all ${isUsed ? "bg-muted text-muted-foreground opacity-40" : "bg-secondary text-secondary-foreground kids-shadow-card hover:kids-shadow-hover cursor-pointer"}`}>{syl}</motion.button>);
+            const isUsed = selected.some(s => s.index === i);
+            return (<motion.button key={`${round}-${syl}-${i}`} whileHover={{ scale: isUsed ? 1 : 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => !isUsed && handleSelect(syl, i)} disabled={isUsed || !!feedback} className={`px-6 py-3 rounded-xl text-lg font-bold font-dyslexic transition-all ${isUsed ? "bg-muted text-muted-foreground opacity-40" : "bg-secondary text-secondary-foreground kids-shadow-card hover:kids-shadow-hover cursor-pointer"}`}>{syl}</motion.button>);
           })}
         </div>
         <div className="mt-8 text-center">
