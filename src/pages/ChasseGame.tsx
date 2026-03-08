@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Star, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGameSession } from "@/hooks/useGameSession";
 
 const WORDS = [
   { word: "kat", correct: true, emoji: "🐱" },
