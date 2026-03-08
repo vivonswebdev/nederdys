@@ -223,6 +223,16 @@ const t = {
   "fauxamis.fauxAmiDesc": { fr: "Sens différent !", nl: "Andere betekenis!" },
   "fauxamis.correct": { fr: "✅ Bien joué !", nl: "✅ Goed gespeeld!" },
   "fauxamis.wrong": { fr: "❌ Raté ! Regarde la vraie signification :", nl: "❌ Fout! Kijk naar de echte betekenis:" },
+
+  // Phare game
+  "game.phare.title": { fr: "Le Phare dans la Brume", nl: "De Vuurtoren in de Mist" },
+  "game.phare.desc": { fr: "Lis la phrase cachée dans la brume et réponds à la question !", nl: "Lees de zin verborgen in de mist en beantwoord de vraag!" },
+  "phare.instruction": { fr: "La brume se lève… Lis bien la phrase ! 🌫️", nl: "De mist trekt op… Lees de zin goed! 🌫️" },
+  "phare.hint": { fr: "Le phare éclaire une phrase. Lis-la et réponds à la question !", nl: "De vuurtoren verlicht een zin. Lees hem en beantwoord de vraag!" },
+  "phare.listen": { fr: "Écouter la phrase", nl: "Luister naar de zin" },
+  "phare.correct": { fr: "✅ Le phare brille pour toi !", nl: "✅ De vuurtoren schijnt voor jou!" },
+  "phare.wrong": { fr: "❌ Relis bien la phrase !", nl: "❌ Lees de zin nog eens goed!" },
+  "phare.bravo": { fr: "Tu as guidé tous les bateaux au port ! 🚢", nl: "Je hebt alle boten naar de haven geleid! 🚢" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
