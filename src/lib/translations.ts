@@ -312,6 +312,18 @@ const t = {
   "oreille.correct": { fr: "✅ Bien entendu !", nl: "✅ Goed gehoord!" },
   "oreille.wrong": { fr: "❌ Ce n'est pas ça ! C'était", nl: "❌ Dat is het niet! Het was" },
   "oreille.bravo": { fr: "Tes oreilles sont magiques ! 🎧", nl: "Je oren zijn magisch! 🎧" },
+
+  // Tir aux Mots game
+  "game.tir.title": { fr: "Le Tir aux Mots", nl: "De Woordenschutter" },
+  "game.tir.desc": { fr: "Trouve le bon mot avant la fin du temps !", nl: "Vind het juiste woord voor de tijd op is!" },
+  "tir.instruction": { fr: "Écoute le mot et clique dessus avant que le temps ne s'écoule ! 🎯", nl: "Luister naar het woord en klik erop voor de tijd om is! 🎯" },
+  "tir.hint": { fr: "Attention aux mots qui se ressemblent ! Choisis vite et bien", nl: "Let op woorden die op elkaar lijken! Kies snel en goed" },
+  "tir.listen": { fr: "Réécouter", nl: "Opnieuw luisteren" },
+  "tir.start": { fr: "C'est parti ! 🚀", nl: "Daar gaan we! 🚀" },
+  "tir.perWord": { fr: "par mot", nl: "per woord" },
+  "tir.correct": { fr: "✅ Dans le mille !", nl: "✅ In de roos!" },
+  "tir.wrong": { fr: "❌ Raté ! C'était", nl: "❌ Gemist! Het was" },
+  "tir.bravo": { fr: "Tu es un tireur d'élite des mots ! 🏆", nl: "Je bent een woordenscherpschutter! 🏆" },
 } as const;
 
 export type TranslationKey = keyof typeof t;

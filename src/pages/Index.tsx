@@ -30,6 +30,7 @@ const Index = () => {
     { id: "trieur", title: t("game.trieur.title"), desc: t("game.trieur.desc"), icon: "🗂️", color: "bg-lime-700", level: t("games.adaptive"), route: "/jeu/trieur" },
     { id: "mur", title: t("game.mur.title"), desc: t("game.mur.desc"), icon: "🧱", color: "bg-red-800", level: t("games.adaptive"), route: "/jeu/mur" },
     { id: "oreille", title: t("game.oreille.title"), desc: t("game.oreille.desc"), icon: "👂", color: "bg-fuchsia-700", level: t("games.adaptive"), route: "/jeu/oreille" },
+    { id: "tir", title: t("game.tir.title"), desc: t("game.tir.desc"), icon: "🎯", color: "bg-rose-700", level: t("games.adaptive"), route: "/jeu/tir" },
   ];
 
   return (
