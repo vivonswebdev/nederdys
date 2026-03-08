@@ -62,8 +62,8 @@ const SyllabesGame = () => {
     if (newSelected.length === current.syllables.length) {
       const isCorrect = newSelected.join("") === current.syllables.join("");
       setFeedback(isCorrect ? "correct" : "wrong");
-      if (isCorrect) setScore((s) => s + 1);
-      else errorsRef.current += 1;
+      if (isCorrect) { setScore((s) => s + 1); sounds.correct(); }
+      else { errorsRef.current += 1; sounds.wrong(); }
       setTimeout(() => {
         if (round < ROUNDS.length - 1) { setRound((r) => r + 1); setSelected([]); setFeedback(null); }
         else setGameOver(true);
