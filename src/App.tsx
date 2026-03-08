@@ -33,6 +33,7 @@ import MurGame from "./pages/MurGame";
 import OreilleMagiqueGame from "./pages/OreilleMagiqueGame";
 import TirGame from "./pages/TirGame";
 import MotTroueGame from "./pages/MotTroueGame";
+import ChronoBilingueGame from "./pages/ChronoBilingueGame";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +73,7 @@ const App = () => (
               <Route path="/jeu/oreille" element={<OreilleMagiqueGame />} />
               <Route path="/jeu/tir" element={<TirGame />} />
               <Route path="/jeu/mot-troue" element={<MotTroueGame />} />
+              <Route path="/jeu/chrono" element={<ChronoBilingueGame />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

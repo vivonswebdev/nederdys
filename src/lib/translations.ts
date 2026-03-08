@@ -334,6 +334,21 @@ const t = {
   "mottroue.correct": { fr: "✅ Parfait ! C'était", nl: "✅ Perfect! Het was" },
   "mottroue.wrong": { fr: "❌ Pas ces lettres ! Essaie encore", nl: "❌ Niet die letters! Probeer opnieuw" },
   "mottroue.bravo": { fr: "Tous les trous sont bouchés ! 🎉", nl: "Alle gaten zijn gevuld! 🎉" },
+
+  // Chrono Bilingue game
+  "game.chrono.title": { fr: "Le Chrono Bilingue", nl: "De Tweetalige Chrono" },
+  "game.chrono.desc": { fr: "Traduis les mots NL en FR avant la fin du chrono !", nl: "Vertaal de NL-woorden naar het Frans voor de tijd op is!" },
+  "chrono.instruction": { fr: "Traduis chaque mot NL en français le plus vite possible ! ⏱️", nl: "Vertaal elk NL-woord zo snel mogelijk naar het Frans! ⏱️" },
+  "chrono.hint": { fr: "Tu entends un mot néerlandais, choisis sa traduction française", nl: "Je hoort een Nederlands woord, kies de Franse vertaling" },
+  "chrono.listen": { fr: "Réécouter", nl: "Opnieuw" },
+  "chrono.chooseFR": { fr: "Choisis la traduction française :", nl: "Kies de Franse vertaling:" },
+  "chrono.start": { fr: "C'est parti !", nl: "Daar gaan we!" },
+  "chrono.perWord": { fr: "par mot", nl: "per woord" },
+  "chrono.words": { fr: "mots", nl: "woorden" },
+  "chrono.correct": { fr: "✅ Correct !", nl: "✅ Correct!" },
+  "chrono.wrong": { fr: "❌ C'était :", nl: "❌ Het was:" },
+  "chrono.totalTime": { fr: "Temps total", nl: "Totale tijd" },
+  "chrono.bravo": { fr: "Tu es un champion bilingue ! 🏆", nl: "Je bent een tweetalige kampioen! 🏆" },
 } as const;
 
 export type TranslationKey = keyof typeof t;
