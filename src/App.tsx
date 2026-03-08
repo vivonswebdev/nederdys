@@ -21,6 +21,7 @@ import LettresGame from "./pages/LettresGame";
 import BurgerGame from "./pages/BurgerGame";
 import GraphemesGame from "./pages/GraphemesGame";
 import TrainGame from "./pages/TrainGame";
+import MiroirGame from "./pages/MiroirGame";
 
 const queryClient = new QueryClient();
 
