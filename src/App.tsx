@@ -25,6 +25,7 @@ import MiroirGame from "./pages/MiroirGame";
 import FauxAmisGame from "./pages/FauxAmisGame";
 import PhareGame from "./pages/PhareGame";
 import ShopPage from "./pages/ShopPage";
+import PeintreGame from "./pages/PeintreGame";
 
 const queryClient = new QueryClient();
 
