@@ -107,6 +107,9 @@ const ChildDashboard = () => {
             )}
           </div>
           <StreakCounter streakDays={streak} />
+          <div className="flex items-center gap-2 bg-kids-orange/15 text-kids-orange rounded-full px-3 py-1.5 font-bold tabular-nums text-sm">
+            💰 {coinsRow?.coins ?? 0}
+          </div>
           <ProgressRing
             currentXp={info.current}
             maxXp={info.span}
@@ -118,6 +121,21 @@ const ChildDashboard = () => {
       </header>
 
       <main className="container max-w-4xl px-4 py-8 space-y-10">
+        <div className="flex flex-wrap gap-3">
+          <button
+            onClick={() => navigate(`/child/${child.id}/avatar`)}
+            className="flex-1 min-w-[10rem] bg-card border border-border rounded-2xl px-4 py-3 font-bold text-foreground text-left hover:border-primary transition-colors"
+          >
+            🎨 Mon avatar
+          </button>
+          <button
+            onClick={() => navigate(`/child/${child.id}/boutique`)}
+            className="flex-1 min-w-[10rem] bg-card border border-border rounded-2xl px-4 py-3 font-bold text-foreground text-left hover:border-primary transition-colors"
+          >
+            🛍️ Boutique d'avatar
+          </button>
+        </div>
+
         <section>
           <h2 className="text-xl font-bold text-foreground mb-4">Choisis ta matière</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
