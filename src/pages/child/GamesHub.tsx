@@ -136,6 +136,34 @@ const GamesHub = () => {
             </div>
           </motion.section>
         ))}
+
+        <section className="mb-10">
+          <h2 className="text-2xl font-bold text-foreground mb-4">🚀 Pour les plus grands (9-12 ans)</h2>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <button
+              onClick={() => navigate(`/child/${childId}/math/chapitres`)}
+              className="border-4 border-kids-purple bg-kids-purple/30 rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+            >
+              <span className="text-4xl block mb-2">🔥</span>
+              <p className="text-xl font-bold text-foreground">Maths avancées</p>
+              <p className="font-dyslexic text-muted-foreground">
+                4e, 5e, 6e primaire — fractions, décimaux, pourcentages…
+              </p>
+            </button>
+
+            <button
+              onClick={() => navigate(`/child/${childId}/nl/exercices`)}
+              className="border-4 border-kids-blue bg-kids-blue/30 rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+            >
+              <span className="text-4xl block mb-2">🎓</span>
+              <p className="text-xl font-bold text-foreground">NL avancé</p>
+              <p className="font-dyslexic text-muted-foreground">
+                Grammaire, vocabulaire, compréhension…
+              </p>
+            </button>
+          </div>
+        </section>
+
       </main>
     </div>
   );

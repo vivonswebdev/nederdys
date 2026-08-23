@@ -1,21 +1,32 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
-import { CHAPTERS } from "@/lib/chapters";
+import { CHAPTERS, ChapterGrade } from "@/lib/chapters";
+
+const GRADE_TABS: { id: "3eprimaire" | ChapterGrade; label: string; emoji: string }[] = [
+  { id: "3eprimaire", label: "3e", emoji: "📗" },
+  { id: "4eprimaire", label: "4e", emoji: "📙" },
+  { id: "5eprimaire", label: "5e", emoji: "📕" },
+  { id: "6eprimaire", label: "6e", emoji: "📒" },
+];
 
 const MathChapters = () => {
   const { id } = useParams<{ id: string }>();
   const childId = id ?? "";
+  const [selectedGrade, setSelectedGrade] = useState<"3eprimaire" | ChapterGrade>("3eprimaire");
 
   const bases = CHAPTERS.filter((c) => c.section === "bases");
   const ce2 = CHAPTERS.filter((c) => c.section === "ce2");
   const stretch = CHAPTERS.filter((c) => c.section === "stretch");
+  const advanced = CHAPTERS.filter((c) => c.section === "avance" && c.grade === selectedGrade);
+
 
   const renderCard = (
     chapter: (typeof CHAPTERS)[number],
     i: number,
-    variant: "bases" | "ce2" | "stretch"
+    variant: "bases" | "ce2" | "stretch" | "avance"
   ) => (
     <motion.div
       key={chapter.id}
@@ -73,28 +84,58 @@ const MathChapters = () => {
           </p>
         </Link>
 
-        {bases.length > 0 && (
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold text-kids-green-dark mb-4">🌱 Pour bien démarrer</h2>
+        <div className="flex gap-3 overflow-x-auto pb-2 mb-8">
+          {GRADE_TABS.map((g) => (
+            <button
+              key={g.id}
+              onClick={() => setSelectedGrade(g.id)}
+              className={`px-6 py-3 rounded-full font-bold whitespace-nowrap border-4 transition-colors ${
+                selectedGrade === g.id
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card text-foreground border-border hover:bg-muted"
+              }`}
+            >
+              {g.emoji} {g.label} primaire
+            </button>
+          ))}
+        </div>
+
+        {selectedGrade === "3eprimaire" ? (
+          <>
+            {bases.length > 0 && (
+              <section className="mb-10">
+                <h2 className="text-2xl font-bold text-kids-green-dark mb-4">🌱 Pour bien démarrer</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {bases.map((c, i) => renderCard(c, i, "bases"))}
+                </div>
+              </section>
+            )}
+
+            <section className="mb-10">
+              <h2 className="text-2xl font-bold text-primary mb-4">📘 3e primaire</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {ce2.map((c, i) => renderCard(c, i, "ce2"))}
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold text-kids-purple mb-4">🚀 Pour aller plus loin</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {stretch.map((c, i) => renderCard(c, i, "stretch"))}
+              </div>
+            </section>
+          </>
+        ) : (
+          <section>
+            <h2 className="text-2xl font-bold text-kids-purple mb-4">
+              🔥 {selectedGrade.replace("primaire", "")} primaire
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {bases.map((c, i) => renderCard(c, i, "bases"))}
+              {advanced.map((c, i) => renderCard(c, i, "avance"))}
             </div>
           </section>
         )}
 
-        <section className="mb-10">
-          <h2 className="text-2xl font-bold text-primary mb-4">📘 CE2</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {ce2.map((c, i) => renderCard(c, i, "ce2"))}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-bold text-kids-purple mb-4">🚀 Pour aller plus loin</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {stretch.map((c, i) => renderCard(c, i, "stretch"))}
-          </div>
-        </section>
       </main>
     </div>
   );

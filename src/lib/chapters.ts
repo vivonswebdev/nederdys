@@ -46,23 +46,40 @@ import { getallenExercises } from "@/data/exercises/nl/getallen";
 import { familieExercises } from "@/data/exercises/nl/familie";
 import { zinnenExercises } from "@/data/exercises/nl/zinnen";
 import { dagenExercises } from "@/data/exercises/nl/dagen";
+import { fractions4eExercises } from "@/data/chapters-avance/fractions-4eprimaire";
+import { grandsNombres4eExercises } from "@/data/chapters-avance/grands-nombres-4eprimaire";
+import { airesPerimetres4eExercises } from "@/data/chapters-avance/aires-perimetres-4eprimaire";
+import { problemes4eExercises } from "@/data/chapters-avance/problemes-4eprimaire";
+import { decimaux5eExercises } from "@/data/chapters-avance/decimaux-5eprimaire";
+import { proportionnalite5eExercises } from "@/data/chapters-avance/proportionnalite-5eprimaire";
+import { pourcentages5eExercises } from "@/data/chapters-avance/pourcentages-5eprimaire";
+import { conversions5eExercises } from "@/data/chapters-avance/conversions-5eprimaire";
+import { nombresRelatifs6eExercises } from "@/data/chapters-avance/nombres-relatifs-6eprimaire";
+import { fractions6eExercises } from "@/data/chapters-avance/fractions-6eprimaire";
+import { airesFormules6eExercises } from "@/data/chapters-avance/aires-formules-6eprimaire";
+import { proportionnalite6eExercises } from "@/data/chapters-avance/proportionnalite-6eprimaire";
 
 export type { Exercise, Difficulty };
 
 export type ChapterSubject = "math" | "nl" | "fr";
 
+export type ChapterGrade = "4eprimaire" | "5eprimaire" | "6eprimaire";
+
 export interface Chapter {
   id: string;
   name: string;
   emoji: string;
-  section: "bases" | "ce2" | "stretch";
+  section: "bases" | "ce2" | "stretch" | "avance";
   subject: ChapterSubject;
+  /** Année scolaire belge pour les chapitres avancés. */
+  grade?: ChapterGrade;
   /** Sous-titre affiché dans la liste (NL). */
   description?: string;
   exercises: Exercise[];
 }
 
 type ChapterDef = Omit<Chapter, "subject">;
+
 
 const MATH_CHAPTERS: ChapterDef[] = [
   { id: "bases-numeration", name: "Les bases des nombres", emoji: "🌱", section: "bases", description: "Compter, reconnaître, additionner avec des images", exercises: basesNumerationExercises },
@@ -111,7 +128,24 @@ const MATH_CHAPTERS: ChapterDef[] = [
   { id: "problemes-esprit-critique", name: "Problèmes malins", emoji: "🧐", section: "stretch", exercises: problemesEspritCritiqueExercises },
   { id: "calendrier", name: "Calendrier", emoji: "📅", section: "ce2", exercises: calendrierExercises },
   { id: "tableaux-double-entree", name: "Tableaux à double entrée", emoji: "📋", section: "ce2", exercises: tableauxDoubleEntreeExercises },
+
+  // === NOUVEAUX CHAPITRES 4e-5e-6e PRIMAIRE (ajoutés à la suite) ===
+  { id: "fractions-4eprimaire", name: "Fractions (4e)", emoji: "🍕", section: "avance", grade: "4eprimaire", exercises: fractions4eExercises },
+  { id: "grands-nombres-4eprimaire", name: "Grands nombres (4e)", emoji: "🔢", section: "avance", grade: "4eprimaire", exercises: grandsNombres4eExercises },
+  { id: "aires-perimetres-4eprimaire", name: "Aires et périmètres (4e)", emoji: "📐", section: "avance", grade: "4eprimaire", exercises: airesPerimetres4eExercises },
+  { id: "problemes-4eprimaire", name: "Problèmes (4e)", emoji: "📝", section: "avance", grade: "4eprimaire", exercises: problemes4eExercises },
+
+  { id: "decimaux-5eprimaire", name: "Nombres décimaux (5e)", emoji: "🔟", section: "avance", grade: "5eprimaire", exercises: decimaux5eExercises },
+  { id: "proportionnalite-5eprimaire", name: "Proportionnalité (5e)", emoji: "📊", section: "avance", grade: "5eprimaire", exercises: proportionnalite5eExercises },
+  { id: "pourcentages-5eprimaire", name: "Pourcentages (5e)", emoji: "💯", section: "avance", grade: "5eprimaire", exercises: pourcentages5eExercises },
+  { id: "conversions-5eprimaire", name: "Conversions (5e)", emoji: "⚖️", section: "avance", grade: "5eprimaire", exercises: conversions5eExercises },
+
+  { id: "nombres-relatifs-6eprimaire", name: "Nombres relatifs (6e)", emoji: "➖", section: "avance", grade: "6eprimaire", exercises: nombresRelatifs6eExercises },
+  { id: "fractions-6eprimaire", name: "Fractions avancées (6e)", emoji: "🍕", section: "avance", grade: "6eprimaire", exercises: fractions6eExercises },
+  { id: "aires-formules-6eprimaire", name: "Aires et formules (6e)", emoji: "📐", section: "avance", grade: "6eprimaire", exercises: airesFormules6eExercises },
+  { id: "proportionnalite-6eprimaire", name: "Proportionnalité (6e)", emoji: "📈", section: "avance", grade: "6eprimaire", exercises: proportionnalite6eExercises },
 ];
+
 
 const NL_CHAPTER_DEFS: ChapterDef[] = [
   { id: "kleuren-nl", name: "Couleurs et vêtements", emoji: "🎨", section: "ce2", description: "De kleuren, de kledij", exercises: kleurenExercises },
