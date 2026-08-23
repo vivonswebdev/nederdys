@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { motion } from "framer-motion";
-import { ArrowLeft, TrendingUp, Clock, Target, Award } from "lucide-react";
+import { ArrowLeft, TrendingUp, Clock, Target, Award, Pencil } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, RadarChart, PolarGrid, PolarAngleAxis, Radar, PieChart, Pie, Cell } from "recharts";
 import { useAuth } from "@/contexts/AuthContext";
@@ -146,7 +146,7 @@ const ParentsDashboard = () => {
             <p className="text-6xl mb-4">🎮</p>
             <h2 className="text-2xl font-bold text-foreground mb-2">{t("dashboard.noData")}</h2>
             <p className="text-muted-foreground mb-6">{currentChild?.first_name || ""} {t("dashboard.noDataDesc")}</p>
-            <Link to="/" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold hover:opacity-90 transition">{t("dashboard.playNow")}</Link>
+            <Link to="/jouer" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold hover:opacity-90 transition">{t("dashboard.playNow")}</Link>
           </motion.div>
         ) : (
           <>
