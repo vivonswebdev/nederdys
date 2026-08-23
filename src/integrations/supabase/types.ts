@@ -168,6 +168,53 @@ export type Database = {
           },
         ]
       }
+      chapter_sessions: {
+        Row: {
+          best_score_pct: number
+          chapter_id: string
+          child_id: string
+          correct_count: number
+          created_at: string
+          difficulty_level: number
+          id: string
+          total_count: number
+          user_id: string
+          xp_earned: number
+        }
+        Insert: {
+          best_score_pct?: number
+          chapter_id: string
+          child_id: string
+          correct_count?: number
+          created_at?: string
+          difficulty_level?: number
+          id?: string
+          total_count?: number
+          user_id: string
+          xp_earned?: number
+        }
+        Update: {
+          best_score_pct?: number
+          chapter_id?: string
+          child_id?: string
+          correct_count?: number
+          created_at?: string
+          difficulty_level?: number
+          id?: string
+          total_count?: number
+          user_id?: string
+          xp_earned?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chapter_sessions_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       child_coins: {
         Row: {
           child_id: string
@@ -658,9 +705,23 @@ export type Database = {
           times_played: number
         }[]
       }
+      get_unlocked_level: {
+        Args: { p_chapter_id: string; p_child_id: string }
+        Returns: number
+      }
       has_parent_pin: { Args: never; Returns: boolean }
       purchase_avatar_item: {
         Args: { p_child_id: string; p_item_id: string }
+        Returns: Json
+      }
+      record_exercise_session: {
+        Args: {
+          p_chapter_id: string
+          p_child_id: string
+          p_correct: number
+          p_difficulty: number
+          p_total: number
+        }
         Returns: Json
       }
       record_game_completion: {
