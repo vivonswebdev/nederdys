@@ -10,6 +10,12 @@ import Home from "./pages/Home";
 import PlayHub from "./pages/PlayHub";
 import NotFound from "./pages/NotFound";
 import MurDesNombres from "./pages/math/MurDesNombres";
+import PyramideNombres from "./pages/math/PyramideNombres";
+import CompteEstBon from "./pages/math/CompteEstBon";
+import ChainesCalcul from "./pages/math/ChainesCalcul";
+import DroiteGraduee from "./pages/math/DroiteGraduee";
+import BatailleNombres from "./pages/math/BatailleNombres";
+import Tangram from "./pages/math/Tangram";
 import MathChapters from "./pages/math/MathChapters";
 import ChapterLevelSelect from "./pages/math/ChapterLevelSelect";
 import ChapterSession from "./pages/math/ChapterSession";
@@ -140,6 +146,30 @@ const App = () => (
               <Route path="/child/:id/math/chrono-calcul/:level" element={<ChronoCalcul />} />
               <Route path="/jeu/mur-des-nombres" element={<MurDesNombres />} />
               <Route path="/jeu/mur-des-nombres/:level" element={<MurDesNombres />} />
+          <Route path="/child/:id/math/pyramide-nombres" element={<PyramideNombres />} />
+          <Route path="/child/:id/math/pyramide-nombres/:level" element={<PyramideNombres />} />
+          <Route path="/jeu/pyramide-nombres" element={<PyramideNombres />} />
+          <Route path="/jeu/pyramide-nombres/:level" element={<PyramideNombres />} />
+          <Route path="/child/:id/math/compte-est-bon" element={<CompteEstBon />} />
+          <Route path="/child/:id/math/compte-est-bon/:level" element={<CompteEstBon />} />
+          <Route path="/jeu/compte-est-bon" element={<CompteEstBon />} />
+          <Route path="/jeu/compte-est-bon/:level" element={<CompteEstBon />} />
+          <Route path="/child/:id/math/chaines-calcul" element={<ChainesCalcul />} />
+          <Route path="/child/:id/math/chaines-calcul/:level" element={<ChainesCalcul />} />
+          <Route path="/jeu/chaines-calcul" element={<ChainesCalcul />} />
+          <Route path="/jeu/chaines-calcul/:level" element={<ChainesCalcul />} />
+          <Route path="/child/:id/math/droite-graduee" element={<DroiteGraduee />} />
+          <Route path="/child/:id/math/droite-graduee/:level" element={<DroiteGraduee />} />
+          <Route path="/jeu/droite-graduee" element={<DroiteGraduee />} />
+          <Route path="/jeu/droite-graduee/:level" element={<DroiteGraduee />} />
+          <Route path="/child/:id/math/bataille-nombres" element={<BatailleNombres />} />
+          <Route path="/child/:id/math/bataille-nombres/:level" element={<BatailleNombres />} />
+          <Route path="/jeu/bataille-nombres" element={<BatailleNombres />} />
+          <Route path="/jeu/bataille-nombres/:level" element={<BatailleNombres />} />
+          <Route path="/child/:id/math/tangram" element={<Tangram />} />
+          <Route path="/child/:id/math/tangram/:level" element={<Tangram />} />
+          <Route path="/jeu/tangram" element={<Tangram />} />
+          <Route path="/jeu/tangram/:level" element={<Tangram />} />
               <Route path="/jeu/chrono-calcul" element={<ChronoCalcul />} />
               <Route path="/jeu/chrono-calcul/:level" element={<ChronoCalcul />} />
               <Route path="/child/:id/math/nombre-troue" element={<NombreTroue />} />

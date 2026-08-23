@@ -8,6 +8,8 @@ export interface ChronoCalcChallenge {
   options: number[];
   timeLimit: number;
   difficulty: 1 | 2 | 3;
+  /** Table de multiplication travaillée (Course aux Tables) */
+  table?: number;
 }
 
 export const chronoCalcChallenges: ChronoCalcChallenge[] = [
@@ -549,6 +551,710 @@ export const chronoCalcChallenges: ChronoCalcChallenge[] = [
       83
     ],
     "timeLimit": 6,
+    "difficulty": 3
+  }
+,
+
+  {
+    "id": 37,
+    "question": "2 × 3 = ?",
+    "audioUrl": "/audio/math/chrono/table-2-3.mp3",
+    "audioText": "2 fois 3",
+    "correctAnswer": 6,
+    "options": [
+      4,
+      6,
+      7,
+      8
+    ],
+    "timeLimit": 14,
+    "difficulty": 1,
+    "table": 2
+  },
+  {
+    "id": 38,
+    "question": "2 × 6 = ?",
+    "audioUrl": "/audio/math/chrono/table-2-6.mp3",
+    "audioText": "2 fois 6",
+    "correctAnswer": 12,
+    "options": [
+      10,
+      12,
+      13,
+      14
+    ],
+    "timeLimit": 14,
+    "difficulty": 1,
+    "table": 2
+  },
+  {
+    "id": 39,
+    "question": "2 × 8 = ?",
+    "audioUrl": "/audio/math/chrono/table-2-8.mp3",
+    "audioText": "2 fois 8",
+    "correctAnswer": 16,
+    "options": [
+      14,
+      16,
+      17,
+      18
+    ],
+    "timeLimit": 14,
+    "difficulty": 1,
+    "table": 2
+  },
+  {
+    "id": 40,
+    "question": "5 × 3 = ?",
+    "audioUrl": "/audio/math/chrono/table-5-3.mp3",
+    "audioText": "5 fois 3",
+    "correctAnswer": 15,
+    "options": [
+      10,
+      15,
+      16,
+      20
+    ],
+    "timeLimit": 14,
+    "difficulty": 1,
+    "table": 5
+  },
+  {
+    "id": 41,
+    "question": "5 × 6 = ?",
+    "audioUrl": "/audio/math/chrono/table-5-6.mp3",
+    "audioText": "5 fois 6",
+    "correctAnswer": 30,
+    "options": [
+      25,
+      30,
+      31,
+      35
+    ],
+    "timeLimit": 14,
+    "difficulty": 1,
+    "table": 5
+  },
+  {
+    "id": 42,
+    "question": "5 × 8 = ?",
+    "audioUrl": "/audio/math/chrono/table-5-8.mp3",
+    "audioText": "5 fois 8",
+    "correctAnswer": 40,
+    "options": [
+      35,
+      40,
+      41,
+      45
+    ],
+    "timeLimit": 14,
+    "difficulty": 1,
+    "table": 5
+  },
+  {
+    "id": 43,
+    "question": "10 × 3 = ?",
+    "audioUrl": "/audio/math/chrono/table-10-3.mp3",
+    "audioText": "10 fois 3",
+    "correctAnswer": 30,
+    "options": [
+      20,
+      30,
+      31,
+      40
+    ],
+    "timeLimit": 14,
+    "difficulty": 1,
+    "table": 10
+  },
+  {
+    "id": 44,
+    "question": "10 × 6 = ?",
+    "audioUrl": "/audio/math/chrono/table-10-6.mp3",
+    "audioText": "10 fois 6",
+    "correctAnswer": 60,
+    "options": [
+      50,
+      60,
+      61,
+      70
+    ],
+    "timeLimit": 14,
+    "difficulty": 1,
+    "table": 10
+  },
+  {
+    "id": 45,
+    "question": "10 × 8 = ?",
+    "audioUrl": "/audio/math/chrono/table-10-8.mp3",
+    "audioText": "10 fois 8",
+    "correctAnswer": 80,
+    "options": [
+      70,
+      80,
+      81,
+      90
+    ],
+    "timeLimit": 14,
+    "difficulty": 1,
+    "table": 10
+  },
+  {
+    "id": 46,
+    "question": "3 × 3 = ?",
+    "audioUrl": "/audio/math/chrono/table-3-3.mp3",
+    "audioText": "3 fois 3",
+    "correctAnswer": 9,
+    "options": [
+      6,
+      9,
+      10,
+      12
+    ],
+    "timeLimit": 11,
+    "difficulty": 2,
+    "table": 3
+  },
+  {
+    "id": 47,
+    "question": "3 × 6 = ?",
+    "audioUrl": "/audio/math/chrono/table-3-6.mp3",
+    "audioText": "3 fois 6",
+    "correctAnswer": 18,
+    "options": [
+      15,
+      18,
+      19,
+      21
+    ],
+    "timeLimit": 11,
+    "difficulty": 2,
+    "table": 3
+  },
+  {
+    "id": 48,
+    "question": "3 × 8 = ?",
+    "audioUrl": "/audio/math/chrono/table-3-8.mp3",
+    "audioText": "3 fois 8",
+    "correctAnswer": 24,
+    "options": [
+      21,
+      24,
+      25,
+      27
+    ],
+    "timeLimit": 11,
+    "difficulty": 2,
+    "table": 3
+  },
+  {
+    "id": 49,
+    "question": "4 × 3 = ?",
+    "audioUrl": "/audio/math/chrono/table-4-3.mp3",
+    "audioText": "4 fois 3",
+    "correctAnswer": 12,
+    "options": [
+      8,
+      12,
+      13,
+      16
+    ],
+    "timeLimit": 11,
+    "difficulty": 2,
+    "table": 4
+  },
+  {
+    "id": 50,
+    "question": "4 × 6 = ?",
+    "audioUrl": "/audio/math/chrono/table-4-6.mp3",
+    "audioText": "4 fois 6",
+    "correctAnswer": 24,
+    "options": [
+      20,
+      24,
+      25,
+      28
+    ],
+    "timeLimit": 11,
+    "difficulty": 2,
+    "table": 4
+  },
+  {
+    "id": 51,
+    "question": "4 × 8 = ?",
+    "audioUrl": "/audio/math/chrono/table-4-8.mp3",
+    "audioText": "4 fois 8",
+    "correctAnswer": 32,
+    "options": [
+      28,
+      32,
+      33,
+      36
+    ],
+    "timeLimit": 11,
+    "difficulty": 2,
+    "table": 4
+  },
+  {
+    "id": 52,
+    "question": "6 × 3 = ?",
+    "audioUrl": "/audio/math/chrono/table-6-3.mp3",
+    "audioText": "6 fois 3",
+    "correctAnswer": 18,
+    "options": [
+      12,
+      18,
+      19,
+      24
+    ],
+    "timeLimit": 11,
+    "difficulty": 2,
+    "table": 6
+  },
+  {
+    "id": 53,
+    "question": "6 × 6 = ?",
+    "audioUrl": "/audio/math/chrono/table-6-6.mp3",
+    "audioText": "6 fois 6",
+    "correctAnswer": 36,
+    "options": [
+      30,
+      36,
+      37,
+      42
+    ],
+    "timeLimit": 11,
+    "difficulty": 2,
+    "table": 6
+  },
+  {
+    "id": 54,
+    "question": "6 × 8 = ?",
+    "audioUrl": "/audio/math/chrono/table-6-8.mp3",
+    "audioText": "6 fois 8",
+    "correctAnswer": 48,
+    "options": [
+      42,
+      48,
+      49,
+      54
+    ],
+    "timeLimit": 11,
+    "difficulty": 2,
+    "table": 6
+  },
+  {
+    "id": 55,
+    "question": "7 × 3 = ?",
+    "audioUrl": "/audio/math/chrono/table-7-3.mp3",
+    "audioText": "7 fois 3",
+    "correctAnswer": 21,
+    "options": [
+      14,
+      21,
+      22,
+      28
+    ],
+    "timeLimit": 9,
+    "difficulty": 3,
+    "table": 7
+  },
+  {
+    "id": 56,
+    "question": "7 × 6 = ?",
+    "audioUrl": "/audio/math/chrono/table-7-6.mp3",
+    "audioText": "7 fois 6",
+    "correctAnswer": 42,
+    "options": [
+      35,
+      42,
+      43,
+      49
+    ],
+    "timeLimit": 9,
+    "difficulty": 3,
+    "table": 7
+  },
+  {
+    "id": 57,
+    "question": "7 × 8 = ?",
+    "audioUrl": "/audio/math/chrono/table-7-8.mp3",
+    "audioText": "7 fois 8",
+    "correctAnswer": 56,
+    "options": [
+      49,
+      56,
+      57,
+      63
+    ],
+    "timeLimit": 9,
+    "difficulty": 3,
+    "table": 7
+  },
+  {
+    "id": 58,
+    "question": "8 × 3 = ?",
+    "audioUrl": "/audio/math/chrono/table-8-3.mp3",
+    "audioText": "8 fois 3",
+    "correctAnswer": 24,
+    "options": [
+      16,
+      24,
+      25,
+      32
+    ],
+    "timeLimit": 9,
+    "difficulty": 3,
+    "table": 8
+  },
+  {
+    "id": 59,
+    "question": "8 × 6 = ?",
+    "audioUrl": "/audio/math/chrono/table-8-6.mp3",
+    "audioText": "8 fois 6",
+    "correctAnswer": 48,
+    "options": [
+      40,
+      48,
+      49,
+      56
+    ],
+    "timeLimit": 9,
+    "difficulty": 3,
+    "table": 8
+  },
+  {
+    "id": 60,
+    "question": "8 × 8 = ?",
+    "audioUrl": "/audio/math/chrono/table-8-8.mp3",
+    "audioText": "8 fois 8",
+    "correctAnswer": 64,
+    "options": [
+      56,
+      64,
+      65,
+      72
+    ],
+    "timeLimit": 9,
+    "difficulty": 3,
+    "table": 8
+  },
+  {
+    "id": 61,
+    "question": "9 × 3 = ?",
+    "audioUrl": "/audio/math/chrono/table-9-3.mp3",
+    "audioText": "9 fois 3",
+    "correctAnswer": 27,
+    "options": [
+      18,
+      27,
+      28,
+      36
+    ],
+    "timeLimit": 9,
+    "difficulty": 3,
+    "table": 9
+  },
+  {
+    "id": 62,
+    "question": "9 × 6 = ?",
+    "audioUrl": "/audio/math/chrono/table-9-6.mp3",
+    "audioText": "9 fois 6",
+    "correctAnswer": 54,
+    "options": [
+      45,
+      54,
+      55,
+      63
+    ],
+    "timeLimit": 9,
+    "difficulty": 3,
+    "table": 9
+  },
+  {
+    "id": 63,
+    "question": "9 × 8 = ?",
+    "audioUrl": "/audio/math/chrono/table-9-8.mp3",
+    "audioText": "9 fois 8",
+    "correctAnswer": 72,
+    "options": [
+      63,
+      72,
+      73,
+      81
+    ],
+    "timeLimit": 9,
+    "difficulty": 3,
+    "table": 9
+  },
+  {
+    "id": 64,
+    "question": "Juste calcul : 9 + 4 = ?",
+    "audioUrl": "/audio/math/chrono/juste-9-4.mp3",
+    "audioText": "9 plus 4",
+    "correctAnswer": 13,
+    "options": [
+      10,
+      13,
+      18,
+      23
+    ],
+    "timeLimit": 14,
+    "difficulty": 1
+  },
+  {
+    "id": 65,
+    "question": "Juste calcul : 9 - 4 = ?",
+    "audioUrl": "/audio/math/chrono/juste-m-9-4.mp3",
+    "audioText": "9 moins 4",
+    "correctAnswer": 5,
+    "options": [
+      3,
+      5,
+      9,
+      12
+    ],
+    "timeLimit": 14,
+    "difficulty": 1
+  },
+  {
+    "id": 66,
+    "question": "Juste calcul : 8 + 7 = ?",
+    "audioUrl": "/audio/math/chrono/juste-8-7.mp3",
+    "audioText": "8 plus 7",
+    "correctAnswer": 15,
+    "options": [
+      12,
+      15,
+      20,
+      25
+    ],
+    "timeLimit": 14,
+    "difficulty": 1
+  },
+  {
+    "id": 67,
+    "question": "Juste calcul : 8 - 7 = ?",
+    "audioUrl": "/audio/math/chrono/juste-m-8-7.mp3",
+    "audioText": "8 moins 7",
+    "correctAnswer": 1,
+    "options": [
+      0,
+      1,
+      5,
+      8
+    ],
+    "timeLimit": 14,
+    "difficulty": 1
+  },
+  {
+    "id": 68,
+    "question": "Juste calcul : 6 + 6 = ?",
+    "audioUrl": "/audio/math/chrono/juste-6-6.mp3",
+    "audioText": "6 plus 6",
+    "correctAnswer": 12,
+    "options": [
+      9,
+      12,
+      17,
+      22
+    ],
+    "timeLimit": 14,
+    "difficulty": 1
+  },
+  {
+    "id": 69,
+    "question": "Juste calcul : 6 - 6 = ?",
+    "audioUrl": "/audio/math/chrono/juste-m-6-6.mp3",
+    "audioText": "6 moins 6",
+    "correctAnswer": 0,
+    "options": [
+      0,
+      0,
+      4,
+      7
+    ],
+    "timeLimit": 14,
+    "difficulty": 1
+  },
+  {
+    "id": 70,
+    "question": "Juste calcul : 19 + 12 = ?",
+    "audioUrl": "/audio/math/chrono/juste-19-12.mp3",
+    "audioText": "19 plus 12",
+    "correctAnswer": 31,
+    "options": [
+      28,
+      31,
+      36,
+      41
+    ],
+    "timeLimit": 11,
+    "difficulty": 2
+  },
+  {
+    "id": 71,
+    "question": "Juste calcul : 19 - 12 = ?",
+    "audioUrl": "/audio/math/chrono/juste-m-19-12.mp3",
+    "audioText": "19 moins 12",
+    "correctAnswer": 7,
+    "options": [
+      5,
+      7,
+      11,
+      14
+    ],
+    "timeLimit": 11,
+    "difficulty": 2
+  },
+  {
+    "id": 72,
+    "question": "Juste calcul : 24 + 17 = ?",
+    "audioUrl": "/audio/math/chrono/juste-24-17.mp3",
+    "audioText": "24 plus 17",
+    "correctAnswer": 41,
+    "options": [
+      38,
+      41,
+      46,
+      51
+    ],
+    "timeLimit": 11,
+    "difficulty": 2
+  },
+  {
+    "id": 73,
+    "question": "Juste calcul : 24 - 17 = ?",
+    "audioUrl": "/audio/math/chrono/juste-m-24-17.mp3",
+    "audioText": "24 moins 17",
+    "correctAnswer": 7,
+    "options": [
+      5,
+      7,
+      11,
+      14
+    ],
+    "timeLimit": 11,
+    "difficulty": 2
+  },
+  {
+    "id": 74,
+    "question": "Juste calcul : 31 + 15 = ?",
+    "audioUrl": "/audio/math/chrono/juste-31-15.mp3",
+    "audioText": "31 plus 15",
+    "correctAnswer": 46,
+    "options": [
+      43,
+      46,
+      51,
+      56
+    ],
+    "timeLimit": 11,
+    "difficulty": 2
+  },
+  {
+    "id": 75,
+    "question": "Juste calcul : 31 - 15 = ?",
+    "audioUrl": "/audio/math/chrono/juste-m-31-15.mp3",
+    "audioText": "31 moins 15",
+    "correctAnswer": 16,
+    "options": [
+      14,
+      16,
+      20,
+      23
+    ],
+    "timeLimit": 11,
+    "difficulty": 2
+  },
+  {
+    "id": 76,
+    "question": "Juste calcul : 48 + 27 = ?",
+    "audioUrl": "/audio/math/chrono/juste-48-27.mp3",
+    "audioText": "48 plus 27",
+    "correctAnswer": 75,
+    "options": [
+      72,
+      75,
+      80,
+      85
+    ],
+    "timeLimit": 9,
+    "difficulty": 3
+  },
+  {
+    "id": 77,
+    "question": "Juste calcul : 48 - 27 = ?",
+    "audioUrl": "/audio/math/chrono/juste-m-48-27.mp3",
+    "audioText": "48 moins 27",
+    "correctAnswer": 21,
+    "options": [
+      19,
+      21,
+      25,
+      28
+    ],
+    "timeLimit": 9,
+    "difficulty": 3
+  },
+  {
+    "id": 78,
+    "question": "Juste calcul : 63 + 39 = ?",
+    "audioUrl": "/audio/math/chrono/juste-63-39.mp3",
+    "audioText": "63 plus 39",
+    "correctAnswer": 102,
+    "options": [
+      99,
+      102,
+      107,
+      112
+    ],
+    "timeLimit": 9,
+    "difficulty": 3
+  },
+  {
+    "id": 79,
+    "question": "Juste calcul : 63 - 39 = ?",
+    "audioUrl": "/audio/math/chrono/juste-m-63-39.mp3",
+    "audioText": "63 moins 39",
+    "correctAnswer": 24,
+    "options": [
+      22,
+      24,
+      28,
+      31
+    ],
+    "timeLimit": 9,
+    "difficulty": 3
+  },
+  {
+    "id": 80,
+    "question": "Juste calcul : 87 + 45 = ?",
+    "audioUrl": "/audio/math/chrono/juste-87-45.mp3",
+    "audioText": "87 plus 45",
+    "correctAnswer": 132,
+    "options": [
+      129,
+      132,
+      137,
+      142
+    ],
+    "timeLimit": 9,
+    "difficulty": 3
+  },
+  {
+    "id": 81,
+    "question": "Juste calcul : 87 - 45 = ?",
+    "audioUrl": "/audio/math/chrono/juste-m-87-45.mp3",
+    "audioText": "87 moins 45",
+    "correctAnswer": 42,
+    "options": [
+      40,
+      42,
+      46,
+      49
+    ],
+    "timeLimit": 9,
     "difficulty": 3
   }
 ] as ChronoCalcChallenge[];
