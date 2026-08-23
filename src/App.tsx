@@ -38,6 +38,9 @@ import MoutonNoirGame from "./pages/MoutonNoirGame";
 import ProfileSelect from "./pages/ProfileSelect";
 import ChildDashboard from "./pages/ChildDashboard";
 import SubjectPage from "./pages/SubjectPage";
+import ParentGate from "./pages/ParentGate";
+import ParentDashboard from "./pages/ParentDashboard";
+import ParentSettings from "./pages/ParentSettings";
 import { ChildProvider } from "@/contexts/ChildContext";
 
 const queryClient = new QueryClient();
