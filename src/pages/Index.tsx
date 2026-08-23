@@ -38,8 +38,8 @@ const Index = () => {
     { id: "mouton", title: t("game.mouton.title"), desc: t("game.mouton.desc"), icon: "🐑", color: "bg-neutral-800", level: t("games.adaptive"), route: "/jeu/mouton" },
   ];
 
-  // Une fois connecté, la page vitrine est masquée : on va direct aux profils.
-  if (!loading && user) return <Navigate to="/profils" replace />;
+  // Une fois connecté, la page vitrine est masquée : on va à l'accueil connecté.
+  if (!loading && user) return <Navigate to="/accueil" replace />;
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">
