@@ -16,6 +16,9 @@ import { ChildLevelBadge } from "./LevelBadge";
 import { SubjectCard } from "./SubjectCard";
 import { DailyChallenge } from "./DailyChallenge";
 import { BadgeShowcase } from "./BadgeShowcase";
+import { AvatarRenderer } from "./AvatarRenderer";
+import { getAvatarConfig } from "@/lib/avatar";
+import { getChildCoins } from "@/lib/database";
 
 const ChildDashboard = () => {
   const { id } = useParams<{ id: string }>();
