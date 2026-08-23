@@ -32,6 +32,7 @@ import {
   upsertChildSettings,
 } from "@/lib/parent";
 import { setPin as savePin } from "@/lib/pin";
+import { SCHOOL_LEVELS, normalizeSchoolLevel, schoolLevelLabel } from "@/lib/schoolLevels";
 
 const TOGGLES: { key: keyof ChildSettings; label: string; hint: string }[] = [
   { key: "timer_enabled", label: "Chrono activé", hint: "Affiche un compte à rebours dans les jeux rapides" },
