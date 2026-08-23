@@ -119,7 +119,18 @@ const ManageChildren = () => {
                         </option>
                       ))}
                     </select>
+                    <select
+                      value={form.gender}
+                      onChange={(e) => setForm({ ...form, gender: e.target.value })}
+                      aria-label="Sexe"
+                      className="flex-1 min-w-[8rem] border border-border bg-background rounded-xl p-2.5"
+                    >
+                      <option value="girl">👧 Fille</option>
+                      <option value="boy">👦 Garçon</option>
+                      <option value="other">🌈 Autre</option>
+                    </select>
                   </div>
+
                   <div className="flex gap-2">
                     <button
                       disabled={busy}
