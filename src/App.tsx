@@ -66,6 +66,8 @@ const App = () => (
               <Route path="/profils" element={<ProfileSelect />} />
               <Route path="/enfant" element={<ChildDashboard />} />
               <Route path="/child/:id" element={<ChildHome />} />
+              <Route path="/child/:id/boutique" element={<AvatarShop />} />
+              <Route path="/child/:id/avatar" element={<AvatarEditor />} />
               <Route path="/child/:id/:subject" element={<SubjectPage />} />
               <Route path="/matiere/:subject" element={<SubjectPage />} />
               <Route path="/jeu/syllabes" element={<SyllabesGame />} />
