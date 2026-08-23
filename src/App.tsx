@@ -35,6 +35,10 @@ import TirGame from "./pages/TirGame";
 import MotTroueGame from "./pages/MotTroueGame";
 import ChronoBilingueGame from "./pages/ChronoBilingueGame";
 import MoutonNoirGame from "./pages/MoutonNoirGame";
+import ProfileSelect from "./pages/ProfileSelect";
+import ChildDashboard from "./pages/ChildDashboard";
+import SubjectPage from "./pages/SubjectPage";
+import { ChildProvider } from "@/contexts/ChildContext";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +46,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <LanguageProvider>
+        <ChildProvider>
         <TooltipProvider>
           <Toaster />
           <Sonner />
@@ -52,6 +57,9 @@ const App = () => (
               <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/ajouter-enfant" element={<AddChild />} />
+              <Route path="/profils" element={<ProfileSelect />} />
+              <Route path="/enfant" element={<ChildDashboard />} />
+              <Route path="/matiere/:subject" element={<SubjectPage />} />
               <Route path="/jeu/syllabes" element={<SyllabesGame />} />
               <Route path="/jeu/chasse" element={<ChasseGame />} />
               <Route path="/jeu/memoire" element={<MemoireGame />} />
@@ -80,6 +88,7 @@ const App = () => (
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
+        </ChildProvider>
       </LanguageProvider>
     </AuthProvider>
   </QueryClientProvider>

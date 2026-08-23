@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { Gamepad2, BarChart3, Home, LogIn, LogOut, UserPlus, Globe, ShoppingBag } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
-import { getChildren, getChildLevel, getChildCoins } from "@/lib/database";
+import { getChildLevel, getChildCoins } from "@/lib/database";
+import { useChild } from "@/contexts/ChildContext";
 import { LevelBadge } from "./LevelBadge";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -12,13 +13,8 @@ export const Navbar = () => {
   const { user, signOut } = useAuth();
   const { lang, setLang, t } = useLanguage();
 
-  const { data: children = [] } = useQuery({
-    queryKey: ["children", user?.id],
-    queryFn: () => getChildren(user!.id),
-    enabled: !!user,
-  });
+  const { activeChild } = useChild();
 
-  const activeChild = children[0];
 
   const { data: childLevel } = useQuery({
     queryKey: ["childLevel", activeChild?.id],

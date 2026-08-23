@@ -358,7 +358,38 @@ const t = {
   "mouton.correct": { fr: "✅ Bien vu ! L'intrus était", nl: "✅ Goed gezien! Het buitenbeentje was" },
   "mouton.wrong": { fr: "❌ Ce mot appartient à la catégorie ! Essaie encore", nl: "❌ Dit woord hoort bij de categorie! Probeer opnieuw" },
   "mouton.bravo": { fr: "Tu as trouvé tous les moutons noirs ! 🐑🖤", nl: "Je hebt alle zwarte schapen gevonden! 🐑🖤" },
+
+  // Profils & matières
+  "profiles.title": { fr: "Qui joue aujourd'hui ?", nl: "Wie speelt vandaag?" },
+  "profiles.subtitle": { fr: "Choisis ton profil pour continuer", nl: "Kies je profiel om verder te gaan" },
+  "profiles.add": { fr: "Ajouter un enfant", nl: "Kind toevoegen" },
+  "profiles.parents": { fr: "Espace Parents", nl: "Ouderportaal" },
+  "profiles.empty": { fr: "Aucun profil pour le moment", nl: "Nog geen profielen" },
+  "profiles.switch": { fr: "Changer de profil", nl: "Profiel wisselen" },
+  "subject.nl": { fr: "Néerlandais", nl: "Nederlands" },
+  "subject.nl.desc": { fr: "Sons, mots et phrases", nl: "Klanken, woorden en zinnen" },
+  "subject.fr": { fr: "Français", nl: "Frans" },
+  "subject.fr.desc": { fr: "Lecture et orthographe", nl: "Lezen en spelling" },
+  "subject.math": { fr: "Mathématiques", nl: "Wiskunde" },
+  "subject.math.desc": { fr: "Nombres, calcul et logique", nl: "Getallen, rekenen en logica" },
+  "subject.choose": { fr: "Choisis ta matière", nl: "Kies je vak" },
+  "subject.soon": { fr: "Bientôt disponible ! 🚧", nl: "Binnenkort beschikbaar! 🚧" },
+  "subject.soon.desc": { fr: "Ces jeux arrivent très vite.", nl: "Deze spellen komen er snel aan." },
+  "subject.back": { fr: "Retour", nl: "Terug" },
+  "subject.count": { fr: "jeux", nl: "spellen" },
+
+  // Dashboard enfant
+  "child.hello": { fr: "Salut", nl: "Hallo" },
+  "child.level": { fr: "Niveau", nl: "Niveau" },
+  "child.xp": { fr: "XP", nl: "XP" },
+  "child.streak": { fr: "jours d'affilée", nl: "dagen op rij" },
+  "child.badges": { fr: "Mes badges", nl: "Mijn badges" },
+  "child.nobadge": { fr: "Joue pour débloquer tes premiers badges !", nl: "Speel om je eerste badges te verdienen!" },
+  "child.challenge": { fr: "Défi du jour", nl: "Uitdaging van de dag" },
+  "child.continue": { fr: "Continuer à jouer", nl: "Verder spelen" },
+  "child.tolevel": { fr: "XP avant le niveau suivant", nl: "XP tot het volgende niveau" },
 } as const;
+
 
 export type TranslationKey = keyof typeof t;
 
