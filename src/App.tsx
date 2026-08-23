@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
+import PlayHub from "./pages/PlayHub";
 import NotFound from "./pages/NotFound";
 import MurDesNombres from "./pages/math/MurDesNombres";
 import MathChapters from "./pages/math/MathChapters";
@@ -80,6 +81,7 @@ const App = () => (
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/ajouter-enfant" element={<AddChild />} />
               <Route path="/profils" element={<ProfileSelect />} />
+              <Route path="/jouer" element={<PlayHub />} />
               <Route path="/enfant" element={<ChildDashboard />} />
               <Route path="/child/:id" element={<ChildHome />} />
               <Route path="/child/:id/boutique" element={<AvatarShop />} />

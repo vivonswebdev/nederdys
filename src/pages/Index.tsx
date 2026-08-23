@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import { Star, Sparkles, BookOpen, Trophy, BarChart3, Gamepad2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import mascot from "@/assets/mascot.png";
 import heroBg from "@/assets/hero-bg.jpg";
 import { FloatingStars } from "@/components/FloatingStars";
 import { GameCard } from "@/components/GameCard";
 import { Navbar } from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
   const { t } = useLanguage();
+  const { user, loading } = useAuth();
 
   const games = [
     { id: "syllabes", title: t("game.syllabes.title"), desc: t("game.syllabes.desc"), icon: "✨", color: "bg-kids-green-light", level: t("games.adaptive"), route: "/jeu/syllabes" },
@@ -35,6 +37,9 @@ const Index = () => {
     { id: "chrono", title: t("game.chrono.title"), desc: t("game.chrono.desc"), icon: "⏱️", color: "bg-blue-800", level: t("games.adaptive"), route: "/jeu/chrono" },
     { id: "mouton", title: t("game.mouton.title"), desc: t("game.mouton.desc"), icon: "🐑", color: "bg-neutral-800", level: t("games.adaptive"), route: "/jeu/mouton" },
   ];
+
+  // Une fois connecté, la page vitrine est masquée : on va direct aux profils.
+  if (!loading && user) return <Navigate to="/profils" replace />;
 
   return (
     <div className="min-h-screen bg-background overflow-hidden">

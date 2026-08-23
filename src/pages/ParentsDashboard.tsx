@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { motion } from "framer-motion";
-import { ArrowLeft, TrendingUp, Clock, Target, Award } from "lucide-react";
+import { ArrowLeft, TrendingUp, Clock, Target, Award, Pencil } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, RadarChart, PolarGrid, PolarAngleAxis, Radar, PieChart, Pie, Cell } from "recharts";
 import { useAuth } from "@/contexts/AuthContext";
@@ -120,12 +120,19 @@ const ParentsDashboard = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container max-w-6xl mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
           <div>
-            <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground mb-2"><ArrowLeft className="w-4 h-4" /> {t("game.back")}</Link>
+            <Link to="/profils" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground mb-2"><ArrowLeft className="w-4 h-4" /> {t("game.back")}</Link>
             <h1 className="text-3xl font-bold text-foreground">{t("dashboard.title")}</h1>
           </div>
+          <Link
+            to="/parent/children"
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold hover:opacity-90 transition"
+          >
+            <Pencil className="w-4 h-4" /> Modifier les profils enfants
+          </Link>
         </div>
+
         {children.length > 1 && (
           <Tabs value={currentChildId || ""} onValueChange={setActiveChildId} className="mb-6">
             <TabsList>{children.map((child) => (<TabsTrigger key={child.id} value={child.id}>{child.avatar_emoji} {child.first_name}</TabsTrigger>))}</TabsList>
@@ -139,7 +146,7 @@ const ParentsDashboard = () => {
             <p className="text-6xl mb-4">🎮</p>
             <h2 className="text-2xl font-bold text-foreground mb-2">{t("dashboard.noData")}</h2>
             <p className="text-muted-foreground mb-6">{currentChild?.first_name || ""} {t("dashboard.noDataDesc")}</p>
-            <Link to="/" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold hover:opacity-90 transition">{t("dashboard.playNow")}</Link>
+            <Link to="/jouer" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold hover:opacity-90 transition">{t("dashboard.playNow")}</Link>
           </motion.div>
         ) : (
           <>
