@@ -54,6 +54,9 @@ import ChallengePage from "./pages/child/ChallengePage";
 import ChildSettingsPage from "./pages/child/ChildSettingsPage";
 import ManageChildren from "./pages/parent/ManageChildren";
 import SubjectPage from "./pages/SubjectPage";
+import GamesHub from "./pages/child/GamesHub";
+import NlChapters from "./pages/nl/NlChapters";
+import FrExercises from "./pages/fr/FrExercises";
 import ParentGate from "./pages/ParentGate";
 import ParentDashboard from "./pages/ParentDashboard";
 import ParentSettings from "./pages/ParentSettings";
@@ -84,6 +87,16 @@ const App = () => (
               <Route path="/child/:id/badges" element={<BadgesPage />} />
               <Route path="/child/:id/defi" element={<ChallengePage />} />
               <Route path="/child/:id/settings" element={<ChildSettingsPage />} />
+              <Route path="/child/:id/games" element={<GamesHub />} />
+              <Route path="/child/:id/jeux" element={<GamesHub />} />
+              <Route path="/child/:id/nl/exercices" element={<NlChapters />} />
+              <Route path="/child/:id/nl/exercises" element={<NlChapters />} />
+              <Route path="/child/:id/nl/chapitre/:chapterId" element={<ChapterLevelSelect />} />
+              <Route path="/child/:id/nl/chapitre/:chapterId/:level" element={<ChapterSession />} />
+              <Route path="/child/:id/fr/exercices" element={<FrExercises />} />
+              <Route path="/child/:id/fr/exercises" element={<FrExercises />} />
+              <Route path="/child/:id/math/exercices" element={<MathChapters />} />
+              <Route path="/child/:id/math/exercises" element={<MathChapters />} />
               <Route path="/child/:id/:subject" element={<SubjectPage />} />
               <Route path="/matiere/:subject" element={<SubjectPage />} />
               <Route path="/jeu/syllabes" element={<SyllabesGame />} />

@@ -37,7 +37,7 @@ const normalize = (value: string) =>
 
 export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Props) => {
   const navigate = useNavigate();
-  const backTo = `/child/${childId}/math/chapitre/${chapter.id}`;
+  const backTo = `/child/${childId}/${chapter.subject}/chapitre/${chapter.id}`;
 
   const session = useMemo(
     () => shuffle(exercisesForLevel(chapter, level)).slice(0, sessionSize),

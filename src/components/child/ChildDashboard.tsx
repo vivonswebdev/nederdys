@@ -155,7 +155,19 @@ const ChildDashboard = () => {
       </header>
 
       <main className="container max-w-4xl px-4 py-8 space-y-10">
+        <button
+          onClick={() => navigate(`/child/${child.id}/games`)}
+          className="w-full bg-kids-blue/30 border-4 border-primary rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+        >
+          <span className="text-4xl block mb-1">🎮</span>
+          <p className="text-xl font-bold text-foreground">Voir tous les jeux</p>
+          <p className="font-dyslexic text-muted-foreground">
+            Jeux et exercices de toutes tes matières !
+          </p>
+        </button>
+
         <div className="flex flex-wrap gap-3">
+
           <button
             onClick={() => navigate(`/child/${child.id}/avatar`)}
             className="flex-1 min-w-[10rem] bg-card border border-border rounded-2xl px-4 py-3 font-bold text-foreground text-left hover:border-primary transition-colors"
