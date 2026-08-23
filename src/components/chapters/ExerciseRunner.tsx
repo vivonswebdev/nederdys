@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Check, X } from "lucide-react";
+import { ArrowLeft, Check, Volume2, X } from "lucide-react";
 import { toast } from "sonner";
 import { Navbar } from "@/components/Navbar";
 import { Confetti } from "@/components/Confetti";
@@ -34,6 +34,23 @@ const normalize = (value: string) =>
     .replace(/\s+/g, "")
     .replace(/,/g, ".")
     .replace(/€|cm|kg|g\b/g, "");
+
+/** Lecture audio nl-BE : fichier fourni sinon synthèse vocale néerlandaise. */
+function playNl(ex: Exercise) {
+  if (ex.audioUrl) {
+    new Audio(ex.audioUrl).play().catch(() => undefined);
+    return;
+  }
+  if (typeof window === "undefined" || !window.speechSynthesis) return;
+  const text = [ex.question, ex.type === "qcm" ? String(ex.answer) : ""].join(" ");
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "nl-BE";
+  utter.rate = 0.85;
+  const voice = window.speechSynthesis.getVoices().find((v) => v.lang.startsWith("nl"));
+  if (voice) utter.voice = voice;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter);
+}
 
 export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Props) => {
   const navigate = useNavigate();
