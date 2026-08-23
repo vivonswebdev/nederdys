@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { GameStat, gameTitleKey, timeAgo } from "@/lib/parent";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { GameDetailDrawer } from "@/components/parent/GameDetailDrawer";
 
 type SortKey = "played" | "successRate" | "recent";
 
@@ -13,10 +14,11 @@ const SUBJECT_BADGE: Record<string, { label: string; className: string }> = {
 
 const PAGE_SIZE = 5;
 
-export const TopGamesTable = ({ stats }: { stats: GameStat[] }) => {
+export const TopGamesTable = ({ stats, childId }: { stats: GameStat[]; childId: string }) => {
   const { t } = useLanguage();
   const [sort, setSort] = useState<SortKey>("played");
   const [page, setPage] = useState(0);
+  const [selectedGameType, setSelectedGameType] = useState<string | null>(null);
 
   const sorted = useMemo(() => {
     const copy = [...stats];
@@ -80,7 +82,11 @@ export const TopGamesTable = ({ stats }: { stats: GameStat[] }) => {
                 {rows.map((g) => {
                   const badge = SUBJECT_BADGE[g.subject];
                   return (
-                    <tr key={g.gameType} className="border-b border-border/60 last:border-0">
+                    <tr
+                      key={g.gameType}
+                      onClick={() => setSelectedGameType(g.gameType)}
+                      className="border-b border-border/60 last:border-0 cursor-pointer hover:bg-muted/50 transition-colors"
+                    >
                       <td className="py-2.5 pr-3 font-medium text-foreground">
                         {t(gameTitleKey(g.gameType) as never)}
                       </td>
@@ -119,6 +125,13 @@ export const TopGamesTable = ({ stats }: { stats: GameStat[] }) => {
           )}
         </>
       )}
+
+      <GameDetailDrawer
+        gameType={selectedGameType}
+        childId={childId}
+        isOpen={!!selectedGameType}
+        onClose={() => setSelectedGameType(null)}
+      />
     </div>
   );
 };

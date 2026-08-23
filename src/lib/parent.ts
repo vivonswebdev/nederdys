@@ -314,3 +314,30 @@ export const exportAllData = async (userId: string) => {
     child_settings: settings.data ?? [],
   };
 };
+
+// ---------- Points faibles par difficulté ----------
+
+export interface DifficultyWeakness {
+  gameType: string;
+  difficulty: string;
+  errorRate: number;
+}
+
+export const getWeakDifficulties = async (childId: string): Promise<DifficultyWeakness[]> => {
+  const { data, error } = await supabase
+    .from("game_difficulties")
+    .select("game_type, difficulty, recent_error_rate")
+    .eq("child_id", childId)
+    .gte("recent_error_rate", 0.4)
+    .order("recent_error_rate", { ascending: false })
+    .limit(3);
+  if (error) {
+    console.error(error);
+    return [];
+  }
+  return (data ?? []).map((d) => ({
+    gameType: d.game_type,
+    difficulty: d.difficulty,
+    errorRate: Math.round(Number(d.recent_error_rate) * 100),
+  }));
+};

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { Download, Printer } from "lucide-react";
@@ -14,6 +16,7 @@ interface Props {
   games: GameStat[];
   achievements: { badge_name: string; unlocked_at: string }[];
   streak: number;
+  chartImage?: string | null;
 }
 
 const LABELS: Record<string, string> = {
@@ -22,7 +25,7 @@ const LABELS: Record<string, string> = {
   math: "Mathématiques",
 };
 
-const buildPdf = ({ childName, periodLabel, stats, games, achievements, streak }: Props) => {
+const buildPdf = ({ childName, periodLabel, stats, games, achievements, streak, chartImage }: Props) => {
   const doc = new jsPDF();
   const today = new Date().toLocaleDateString("fr-BE");
 
@@ -33,8 +36,14 @@ const buildPdf = ({ childName, periodLabel, stats, games, achievements, streak }
   doc.text(`Période : ${periodLabel}`, 14, 37);
   doc.text(`Export du ${today} · Série : ${streak} jour(s)`, 14, 44);
 
+  let cursorY = 52;
+  if (chartImage) {
+    doc.addImage(chartImage, "PNG", 14, cursorY, 180, 70);
+    cursorY += 78;
+  }
+
   autoTable(doc, {
-    startY: 52,
+    startY: cursorY,
     head: [["Matière", "XP", "Sessions", "Réussite", "Tendance 7j"]],
     body: stats.map((s) => [
       LABELS[s.subject],
@@ -75,24 +84,51 @@ const buildPdf = ({ childName, periodLabel, stats, games, achievements, streak }
   return doc;
 };
 
-export const ExportPDF = (props: Props) => (
-  <div className="flex gap-2">
-    <Button
-      onClick={() => buildPdf(props).save(`nederdys-${props.childName}-${Date.now()}.pdf`)}
-      className="gap-2"
-    >
-      <Download className="w-4 h-4" /> Exporter PDF
-    </Button>
-    <Button
-      variant="outline"
-      className="gap-2"
-      onClick={() => {
-        const doc = buildPdf(props);
+export const ExportPDF = (
+  props: Props & { chartRef?: React.RefObject<HTMLElement | null> }
+) => {
+  const { chartRef, ...pdfProps } = props;
+  const [busy, setBusy] = useState(false);
+
+  const capture = async (): Promise<string | null> => {
+    if (!chartRef?.current) return props.chartImage ?? null;
+    try {
+      const canvas = await html2canvas(chartRef.current as HTMLElement, {
+        backgroundColor: "#ffffff",
+        scale: 2,
+        useCORS: true,
+      });
+      return canvas.toDataURL("image/png");
+    } catch (e) {
+      console.error("Capture du graphique impossible:", e);
+      return null;
+    }
+  };
+
+  const run = async (print: boolean) => {
+    setBusy(true);
+    try {
+      const chartImage = await capture();
+      const doc = buildPdf({ ...pdfProps, chartImage });
+      if (print) {
         doc.autoPrint();
         window.open(doc.output("bloburl") as unknown as string, "_blank");
-      }}
-    >
-      <Printer className="w-4 h-4" /> Imprimer
-    </Button>
-  </div>
-);
+      } else {
+        doc.save(`nederdys-${props.childName}-${Date.now()}.pdf`);
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="flex gap-2">
+      <Button onClick={() => run(false)} disabled={busy} className="gap-2">
+        <Download className="w-4 h-4" /> Exporter PDF
+      </Button>
+      <Button variant="outline" className="gap-2" disabled={busy} onClick={() => run(true)}>
+        <Printer className="w-4 h-4" /> Imprimer
+      </Button>
+    </div>
+  );
+};

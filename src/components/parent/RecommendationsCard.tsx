@@ -1,13 +1,27 @@
-import { SubjectStat } from "@/lib/parent";
+import { useEffect, useState } from "react";
+import {
+  SubjectStat,
+  DifficultyWeakness,
+  getWeakDifficulties,
+  gameTitleKey,
+} from "@/lib/parent";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { tierForXp } from "@/lib/gamification";
 
 interface Props {
   stats: SubjectStat[];
   streak: number;
   childName: string;
+  childId: string;
 }
 
-export const RecommendationsCard = ({ stats, streak, childName }: Props) => {
+export const RecommendationsCard = ({ stats, streak, childName, childId }: Props) => {
+  const { t } = useLanguage();
+  const [weakSpots, setWeakSpots] = useState<DifficultyWeakness[]>([]);
+  useEffect(() => {
+    getWeakDifficulties(childId).then(setWeakSpots);
+  }, [childId]);
+
   const by = (s: string) => stats.find((x) => x.subject === s)!;
   const nl = by("nl");
   const fr = by("fr");
@@ -40,6 +54,12 @@ export const RecommendationsCard = ({ stats, streak, childName }: Props) => {
   const lowAccuracy = stats.filter((s) => s.sessions >= 3 && s.successRate < 60);
   for (const s of lowAccuracy)
     messages.push(`📉 Taux de réussite de ${s.successRate}% en ${labels[s.subject]} : baisser la difficulté peut aider.`);
+
+  for (const w of weakSpots) {
+    messages.push(
+      `🎯 ${t(gameTitleKey(w.gameType) as never)} (niveau ${w.difficulty}) : ${w.errorRate}% d'erreurs récentes — un point à retravailler.`
+    );
+  }
 
   return (
     <div className="bg-card border border-border rounded-xl p-5 shadow-sm">

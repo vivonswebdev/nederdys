@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Flame } from "lucide-react";
 import { ParentShell } from "@/components/parent/ParentShell";
@@ -28,6 +28,7 @@ const PERIODS: { key: Period; label: string }[] = [
 const ParentDashboard = () => {
   const { activeChild } = useChild();
   const [period, setPeriod] = useState<Period>("30");
+  const chartRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.title = "Progression de mon enfant — Espace parent";
@@ -97,6 +98,7 @@ const ParentDashboard = () => {
                 games={localGames}
                 achievements={achievements}
                 streak={streak}
+                chartRef={chartRef}
               />
             </div>
           </div>
@@ -106,13 +108,16 @@ const ParentDashboard = () => {
           ) : (
             <>
               <DashboardOverview stats={stats} />
-              <ProgressChart data={daily} />
+              <div ref={chartRef}>
+                <ProgressChart data={daily} />
+              </div>
               <div className="grid lg:grid-cols-2 gap-6">
-                <TopGamesTable stats={games} />
+                <TopGamesTable stats={games} childId={activeChild.id} />
                 <RecommendationsCard
                   stats={stats}
                   streak={streak}
                   childName={activeChild.first_name}
+                  childId={activeChild.id}
                 />
               </div>
               <BadgeGrid achievements={achievements} />
