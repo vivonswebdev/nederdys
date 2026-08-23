@@ -166,7 +166,9 @@ const ManageChildren = () => {
                           first_name: child.first_name,
                           age: child.age,
                           school_level: String(child.school_level),
+                          gender: String(child.gender ?? "other"),
                         });
+
                       }}
                       className="inline-flex items-center gap-1.5 border border-border px-3 py-2 rounded-xl font-bold text-sm text-foreground"
                     >
