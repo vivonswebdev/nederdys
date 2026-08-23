@@ -24,7 +24,6 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   ChildSettings,
   DEFAULT_CHILD_SETTINGS,
-  changePin,
   exportAllData,
   getChildSettings,
   getParentSettings,
@@ -32,6 +31,7 @@ import {
   updateParentSettings,
   upsertChildSettings,
 } from "@/lib/parent";
+import { setPin as savePin } from "@/lib/pin";
 
 const TOGGLES: { key: keyof ChildSettings; label: string; hint: string }[] = [
   { key: "timer_enabled", label: "Chrono activé", hint: "Affiche un compte à rebours dans les jeux rapides" },
