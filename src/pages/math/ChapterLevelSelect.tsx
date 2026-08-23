@@ -58,7 +58,7 @@ const ChapterLevelSelect = () => {
     };
   }, [childId, chapterId]);
 
-  if (!chapter) return <Navigate to={`/child/${childId}/math/chapitres`} replace />;
+  if (!chapter) return <Navigate to={listRoute} replace />;
 
   const levels: Difficulty[] = [1, 2, 3];
 
@@ -68,7 +68,7 @@ const ChapterLevelSelect = () => {
       return;
     }
     sounds.click();
-    navigate(`/child/${childId}/math/chapitre/${chapter.id}/${level}`);
+    navigate(`/child/${childId}/${chapter.subject}/chapitre/${chapter.id}/${level}`);
   };
 
   return (
@@ -76,7 +76,7 @@ const ChapterLevelSelect = () => {
       <Navbar />
       <main className="container max-w-4xl px-4 py-8">
         <Link
-          to={`/child/${childId}/math/chapitres`}
+          to={listRoute}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
         >
           <ArrowLeft className="w-4 h-4" /> Tous les chapitres
