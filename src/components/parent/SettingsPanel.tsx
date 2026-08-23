@@ -24,7 +24,6 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   ChildSettings,
   DEFAULT_CHILD_SETTINGS,
-  changePin,
   exportAllData,
   getChildSettings,
   getParentSettings,
@@ -32,6 +31,7 @@ import {
   updateParentSettings,
   upsertChildSettings,
 } from "@/lib/parent";
+import { setPin as savePin } from "@/lib/pin";
 
 const TOGGLES: { key: keyof ChildSettings; label: string; hint: string }[] = [
   { key: "timer_enabled", label: "Chrono activé", hint: "Affiche un compte à rebours dans les jeux rapides" },
@@ -121,14 +121,16 @@ export const SettingsPanel = () => {
       toast.error("Les deux nouveaux codes ne correspondent pas.");
       return;
     }
-    const ok = await changePin(user.id, oldPin, newPin);
-    if (ok) {
+    const res = await savePin(newPin, oldPin);
+    if (res.ok === true) {
       toast.success("Code PIN mis à jour");
       setOldPin("");
       setNewPin("");
       setConfirmPin("");
-    } else {
+    } else if (res.reason === "wrong_old_pin") {
       toast.error("Ancien code incorrect");
+    } else {
+      toast.error("Modification impossible");
     }
   };
 

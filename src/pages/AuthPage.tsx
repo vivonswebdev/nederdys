@@ -26,9 +26,18 @@ const AuthPage = () => {
         toast.success(t("auth.loginSuccess"));
         navigate("/");
       } else {
-        const { error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin, data: { display_name: displayName } } });
+        const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: window.location.origin, data: { display_name: displayName } } });
         if (error) throw error;
-        toast.success(t("auth.signupSuccess"));
+        if (data.user && data.user.identities?.length === 0) {
+          toast.error("Cet email est déjà utilisé.");
+        } else if (data.user && !data.session) {
+          // Confirmation email activée : l'utilisateur n'est pas encore connecté
+          toast.success("Vérifiez vos emails pour confirmer votre compte !");
+          setIsLogin(true);
+        } else {
+          toast.success(t("auth.signupSuccess"));
+          navigate("/");
+        }
       }
     } catch (error: any) {
       toast.error(error.message || "Error");

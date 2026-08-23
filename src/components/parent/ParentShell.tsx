@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useChild } from "@/contexts/ChildContext";
 import { ParentLogin } from "@/components/parent/ParentLogin";
-import { endParentSession, isParentSessionValid } from "@/lib/parent";
+import { isParentSessionActive, setParentSession } from "@/lib/pin";
 
 interface Props {
   title: string;
@@ -17,7 +17,7 @@ export const ParentShell = ({ title, children }: Props) => {
   const { children: kids, activeChild, setActiveChildId } = useChild();
   const navigate = useNavigate();
   const location = useLocation();
-  const [unlocked, setUnlocked] = useState(() => isParentSessionValid());
+  const [unlocked, setUnlocked] = useState(() => isParentSessionActive());
 
   useEffect(() => {
     if (!loading && !user) navigate("/auth");
@@ -26,7 +26,7 @@ export const ParentShell = ({ title, children }: Props) => {
   // Vérifie l'expiration de la session toutes les 30 s
   useEffect(() => {
     const id = setInterval(() => {
-      if (unlocked && !isParentSessionValid()) setUnlocked(false);
+      if (unlocked && !isParentSessionActive()) setUnlocked(false);
     }, 30_000);
     return () => clearInterval(id);
   }, [unlocked]);
@@ -89,7 +89,7 @@ export const ParentShell = ({ title, children }: Props) => {
               size="sm"
               className="gap-1.5"
               onClick={() => {
-                endParentSession();
+                setParentSession(false);
                 setUnlocked(false);
               }}
             >

@@ -346,6 +346,33 @@ export type Database = {
           },
         ]
       }
+      parent_pin: {
+        Row: {
+          created_at: string
+          failed_attempts: number
+          locked_until: string | null
+          parent_id: string
+          pin_hash: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          failed_attempts?: number
+          locked_until?: string | null
+          parent_id: string
+          pin_hash: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          failed_attempts?: number
+          locked_until?: string | null
+          parent_id?: string
+          pin_hash?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       parent_settings: {
         Row: {
           created_at: string
@@ -452,7 +479,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_parent_pin: { Args: never; Returns: boolean }
+      set_parent_pin: {
+        Args: { new_pin: string; old_pin?: string }
+        Returns: Json
+      }
+      verify_parent_pin: { Args: { input_pin: string }; Returns: Json }
     }
     Enums: {
       [_ in never]: never
