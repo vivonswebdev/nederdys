@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import { Star, Sparkles, BookOpen, Trophy, BarChart3, Gamepad2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import mascot from "@/assets/mascot.png";
 import heroBg from "@/assets/hero-bg.jpg";
 import { FloatingStars } from "@/components/FloatingStars";
 import { GameCard } from "@/components/GameCard";
 import { Navbar } from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
   const { t } = useLanguage();
+  const { user, loading } = useAuth();
 
   const games = [
     { id: "syllabes", title: t("game.syllabes.title"), desc: t("game.syllabes.desc"), icon: "✨", color: "bg-kids-green-light", level: t("games.adaptive"), route: "/jeu/syllabes" },
