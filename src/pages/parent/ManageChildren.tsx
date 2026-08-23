@@ -162,7 +162,7 @@ const ManageChildren = () => {
                     <div>
                       <p className="font-bold text-foreground">{child.first_name}</p>
                       <p className="text-sm text-muted-foreground">
-                        {child.age} ans · {String(child.school_level).toUpperCase()}
+                        {child.age} ans · {schoolLevelLabel(String(child.school_level))}
                       </p>
                     </div>
                   </div>
