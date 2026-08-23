@@ -91,7 +91,7 @@ const AvatarEditor = () => {
 
       <main className="container max-w-4xl px-4 py-8 grid gap-8 md:grid-cols-2">
         <div className="flex flex-col items-center gap-3">
-          <AvatarRenderer seed={seed} options={config} size="lg" animated />
+          <AvatarRenderer seed={seed} gender={child?.gender} options={config} size="lg" animated />
           <p className="font-bold text-foreground">{child?.first_name}</p>
         </div>
 
@@ -128,7 +128,7 @@ const AvatarEditor = () => {
                       selected ? "border-kids-green-dark bg-kids-green-light/20" : "border-transparent bg-muted"
                     }`}
                   >
-                    <AvatarRenderer seed={seed} options={{ [option]: item.dicebear_value }} size="xs" />
+                    <AvatarRenderer seed={seed} gender={child?.gender} options={{ [option]: item.dicebear_value }} size="xs" />
                     <span className="text-[11px] text-center text-muted-foreground">{item.name}</span>
                   </button>
                 );

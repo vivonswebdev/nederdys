@@ -27,6 +27,7 @@ const AvatarShop = () => {
   const child = children.find((c) => c.id === childId);
   const queryClient = useQueryClient();
   const [filter, setFilter] = useState<"all" | AvatarCategory>("all");
+  const [genderFilter, setGenderFilter] = useState<"all" | "girl" | "boy" | "other">("all");
   const [busy, setBusy] = useState<string | null>(null);
 
   const { data: items = [] } = useQuery({ queryKey: ["avatarItems"], queryFn: getAvatarItems });
@@ -43,7 +44,11 @@ const AvatarShop = () => {
 
   const coins = coinsRow?.coins ?? 0;
   const ownedIds = new Set(owned.map((o) => o.id));
-  const filtered = filter === "all" ? items : items.filter((i) => i.category === filter);
+  const filtered = items
+    .filter((i) => filter === "all" || i.category === filter)
+    .filter((i) =>
+      genderFilter === "all" ? true : i.gender === genderFilter || i.gender === "other"
+    );
 
   async function handleBuy(item: AvatarItem) {
     if (!childId) return;
@@ -82,9 +87,28 @@ const AvatarShop = () => {
       <main className="container max-w-4xl px-4 py-8 space-y-6">
         {child && (
           <div className="flex justify-center">
-            <AvatarRenderer seed={child.first_name} size="md" animated />
+            <AvatarRenderer seed={child.first_name} gender={child.gender} size="md" animated />
           </div>
         )}
+
+        <div className="flex flex-wrap gap-2">
+          {([
+            { id: "all", label: "Tous" },
+            { id: "girl", label: "👧 Fille" },
+            { id: "boy", label: "👦 Garçon" },
+            { id: "other", label: "🌈 Mixte" },
+          ] as const).map((g) => (
+            <button
+              key={g.id}
+              onClick={() => setGenderFilter(g.id)}
+              className={`px-4 py-2 rounded-full font-bold text-sm transition-colors ${
+                genderFilter === g.id ? "bg-kids-orange text-white" : "bg-muted text-muted-foreground"
+              }`}
+            >
+              {g.label}
+            </button>
+          ))}
+        </div>
 
         <div className="flex flex-wrap gap-2">
           {FILTERS.map((f) => (
@@ -112,7 +136,7 @@ const AvatarShop = () => {
                 transition={{ delay: i * 0.03 }}
                 className="bg-card border border-border rounded-2xl p-4 flex flex-col items-center gap-2 shadow-sm"
               >
-                <AvatarRenderer seed={child?.first_name ?? "nederdys"} options={preview} size="sm" />
+                <AvatarRenderer seed={child?.first_name ?? "nederdys"} gender={child?.gender} options={preview} size="sm" />
                 <p className="font-bold text-sm text-center text-foreground">{item.name}</p>
                 <span className={`text-[11px] px-2 py-0.5 rounded-full font-bold ${RARITY_STYLES[item.rarity]}`}>
                   {item.rarity}

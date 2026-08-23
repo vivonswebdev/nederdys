@@ -24,7 +24,7 @@ const ManageChildren = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState({ first_name: "", age: 8, school_level: "ce2" });
+  const [form, setForm] = useState({ first_name: "", age: 8, school_level: "ce2", gender: "other" });
   const [pendingDelete, setPendingDelete] = useState<{ id: string; name: string } | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -46,6 +46,7 @@ const ManageChildren = () => {
         first_name: form.first_name.trim(),
         age: form.age,
         school_level: form.school_level,
+        gender: form.gender,
       })
       .eq("id", childId);
     setBusy(false);

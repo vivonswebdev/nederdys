@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Gamepad2, BarChart3, Home, LogIn, LogOut, UserPlus, Globe, ShoppingBag } from "lucide-react";
+import { Gamepad2, BarChart3, Home, LogIn, LogOut, UserPlus, Globe, ShoppingBag , Trophy } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { getChildLevel, getChildCoins } from "@/lib/database";
@@ -44,6 +44,7 @@ export const Navbar = () => {
           {[
             { to: user ? "/accueil" : "/", icon: <Home className="w-4 h-4" />, label: t("nav.home") },
             { to: "/jouer", icon: <Gamepad2 className="w-4 h-4" />, label: t("nav.play") },
+            { to: "/classement", icon: <Trophy className="w-4 h-4" />, label: "Classement" },
             { to: "/parents", icon: <BarChart3 className="w-4 h-4" />, label: t("nav.parents") },
           ].map((link) => (
             <Link
