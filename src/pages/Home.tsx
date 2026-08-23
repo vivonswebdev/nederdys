@@ -14,6 +14,8 @@ import { ProgressRing } from "@/components/child/ProgressRing";
 import { StreakCounter } from "@/components/child/StreakCounter";
 import { AvatarRenderer } from "@/components/child/AvatarRenderer";
 import { getAvatarConfig } from "@/lib/avatar";
+import { computeWeeklyStats, SessionRow } from "@/lib/weekly";
+import { WeeklyProgressWidget } from "@/components/child/WeeklyProgressWidget";
 
 const Home = () => {
   const { user, loading: authLoading } = useAuth();
@@ -68,6 +70,7 @@ const Home = () => {
   const gamesPlayed = level?.games_played ?? sessions.length ?? 0;
   const today = new Date().toISOString().split("T")[0];
   const playedToday = sessions.some((s) => s.created_at?.startsWith(today));
+  const weekly = computeWeeklyStats(sessions as unknown as SessionRow[]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -134,6 +137,15 @@ const Home = () => {
           <div className="flex items-center justify-center sm:justify-start gap-3 mt-5">
             <StreakCounter streakDays={streak} />
           </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.08 }}
+          className="mt-8"
+        >
+          <WeeklyProgressWidget stats={weekly} childId={child.id} />
         </motion.div>
 
         <motion.section

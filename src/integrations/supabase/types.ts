@@ -59,6 +59,7 @@ export type Database = {
           child_id: string
           clothing_color: string | null
           hair_color: string | null
+          hair_style: string | null
           id: string
           seed: string | null
           updated_at: string
@@ -69,6 +70,7 @@ export type Database = {
           child_id: string
           clothing_color?: string | null
           hair_color?: string | null
+          hair_style?: string | null
           id?: string
           seed?: string | null
           updated_at?: string
@@ -79,6 +81,7 @@ export type Database = {
           child_id?: string
           clothing_color?: string | null
           hair_color?: string | null
+          hair_style?: string | null
           id?: string
           seed?: string | null
           updated_at?: string
