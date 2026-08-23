@@ -37,6 +37,7 @@ import ChronoBilingueGame from "./pages/ChronoBilingueGame";
 import MoutonNoirGame from "./pages/MoutonNoirGame";
 import ProfileSelect from "./pages/ProfileSelect";
 import ChildDashboard from "./pages/ChildDashboard";
+import ChildHome from "./pages/ChildHome";
 import SubjectPage from "./pages/SubjectPage";
 import ParentGate from "./pages/ParentGate";
 import ParentDashboard from "./pages/ParentDashboard";
@@ -62,6 +63,8 @@ const App = () => (
               <Route path="/ajouter-enfant" element={<AddChild />} />
               <Route path="/profils" element={<ProfileSelect />} />
               <Route path="/enfant" element={<ChildDashboard />} />
+              <Route path="/child/:id" element={<ChildHome />} />
+              <Route path="/child/:id/:subject" element={<SubjectPage />} />
               <Route path="/matiere/:subject" element={<SubjectPage />} />
               <Route path="/jeu/syllabes" element={<SyllabesGame />} />
               <Route path="/jeu/chasse" element={<ChasseGame />} />

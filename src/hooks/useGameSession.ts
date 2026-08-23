@@ -1,4 +1,5 @@
 import { useRef, useCallback, useState, useEffect } from "react";
+import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 import { useChild } from "@/contexts/ChildContext";
 import { useQueryClient } from "@tanstack/react-query";
@@ -13,6 +14,7 @@ import {
   Difficulty,
 } from "@/lib/database";
 import { recordDailyActivity, unlockBadge } from "@/lib/gamification";
+import { progressDailyChallenge } from "@/lib/challenges";
 
 export const useGameSession = (gameType: string) => {
   const { user } = useAuth();
@@ -97,6 +99,19 @@ export const useGameSession = (gameType: string) => {
       if (durationSeconds >= 1800) {
         await unlockBadge(user.id, activeChild.id, "marathon");
       }
+
+      // Défi du jour
+      const challenge = await progressDailyChallenge(user.id, activeChild.id, {
+        xp,
+        errors: errorsCount,
+        maxScore,
+        durationSeconds,
+      });
+      if (challenge.completed && challenge.xpReward > 0) {
+        await upsertChildLevel(user.id, activeChild.id, challenge.xpReward);
+        toast.success(`Défi du jour réussi ! +${challenge.xpReward} XP 🎉`);
+      }
+      queryClient.invalidateQueries({ queryKey: ["dailyChallenge"] });
 
       // Invalidate queries
       queryClient.invalidateQueries({ queryKey: ["sessions"] });
