@@ -1,8 +1,8 @@
 import { useRef, useCallback, useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useChild } from "@/contexts/ChildContext";
+import { useQueryClient } from "@tanstack/react-query";
 import {
-  getChildren,
   saveGameSession,
   calculateXpGain,
   upsertChildLevel,
@@ -12,6 +12,7 @@ import {
   addCoins,
   Difficulty,
 } from "@/lib/database";
+import { recordDailyActivity, unlockBadge } from "@/lib/gamification";
 
 export const useGameSession = (gameType: string) => {
   const { user } = useAuth();
@@ -23,13 +24,8 @@ export const useGameSession = (gameType: string) => {
   const [leveledUp, setLeveledUp] = useState(false);
   const streakRef = useRef(0);
 
-  const { data: children = [] } = useQuery({
-    queryKey: ["children", user?.id],
-    queryFn: () => getChildren(user!.id),
-    enabled: !!user,
-  });
+  const { activeChild } = useChild();
 
-  const activeChild = children[0];
 
   // Load difficulty on mount
   useEffect(() => {
