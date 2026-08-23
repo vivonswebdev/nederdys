@@ -46,23 +46,40 @@ import { getallenExercises } from "@/data/exercises/nl/getallen";
 import { familieExercises } from "@/data/exercises/nl/familie";
 import { zinnenExercises } from "@/data/exercises/nl/zinnen";
 import { dagenExercises } from "@/data/exercises/nl/dagen";
+import { fractions4eExercises } from "@/data/chapters-avance/fractions-4eprimaire";
+import { grandsNombres4eExercises } from "@/data/chapters-avance/grands-nombres-4eprimaire";
+import { airesPerimetres4eExercises } from "@/data/chapters-avance/aires-perimetres-4eprimaire";
+import { problemes4eExercises } from "@/data/chapters-avance/problemes-4eprimaire";
+import { decimaux5eExercises } from "@/data/chapters-avance/decimaux-5eprimaire";
+import { proportionnalite5eExercises } from "@/data/chapters-avance/proportionnalite-5eprimaire";
+import { pourcentages5eExercises } from "@/data/chapters-avance/pourcentages-5eprimaire";
+import { conversions5eExercises } from "@/data/chapters-avance/conversions-5eprimaire";
+import { nombresRelatifs6eExercises } from "@/data/chapters-avance/nombres-relatifs-6eprimaire";
+import { fractions6eExercises } from "@/data/chapters-avance/fractions-6eprimaire";
+import { airesFormules6eExercises } from "@/data/chapters-avance/aires-formules-6eprimaire";
+import { proportionnalite6eExercises } from "@/data/chapters-avance/proportionnalite-6eprimaire";
 
 export type { Exercise, Difficulty };
 
 export type ChapterSubject = "math" | "nl" | "fr";
 
+export type ChapterGrade = "4eprimaire" | "5eprimaire" | "6eprimaire";
+
 export interface Chapter {
   id: string;
   name: string;
   emoji: string;
-  section: "bases" | "ce2" | "stretch";
+  section: "bases" | "ce2" | "stretch" | "avance";
   subject: ChapterSubject;
+  /** Année scolaire belge pour les chapitres avancés. */
+  grade?: ChapterGrade;
   /** Sous-titre affiché dans la liste (NL). */
   description?: string;
   exercises: Exercise[];
 }
 
 type ChapterDef = Omit<Chapter, "subject">;
+
 
 const MATH_CHAPTERS: ChapterDef[] = [
   { id: "bases-numeration", name: "Les bases des nombres", emoji: "🌱", section: "bases", description: "Compter, reconnaître, additionner avec des images", exercises: basesNumerationExercises },
