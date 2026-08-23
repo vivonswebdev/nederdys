@@ -17,14 +17,20 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-const SCHOOL_LEVELS = ["cp", "ce1", "ce2", "cm1", "cm2"];
+import {
+  SCHOOL_LEVELS,
+  DEFAULT_SCHOOL_LEVEL,
+  GENDER_OPTIONS,
+  normalizeSchoolLevel,
+  schoolLevelLabel,
+} from "@/lib/schoolLevels";
 
 const ManageChildren = () => {
   const { children: kids } = useChild();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState({ first_name: "", age: 8, school_level: "ce2", gender: "other" });
+  const [form, setForm] = useState({ first_name: "", age: 8, school_level: DEFAULT_SCHOOL_LEVEL, gender: "girl" });
   const [pendingDelete, setPendingDelete] = useState<{ id: string; name: string } | null>(null);
   const [busy, setBusy] = useState(false);
 
