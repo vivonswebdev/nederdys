@@ -132,6 +132,8 @@ const App = () => (
               <Route path="/jeu/tir-aux-nombres" element={<TirAuxNombres />} />
               <Route path="/jeu/tir-aux-nombres/:level" element={<TirAuxNombres />} />
               <Route path="/child/:id/math/mouton-noir" element={<MoutonNoirMaths />} />
+              <Route path="/child/:id/math/mouton-noir-maths" element={<MoutonNoirMaths />} />
+              <Route path="/child/:id/math/mouton-noir-maths/:level" element={<MoutonNoirMaths />} />
               <Route path="/child/:id/math/mouton-noir/:level" element={<MoutonNoirMaths />} />
               <Route path="/jeu/mouton-noir-maths" element={<MoutonNoirMaths />} />
               <Route path="/jeu/mouton-noir-maths/:level" element={<MoutonNoirMaths />} />
