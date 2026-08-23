@@ -1,19 +1,16 @@
 import { supabase } from "@/integrations/supabase/client";
 import { GAMES, Subject } from "@/lib/games";
 
-// ---------- PIN ----------
-
-export const DEFAULT_PIN = "1234";
-const MAX_ATTEMPTS = 5;
-const LOCK_MINUTES = 5;
-
-export const hashPin = async (pin: string): Promise<string> => {
-  const data = new TextEncoder().encode(`nederdys::${pin}`);
-  const digest = await crypto.subtle.digest("SHA-256", data);
-  return Array.from(new Uint8Array(digest))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-};
+// ---------- PIN & session parent ----------
+// La vérification du PIN est 100 % serveur (RPC bcrypt) : voir src/lib/pin.ts.
+export {
+  hasPin,
+  setPin,
+  verifyPin,
+  setParentSession,
+  isParentSessionActive,
+} from "@/lib/pin";
+export type { PinResult } from "@/lib/pin";
 
 export const getParentSettings = async (userId: string) => {
   const { data } = await supabase
@@ -24,7 +21,7 @@ export const getParentSettings = async (userId: string) => {
   if (data) return data;
   const { data: created, error } = await supabase
     .from("parent_settings")
-    .insert({ user_id: userId, pin_hash: await hashPin(DEFAULT_PIN) })
+    .insert({ user_id: userId })
     .select()
     .maybeSingle();
   if (error) console.error("Error creating parent settings:", error);
@@ -43,69 +40,6 @@ export const updateParentSettings = async (
   return !error;
 };
 
-export type PinResult =
-  | { ok: true }
-  | { ok: false; reason: "wrong"; attemptsLeft: number }
-  | { ok: false; reason: "locked"; until: string };
-
-export const verifyPin = async (userId: string, pin: string): Promise<PinResult> => {
-  const settings = await getParentSettings(userId);
-  if (!settings) return { ok: false, reason: "wrong", attemptsLeft: MAX_ATTEMPTS };
-
-  if (settings.locked_until && new Date(settings.locked_until) > new Date()) {
-    return { ok: false, reason: "locked", until: settings.locked_until };
-  }
-
-  const hash = await hashPin(pin);
-  const expected = settings.pin_hash ?? (await hashPin(DEFAULT_PIN));
-
-  if (hash === expected) {
-    await updateParentSettings(userId, { failed_attempts: 0, locked_until: null });
-    return { ok: true };
-  }
-
-  const attempts = (settings.failed_attempts ?? 0) + 1;
-  if (attempts >= MAX_ATTEMPTS) {
-    const until = new Date(Date.now() + LOCK_MINUTES * 60_000).toISOString();
-    await updateParentSettings(userId, { failed_attempts: 0, locked_until: until });
-    return { ok: false, reason: "locked", until };
-  }
-  await updateParentSettings(userId, { failed_attempts: attempts });
-  return { ok: false, reason: "wrong", attemptsLeft: MAX_ATTEMPTS - attempts };
-};
-
-export const changePin = async (userId: string, oldPin: string, newPin: string) => {
-  const check = await verifyPin(userId, oldPin);
-  if (!check.ok) return false;
-  return updateParentSettings(userId, { pin_hash: await hashPin(newPin) });
-};
-
-export const resetPinToDefault = async (userId: string) =>
-  updateParentSettings(userId, {
-    pin_hash: await hashPin(DEFAULT_PIN),
-    failed_attempts: 0,
-    locked_until: null,
-  });
-
-// ---------- Session parent (30 min) ----------
-
-const SESSION_KEY = "nederdys.parentSession";
-const SESSION_MS = 30 * 60_000;
-
-export const startParentSession = () =>
-  localStorage.setItem(SESSION_KEY, String(Date.now() + SESSION_MS));
-
-export const endParentSession = () => localStorage.removeItem(SESSION_KEY);
-
-export const isParentSessionValid = () => {
-  const raw = localStorage.getItem(SESSION_KEY);
-  if (!raw) return false;
-  if (Number(raw) < Date.now()) {
-    endParentSession();
-    return false;
-  }
-  return true;
-};
 
 // ---------- Données ----------
 
