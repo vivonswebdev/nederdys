@@ -17,14 +17,14 @@ import {
 import { AvatarRenderer } from "@/components/child/AvatarRenderer";
 import { sounds } from "@/lib/sounds";
 
-const TABS: AvatarCategory[] = ["background", "hair", "clothing", "accessory"];
+const TABS: AvatarCategory[] = ["hairstyle", "hair", "accessory", "background", "clothing"];
 
 const AvatarEditor = () => {
   const { id: childId } = useParams<{ id: string }>();
   const { children } = useChild();
   const child = children.find((c) => c.id === childId);
   const [config, setConfig] = useState<AvatarConfig>({});
-  const [activeTab, setActiveTab] = useState<AvatarCategory>("background");
+  const [activeTab, setActiveTab] = useState<AvatarCategory>("hairstyle");
   const [saving, setSaving] = useState(false);
 
   const { data: owned = [] } = useQuery({

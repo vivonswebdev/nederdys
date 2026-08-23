@@ -1,6 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 
-export type AvatarCategory = "background" | "hair" | "clothing" | "accessory";
+export type AvatarCategory = "background" | "hair" | "hairstyle" | "clothing" | "accessory";
 export type Rarity = "common" | "rare" | "epic" | "legendary";
 
 export interface AvatarItem {
@@ -18,6 +18,7 @@ export interface AvatarItem {
 export interface AvatarConfig {
   backgroundColor?: string | null;
   hairColor?: string | null;
+  hair?: string | null;
   skinColor?: string | null;
   accessories?: string | null;
 }
@@ -42,6 +43,7 @@ export function getAvatarUrl({ seed, ...options }: DiceBearOptions): string {
 export const OPTION_TO_COLUMN: Record<string, string> = {
   backgroundColor: "background_color",
   hairColor: "hair_color",
+  hair: "hair_style",
   skinColor: "clothing_color",
   accessories: "accessories",
 };
@@ -49,6 +51,7 @@ export const OPTION_TO_COLUMN: Record<string, string> = {
 export const CATEGORY_TO_OPTION: Record<AvatarCategory, keyof AvatarConfig> = {
   background: "backgroundColor",
   hair: "hairColor",
+  hairstyle: "hair",
   clothing: "skinColor",
   accessory: "accessories",
 };
@@ -62,7 +65,8 @@ export const RARITY_STYLES: Record<Rarity, string> = {
 
 export const CATEGORY_LABELS: Record<AvatarCategory, string> = {
   background: "Fonds",
-  hair: "Cheveux",
+  hair: "Couleur cheveux",
+  hairstyle: "Coiffures",
   clothing: "Peau",
   accessory: "Accessoires",
 };
@@ -94,6 +98,7 @@ export async function getAvatarConfig(childId: string): Promise<AvatarConfig> {
   return {
     backgroundColor: data?.background_color ?? null,
     hairColor: data?.hair_color ?? null,
+    hair: data?.hair_style ?? null,
     skinColor: data?.clothing_color ?? null,
     accessories: data?.accessories ?? null,
   };
@@ -105,6 +110,7 @@ export async function saveAvatarConfig(childId: string, config: AvatarConfig) {
       child_id: childId,
       background_color: config.backgroundColor ?? null,
       hair_color: config.hairColor ?? null,
+      hair_style: config.hair ?? null,
       clothing_color: config.skinColor ?? null,
       accessories: config.accessories ?? null,
       updated_at: new Date().toISOString(),

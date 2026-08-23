@@ -19,7 +19,7 @@ import {
 import { AvatarRenderer } from "@/components/child/AvatarRenderer";
 import { sounds } from "@/lib/sounds";
 
-const FILTERS: ("all" | AvatarCategory)[] = ["all", "background", "hair", "clothing", "accessory"];
+const FILTERS: ("all" | AvatarCategory)[] = ["all", "hairstyle", "hair", "accessory", "background", "clothing"];
 
 const AvatarShop = () => {
   const { id: childId } = useParams<{ id: string }>();
