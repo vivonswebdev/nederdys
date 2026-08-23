@@ -10,18 +10,32 @@ import { geometrieCe2Exercises } from "@/data/chapters/geometrie-ce2";
 import { multiplicationAvanceeExercises } from "@/data/chapters/multiplication-avancee";
 import { divisionCe2Exercises } from "@/data/chapters/division-ce2";
 import { problemesAvancesExercises } from "@/data/chapters/problemes-avances";
+import { kleurenExercises } from "@/data/exercises/nl/kleuren";
+import { dierenExercises } from "@/data/exercises/nl/dieren";
+import { getallenExercises } from "@/data/exercises/nl/getallen";
+import { familieExercises } from "@/data/exercises/nl/familie";
+import { zinnenExercises } from "@/data/exercises/nl/zinnen";
+import { dagenExercises } from "@/data/exercises/nl/dagen";
 
 export type { Exercise, Difficulty };
+
+export type ChapterSubject = "math" | "nl" | "fr";
 
 export interface Chapter {
   id: string;
   name: string;
   emoji: string;
   section: "ce2" | "stretch";
+  subject: ChapterSubject;
+  /** Sous-titre affiché dans la liste (NL). */
+  description?: string;
   exercises: Exercise[];
 }
 
-export const CHAPTERS: Chapter[] = [
+type ChapterDef = Omit<Chapter, "subject">;
+
+const MATH_CHAPTERS: ChapterDef[] = [
+
   { id: "numeration-ce2", name: "Numération", emoji: "🔢", section: "ce2", exercises: numerationCe2Exercises },
   { id: "addition-ce2", name: "Additions", emoji: "➕", section: "ce2", exercises: additionCe2Exercises },
   { id: "soustraction-ce2", name: "Soustractions", emoji: "➖", section: "ce2", exercises: soustractionCe2Exercises },
