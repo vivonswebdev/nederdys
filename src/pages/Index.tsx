@@ -141,7 +141,7 @@ const Index = () => {
         <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} className="container max-w-xl">
           <h2 className="text-3xl font-bold text-foreground mb-4">{t("cta.title")}</h2>
           <p className="text-muted-foreground mb-6">{t("cta.desc")}</p>
-          <Link to="/jeu/syllabes">
+          <Link to="/profils">
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="bg-primary text-primary-foreground px-10 py-4 rounded-full text-xl font-bold shadow-lg">
               {t("cta.button")}
             </motion.button>
