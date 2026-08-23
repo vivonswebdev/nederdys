@@ -37,12 +37,10 @@ export const ParentLogin = ({ onSuccess }: Props) => {
     const res = await verifyPin(pin);
     setBusy(false);
     setPin("");
-    if (res.ok) {
+    if (res.ok === true) {
       setParentSession(true);
       onSuccess();
-      return;
-    }
-    if (res.reason === "locked") {
+    } else if (res.reason === "locked") {
       setLockedUntil(new Date(res.lockedUntil));
       setError("Trop de tentatives. Réessayez dans 5 minutes.");
     } else if (res.reason === "wrong") {
