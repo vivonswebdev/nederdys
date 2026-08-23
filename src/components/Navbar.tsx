@@ -35,14 +35,14 @@ export const Navbar = () => {
       className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border"
     >
       <div className="container flex items-center justify-between h-16 px-4">
-        <Link to={user ? "/profils" : "/"} className="flex items-center gap-2">
+        <Link to={user ? "/accueil" : "/"} className="flex items-center gap-2">
           <span className="text-2xl">🐸</span>
           <span className="text-xl font-bold text-primary">NederDys</span>
         </Link>
         
         <div className="flex items-center gap-1">
           {[
-            { to: user ? "/profils" : "/", icon: <Home className="w-4 h-4" />, label: t("nav.home") },
+            { to: user ? "/accueil" : "/", icon: <Home className="w-4 h-4" />, label: t("nav.home") },
             { to: "/jouer", icon: <Gamepad2 className="w-4 h-4" />, label: t("nav.play") },
             { to: "/parents", icon: <BarChart3 className="w-4 h-4" />, label: t("nav.parents") },
           ].map((link) => (

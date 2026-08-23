@@ -12,7 +12,7 @@ import { getLevel } from "@/lib/levels";
 import { getStreakDays, computeStreak } from "@/lib/gamification";
 import { ProgressRing } from "@/components/child/ProgressRing";
 import { StreakCounter } from "@/components/child/StreakCounter";
-import { AvatarRenderer } from "@/components/AvatarRenderer";
+import { AvatarRenderer } from "@/components/child/AvatarRenderer";
 import { getAvatarConfig } from "@/lib/avatar";
 
 const Home = () => {

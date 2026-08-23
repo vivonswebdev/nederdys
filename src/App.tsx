@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
+import Home from "./pages/Home";
 import PlayHub from "./pages/PlayHub";
 import NotFound from "./pages/NotFound";
 import MurDesNombres from "./pages/math/MurDesNombres";
@@ -76,6 +77,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/accueil" element={<Home />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />

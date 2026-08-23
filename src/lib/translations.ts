@@ -1,4 +1,22 @@
 const t = {
+  // Home
+  "home.greeting": { fr: "Salut", nl: "Hoi" },
+  "home.playedToday": { fr: "Tu as déjà joué aujourd'hui, super !", nl: "Je hebt vandaag al gespeeld, goed zo!" },
+  "home.notPlayedToday": { fr: "Prêt à apprendre aujourd'hui ?", nl: "Klaar om vandaag te leren?" },
+  "home.games": { fr: "jeux", nl: "spellen" },
+  "home.level": { fr: "Niveau", nl: "Niveau" },
+  "home.xpProgress": { fr: "Progression XP", nl: "XP-voortgang" },
+  "home.actions": { fr: "Que veux-tu faire ?", nl: "Wat wil je doen?" },
+  "home.play": { fr: "Jouer", nl: "Spelen" },
+  "home.playDesc": { fr: "Choisis une matière et un jeu", nl: "Kies een vak en een spel" },
+  "home.settings": { fr: "Paramètres", nl: "Instellingen" },
+  "home.settingsDesc": { fr: "Mode nuit, police DYS, langue...", nl: "Nachtmodus, DYS-lettertype, taal..." },
+  "home.parents": { fr: "Espace Parents", nl: "Ouderruimte" },
+  "home.parentsDesc": { fr: "Progrès, réglages et famille", nl: "Voortgang, instellingen en gezin" },
+  "home.profiles": { fr: "Changer d'enfant", nl: "Van kind wisselen" },
+  "home.profilesDesc": { fr: "Voir tous les profils", nl: "Bekijk alle profielen" },
+  "home.tipTitle": { fr: "Le conseil de Kikker", nl: "Kikkers tip" },
+  "home.tipText": { fr: "Un petit jeu chaque jour aide ton cerveau à mémoriser. Même 5 minutes comptent !", nl: "Elke dag een klein spelletje helpt je brein om te onthouden. Zelfs 5 minuten telt!" },
   // Navbar
   "nav.home": { fr: "Accueil", nl: "Home" },
   "nav.play": { fr: "Jouer", nl: "Spelen" },
