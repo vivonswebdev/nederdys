@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { GameStat, gameTitleKey, timeAgo } from "@/lib/parent";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { GameDetailDrawer } from "@/components/parent/GameDetailDrawer";
 
 type SortKey = "played" | "successRate" | "recent";
 
