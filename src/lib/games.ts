@@ -23,6 +23,12 @@ export const SUBJECTS: {
 ];
 
 export const GAMES: GameMeta[] = [
+  { id: "pyramidenombres", subject: "math", titleKey: "game.pyramidenombres.title", descKey: "game.pyramidenombres.desc", icon: "🔺", color: "bg-kids-red", route: "/jeu/pyramide-nombres" },
+  { id: "compteestbon", subject: "math", titleKey: "game.compteestbon.title", descKey: "game.compteestbon.desc", icon: "🎯", color: "bg-kids-orange", route: "/jeu/compte-est-bon" },
+  { id: "chainescalcul", subject: "math", titleKey: "game.chainescalcul.title", descKey: "game.chainescalcul.desc", icon: "🔗", color: "bg-kids-blue", route: "/jeu/chaines-calcul" },
+  { id: "droitegraduee", subject: "math", titleKey: "game.droitegraduee.title", descKey: "game.droitegraduee.desc", icon: "📍", color: "bg-kids-green-light", route: "/jeu/droite-graduee" },
+  { id: "bataillenombres", subject: "math", titleKey: "game.bataillenombres.title", descKey: "game.bataillenombres.desc", icon: "⚔️", color: "bg-kids-purple", route: "/jeu/bataille-nombres" },
+  { id: "tangram", subject: "math", titleKey: "game.tangram.title", descKey: "game.tangram.desc", icon: "🧩", color: "bg-kids-yellow", route: "/jeu/tangram" },
   { id: "syllabes", subject: "nl", titleKey: "game.syllabes.title", descKey: "game.syllabes.desc", icon: "✨", color: "bg-kids-green-light", route: "/jeu/syllabes" },
   { id: "chasse", subject: "nl", titleKey: "game.chasse.title", descKey: "game.chasse.desc", icon: "🎈", color: "bg-kids-yellow", route: "/jeu/chasse" },
   { id: "memoire", subject: "nl", titleKey: "game.memoire.title", descKey: "game.memoire.desc", icon: "🔊", color: "bg-kids-blue", route: "/jeu/memoire" },
@@ -57,6 +63,12 @@ export const gamesBySubject = (subject: Subject) => GAMES.filter((g) => g.subjec
 
 /** Catégorie pédagogique de chaque jeu (utilisée par les filtres de la liste). */
 export const GAME_CATEGORY: Record<string, string> = {
+  pyramidenombres: "calcul",
+  compteestbon: "logique",
+  chainescalcul: "calcul",
+  droitegraduee: "logique",
+  bataillenombres: "calcul",
+  tangram: "logique",
   syllabes: "phonologie",
   chasse: "vocabulaire",
   memoire: "ecoute",
