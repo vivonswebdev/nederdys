@@ -220,6 +220,56 @@ export type Database = {
         }
         Relationships: []
       }
+      daily_challenges: {
+        Row: {
+          challenge_type: string
+          child_id: string
+          created_at: string
+          current_value: number
+          date: string
+          id: string
+          is_completed: boolean
+          target_value: number
+          updated_at: string
+          user_id: string
+          xp_reward: number
+        }
+        Insert: {
+          challenge_type: string
+          child_id: string
+          created_at?: string
+          current_value?: number
+          date?: string
+          id?: string
+          is_completed?: boolean
+          target_value?: number
+          updated_at?: string
+          user_id: string
+          xp_reward?: number
+        }
+        Update: {
+          challenge_type?: string
+          child_id?: string
+          created_at?: string
+          current_value?: number
+          date?: string
+          id?: string
+          is_completed?: boolean
+          target_value?: number
+          updated_at?: string
+          user_id?: string
+          xp_reward?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_challenges_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       daily_streaks: {
         Row: {
           child_id: string

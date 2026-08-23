@@ -14,7 +14,7 @@ const ProfileSelect = () => {
 
   const pick = (id: string) => {
     setActiveChildId(id);
-    navigate("/enfant");
+    navigate(`/child/${id}`);
   };
 
   return (
