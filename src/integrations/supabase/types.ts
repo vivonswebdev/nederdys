@@ -650,6 +650,20 @@ export type Database = {
         Args: { p_child_id: string; p_item_id: string }
         Returns: Json
       }
+      record_game_completion: {
+        Args: {
+          p_child_id: string
+          p_difficulty: number
+          p_duration_seconds?: number
+          p_errors_count?: number
+          p_game_id: string
+          p_max_score?: number
+          p_score?: number
+          p_subject: string
+          p_xp_earned: number
+        }
+        Returns: Json
+      }
       set_parent_pin: {
         Args: { new_pin: string; old_pin?: string }
         Returns: Json

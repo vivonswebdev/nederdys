@@ -20,7 +20,7 @@ const SubjectPage = () => {
     icon: g.icon,
     color: g.color,
     level: t("games.adaptive"),
-    route: g.route,
+    route: id && g.subject === "math" ? `/child/${id}/math/${g.route.replace("/jeu/", "")}` : g.route,
   }));
 
   return (
