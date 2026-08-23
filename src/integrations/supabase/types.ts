@@ -648,6 +648,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_top_games: {
+        Args: { p_child_id: string; p_days?: number; p_limit?: number }
+        Returns: {
+          game_id: string
+          last_session: string
+          subject: string
+          success_rate: number
+          times_played: number
+        }[]
+      }
       has_parent_pin: { Args: never; Returns: boolean }
       purchase_avatar_item: {
         Args: { p_child_id: string; p_item_id: string }

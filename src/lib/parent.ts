@@ -195,6 +195,30 @@ export const buildGameStats = (rows: SessionRow[]): GameStat[] => {
   }));
 };
 
+/** Top jeux calculés côté serveur (RPC get_top_games : NULLIF + GROUP BY game_type, subject). */
+export const getTopGames = async (
+  childId: string,
+  period: Period,
+  limit = 5
+): Promise<GameStat[]> => {
+  const { data, error } = await supabase.rpc("get_top_games", {
+    p_child_id: childId,
+    p_limit: limit,
+    p_days: period === "all" ? null : Number(period),
+  });
+  if (error) {
+    console.error("Error fetching top games:", error.message);
+    return [];
+  }
+  return (data ?? []).map((r) => ({
+    gameType: r.game_id,
+    subject: (r.subject as Subject) ?? subjectOfGame(r.game_id),
+    played: Number(r.times_played),
+    successRate: Math.round(Number(r.success_rate)),
+    lastPlayed: r.last_session,
+  }));
+};
+
 export const timeAgo = (iso: string) => {
   const diff = Date.now() - new Date(iso).getTime();
   const min = Math.round(diff / 60_000);

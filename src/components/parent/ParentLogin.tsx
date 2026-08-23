@@ -42,9 +42,16 @@ export const ParentLogin = ({ onSuccess }: Props) => {
       onSuccess();
     } else if (res.reason === "locked") {
       setLockedUntil(new Date(res.lockedUntil));
-      setError("Trop de tentatives. Réessayez dans 5 minutes.");
+      setError(
+        `Compte bloqué. Réessayez dans ${Math.max(
+          1,
+          Math.ceil((new Date(res.lockedUntil).getTime() - Date.now()) / 60_000)
+        )} minute(s).`
+      );
     } else if (res.reason === "wrong") {
-      setError(`Code incorrect. ${res.attemptsLeft} tentative(s) avant blocage.`);
+      setError(
+        `Code PIN incorrect. ${res.attemptsLeft} tentative(s) restante(s) — après 3 essais, attendez 5 minutes.`
+      );
     } else if (res.reason === "no_pin") {
       setMode("create");
       setError(null);
