@@ -173,8 +173,8 @@ const ManageChildren = () => {
                         setForm({
                           first_name: child.first_name,
                           age: child.age,
-                          school_level: String(child.school_level),
-                          gender: String(child.gender ?? "other"),
+                          school_level: normalizeSchoolLevel(String(child.school_level)),
+                          gender: String(child.gender ?? "girl") === "boy" ? "boy" : "girl",
                         });
 
                       }}
