@@ -55,12 +55,8 @@ const AddChild = () => {
             </div>
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">Sexe</label>
-              <div className="grid grid-cols-3 gap-2">
-                {([
-                  { id: "girl", label: "👧 Fille" },
-                  { id: "boy", label: "👦 Garçon" },
-                  { id: "other", label: "🌈 Autre" },
-                ] as const).map((g) => (
+              <div className="grid grid-cols-2 gap-2">
+                {GENDER_OPTIONS.map((g) => (
                   <button
                     key={g.id}
                     type="button"
@@ -75,6 +71,20 @@ const AddChild = () => {
                   </button>
                 ))}
               </div>
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-foreground mb-2">Niveau scolaire (Belgique)</label>
+              <select
+                value={schoolLevel}
+                onChange={(e) => setSchoolLevel(e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                {SCHOOL_LEVELS.map((l) => (
+                  <option key={l.id} value={l.id}>
+                    {l.label}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">{t("addChild.avatar")}</label>
