@@ -32,6 +32,14 @@ import { monnaieRenduExercises } from "@/data/chapters/monnaie-rendu";
 import { problemesEspritCritiqueExercises } from "@/data/chapters/problemes-esprit-critique";
 import { calendrierExercises } from "@/data/chapters/calendrier";
 import { tableauxDoubleEntreeExercises } from "@/data/chapters/tableaux-double-entree";
+import { basesNumerationExercises } from "@/data/chapters/bases-numeration";
+import { deOfHetExercises } from "@/data/chapters/de-of-het";
+import { plurielNomsExercises } from "@/data/chapters/pluriel-noms";
+import { conjugaisonPresenteExercises } from "@/data/chapters/conjugaison-presente";
+import { adjectifsNlExercises } from "@/data/chapters/adjectifs-nl";
+import { vraiFauxNlExercises } from "@/data/chapters/vrai-faux-nl";
+import { questionReponseNlExercises } from "@/data/chapters/question-reponse-nl";
+import { dialogueNlExercises } from "@/data/chapters/dialogue-nl";
 import { kleurenExercises } from "@/data/exercises/nl/kleuren";
 import { dierenExercises } from "@/data/exercises/nl/dieren";
 import { getallenExercises } from "@/data/exercises/nl/getallen";
@@ -47,7 +55,7 @@ export interface Chapter {
   id: string;
   name: string;
   emoji: string;
-  section: "ce2" | "stretch";
+  section: "bases" | "ce2" | "stretch";
   subject: ChapterSubject;
   /** Sous-titre affiché dans la liste (NL). */
   description?: string;
@@ -57,6 +65,7 @@ export interface Chapter {
 type ChapterDef = Omit<Chapter, "subject">;
 
 const MATH_CHAPTERS: ChapterDef[] = [
+  { id: "bases-numeration", name: "Les bases des nombres", emoji: "🌱", section: "bases", description: "Compter, reconnaître, additionner avec des images", exercises: basesNumerationExercises },
 
   { id: "numeration-ce2", name: "Numération", emoji: "🔢", section: "ce2", exercises: numerationCe2Exercises },
   { id: "addition-ce2", name: "Additions", emoji: "➕", section: "ce2", exercises: additionCe2Exercises },
@@ -111,6 +120,13 @@ const NL_CHAPTER_DEFS: ChapterDef[] = [
   { id: "familie-nl", name: "La famille", emoji: "👨‍👩‍👧‍👦", section: "ce2", description: "Vocabulaire familial de base", exercises: familieExercises },
   { id: "zinnen-nl", name: "Phrases simples", emoji: "💬", section: "ce2", description: "Sujet - verbe - complément", exercises: zinnenExercises },
   { id: "dagen-nl", name: "Jours et heure", emoji: "📅", section: "ce2", description: "Les jours, dire l'heure", exercises: dagenExercises },
+  { id: "de-of-het", name: "De ou Het ?", emoji: "🏷️", section: "ce2", description: "Choisir le bon article", exercises: deOfHetExercises },
+  { id: "pluriel-noms", name: "Le pluriel", emoji: "➕", section: "ce2", description: "-en, -s, -eren", exercises: plurielNomsExercises },
+  { id: "vrai-faux-nl", name: "Vrai ou Faux", emoji: "✅", section: "ce2", description: "Écoute la phrase et décide", exercises: vraiFauxNlExercises },
+  { id: "question-reponse-nl", name: "Question-Réponse", emoji: "💭", section: "ce2", description: "Associer question et réponse", exercises: questionReponseNlExercises },
+  { id: "conjugaison-presente", name: "Conjugaison au présent", emoji: "✍️", section: "stretch", description: "ik / jij / hij + verbe", exercises: conjugaisonPresenteExercises },
+  { id: "adjectifs-nl", name: "Les adjectifs", emoji: "🎨", section: "stretch", description: "de grote man, het grote huis", exercises: adjectifsNlExercises },
+  { id: "dialogue-nl", name: "Petit dialogue", emoji: "🗨️", section: "stretch", description: "Compléter une conversation", exercises: dialogueNlExercises },
 ];
 
 export const CHAPTERS: Chapter[] = MATH_CHAPTERS.map((c) => ({ ...c, subject: "math" as const }));
