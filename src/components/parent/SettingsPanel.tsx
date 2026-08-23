@@ -80,6 +80,7 @@ export const SettingsPanel = () => {
         sound_effects: childSettings.sound_effects,
         reduced_motion: childSettings.reduced_motion,
         colorblind_mode: childSettings.colorblind_mode,
+        dark_mode: childSettings.dark_mode ?? false,
       });
     }
   }, [childSettings]);
