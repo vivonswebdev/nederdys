@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { ParentLogin } from "@/components/parent/ParentLogin";
-import { isParentSessionValid } from "@/lib/parent";
+import { isParentSessionActive } from "@/lib/pin";
 
 const ParentGate = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const ParentGate = () => {
   useEffect(() => {
     if (loading) return;
     if (!user) navigate("/auth");
-    else if (isParentSessionValid()) navigate("/parent/dashboard");
+    else if (isParentSessionActive()) navigate("/parent/dashboard");
   }, [loading, user, navigate]);
 
   return (
