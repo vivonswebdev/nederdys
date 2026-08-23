@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.get_top_games(uuid, integer, integer) FROM anon, public;
