@@ -9,6 +9,10 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import MurDesNombres from "./pages/math/MurDesNombres";
 import ChronoCalcul from "./pages/math/ChronoCalcul";
+import NombreTroue from "./pages/math/NombreTroue";
+import OreilleDesNombres from "./pages/math/OreilleDesNombres";
+import TirAuxNombres from "./pages/math/TirAuxNombres";
+import MoutonNoirMaths from "./pages/math/MoutonNoirMaths";
 import SyllabesGame from "./pages/SyllabesGame";
 import ChasseGame from "./pages/ChasseGame";
 import MemoireGame from "./pages/MemoireGame";
@@ -115,6 +119,22 @@ const App = () => (
               <Route path="/jeu/mur-des-nombres/:level" element={<MurDesNombres />} />
               <Route path="/jeu/chrono-calcul" element={<ChronoCalcul />} />
               <Route path="/jeu/chrono-calcul/:level" element={<ChronoCalcul />} />
+              <Route path="/child/:id/math/nombre-troue" element={<NombreTroue />} />
+              <Route path="/child/:id/math/nombre-troue/:level" element={<NombreTroue />} />
+              <Route path="/jeu/nombre-troue" element={<NombreTroue />} />
+              <Route path="/jeu/nombre-troue/:level" element={<NombreTroue />} />
+              <Route path="/child/:id/math/oreille-des-nombres" element={<OreilleDesNombres />} />
+              <Route path="/child/:id/math/oreille-des-nombres/:level" element={<OreilleDesNombres />} />
+              <Route path="/jeu/oreille-des-nombres" element={<OreilleDesNombres />} />
+              <Route path="/jeu/oreille-des-nombres/:level" element={<OreilleDesNombres />} />
+              <Route path="/child/:id/math/tir-aux-nombres" element={<TirAuxNombres />} />
+              <Route path="/child/:id/math/tir-aux-nombres/:level" element={<TirAuxNombres />} />
+              <Route path="/jeu/tir-aux-nombres" element={<TirAuxNombres />} />
+              <Route path="/jeu/tir-aux-nombres/:level" element={<TirAuxNombres />} />
+              <Route path="/child/:id/math/mouton-noir" element={<MoutonNoirMaths />} />
+              <Route path="/child/:id/math/mouton-noir/:level" element={<MoutonNoirMaths />} />
+              <Route path="/jeu/mouton-noir-maths" element={<MoutonNoirMaths />} />
+              <Route path="/jeu/mouton-noir-maths/:level" element={<MoutonNoirMaths />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
