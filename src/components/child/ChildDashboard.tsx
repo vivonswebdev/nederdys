@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { LogOut, Settings } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
 import { useChild } from "@/contexts/ChildContext";
 import { getChildLevel } from "@/lib/database";
@@ -18,6 +17,12 @@ import { DailyChallenge } from "./DailyChallenge";
 import { BadgeShowcase } from "./BadgeShowcase";
 import { AvatarRenderer } from "./AvatarRenderer";
 import { getAvatarConfig } from "@/lib/avatar";
+import { AboutModal } from "./AboutModal";
+import { useChildSettings } from "@/hooks/useChildSettings";
+import { checkAndUnlockBadges } from "@/lib/badges";
+import { getAchievements } from "@/lib/gamification";
+import { getOrCreateDailyChallenge } from "@/lib/challenges";
+import { msUntilLocalMidnight } from "@/lib/date";
 import { getChildCoins } from "@/lib/database";
 
 const ChildDashboard = () => {
@@ -25,7 +30,9 @@ const ChildDashboard = () => {
   const { user, signOut } = useAuth();
   const { children, activeChild, setActiveChildId, loading } = useChild();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [aboutOpen, setAboutOpen] = useState(false);
+  useChildSettings(id);
 
   const child = children.find((c) => c.id === id) ?? null;
 
@@ -41,8 +48,30 @@ const ChildDashboard = () => {
   }, [loading, user, id, child, activeChild]);
 
   useEffect(() => {
-    if (user && child) recordDailyActivity(user.id, child.id, 0);
-  }, [user, child]);
+    if (!user || !child) return;
+    recordDailyActivity(user.id, child.id, 0).then(() => {
+      checkAndUnlockBadges(user.id, child.id).then((newly) => {
+        if (newly.length) queryClient.invalidateQueries({ queryKey: ["achievements"] });
+      });
+    });
+  }, [user, child, queryClient]);
+
+  // Reset du défi à minuit (heure locale) + contrôle horaire
+  useEffect(() => {
+    if (!user || !child) return;
+    const ensure = () => {
+      getOrCreateDailyChallenge(user.id, child.id).then(() =>
+        queryClient.invalidateQueries({ queryKey: ["dailyChallenge", child.id] })
+      );
+    };
+    ensure();
+    const hourly = setInterval(ensure, 60 * 60 * 1000);
+    const midnight = setTimeout(ensure, msUntilLocalMidnight());
+    return () => {
+      clearInterval(hourly);
+      clearTimeout(midnight);
+    };
+  }, [user, child, queryClient]);
 
   const { data: level, isLoading: levelLoading } = useQuery({
     queryKey: ["childLevel", child?.id],
@@ -57,6 +86,11 @@ const ChildDashboard = () => {
   const { data: avatarConfig } = useQuery({
     queryKey: ["avatarConfig", child?.id],
     queryFn: () => getAvatarConfig(child!.id),
+    enabled: !!child,
+  });
+  const { data: achievements = [] } = useQuery({
+    queryKey: ["achievements", child?.id],
+    queryFn: () => getAchievements(child!.id),
     enabled: !!child,
   });
   const { data: coinsRow } = useQuery({
@@ -134,6 +168,18 @@ const ChildDashboard = () => {
           >
             🛍️ Boutique d'avatar
           </button>
+          <button
+            onClick={() => navigate(`/child/${child.id}/badges`)}
+            className="flex-1 min-w-[10rem] bg-card border border-border rounded-2xl px-4 py-3 font-bold text-foreground text-left hover:border-primary transition-colors"
+          >
+            🏅 Mes badges
+          </button>
+          <button
+            onClick={() => navigate(`/child/${child.id}/settings`)}
+            className="flex-1 min-w-[10rem] bg-card border border-border rounded-2xl px-4 py-3 font-bold text-foreground text-left hover:border-primary transition-colors"
+          >
+            ⚙️ Mes paramètres
+          </button>
         </div>
 
         <section>
@@ -172,13 +218,21 @@ const ChildDashboard = () => {
           </div>
         </section>
 
-        <DailyChallenge childId={child.id} />
+        <div className="space-y-2">
+          <DailyChallenge childId={child.id} />
+          <button
+            onClick={() => navigate(`/child/${child.id}/defi`)}
+            className="text-sm text-primary font-medium hover:underline"
+          >
+            Voir le récapitulatif des défis →
+          </button>
+        </div>
 
         <BadgeShowcase childId={child.id} />
 
         <footer className="flex flex-wrap gap-3 pt-4 border-t border-border">
           <button
-            onClick={() => navigate("/profils")}
+            onClick={() => navigate(`/child/${child.id}/settings`)}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground rounded-full border border-border px-4 py-2"
           >
             <Settings className="w-4 h-4" /> Paramètres
@@ -195,26 +249,21 @@ const ChildDashboard = () => {
         </footer>
       </main>
 
-      <Dialog open={aboutOpen} onOpenChange={setAboutOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>À propos de moi</DialogTitle>
-          </DialogHeader>
-          <div className="text-center">
-            <span className="text-6xl block mb-3">{child.avatar_emoji}</span>
-            <p className="text-lg font-bold text-foreground">{child.first_name}</p>
-            <p className="text-muted-foreground font-dyslexic">
-              {child.age} ans · {String(child.school_level).toUpperCase()}
-            </p>
-            <p className="text-sm text-muted-foreground mt-2">
-              Niveau {info.level} {info.emoji} {info.title} · {totalXp} XP
-            </p>
-            <p className="text-xs text-muted-foreground mt-2">
-              Inscrit le {new Date(child.created_at as string).toLocaleDateString("fr-BE")}
-            </p>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <AboutModal
+        open={aboutOpen}
+        onOpenChange={setAboutOpen}
+        child={{
+          id: child.id,
+          first_name: child.first_name,
+          age: child.age,
+          school_level: String(child.school_level),
+          created_at: String(child.created_at),
+        }}
+        totalXp={totalXp}
+        badgeCount={achievements.length}
+        avatarConfig={avatarConfig ?? undefined}
+        onEditAvatar={() => navigate(`/child/${child.id}/avatar`)}
+      />
     </div>
   );
 };
