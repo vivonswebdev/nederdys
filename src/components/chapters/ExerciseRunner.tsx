@@ -212,7 +212,20 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
           animate={{ opacity: 1, y: 0 }}
           className="bg-card border-4 border-border rounded-3xl p-6 kids-shadow-card"
         >
-          <h2 className="text-xl font-bold text-foreground font-dyslexic mb-3">{ex.question}</h2>
+          <div className="flex items-start gap-3 mb-3">
+            <h2 className="text-xl font-bold text-foreground font-dyslexic flex-1">{ex.question}</h2>
+            {chapter.subject === "nl" && (
+              <button
+                type="button"
+                onClick={() => playNl(ex)}
+                aria-label="Écouter en néerlandais"
+                className="shrink-0 w-11 h-11 rounded-full bg-kids-blue/40 border-2 border-primary flex items-center justify-center hover:scale-105 transition-transform"
+              >
+                <Volume2 className="w-5 h-5 text-foreground" />
+              </button>
+            )}
+          </div>
+
           {ex.visualAid && (
             <p className="text-lg text-center bg-muted rounded-2xl py-3 px-4 mb-4 font-dyslexic">
               {ex.visualAid}
