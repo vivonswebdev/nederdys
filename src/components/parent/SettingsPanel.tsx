@@ -121,14 +121,16 @@ export const SettingsPanel = () => {
       toast.error("Les deux nouveaux codes ne correspondent pas.");
       return;
     }
-    const ok = await changePin(user.id, oldPin, newPin);
-    if (ok) {
+    const res = await savePin(newPin, oldPin);
+    if (res.ok === true) {
       toast.success("Code PIN mis à jour");
       setOldPin("");
       setNewPin("");
       setConfirmPin("");
-    } else {
+    } else if (res.reason === "wrong_old_pin") {
       toast.error("Ancien code incorrect");
+    } else {
+      toast.error("Modification impossible");
     }
   };
 
