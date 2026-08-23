@@ -20,6 +20,9 @@ export default {
       },
       colors: {
         border: "hsl(var(--border))",
+        "chart-nl": "hsl(var(--chart-nl))",
+        "chart-fr": "hsl(var(--chart-fr))",
+        "chart-math": "hsl(var(--chart-math))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",

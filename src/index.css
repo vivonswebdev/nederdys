@@ -48,6 +48,10 @@
     --input: 140 20% 85%;
     --ring: 140 50% 40%;
 
+    --chart-nl: 210 80% 50%;
+    --chart-fr: 350 75% 55%;
+    --chart-math: 42 90% 48%;
+
     --radius: 1rem;
 
     /* Custom kids tokens */

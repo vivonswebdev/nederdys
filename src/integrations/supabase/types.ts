@@ -131,6 +131,53 @@ export type Database = {
           },
         ]
       }
+      child_settings: {
+        Row: {
+          child_id: string
+          colorblind_mode: boolean
+          created_at: string
+          dyslexic_font: boolean
+          id: string
+          reduced_motion: boolean
+          sound_effects: boolean
+          timer_enabled: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          child_id: string
+          colorblind_mode?: boolean
+          created_at?: string
+          dyslexic_font?: boolean
+          id?: string
+          reduced_motion?: boolean
+          sound_effects?: boolean
+          timer_enabled?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          child_id?: string
+          colorblind_mode?: boolean
+          created_at?: string
+          dyslexic_font?: boolean
+          id?: string
+          reduced_motion?: boolean
+          sound_effects?: boolean
+          timer_enabled?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_settings_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       children: {
         Row: {
           age: number
@@ -298,6 +345,45 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      parent_settings: {
+        Row: {
+          created_at: string
+          failed_attempts: number
+          id: string
+          locked_until: string | null
+          parent_email: string | null
+          pin_hash: string | null
+          stagnation_alert: boolean
+          updated_at: string
+          user_id: string
+          weekly_email: boolean
+        }
+        Insert: {
+          created_at?: string
+          failed_attempts?: number
+          id?: string
+          locked_until?: string | null
+          parent_email?: string | null
+          pin_hash?: string | null
+          stagnation_alert?: boolean
+          updated_at?: string
+          user_id: string
+          weekly_email?: boolean
+        }
+        Update: {
+          created_at?: string
+          failed_attempts?: number
+          id?: string
+          locked_until?: string | null
+          parent_email?: string | null
+          pin_hash?: string | null
+          stagnation_alert?: boolean
+          updated_at?: string
+          user_id?: string
+          weekly_email?: boolean
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
