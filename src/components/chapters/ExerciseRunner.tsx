@@ -8,6 +8,7 @@ import { Confetti } from "@/components/Confetti";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { sounds } from "@/lib/sounds";
+import { logMistake } from "@/lib/mistakes";
 import {
   Chapter,
   Difficulty,
@@ -122,8 +123,11 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
     }
   };
 
-  const validate = (isCorrect: boolean) => {
+  const validate = (isCorrect: boolean, givenAnswer?: string) => {
     if (feedback) return;
+    if (!isCorrect && exercise) {
+      void logMistake({ childId, chapter, exercise, level, givenAnswer });
+    }
     setFeedback(isCorrect ? "correct" : "wrong");
     isCorrect ? sounds.correct() : sounds.wrong();
     const nextCorrect = correctCount + (isCorrect ? 1 : 0);
@@ -256,7 +260,7 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
                 <button
                   key={String(opt)}
                   disabled={!!feedback}
-                  onClick={() => validate(String(opt) === String(ex.answer))}
+                  onClick={() => validate(String(opt) === String(ex.answer), String(opt))}
                   className="border-4 border-border rounded-2xl p-4 text-lg font-bold font-dyslexic bg-background hover:bg-muted transition-colors disabled:opacity-70"
                 >
                   {String(opt)}
@@ -270,14 +274,14 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
             <div className="grid grid-cols-2 gap-3">
               <button
                 disabled={!!feedback}
-                onClick={() => validate(ex.answer === true)}
+                onClick={() => validate(ex.answer === true, "Vrai")}
                 className="border-4 border-kids-green-dark bg-kids-green-light rounded-2xl p-5 text-lg font-bold"
               >
                 ✅ Vrai
               </button>
               <button
                 disabled={!!feedback}
-                onClick={() => validate(ex.answer === false)}
+                onClick={() => validate(ex.answer === false, "Faux")}
                 className="border-4 border-red-700 bg-kids-red rounded-2xl p-5 text-lg font-bold"
               >
                 ❌ Faux
@@ -291,7 +295,7 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
               onSubmit={(e) => {
                 e.preventDefault();
                 if (!textAnswer.trim()) return;
-                validate(normalize(textAnswer) === normalize(ex.answer));
+                validate(normalize(textAnswer) === normalize(ex.answer), textAnswer);
               }}
               className="flex flex-col sm:flex-row gap-3"
             >
@@ -350,7 +354,7 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
                 </Button>
                 <Button
                   disabled={!!feedback || orderPicks.length !== ex.answer.length}
-                  onClick={() => validate(orderPicks.every((v, i) => v === ex.answer[i]))}
+                  onClick={() => validate(orderPicks.every((v, i) => v === ex.answer[i]), orderPicks.join(" · "))}
                 >
                   Valider
                 </Button>
@@ -402,7 +406,7 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
                           setMatched(next);
                           if (Object.keys(next).length === ex.pairs.length) {
                             const allGood = ex.pairs.every((p) => next[p.left] === p.right);
-                            validate(allGood);
+                            validate(allGood, ex.pairs.map((p) => `${p.left} → ${next[p.left]}`).join(" · "));
                           }
                         }}
                         className="w-full border-4 border-border rounded-2xl px-3 py-3 font-bold font-dyslexic bg-background hover:bg-muted disabled:opacity-60"
