@@ -8,13 +8,14 @@ const MathChapters = () => {
   const { id } = useParams<{ id: string }>();
   const childId = id ?? "";
 
+  const bases = CHAPTERS.filter((c) => c.section === "bases");
   const ce2 = CHAPTERS.filter((c) => c.section === "ce2");
   const stretch = CHAPTERS.filter((c) => c.section === "stretch");
 
   const renderCard = (
     chapter: (typeof CHAPTERS)[number],
     i: number,
-    variant: "ce2" | "stretch"
+    variant: "bases" | "ce2" | "stretch"
   ) => (
     <motion.div
       key={chapter.id}
@@ -27,7 +28,9 @@ const MathChapters = () => {
           className={`relative overflow-hidden border-4 rounded-3xl p-6 kids-shadow-card hover:kids-shadow-hover transition-shadow h-full ${
             variant === "ce2"
               ? "bg-kids-blue/40 border-primary"
-              : "bg-kids-purple/30 border-kids-purple"
+              : variant === "bases"
+                ? "bg-kids-green-light border-kids-green-dark"
+                : "bg-kids-purple/30 border-kids-purple"
           }`}
         >
           {variant === "stretch" && (
@@ -58,6 +61,26 @@ const MathChapters = () => {
           <h1 className="text-3xl font-bold text-foreground">📚 Mathématiques</h1>
           <p className="text-muted-foreground font-dyslexic mt-1">Choisis ton chapitre :</p>
         </header>
+
+        <Link
+          to={`/child/${childId}/test-placement/math`}
+          className="block mb-8 border-4 border-kids-orange bg-kids-orange/30 rounded-3xl p-5 kids-shadow-card hover:kids-shadow-hover transition-shadow"
+        >
+          <span className="text-3xl mr-2">🎯</span>
+          <span className="text-lg font-bold text-foreground">Faire le test de placement</span>
+          <p className="font-dyslexic text-muted-foreground mt-1">
+            6 questions pour débloquer directement le bon niveau.
+          </p>
+        </Link>
+
+        {bases.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-2xl font-bold text-kids-green-dark mb-4">🌱 Pour bien démarrer</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {bases.map((c, i) => renderCard(c, i, "bases"))}
+            </div>
+          </section>
+        )}
 
         <section className="mb-10">
           <h2 className="text-2xl font-bold text-primary mb-4">📘 CE2</h2>

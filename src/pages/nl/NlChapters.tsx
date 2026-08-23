@@ -24,6 +24,18 @@ const NlChapters = () => {
           <p className="text-muted-foreground font-dyslexic mt-1">Choisis ton chapitre :</p>
         </header>
 
+        <Link
+          to={`/child/${childId}/test-placement/nl`}
+          className="block mb-8 border-4 border-kids-orange bg-kids-orange/30 rounded-3xl p-5 kids-shadow-card hover:kids-shadow-hover transition-shadow"
+        >
+          <span className="text-3xl mr-2">🎯</span>
+          <span className="text-lg font-bold text-foreground">Faire le test de placement</span>
+          <p className="font-dyslexic text-muted-foreground mt-1">
+            6 questions pour débloquer directement le bon niveau.
+          </p>
+        </Link>
+
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {NL_CHAPTERS.map((chapter, i) => (
             <motion.div
