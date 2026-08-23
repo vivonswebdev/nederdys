@@ -44,6 +44,25 @@ const SubjectPage = () => {
           </p>
         </div>
 
+        {meta.id === "math" && id && (
+          <Link to={`/child/${id}/math/chapitres`} className="block mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-kids-blue/40 border-4 border-primary rounded-3xl p-6 kids-shadow-card hover:kids-shadow-hover transition-shadow flex items-center gap-4"
+            >
+              <span className="text-5xl">📚</span>
+              <div>
+                <h2 className="text-xl font-bold text-foreground">Les chapitres de maths</h2>
+                <p className="font-dyslexic text-muted-foreground">
+                  10 chapitres, 3 niveaux à débloquer un par un
+                </p>
+              </div>
+            </motion.div>
+          </Link>
+        )}
+
+
         {games.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {games.map((game, i) => (
