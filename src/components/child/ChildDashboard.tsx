@@ -54,6 +54,16 @@ const ChildDashboard = () => {
     queryFn: () => getStreakDays(child!.id),
     enabled: !!child,
   });
+  const { data: avatarConfig } = useQuery({
+    queryKey: ["avatarConfig", child?.id],
+    queryFn: () => getAvatarConfig(child!.id),
+    enabled: !!child,
+  });
+  const { data: coinsRow } = useQuery({
+    queryKey: ["childCoins", child?.id],
+    queryFn: () => getChildCoins(child!.id),
+    enabled: !!child,
+  });
 
   if (!child) return <div className="min-h-screen bg-background" />;
 
