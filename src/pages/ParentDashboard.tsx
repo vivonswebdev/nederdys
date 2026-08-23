@@ -13,6 +13,7 @@ import {
   Period,
   buildDailySeries,
   buildGameStats,
+  getTopGames,
   buildSubjectStats,
   getSessionsForPeriod,
 } from "@/lib/parent";
@@ -44,6 +45,12 @@ const ParentDashboard = () => {
     enabled: !!activeChild,
   });
 
+  const { data: topGames } = useQuery({
+    queryKey: ["topGames", activeChild?.id, period],
+    queryFn: () => getTopGames(activeChild!.id, period, 5),
+    enabled: !!activeChild,
+  });
+
   const { data: streakRows = [] } = useQuery({
     queryKey: ["streaks", activeChild?.id],
     queryFn: () => getStreakDays(activeChild!.id),
@@ -52,7 +59,9 @@ const ParentDashboard = () => {
 
   const stats = useMemo(() => buildSubjectStats(sessions), [sessions]);
   const daily = useMemo(() => buildDailySeries(sessions, period), [sessions, period]);
-  const games = useMemo(() => buildGameStats(sessions), [sessions]);
+  const localGames = useMemo(() => buildGameStats(sessions), [sessions]);
+  // Le serveur agrège (NULLIF anti division par zéro) ; repli local si la RPC échoue.
+  const games = topGames && topGames.length > 0 ? topGames : localGames;
   const streak = useMemo(() => computeStreak(streakRows.map((r) => r.date)), [streakRows]);
   const periodLabel = PERIODS.find((p) => p.key === period)!.label;
 
