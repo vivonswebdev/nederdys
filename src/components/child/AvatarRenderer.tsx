@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { getAvatarUrl, AvatarConfig } from "@/lib/avatar";
 
@@ -16,11 +17,15 @@ const sizeClasses = {
   lg: "w-48 h-48",
 };
 
-export function AvatarRenderer({ seed, options = {}, size = "md", animated = false, className = "" }: Props) {
+export const AvatarRenderer = forwardRef<HTMLDivElement, Props>(function AvatarRenderer(
+  { seed, options = {}, size = "md", animated = false, className = "" },
+  ref
+) {
   const avatarUrl = getAvatarUrl({ seed, ...options });
 
   return (
     <motion.div
+      ref={ref}
       initial={animated ? { scale: 0.85, opacity: 0 } : false}
       animate={animated ? { scale: 1, opacity: 1 } : undefined}
       transition={{ type: "spring", stiffness: 220, damping: 18 }}
@@ -29,6 +34,6 @@ export function AvatarRenderer({ seed, options = {}, size = "md", animated = fal
       <img src={avatarUrl} alt={`Avatar de ${seed}`} className="w-full h-full object-cover" loading="lazy" />
     </motion.div>
   );
-}
+});
 
 export default AvatarRenderer;
