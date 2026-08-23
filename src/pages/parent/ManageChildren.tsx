@@ -24,7 +24,7 @@ const ManageChildren = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState({ first_name: "", age: 8, school_level: "ce2" });
+  const [form, setForm] = useState({ first_name: "", age: 8, school_level: "ce2", gender: "other" });
   const [pendingDelete, setPendingDelete] = useState<{ id: string; name: string } | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -46,6 +46,7 @@ const ManageChildren = () => {
         first_name: form.first_name.trim(),
         age: form.age,
         school_level: form.school_level,
+        gender: form.gender,
       })
       .eq("id", childId);
     setBusy(false);
@@ -118,7 +119,18 @@ const ManageChildren = () => {
                         </option>
                       ))}
                     </select>
+                    <select
+                      value={form.gender}
+                      onChange={(e) => setForm({ ...form, gender: e.target.value })}
+                      aria-label="Sexe"
+                      className="flex-1 min-w-[8rem] border border-border bg-background rounded-xl p-2.5"
+                    >
+                      <option value="girl">👧 Fille</option>
+                      <option value="boy">👦 Garçon</option>
+                      <option value="other">🌈 Autre</option>
+                    </select>
                   </div>
+
                   <div className="flex gap-2">
                     <button
                       disabled={busy}
@@ -154,7 +166,9 @@ const ManageChildren = () => {
                           first_name: child.first_name,
                           age: child.age,
                           school_level: String(child.school_level),
+                          gender: String(child.gender ?? "other"),
                         });
+
                       }}
                       className="inline-flex items-center gap-1.5 border border-border px-3 py-2 rounded-xl font-bold text-sm text-foreground"
                     >

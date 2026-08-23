@@ -87,7 +87,7 @@ const Home = () => {
               className="hover:scale-105 transition-transform"
               aria-label="Modifier mon avatar"
             >
-              <AvatarRenderer seed={child.first_name} options={avatarConfig ?? {}} size="lg" />
+              <AvatarRenderer seed={child.first_name} gender={child.gender} options={avatarConfig ?? {}} size="lg" />
             </Link>
             <div className="flex-1 text-center sm:text-left">
               <h1 className="text-2xl font-bold text-foreground">

@@ -13,6 +13,7 @@ export interface AvatarItem {
   price: number;
   rarity: Rarity;
   is_premium: boolean;
+  gender?: "girl" | "boy" | "other" | null;
 }
 
 export interface AvatarConfig {
@@ -137,4 +138,63 @@ export async function purchaseAvatarItem(childId: string, itemId: string): Promi
     return { ok: false, reason: "server_error" };
   }
   return (data ?? { ok: false }) as unknown as PurchaseResult;
+}
+
+/* ------------------------------------------------------------------ */
+/* Genre de l'enfant : avatar adapté automatiquement                   */
+/* ------------------------------------------------------------------ */
+
+export type Gender = "girl" | "boy" | "other";
+
+export const GENDER_LABELS: Record<Gender, string> = {
+  girl: "👧 Fille",
+  boy: "👦 Garçon",
+  other: "🌈 Autre",
+};
+
+const SEED_PREFIXES: Record<Gender, string[]> = {
+  girl: ["princess", "fairy", "star", "moon", "flower"],
+  boy: ["hero", "knight", "dragon", "star", "moon"],
+  other: ["wizard", "alien", "robot", "star", "moon"],
+};
+
+/** Graine DiceBear stable et adaptée au genre (déterministe par prénom). */
+export function getAvatarSeed(name: string, gender: Gender = "other"): string {
+  const clean = (name || "nederdys").toLowerCase().trim().replace(/\s+/g, "-");
+  const prefixes = SEED_PREFIXES[gender] ?? SEED_PREFIXES.other;
+  const hash = Array.from(clean).reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  return `${prefixes[hash % prefixes.length]}-${clean}`;
+}
+
+const GENDER_DEFAULTS: Record<Gender, AvatarConfig> = {
+  girl: {
+    backgroundColor: "ffc0e9,ffb6c1,dda0dd",
+    hairColor: "f6d7b0,cb6820,ff69b4",
+    hair: "long02,long07,long16",
+  },
+  boy: {
+    backgroundColor: "c0d7fe,b0e0e6,b0c4de",
+    hairColor: "2b1b0e,0e0e0e,e5d7a3",
+    hair: "short02,short05,short09",
+  },
+  other: {
+    backgroundColor: "e0bbe4,a0e7c5,ffd93d",
+    hairColor: "9b59b6,3498db,f1c40f",
+    hair: "long20,short18",
+  },
+};
+
+/** Options DiceBear par défaut selon le genre. */
+export function getDefaultAvatarOptions(gender: Gender = "other"): AvatarConfig {
+  return { ...(GENDER_DEFAULTS[gender] ?? GENDER_DEFAULTS.other) };
+}
+
+/** Fusionne les défauts liés au genre avec la config personnalisée de l'enfant. */
+export function mergeAvatarOptions(gender: Gender | null | undefined, custom?: AvatarConfig): AvatarConfig {
+  const defaults = getDefaultAvatarOptions((gender ?? "other") as Gender);
+  const merged: AvatarConfig = { ...defaults };
+  Object.entries(custom ?? {}).forEach(([key, value]) => {
+    if (value) (merged as Record<string, unknown>)[key] = value;
+  });
+  return merged;
 }

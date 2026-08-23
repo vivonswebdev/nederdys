@@ -7,6 +7,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Home from "./pages/Home";
+import Leaderboard from "./pages/Leaderboard";
 import PlayHub from "./pages/PlayHub";
 import NotFound from "./pages/NotFound";
 import MurDesNombres from "./pages/math/MurDesNombres";
@@ -89,6 +90,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/accueil" element={<Home />} />
+              <Route path="/classement" element={<Leaderboard />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
