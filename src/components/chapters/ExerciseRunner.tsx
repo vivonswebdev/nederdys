@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, Volume2, X } from "lucide-react";
@@ -26,6 +26,14 @@ interface Props {
   chapter: Chapter;
   level: Difficulty;
   sessionSize?: number;
+  /** Mode test : exercices imposés (ordre conservé, pas de tirage aléatoire). */
+  customExercises?: Exercise[];
+  /** Mode test : appelé à la fin avec la justesse de chaque exercice (même ordre). */
+  onFinish?: (results: { exercise: Exercise; correct: boolean }[]) => void | Promise<void>;
+  /** Mode test : écran de fin personnalisé (le runner n'enregistre alors rien). */
+  finishedContent?: React.ReactNode;
+  /** Lien de sortie personnalisé. */
+  exitTo?: string;
 }
 
 const normalize = (value: string) =>
@@ -53,14 +61,25 @@ function playNl(ex: Exercise) {
   window.speechSynthesis.speak(utter);
 }
 
-export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Props) => {
+export const ExerciseRunner = ({
+  childId,
+  chapter,
+  level,
+  sessionSize = 6,
+  customExercises,
+  onFinish,
+  finishedContent,
+  exitTo,
+}: Props) => {
   const navigate = useNavigate();
-  const backTo = `/child/${childId}/${chapter.subject}/chapitre/${chapter.id}`;
+  const testMode = !!onFinish;
+  const backTo = exitTo ?? `/child/${childId}/${chapter.subject}/chapitre/${chapter.id}`;
 
   const session = useMemo(
-    () => shuffle(exercisesForLevel(chapter, level)).slice(0, sessionSize),
-    [chapter, level, sessionSize]
+    () => customExercises ?? shuffle(exercisesForLevel(chapter, level)).slice(0, sessionSize),
+    [chapter, level, sessionSize, customExercises]
   );
+  const answersRef = useRef<{ exercise: Exercise; correct: boolean }[]>([]);
 
   const [index, setIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
@@ -99,6 +118,12 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
 
   const finishSession = async (finalCorrect: number) => {
     setFinished(true);
+    if (testMode) {
+      setSaving(true);
+      await onFinish!(answersRef.current);
+      setSaving(false);
+      return;
+    }
     setSaving(true);
     const total = session.length;
     const pct = Math.round((finalCorrect / Math.max(total, 1)) * 100);
@@ -125,7 +150,8 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
 
   const validate = (isCorrect: boolean, givenAnswer?: string) => {
     if (feedback) return;
-    if (!isCorrect && exercise) {
+    if (exercise) answersRef.current.push({ exercise, correct: isCorrect });
+    if (!isCorrect && exercise && !testMode) {
       void logMistake({ childId, chapter, exercise, level, givenAnswer });
     }
     setFeedback(isCorrect ? "correct" : "wrong");
@@ -152,6 +178,21 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
           <Button className="mt-4" onClick={() => navigate(backTo)}>
             Retour au chapitre
           </Button>
+        </main>
+      </div>
+    );
+  }
+
+  if (finished && finishedContent) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <main className="container max-w-xl px-4 py-12">
+          {saving ? (
+            <p className="text-center font-dyslexic text-muted-foreground">Enregistrement…</p>
+          ) : (
+            finishedContent
+          )}
         </main>
       </div>
     );
