@@ -19,10 +19,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "5",
     "options": [
-      "3",
+      "1",
       "5",
-      "4",
-      "8"
+      "6",
+      "10"
     ],
     "difficulty": 1
   },
@@ -35,9 +35,9 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "correctAnswer": "5",
     "options": [
       "5",
-      "3",
-      "6",
-      "8"
+      "7",
+      "8",
+      "15"
     ],
     "difficulty": 1
   },
@@ -49,10 +49,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "4",
     "options": [
+      "7",
+      "3",
       "5",
-      "6",
-      "4",
-      "7"
+      "4"
     ],
     "difficulty": 1
   },
@@ -64,10 +64,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "2",
     "options": [
+      "1",
+      "9",
       "2",
-      "4",
-      "5",
-      "0"
+      "3"
     ],
     "difficulty": 1
   },
@@ -79,8 +79,8 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "5",
     "options": [
-      "7",
-      "3",
+      "2",
+      "9",
       "5",
       "4"
     ],
@@ -94,10 +94,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "7",
     "options": [
+      "9",
+      "13",
       "5",
-      "7",
-      "6",
-      "8"
+      "7"
     ],
     "difficulty": 1
   },
@@ -109,9 +109,9 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "3",
     "options": [
+      "2",
+      "9",
       "3",
-      "6",
-      "4",
       "1"
     ],
     "difficulty": 1
@@ -124,10 +124,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "6",
     "options": [
-      "8",
       "6",
+      "9",
       "5",
-      "7"
+      "12"
     ],
     "difficulty": 1
   },
@@ -139,9 +139,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "1",
     "options": [
-      "1",
-      "3",
-      "0"
+      "8",
+      "6",
+      "7",
+      "1"
     ],
     "difficulty": 1
   },
@@ -155,8 +156,8 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "options": [
       "4",
       "3",
-      "6",
-      "5"
+      "5",
+      "14"
     ],
     "difficulty": 1
   },
@@ -168,10 +169,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 0,
     "correctAnswer": "4",
     "options": [
-      "4",
-      "6",
       "7",
-      "5"
+      "6",
+      "3",
+      "4"
     ],
     "difficulty": 2
   },
@@ -183,9 +184,9 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 0,
     "correctAnswer": "6",
     "options": [
-      "8",
+      "5",
       "4",
-      "7",
+      "16",
       "6"
     ],
     "difficulty": 2
@@ -200,7 +201,7 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "options": [
       "10",
       "9",
-      "11",
+      "15",
       "8"
     ],
     "difficulty": 2
@@ -213,10 +214,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 0,
     "correctAnswer": "12",
     "options": [
-      "12",
-      "14",
+      "11",
       "13",
-      "15"
+      "12",
+      "7"
     ],
     "difficulty": 2
   },
@@ -228,10 +229,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 0,
     "correctAnswer": "8",
     "options": [
-      "6",
+      "15",
+      "7",
       "8",
-      "11",
-      "9"
+      "4"
     ],
     "difficulty": 2
   },
@@ -243,10 +244,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 0,
     "correctAnswer": "14",
     "options": [
-      "15",
-      "16",
+      "24",
+      "18",
       "14",
-      "17"
+      "15"
     ],
     "difficulty": 2
   },
@@ -258,10 +259,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 0,
     "correctAnswer": "9",
     "options": [
-      "8",
+      "9",
+      "4",
       "10",
-      "11",
-      "9"
+      "11"
     ],
     "difficulty": 2
   },
@@ -273,10 +274,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 0,
     "correctAnswer": "11",
     "options": [
-      "9",
-      "10",
-      "12",
-      "11"
+      "16",
+      "11",
+      "13",
+      "15"
     ],
     "difficulty": 2
   },
@@ -288,10 +289,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 0,
     "correctAnswer": "7",
     "options": [
-      "10",
-      "6",
+      "8",
+      "2",
       "7",
-      "8"
+      "6"
     ],
     "difficulty": 2
   },
@@ -303,10 +304,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 0,
     "correctAnswer": "16",
     "options": [
-      "16",
-      "14",
+      "13",
       "15",
-      "18"
+      "16",
+      "26"
     ],
     "difficulty": 2
   },
@@ -318,10 +319,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "8",
     "options": [
-      "18",
-      "6",
       "8",
-      "10"
+      "15",
+      "9",
+      "12"
     ],
     "difficulty": 3
   },
@@ -333,10 +334,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "7",
     "options": [
-      "6",
-      "9",
       "8",
-      "7"
+      "5",
+      "7",
+      "14"
     ],
     "difficulty": 3
   },
@@ -348,10 +349,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "6",
     "options": [
+      "11",
       "6",
-      "8",
-      "7",
-      "16"
+      "12",
+      "1"
     ],
     "difficulty": 3
   },
@@ -363,10 +364,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "9",
     "options": [
-      "10",
-      "19",
       "7",
-      "9"
+      "9",
+      "11",
+      "10"
     ],
     "difficulty": 3
   },
@@ -378,10 +379,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "15",
     "options": [
-      "13",
-      "17",
+      "11",
+      "25",
       "15",
-      "16"
+      "20"
     ],
     "difficulty": 3
   },
@@ -393,10 +394,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "8",
     "options": [
-      "18",
-      "6",
-      "8",
-      "7"
+      "4",
+      "7",
+      "10",
+      "8"
     ],
     "difficulty": 3
   },
@@ -408,10 +409,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "13",
     "options": [
-      "13",
-      "15",
-      "12",
-      "14"
+      "10",
+      "16",
+      "8",
+      "13"
     ],
     "difficulty": 3
   },
@@ -423,10 +424,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "17",
     "options": [
-      "18",
-      "17",
-      "27",
-      "15"
+      "21",
+      "20",
+      "15",
+      "17"
     ],
     "difficulty": 3
   },
@@ -438,10 +439,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "26",
     "options": [
-      "28",
-      "24",
-      "27",
-      "26"
+      "29",
+      "26",
+      "36",
+      "27"
     ],
     "difficulty": 3
   },
@@ -453,10 +454,10 @@ export const holeyNumberChallenges: HoleyNumberChallenge[] = [
     "holeIndex": 1,
     "correctAnswer": "9",
     "options": [
-      "8",
+      "6",
+      "4",
       "9",
-      "7",
-      "10"
+      "16"
     ],
     "difficulty": 3
   }

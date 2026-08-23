@@ -15,10 +15,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Sept",
     "correctAnswer": 7,
     "options": [
-      7,
       10,
-      6,
-      5
+      2,
+      5,
+      7
     ],
     "difficulty": 1
   },
@@ -28,10 +28,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Quatre",
     "correctAnswer": 4,
     "options": [
-      3,
-      7,
-      6,
-      4
+      11,
+      4,
+      9,
+      8
     ],
     "difficulty": 1
   },
@@ -41,10 +41,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Neuf",
     "correctAnswer": 9,
     "options": [
-      12,
+      16,
+      5,
       9,
-      10,
-      7
+      4
     ],
     "difficulty": 1
   },
@@ -55,9 +55,9 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "correctAnswer": 2,
     "options": [
       1,
+      2,
       3,
-      0,
-      2
+      8
     ],
     "difficulty": 1
   },
@@ -68,9 +68,9 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "correctAnswer": 6,
     "options": [
       6,
-      9,
-      8,
-      4
+      13,
+      5,
+      12
     ],
     "difficulty": 1
   },
@@ -80,10 +80,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Dix",
     "correctAnswer": 10,
     "options": [
+      5,
       10,
-      12,
-      11,
-      8
+      6,
+      12
     ],
     "difficulty": 1
   },
@@ -93,10 +93,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Trois",
     "correctAnswer": 3,
     "options": [
-      2,
-      3,
+      10,
       5,
-      6
+      9,
+      3
     ],
     "difficulty": 1
   },
@@ -106,10 +106,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Huit",
     "correctAnswer": 8,
     "options": [
-      9,
+      8,
+      5,
       11,
-      10,
-      8
+      9
     ],
     "difficulty": 1
   },
@@ -119,10 +119,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Cinq",
     "correctAnswer": 5,
     "options": [
-      4,
+      2,
       3,
-      5,
-      7
+      9,
+      5
     ],
     "difficulty": 1
   },
@@ -132,10 +132,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Un",
     "correctAnswer": 1,
     "options": [
-      3,
-      0,
-      2,
-      1
+      11,
+      7,
+      1,
+      4
     ],
     "difficulty": 1
   },
@@ -145,10 +145,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Quarante-cinq",
     "correctAnswer": 45,
     "options": [
-      54,
-      44,
-      55,
-      45
+      47,
+      52,
+      45,
+      48
     ],
     "difficulty": 2
   },
@@ -158,10 +158,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Trente-deux",
     "correctAnswer": 32,
     "options": [
-      42,
       32,
-      23,
-      33
+      42,
+      29,
+      37
     ],
     "difficulty": 2
   },
@@ -171,9 +171,9 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Soixante-huit",
     "correctAnswer": 68,
     "options": [
-      69,
-      78,
-      67,
+      72,
+      66,
+      71,
       68
     ],
     "difficulty": 2
@@ -184,10 +184,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Cinquante-quatre",
     "correctAnswer": 54,
     "options": [
-      55,
-      45,
       54,
-      53
+      64,
+      60,
+      57
     ],
     "difficulty": 2
   },
@@ -197,10 +197,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Vingt-sept",
     "correctAnswer": 27,
     "options": [
+      72,
       26,
-      27,
-      37,
-      72
+      30,
+      27
     ],
     "difficulty": 2
   },
@@ -210,10 +210,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Quatre-vingt-un",
     "correctAnswer": 81,
     "options": [
-      82,
-      91,
-      18,
-      81
+      80,
+      83,
+      81,
+      78
     ],
     "difficulty": 2
   },
@@ -223,10 +223,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Soixante-treize",
     "correctAnswer": 73,
     "options": [
-      83,
-      37,
+      68,
       72,
-      73
+      73,
+      75
     ],
     "difficulty": 2
   },
@@ -236,10 +236,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Seize",
     "correctAnswer": 16,
     "options": [
-      61,
-      26,
-      15,
-      16
+      13,
+      11,
+      16,
+      23
     ],
     "difficulty": 2
   },
@@ -250,9 +250,9 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "correctAnswer": 99,
     "options": [
       98,
-      109,
-      99,
-      100
+      100,
+      103,
+      99
     ],
     "difficulty": 2
   },
@@ -262,10 +262,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Cinquante",
     "correctAnswer": 50,
     "options": [
-      51,
       49,
-      60,
-      50
+      50,
+      54,
+      56
     ],
     "difficulty": 2
   },
@@ -276,9 +276,9 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "correctAnswer": 13,
     "options": [
       12,
-      30,
+      17,
       13,
-      14
+      18
     ],
     "difficulty": 3
   },
@@ -288,10 +288,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Quatorze",
     "correctAnswer": 14,
     "options": [
-      41,
-      14,
-      40,
-      15
+      11,
+      13,
+      9,
+      14
     ],
     "difficulty": 3
   },
@@ -301,10 +301,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Seize",
     "correctAnswer": 16,
     "options": [
-      60,
-      17,
-      15,
-      16
+      12,
+      23,
+      16,
+      11
     ],
     "difficulty": 3
   },
@@ -314,10 +314,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Dix-sept",
     "correctAnswer": 17,
     "options": [
-      70,
+      16,
+      23,
       17,
-      71,
-      18
+      27
     ],
     "difficulty": 3
   },
@@ -327,10 +327,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Soixante",
     "correctAnswer": 60,
     "options": [
+      70,
       61,
-      16,
-      60,
-      70
+      62,
+      60
     ],
     "difficulty": 3
   },
@@ -340,10 +340,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Soixante-dix",
     "correctAnswer": 70,
     "options": [
-      80,
+      66,
       70,
-      60,
-      17
+      76,
+      74
     ],
     "difficulty": 3
   },
@@ -354,9 +354,9 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "correctAnswer": 15,
     "options": [
       15,
-      16,
-      50,
-      51
+      19,
+      10,
+      17
     ],
     "difficulty": 3
   },
@@ -367,9 +367,9 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "correctAnswer": 19,
     "options": [
       19,
-      91,
-      90,
-      18
+      25,
+      17,
+      29
     ],
     "difficulty": 3
   },
@@ -379,10 +379,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Quatre-vingt-dix",
     "correctAnswer": 90,
     "options": [
+      91,
+      94,
       90,
-      80,
-      19,
-      91
+      88
     ],
     "difficulty": 3
   },
@@ -392,10 +392,10 @@ export const magicEarChallenges: MagicEarChallenge[] = [
     "audioText": "Quatre-vingts",
     "correctAnswer": 80,
     "options": [
-      81,
+      76,
       80,
-      90,
-      18
+      77,
+      81
     ],
     "difficulty": 3
   }
