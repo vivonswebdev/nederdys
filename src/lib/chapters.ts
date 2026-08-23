@@ -10,6 +10,20 @@ import { geometrieCe2Exercises } from "@/data/chapters/geometrie-ce2";
 import { multiplicationAvanceeExercises } from "@/data/chapters/multiplication-avancee";
 import { divisionCe2Exercises } from "@/data/chapters/division-ce2";
 import { problemesAvancesExercises } from "@/data/chapters/problemes-avances";
+import { nombres0100Exercises } from "@/data/chapters/nombres-0-100";
+import { nombres1001000Exercises } from "@/data/chapters/nombres-100-1000";
+import { nombresDecimauxExercises } from "@/data/chapters/nombres-decimaux";
+import { fractionsSimplesExercises } from "@/data/chapters/fractions-simples";
+import { additionsRetenueExercises } from "@/data/chapters/additions-retenue";
+import { soustractionsRetenueExercises } from "@/data/chapters/soustractions-retenue";
+import { multiplications2ChiffresExercises } from "@/data/chapters/multiplications-2chiffres";
+import { calculMentalExercises } from "@/data/chapters/calcul-mental";
+import { divisionsSimplesExercises } from "@/data/chapters/divisions-simples";
+import { perimetresExercises } from "@/data/chapters/perimetres";
+import { airesExercises } from "@/data/chapters/aires";
+import { longueursExercises } from "@/data/chapters/longueurs";
+import { massesExercises } from "@/data/chapters/masses";
+import { dureesExercises } from "@/data/chapters/durees";
 import { kleurenExercises } from "@/data/exercises/nl/kleuren";
 import { dierenExercises } from "@/data/exercises/nl/dieren";
 import { getallenExercises } from "@/data/exercises/nl/getallen";
@@ -58,6 +72,20 @@ const MATH_CHAPTERS: ChapterDef[] = [
     section: "stretch",
     exercises: problemesAvancesExercises,
   },
+  { id: "nombres-0-100", name: "Nombres de 0 à 100", emoji: "📈", section: "ce2", exercises: nombres0100Exercises },
+  { id: "nombres-100-1000", name: "Nombres de 100 à 1000", emoji: "📊", section: "ce2", exercises: nombres1001000Exercises },
+  { id: "nombres-decimaux", name: "Nombres décimaux", emoji: "📐", section: "stretch", exercises: nombresDecimauxExercises },
+  { id: "fractions-simples", name: "Fractions simples", emoji: "🍕", section: "stretch", exercises: fractionsSimplesExercises },
+  { id: "additions-retenue", name: "Additions à retenue", emoji: "➕", section: "ce2", exercises: additionsRetenueExercises },
+  { id: "soustractions-retenue", name: "Soustractions à retenue", emoji: "➖", section: "ce2", exercises: soustractionsRetenueExercises },
+  { id: "multiplications-2chiffres", name: "Multiplications à 2 chiffres", emoji: "✖️", section: "stretch", exercises: multiplications2ChiffresExercises },
+  { id: "calcul-mental", name: "Calcul mental", emoji: "⚡", section: "ce2", exercises: calculMentalExercises },
+  { id: "divisions-simples", name: "Divisions simples", emoji: "➗", section: "ce2", exercises: divisionsSimplesExercises },
+  { id: "perimetres", name: "Périmètres", emoji: "📏", section: "stretch", exercises: perimetresExercises },
+  { id: "aires", name: "Aires", emoji: "🟦", section: "stretch", exercises: airesExercises },
+  { id: "longueurs", name: "Longueurs", emoji: "📐", section: "ce2", exercises: longueursExercises },
+  { id: "masses", name: "Masses", emoji: "⚖️", section: "ce2", exercises: massesExercises },
+  { id: "durees", name: "Durées", emoji: "⏰", section: "ce2", exercises: dureesExercises },
 ];
 
 const NL_CHAPTER_DEFS: ChapterDef[] = [
