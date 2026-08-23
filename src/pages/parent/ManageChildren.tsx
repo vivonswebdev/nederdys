@@ -120,8 +120,8 @@ const ManageChildren = () => {
                       className="flex-1 min-w-[8rem] border border-border bg-background rounded-xl p-2.5"
                     >
                       {SCHOOL_LEVELS.map((l) => (
-                        <option key={l} value={l}>
-                          {l.toUpperCase()}
+                        <option key={l.id} value={l.id}>
+                          {l.label}
                         </option>
                       ))}
                     </select>
@@ -131,9 +131,11 @@ const ManageChildren = () => {
                       aria-label="Sexe"
                       className="flex-1 min-w-[8rem] border border-border bg-background rounded-xl p-2.5"
                     >
-                      <option value="girl">👧 Fille</option>
-                      <option value="boy">👦 Garçon</option>
-                      <option value="other">🌈 Autre</option>
+                      {GENDER_OPTIONS.map((g) => (
+                        <option key={g.id} value={g.id}>
+                          {g.label}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
