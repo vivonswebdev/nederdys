@@ -164,7 +164,7 @@ const ChildDashboard = () => {
               title="Mathématiques"
               icon="🔢"
               colorClass="bg-kids-orange"
-              available={false}
+              available
               gameCount={gamesBySubject("math").length}
               childId={child.id}
               index={2}
