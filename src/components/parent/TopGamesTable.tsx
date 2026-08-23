@@ -125,6 +125,13 @@ export const TopGamesTable = ({ stats, childId }: { stats: GameStat[]; childId: 
           )}
         </>
       )}
+
+      <GameDetailDrawer
+        gameType={selectedGameType}
+        childId={childId}
+        isOpen={!!selectedGameType}
+        onClose={() => setSelectedGameType(null)}
+      />
     </div>
   );
 };
