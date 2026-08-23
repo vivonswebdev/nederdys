@@ -36,7 +36,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export const ProgressChart = ({ data }: { data: DailyPoint[] }) => {
   const [hidden, setHidden] = useState<string[]>([]);
   const hasData = data.some((d) => d.total > 0);
-  const activeDays = data.filter((d) => d.total > 0).length;
 
   const toggle = (key: string) =>
     setHidden((h) => (h.includes(key) ? h.filter((k) => k !== key) : [...h, key]));
@@ -61,9 +60,9 @@ export const ProgressChart = ({ data }: { data: DailyPoint[] }) => {
         </div>
       </div>
 
-      {!hasData || activeDays < 3 ? (
+      {!hasData ? (
         <p className="text-sm text-muted-foreground py-16 text-center">
-          Pas assez de données pour afficher un graphique fiable (minimum 3 journées de jeu).
+          Aucune partie enregistrée sur cette période.
         </p>
       ) : (
         <div className="h-64 w-full">
