@@ -35,6 +35,10 @@ import TirGame from "./pages/TirGame";
 import MotTroueGame from "./pages/MotTroueGame";
 import ChronoBilingueGame from "./pages/ChronoBilingueGame";
 import MoutonNoirGame from "./pages/MoutonNoirGame";
+import ProfileSelect from "./pages/ProfileSelect";
+import ChildDashboard from "./pages/ChildDashboard";
+import SubjectPage from "./pages/SubjectPage";
+import { ChildProvider } from "@/contexts/ChildContext";
 
 const queryClient = new QueryClient();
 
