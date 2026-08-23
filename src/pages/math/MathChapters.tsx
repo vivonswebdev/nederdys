@@ -26,7 +26,7 @@ const MathChapters = () => {
   const renderCard = (
     chapter: (typeof CHAPTERS)[number],
     i: number,
-    variant: "bases" | "ce2" | "stretch"
+    variant: "bases" | "ce2" | "stretch" | "avance"
   ) => (
     <motion.div
       key={chapter.id}
