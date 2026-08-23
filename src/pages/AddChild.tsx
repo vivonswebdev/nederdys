@@ -27,7 +27,7 @@ const AddChild = () => {
     if (!user) return;
     setLoading(true);
     try {
-      const { error } = await supabase.from("children").insert({ user_id: user.id, first_name: name, age, avatar_emoji: avatar, dys_level: dysLevel, gender });
+      const { error } = await supabase.from("children").insert({ user_id: user.id, first_name: name, age, avatar_emoji: avatar, dys_level: dysLevel, gender, school_level: schoolLevel });
       if (error) throw error;
       toast.success(`${name} ${t("addChild.success")}`);
       navigate("/");
