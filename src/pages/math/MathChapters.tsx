@@ -1,16 +1,27 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
-import { CHAPTERS } from "@/lib/chapters";
+import { CHAPTERS, ChapterGrade } from "@/lib/chapters";
+
+const GRADE_TABS: { id: "3eprimaire" | ChapterGrade; label: string; emoji: string }[] = [
+  { id: "3eprimaire", label: "3e", emoji: "📗" },
+  { id: "4eprimaire", label: "4e", emoji: "📙" },
+  { id: "5eprimaire", label: "5e", emoji: "📕" },
+  { id: "6eprimaire", label: "6e", emoji: "📒" },
+];
 
 const MathChapters = () => {
   const { id } = useParams<{ id: string }>();
   const childId = id ?? "";
+  const [selectedGrade, setSelectedGrade] = useState<"3eprimaire" | ChapterGrade>("3eprimaire");
 
   const bases = CHAPTERS.filter((c) => c.section === "bases");
   const ce2 = CHAPTERS.filter((c) => c.section === "ce2");
   const stretch = CHAPTERS.filter((c) => c.section === "stretch");
+  const advanced = CHAPTERS.filter((c) => c.section === "avance" && c.grade === selectedGrade);
+
 
   const renderCard = (
     chapter: (typeof CHAPTERS)[number],
