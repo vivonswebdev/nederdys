@@ -14,6 +14,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      achievements: {
+        Row: {
+          badge_icon: string
+          badge_name: string
+          category: string
+          child_id: string
+          id: string
+          unlocked_at: string
+          user_id: string
+        }
+        Insert: {
+          badge_icon?: string
+          badge_name: string
+          category?: string
+          child_id: string
+          id?: string
+          unlocked_at?: string
+          user_id: string
+        }
+        Update: {
+          badge_icon?: string
+          badge_name?: string
+          category?: string
+          child_id?: string
+          id?: string
+          unlocked_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "achievements_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       child_coins: {
         Row: {
           child_id: string
@@ -103,6 +141,7 @@ export type Database = {
           font_preference: string
           high_contrast: boolean
           id: string
+          school_level: string
           updated_at: string
           user_id: string
         }
@@ -115,6 +154,7 @@ export type Database = {
           font_preference?: string
           high_contrast?: boolean
           id?: string
+          school_level?: string
           updated_at?: string
           user_id: string
         }
@@ -127,10 +167,46 @@ export type Database = {
           font_preference?: string
           high_contrast?: boolean
           id?: string
+          school_level?: string
           updated_at?: string
           user_id?: string
         }
         Relationships: []
+      }
+      daily_streaks: {
+        Row: {
+          child_id: string
+          created_at: string
+          date: string
+          id: string
+          user_id: string
+          xp_earned: number
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          date?: string
+          id?: string
+          user_id: string
+          xp_earned?: number
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          date?: string
+          id?: string
+          user_id?: string
+          xp_earned?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_streaks_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       game_difficulties: {
         Row: {
@@ -184,6 +260,7 @@ export type Database = {
           id: string
           max_score: number
           score: number
+          subject: string
           user_id: string
         }
         Insert: {
@@ -196,6 +273,7 @@ export type Database = {
           id?: string
           max_score?: number
           score?: number
+          subject?: string
           user_id: string
         }
         Update: {
@@ -208,6 +286,7 @@ export type Database = {
           id?: string
           max_score?: number
           score?: number
+          subject?: string
           user_id?: string
         }
         Relationships: [
