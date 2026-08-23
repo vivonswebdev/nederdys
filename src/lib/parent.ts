@@ -214,6 +214,7 @@ export interface ChildSettings {
   sound_effects: boolean;
   reduced_motion: boolean;
   colorblind_mode: boolean;
+  dark_mode: boolean;
 }
 
 export const DEFAULT_CHILD_SETTINGS: ChildSettings = {
@@ -222,6 +223,7 @@ export const DEFAULT_CHILD_SETTINGS: ChildSettings = {
   sound_effects: true,
   reduced_motion: false,
   colorblind_mode: false,
+  dark_mode: false,
 };
 
 export const getChildSettings = async (childId: string) => {

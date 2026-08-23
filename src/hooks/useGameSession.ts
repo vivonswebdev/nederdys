@@ -13,7 +13,8 @@ import {
   addCoins,
   Difficulty,
 } from "@/lib/database";
-import { recordDailyActivity, unlockBadge } from "@/lib/gamification";
+import { recordDailyActivity } from "@/lib/gamification";
+import { checkAndUnlockBadges } from "@/lib/badges";
 import { progressDailyChallenge } from "@/lib/challenges";
 
 export const useGameSession = (gameType: string) => {
@@ -92,13 +93,7 @@ export const useGameSession = (gameType: string) => {
 
       // Série quotidienne & badges
       await recordDailyActivity(user.id, activeChild.id, xp);
-      await unlockBadge(user.id, activeChild.id, "first_steps");
-      if (maxScore > 0 && errorsCount === 0 && newDiff === "hard") {
-        await unlockBadge(user.id, activeChild.id, "perfectionist");
-      }
-      if (durationSeconds >= 1800) {
-        await unlockBadge(user.id, activeChild.id, "marathon");
-      }
+      await checkAndUnlockBadges(user.id, activeChild.id);
 
       // Défi du jour
       const challenge = await progressDailyChallenge(user.id, activeChild.id, {

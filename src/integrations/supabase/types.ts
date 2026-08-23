@@ -252,6 +252,7 @@ export type Database = {
           child_id: string
           colorblind_mode: boolean
           created_at: string
+          dark_mode: boolean
           dyslexic_font: boolean
           id: string
           reduced_motion: boolean
@@ -264,6 +265,7 @@ export type Database = {
           child_id: string
           colorblind_mode?: boolean
           created_at?: string
+          dark_mode?: boolean
           dyslexic_font?: boolean
           id?: string
           reduced_motion?: boolean
@@ -276,6 +278,7 @@ export type Database = {
           child_id?: string
           colorblind_mode?: boolean
           created_at?: string
+          dark_mode?: boolean
           dyslexic_font?: boolean
           id?: string
           reduced_motion?: boolean

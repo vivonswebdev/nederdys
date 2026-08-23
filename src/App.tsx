@@ -42,6 +42,10 @@ import ChildDashboard from "./pages/ChildDashboard";
 import ChildHome from "./pages/ChildHome";
 import AvatarShop from "./pages/AvatarShop";
 import AvatarEditor from "./pages/AvatarEditor";
+import BadgesPage from "./pages/child/BadgesPage";
+import ChallengePage from "./pages/child/ChallengePage";
+import ChildSettingsPage from "./pages/child/ChildSettingsPage";
+import ManageChildren from "./pages/parent/ManageChildren";
 import SubjectPage from "./pages/SubjectPage";
 import ParentGate from "./pages/ParentGate";
 import ParentDashboard from "./pages/ParentDashboard";
@@ -70,6 +74,9 @@ const App = () => (
               <Route path="/child/:id" element={<ChildHome />} />
               <Route path="/child/:id/boutique" element={<AvatarShop />} />
               <Route path="/child/:id/avatar" element={<AvatarEditor />} />
+              <Route path="/child/:id/badges" element={<BadgesPage />} />
+              <Route path="/child/:id/defi" element={<ChallengePage />} />
+              <Route path="/child/:id/settings" element={<ChildSettingsPage />} />
               <Route path="/child/:id/:subject" element={<SubjectPage />} />
               <Route path="/matiere/:subject" element={<SubjectPage />} />
               <Route path="/jeu/syllabes" element={<SyllabesGame />} />
@@ -79,6 +86,7 @@ const App = () => (
               <Route path="/parent" element={<ParentGate />} />
               <Route path="/parent/dashboard" element={<ParentDashboard />} />
               <Route path="/parent/settings" element={<ParentSettings />} />
+              <Route path="/parent/children" element={<ManageChildren />} />
               <Route path="/jeu/phonemes" element={<PhonemesGame />} />
               <Route path="/jeu/dictee" element={<DicteeGame />} />
               <Route path="/jeu/lettres" element={<LettresGame />} />
