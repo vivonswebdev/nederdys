@@ -16,6 +16,9 @@ import { ChildLevelBadge } from "./LevelBadge";
 import { SubjectCard } from "./SubjectCard";
 import { DailyChallenge } from "./DailyChallenge";
 import { BadgeShowcase } from "./BadgeShowcase";
+import { AvatarRenderer } from "./AvatarRenderer";
+import { getAvatarConfig } from "@/lib/avatar";
+import { getChildCoins } from "@/lib/database";
 
 const ChildDashboard = () => {
   const { id } = useParams<{ id: string }>();
@@ -51,6 +54,16 @@ const ChildDashboard = () => {
     queryFn: () => getStreakDays(child!.id),
     enabled: !!child,
   });
+  const { data: avatarConfig } = useQuery({
+    queryKey: ["avatarConfig", child?.id],
+    queryFn: () => getAvatarConfig(child!.id),
+    enabled: !!child,
+  });
+  const { data: coinsRow } = useQuery({
+    queryKey: ["childCoins", child?.id],
+    queryFn: () => getChildCoins(child!.id),
+    enabled: !!child,
+  });
 
   if (!child) return <div className="min-h-screen bg-background" />;
 
@@ -65,10 +78,10 @@ const ChildDashboard = () => {
         <div className="container max-w-4xl px-4 py-3 flex flex-wrap items-center gap-4">
           <button
             onClick={() => setAboutOpen(true)}
-            className="text-4xl hover:scale-110 transition-transform"
+            className="hover:scale-110 transition-transform"
             aria-label="À propos de moi"
           >
-            {child.avatar_emoji}
+            <AvatarRenderer seed={child.first_name} options={avatarConfig ?? {}} size="sm" />
           </button>
           <div className="flex-1 min-w-[12rem]">
             <div className="flex items-center gap-2 flex-wrap">
@@ -94,6 +107,9 @@ const ChildDashboard = () => {
             )}
           </div>
           <StreakCounter streakDays={streak} />
+          <div className="flex items-center gap-2 bg-kids-orange/15 text-kids-orange rounded-full px-3 py-1.5 font-bold tabular-nums text-sm">
+            💰 {coinsRow?.coins ?? 0}
+          </div>
           <ProgressRing
             currentXp={info.current}
             maxXp={info.span}
@@ -105,6 +121,21 @@ const ChildDashboard = () => {
       </header>
 
       <main className="container max-w-4xl px-4 py-8 space-y-10">
+        <div className="flex flex-wrap gap-3">
+          <button
+            onClick={() => navigate(`/child/${child.id}/avatar`)}
+            className="flex-1 min-w-[10rem] bg-card border border-border rounded-2xl px-4 py-3 font-bold text-foreground text-left hover:border-primary transition-colors"
+          >
+            🎨 Mon avatar
+          </button>
+          <button
+            onClick={() => navigate(`/child/${child.id}/boutique`)}
+            className="flex-1 min-w-[10rem] bg-card border border-border rounded-2xl px-4 py-3 font-bold text-foreground text-left hover:border-primary transition-colors"
+          >
+            🛍️ Boutique d'avatar
+          </button>
+        </div>
+
         <section>
           <h2 className="text-xl font-bold text-foreground mb-4">Choisis ta matière</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">

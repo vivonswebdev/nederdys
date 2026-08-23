@@ -52,6 +52,122 @@ export type Database = {
           },
         ]
       }
+      avatar_config: {
+        Row: {
+          accessories: string | null
+          background_color: string | null
+          child_id: string
+          clothing_color: string | null
+          hair_color: string | null
+          id: string
+          seed: string | null
+          updated_at: string
+        }
+        Insert: {
+          accessories?: string | null
+          background_color?: string | null
+          child_id: string
+          clothing_color?: string | null
+          hair_color?: string | null
+          id?: string
+          seed?: string | null
+          updated_at?: string
+        }
+        Update: {
+          accessories?: string | null
+          background_color?: string | null
+          child_id?: string
+          clothing_color?: string | null
+          hair_color?: string | null
+          id?: string
+          seed?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "avatar_config_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      avatar_items: {
+        Row: {
+          category: string
+          created_at: string
+          dicebear_option: string
+          dicebear_value: string
+          id: string
+          is_premium: boolean
+          name: string
+          name_nl: string | null
+          price: number
+          rarity: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          dicebear_option: string
+          dicebear_value: string
+          id?: string
+          is_premium?: boolean
+          name: string
+          name_nl?: string | null
+          price?: number
+          rarity?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          dicebear_option?: string
+          dicebear_value?: string
+          id?: string
+          is_premium?: boolean
+          name?: string
+          name_nl?: string | null
+          price?: number
+          rarity?: string
+        }
+        Relationships: []
+      }
+      avatar_owned_items: {
+        Row: {
+          acquired_at: string
+          child_id: string
+          id: string
+          item_id: string
+        }
+        Insert: {
+          acquired_at?: string
+          child_id: string
+          id?: string
+          item_id: string
+        }
+        Update: {
+          acquired_at?: string
+          child_id?: string
+          id?: string
+          item_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "avatar_owned_items_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "avatar_owned_items_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "avatar_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       child_coins: {
         Row: {
           child_id: string
@@ -530,6 +646,10 @@ export type Database = {
     }
     Functions: {
       has_parent_pin: { Args: never; Returns: boolean }
+      purchase_avatar_item: {
+        Args: { p_child_id: string; p_item_id: string }
+        Returns: Json
+      }
       set_parent_pin: {
         Args: { new_pin: string; old_pin?: string }
         Returns: Json
