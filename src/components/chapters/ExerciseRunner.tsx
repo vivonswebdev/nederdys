@@ -42,7 +42,7 @@ function playNl(ex: Exercise) {
     return;
   }
   if (typeof window === "undefined" || !window.speechSynthesis) return;
-  const text = [ex.question, ex.type === "qcm" ? String(ex.answer) : ""].join(" ");
+  const text = ex.question;
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = "nl-BE";
   utter.rate = 0.85;
