@@ -17,7 +17,8 @@ const AddChild = () => {
   const [age, setAge] = useState(8);
   const [avatar, setAvatar] = useState("🐸");
   const [dysLevel, setDysLevel] = useState("moderate");
-  const [gender, setGender] = useState<"girl" | "boy" | "other">("girl");
+  const [gender, setGender] = useState<"girl" | "boy">("girl");
+  const [schoolLevel, setSchoolLevel] = useState<string>(DEFAULT_SCHOOL_LEVEL);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
