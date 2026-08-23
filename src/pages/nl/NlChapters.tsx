@@ -1,0 +1,53 @@
+import { motion } from "framer-motion";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import { Navbar } from "@/components/Navbar";
+import { NL_CHAPTERS } from "@/lib/chapters";
+
+const NlChapters = () => {
+  const { id } = useParams<{ id: string }>();
+  const childId = id ?? "";
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main className="container max-w-5xl px-4 py-8">
+        <Link
+          to={`/child/${childId}/games`}
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
+        >
+          <ArrowLeft className="w-4 h-4" /> Retour aux jeux
+        </Link>
+
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-foreground">🇳🇱 Exercices de Néerlandais</h1>
+          <p className="text-muted-foreground font-dyslexic mt-1">Choisis ton chapitre :</p>
+        </header>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {NL_CHAPTERS.map((chapter, i) => (
+            <motion.div
+              key={chapter.id}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+            >
+              <Link to={`/child/${childId}/nl/chapitre/${chapter.id}`}>
+                <div className="bg-kids-blue/30 border-4 border-kids-blue rounded-3xl p-6 kids-shadow-card hover:kids-shadow-hover transition-shadow h-full">
+                  <span className="text-5xl block mb-3">{chapter.emoji}</span>
+                  <h2 className="text-xl font-bold text-foreground">{chapter.name}</h2>
+                  <p className="font-dyslexic text-muted-foreground">{chapter.description}</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    {chapter.exercises.length} exercices · 3 niveaux
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default NlChapters;
