@@ -14,10 +14,11 @@ const SUBJECT_BADGE: Record<string, { label: string; className: string }> = {
 
 const PAGE_SIZE = 5;
 
-export const TopGamesTable = ({ stats }: { stats: GameStat[] }) => {
+export const TopGamesTable = ({ stats, childId }: { stats: GameStat[]; childId: string }) => {
   const { t } = useLanguage();
   const [sort, setSort] = useState<SortKey>("played");
   const [page, setPage] = useState(0);
+  const [selectedGameType, setSelectedGameType] = useState<string | null>(null);
 
   const sorted = useMemo(() => {
     const copy = [...stats];
