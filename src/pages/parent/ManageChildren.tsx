@@ -17,14 +17,20 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-const SCHOOL_LEVELS = ["cp", "ce1", "ce2", "cm1", "cm2"];
+import {
+  SCHOOL_LEVELS,
+  DEFAULT_SCHOOL_LEVEL,
+  GENDER_OPTIONS,
+  normalizeSchoolLevel,
+  schoolLevelLabel,
+} from "@/lib/schoolLevels";
 
 const ManageChildren = () => {
   const { children: kids } = useChild();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState({ first_name: "", age: 8, school_level: "ce2", gender: "other" });
+  const [form, setForm] = useState({ first_name: "", age: 8, school_level: DEFAULT_SCHOOL_LEVEL, gender: "girl" });
   const [pendingDelete, setPendingDelete] = useState<{ id: string; name: string } | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -114,8 +120,8 @@ const ManageChildren = () => {
                       className="flex-1 min-w-[8rem] border border-border bg-background rounded-xl p-2.5"
                     >
                       {SCHOOL_LEVELS.map((l) => (
-                        <option key={l} value={l}>
-                          {l.toUpperCase()}
+                        <option key={l.id} value={l.id}>
+                          {l.label}
                         </option>
                       ))}
                     </select>
@@ -125,9 +131,11 @@ const ManageChildren = () => {
                       aria-label="Sexe"
                       className="flex-1 min-w-[8rem] border border-border bg-background rounded-xl p-2.5"
                     >
-                      <option value="girl">👧 Fille</option>
-                      <option value="boy">👦 Garçon</option>
-                      <option value="other">🌈 Autre</option>
+                      {GENDER_OPTIONS.map((g) => (
+                        <option key={g.id} value={g.id}>
+                          {g.label}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
@@ -154,7 +162,7 @@ const ManageChildren = () => {
                     <div>
                       <p className="font-bold text-foreground">{child.first_name}</p>
                       <p className="text-sm text-muted-foreground">
-                        {child.age} ans · {String(child.school_level).toUpperCase()}
+                        {child.age} ans · {schoolLevelLabel(String(child.school_level))}
                       </p>
                     </div>
                   </div>
@@ -165,8 +173,8 @@ const ManageChildren = () => {
                         setForm({
                           first_name: child.first_name,
                           age: child.age,
-                          school_level: String(child.school_level),
-                          gender: String(child.gender ?? "other"),
+                          school_level: normalizeSchoolLevel(String(child.school_level)),
+                          gender: String(child.gender ?? "girl") === "boy" ? "boy" : "girl",
                         });
 
                       }}

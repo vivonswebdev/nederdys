@@ -32,6 +32,7 @@ import {
   upsertChildSettings,
 } from "@/lib/parent";
 import { setPin as savePin } from "@/lib/pin";
+import { SCHOOL_LEVELS, normalizeSchoolLevel, schoolLevelLabel } from "@/lib/schoolLevels";
 
 const TOGGLES: { key: keyof ChildSettings; label: string; hint: string }[] = [
   { key: "timer_enabled", label: "Chrono activé", hint: "Affiche un compte à rebours dans les jeux rapides" },
@@ -139,7 +140,7 @@ export const SettingsPanel = () => {
     setEditing(c.id);
     setEditName(c.first_name);
     setEditEmoji(c.avatar_emoji);
-    setEditLevel(c.school_level ?? "ce2");
+    setEditLevel(normalizeSchoolLevel(c.school_level));
   };
 
   const saveEdit = async (id: string) => {
@@ -227,13 +228,18 @@ export const SettingsPanel = () => {
                     className="w-40"
                     aria-label="Prénom"
                   />
-                  <Input
+                  <select
                     value={editLevel}
                     onChange={(e) => setEditLevel(e.target.value)}
-                    className="w-28"
+                    className="h-10 rounded-md border border-input bg-background px-3 text-sm"
                     aria-label="Niveau scolaire"
-                    placeholder="ce2"
-                  />
+                  >
+                    {SCHOOL_LEVELS.map((l) => (
+                      <option key={l.id} value={l.id}>
+                        {l.label}
+                      </option>
+                    ))}
+                  </select>
                   <Button size="sm" onClick={() => saveEdit(c.id)}>
                     Enregistrer
                   </Button>
@@ -245,7 +251,7 @@ export const SettingsPanel = () => {
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="text-2xl">{c.avatar_emoji}</span>
                   <span className="font-medium text-foreground">{c.first_name}</span>
-                  <span className="text-xs text-muted-foreground uppercase">{c.school_level}</span>
+                  <span className="text-xs text-muted-foreground">{schoolLevelLabel(c.school_level)}</span>
                   <div className="ml-auto flex gap-2">
                     <Button size="sm" variant="outline" className="gap-1.5" onClick={() => startEdit(c)}>
                       <Pencil className="w-3.5 h-3.5" /> Modifier
