@@ -12,13 +12,8 @@ export const Navbar = () => {
   const { user, signOut } = useAuth();
   const { lang, setLang, t } = useLanguage();
 
-  const { data: children = [] } = useQuery({
-    queryKey: ["children", user?.id],
-    queryFn: () => getChildren(user!.id),
-    enabled: !!user,
-  });
+  const { activeChild } = useChild();
 
-  const activeChild = children[0];
 
   const { data: childLevel } = useQuery({
     queryKey: ["childLevel", activeChild?.id],
