@@ -82,7 +82,11 @@ export const TopGamesTable = ({ stats, childId }: { stats: GameStat[]; childId: 
                 {rows.map((g) => {
                   const badge = SUBJECT_BADGE[g.subject];
                   return (
-                    <tr key={g.gameType} className="border-b border-border/60 last:border-0">
+                    <tr
+                      key={g.gameType}
+                      onClick={() => setSelectedGameType(g.gameType)}
+                      className="border-b border-border/60 last:border-0 cursor-pointer hover:bg-muted/50 transition-colors"
+                    >
                       <td className="py-2.5 pr-3 font-medium text-foreground">
                         {t(gameTitleKey(g.gameType) as never)}
                       </td>
