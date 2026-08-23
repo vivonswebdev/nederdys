@@ -94,7 +94,7 @@ const ParentDashboard = () => {
                 childName={activeChild.first_name}
                 periodLabel={periodLabel}
                 stats={stats}
-                games={games}
+                games={localGames}
                 achievements={achievements}
                 streak={streak}
               />
