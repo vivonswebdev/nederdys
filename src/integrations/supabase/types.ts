@@ -474,6 +474,56 @@ export type Database = {
           },
         ]
       }
+      exercise_mistakes: {
+        Row: {
+          chapter_id: string
+          child_id: string
+          correct_answer: string
+          created_at: string
+          difficulty: number
+          exercise_id: string
+          given_answer: string | null
+          id: string
+          question: string
+          resolved: boolean
+          subject: string
+        }
+        Insert: {
+          chapter_id: string
+          child_id: string
+          correct_answer: string
+          created_at?: string
+          difficulty?: number
+          exercise_id: string
+          given_answer?: string | null
+          id?: string
+          question: string
+          resolved?: boolean
+          subject?: string
+        }
+        Update: {
+          chapter_id?: string
+          child_id?: string
+          correct_answer?: string
+          created_at?: string
+          difficulty?: number
+          exercise_id?: string
+          given_answer?: string | null
+          id?: string
+          question?: string
+          resolved?: boolean
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exercise_mistakes_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       game_difficulties: {
         Row: {
           child_id: string
