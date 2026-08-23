@@ -26,8 +26,8 @@ const MathChapters = () => {
         <div
           className={`relative overflow-hidden border-4 rounded-3xl p-6 kids-shadow-card hover:kids-shadow-hover transition-shadow h-full ${
             variant === "ce2"
-              ? "bg-kids-blue-light border-primary"
-              : "bg-kids-purple-light border-kids-purple"
+              ? "bg-kids-blue/40 border-primary"
+              : "bg-kids-purple/30 border-kids-purple"
           }`}
         >
           {variant === "stretch" && (
@@ -48,7 +48,7 @@ const MathChapters = () => {
       <Navbar />
       <main className="container max-w-5xl px-4 py-8">
         <Link
-          to={`/child/${childId}/matiere/math`}
+          to={`/child/${childId}/math`}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
         >
           <ArrowLeft className="w-4 h-4" /> Retour

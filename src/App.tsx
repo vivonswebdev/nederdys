@@ -8,6 +8,9 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import MurDesNombres from "./pages/math/MurDesNombres";
+import MathChapters from "./pages/math/MathChapters";
+import ChapterLevelSelect from "./pages/math/ChapterLevelSelect";
+import ChapterSession from "./pages/math/ChapterSession";
 import ChronoCalcul from "./pages/math/ChronoCalcul";
 import NombreTroue from "./pages/math/NombreTroue";
 import OreilleDesNombres from "./pages/math/OreilleDesNombres";
@@ -111,6 +114,9 @@ const App = () => (
               <Route path="/jeu/mot-troue" element={<MotTroueGame />} />
               <Route path="/jeu/chrono" element={<ChronoBilingueGame />} />
               <Route path="/jeu/mouton" element={<MoutonNoirGame />} />
+              <Route path="/child/:id/math/chapitres" element={<MathChapters />} />
+              <Route path="/child/:id/math/chapitre/:chapterId" element={<ChapterLevelSelect />} />
+              <Route path="/child/:id/math/chapitre/:chapterId/:level" element={<ChapterSession />} />
               <Route path="/child/:id/math/mur-des-nombres" element={<MurDesNombres />} />
               <Route path="/child/:id/math/mur-des-nombres/:level" element={<MurDesNombres />} />
               <Route path="/child/:id/math/chrono-calcul" element={<ChronoCalcul />} />
