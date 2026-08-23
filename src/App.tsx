@@ -20,6 +20,7 @@ import DroiteGraduee from "./pages/math/DroiteGraduee";
 import BatailleNombres from "./pages/math/BatailleNombres";
 import Tangram from "./pages/math/Tangram";
 import MathChapters from "./pages/math/MathChapters";
+import PlacementTest from "./pages/PlacementTest";
 import ChapterLevelSelect from "./pages/math/ChapterLevelSelect";
 import ChapterSession from "./pages/math/ChapterSession";
 import ChronoCalcul from "./pages/math/ChronoCalcul";
@@ -142,6 +143,7 @@ const App = () => (
               <Route path="/jeu/mot-troue" element={<MotTroueGame />} />
               <Route path="/jeu/chrono" element={<ChronoBilingueGame />} />
               <Route path="/jeu/mouton" element={<MoutonNoirGame />} />
+              <Route path="/child/:id/test-placement/:subject" element={<PlacementTest />} />
               <Route path="/child/:id/math/chapitres" element={<MathChapters />} />
               <Route path="/child/:id/math/chapitre/:chapterId" element={<ChapterLevelSelect />} />
               <Route path="/child/:id/math/chapitre/:chapterId/:level" element={<ChapterSession />} />
