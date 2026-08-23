@@ -13,6 +13,7 @@ import {
   fetchBestScores,
   fetchUnlockedLevel,
   getChapter,
+  chaptersListRoute,
 } from "@/lib/chapters";
 
 const REQUIREMENT: Record<Difficulty, string | null> = {
@@ -26,6 +27,7 @@ const ChapterLevelSelect = () => {
   const navigate = useNavigate();
   const childId = id ?? "";
   const chapter = getChapter(chapterId);
+  const listRoute = chaptersListRoute(childId, chapter?.subject ?? "math");
 
   const [unlockedLevel, setUnlockedLevel] = useState<Difficulty>(1);
   const [bestScores, setBestScores] = useState<Record<Difficulty, number>>({ 1: 0, 2: 0, 3: 0 });
