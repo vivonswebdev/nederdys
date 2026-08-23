@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Navbar } from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SCHOOL_LEVELS, DEFAULT_SCHOOL_LEVEL, GENDER_OPTIONS } from "@/lib/schoolLevels";
 
 const AVATARS = ["🐸", "🦁", "🐯", "🦊", "🐻", "🐼", "🐰", "🦒"];
 
