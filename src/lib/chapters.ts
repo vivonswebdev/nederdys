@@ -60,7 +60,28 @@ const MATH_CHAPTERS: ChapterDef[] = [
   },
 ];
 
-export const getChapter = (id?: string) => CHAPTERS.find((c) => c.id === id);
+const NL_CHAPTER_DEFS: ChapterDef[] = [
+  { id: "kleuren-nl", name: "Couleurs et vêtements", emoji: "🎨", section: "ce2", description: "De kleuren, de kledij", exercises: kleurenExercises },
+  { id: "dieren-nl", name: "Les animaux", emoji: "🐾", section: "ce2", description: "De dieren, de/het", exercises: dierenExercises },
+  { id: "getallen-nl", name: "Nombres 1-20", emoji: "🔢", section: "ce2", description: "Lire et écrire les nombres", exercises: getallenExercises },
+  { id: "familie-nl", name: "La famille", emoji: "👨‍👩‍👧‍👦", section: "ce2", description: "Vocabulaire familial de base", exercises: familieExercises },
+  { id: "zinnen-nl", name: "Phrases simples", emoji: "💬", section: "ce2", description: "Sujet - verbe - complément", exercises: zinnenExercises },
+  { id: "dagen-nl", name: "Jours et heure", emoji: "📅", section: "ce2", description: "Les jours, dire l'heure", exercises: dagenExercises },
+];
+
+export const CHAPTERS: Chapter[] = MATH_CHAPTERS.map((c) => ({ ...c, subject: "math" as const }));
+export const NL_CHAPTERS: Chapter[] = NL_CHAPTER_DEFS.map((c) => ({ ...c, subject: "nl" as const }));
+export const ALL_CHAPTERS: Chapter[] = [...CHAPTERS, ...NL_CHAPTERS];
+
+export const chaptersBySubject = (subject: ChapterSubject) =>
+  ALL_CHAPTERS.filter((c) => c.subject === subject);
+
+/** Route de la liste des chapitres d'une matière. */
+export const chaptersListRoute = (childId: string, subject: ChapterSubject) =>
+  subject === "math" ? `/child/${childId}/math/chapitres` : `/child/${childId}/${subject}/exercices`;
+
+export const getChapter = (id?: string) => ALL_CHAPTERS.find((c) => c.id === id);
+
 
 export const LEVEL_LABEL: Record<Difficulty, string> = { 1: "Facile", 2: "Moyen", 3: "Difficile" };
 export const LEVEL_EMOJI: Record<Difficulty, string> = { 1: "🌱", 2: "🌿", 3: "🌳" };
