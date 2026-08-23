@@ -38,6 +38,8 @@ import MoutonNoirGame from "./pages/MoutonNoirGame";
 import ProfileSelect from "./pages/ProfileSelect";
 import ChildDashboard from "./pages/ChildDashboard";
 import ChildHome from "./pages/ChildHome";
+import AvatarShop from "./pages/AvatarShop";
+import AvatarEditor from "./pages/AvatarEditor";
 import SubjectPage from "./pages/SubjectPage";
 import ParentGate from "./pages/ParentGate";
 import ParentDashboard from "./pages/ParentDashboard";
