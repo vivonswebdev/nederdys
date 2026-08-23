@@ -115,7 +115,7 @@ const ChildDashboard = () => {
             className="hover:scale-110 transition-transform"
             aria-label="À propos de moi"
           >
-            <AvatarRenderer seed={child.first_name} options={avatarConfig ?? {}} size="sm" />
+            <AvatarRenderer seed={child.first_name} gender={child.gender} options={avatarConfig ?? {}} size="sm" />
           </button>
           <div className="flex-1 min-w-[12rem]">
             <div className="flex items-center gap-2 flex-wrap">

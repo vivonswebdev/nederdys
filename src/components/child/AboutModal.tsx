@@ -44,7 +44,7 @@ export const AboutModal = ({
         </DialogHeader>
 
         <div className="flex flex-col items-center gap-3">
-          <AvatarRenderer seed={child.first_name} options={avatarConfig ?? {}} size="lg" animated />
+          <AvatarRenderer seed={child.first_name} gender={child.gender} options={avatarConfig ?? {}} size="lg" animated />
           <p className="text-2xl font-bold text-foreground">{child.first_name}</p>
           <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="rounded-full bg-primary/15 text-primary font-bold text-sm px-3 py-1">
