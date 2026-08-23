@@ -1,10 +1,11 @@
 import { forwardRef } from "react";
 import { motion } from "framer-motion";
-import { getAvatarUrl, AvatarConfig } from "@/lib/avatar";
+import { getAvatarUrl, mergeAvatarOptions, AvatarConfig, Gender } from "@/lib/avatar";
 
 interface Props {
   seed: string;
   options?: AvatarConfig;
+  gender?: Gender | string | null;
   size?: "xs" | "sm" | "md" | "lg";
   animated?: boolean;
   className?: string;
@@ -18,10 +19,11 @@ const sizeClasses = {
 };
 
 export const AvatarRenderer = forwardRef<HTMLDivElement, Props>(function AvatarRenderer(
-  { seed, options = {}, size = "md", animated = false, className = "" },
+  { seed, options = {}, gender, size = "md", animated = false, className = "" },
   ref
 ) {
-  const avatarUrl = getAvatarUrl({ seed, ...options });
+  const resolved = gender ? mergeAvatarOptions(gender as Gender, options) : options;
+  const avatarUrl = getAvatarUrl({ seed, ...resolved });
 
   return (
     <motion.div
