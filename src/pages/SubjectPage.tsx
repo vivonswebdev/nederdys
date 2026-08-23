@@ -7,11 +7,11 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { SUBJECTS, gamesBySubject, Subject } from "@/lib/games";
 
 const SubjectPage = () => {
-  const { subject } = useParams<{ subject: string }>();
+  const { subject, id } = useParams<{ subject: string; id?: string }>();
   const { t } = useLanguage();
 
   const meta = SUBJECTS.find((s) => s.id === subject);
-  if (!meta) return <Navigate to="/enfant" replace />;
+  if (!meta) return <Navigate to={id ? `/child/${id}` : "/enfant"} replace />;
 
   const games = gamesBySubject(meta.id as Subject).map((g) => ({
     id: g.id,
@@ -28,7 +28,7 @@ const SubjectPage = () => {
       <Navbar />
       <main className="container max-w-5xl px-4 py-8">
         <Link
-          to="/enfant"
+          to={id ? `/child/${id}` : "/enfant"}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
         >
           <ArrowLeft className="w-4 h-4" /> {t("subject.back")}
