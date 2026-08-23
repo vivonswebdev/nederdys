@@ -53,10 +53,10 @@ export const useChildSettings = (childId?: string) => {
       if (!user || !childId) return;
       const next = { ...prefs, [key]: !prefs[key] };
       applyChildPrefs(next);
-      queryClient.setQueryData(["childSettings", childId], (old: unknown) => ({
-        ...(old ?? {}),
-        ...next,
-      }));
+      queryClient.setQueryData(
+        ["childSettings", childId],
+        (old: Record<string, unknown> | null | undefined) => ({ ...(old ?? {}), ...next })
+      );
       await upsertChildSettings(user.id, childId, { [key]: next[key] } as never);
       queryClient.invalidateQueries({ queryKey: ["childSettings", childId] });
     },
