@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Settings, LogOut, ArrowLeft } from "lucide-react";
+import { LayoutDashboard, Settings, Users, LogOut, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useChild } from "@/contexts/ChildContext";
@@ -43,6 +43,7 @@ export const ParentShell = ({ title, children }: Props) => {
 
   const navItems = [
     { to: "/parent/dashboard", label: "Vue d'ensemble", icon: LayoutDashboard },
+    { to: "/parent/children", label: "Enfants", icon: Users },
     { to: "/parent/settings", label: "Paramètres", icon: Settings },
   ];
 
