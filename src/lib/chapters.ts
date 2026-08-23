@@ -128,7 +128,24 @@ const MATH_CHAPTERS: ChapterDef[] = [
   { id: "problemes-esprit-critique", name: "Problèmes malins", emoji: "🧐", section: "stretch", exercises: problemesEspritCritiqueExercises },
   { id: "calendrier", name: "Calendrier", emoji: "📅", section: "ce2", exercises: calendrierExercises },
   { id: "tableaux-double-entree", name: "Tableaux à double entrée", emoji: "📋", section: "ce2", exercises: tableauxDoubleEntreeExercises },
+
+  // === NOUVEAUX CHAPITRES 4e-5e-6e PRIMAIRE (ajoutés à la suite) ===
+  { id: "fractions-4eprimaire", name: "Fractions (4e)", emoji: "🍕", section: "avance", grade: "4eprimaire", exercises: fractions4eExercises },
+  { id: "grands-nombres-4eprimaire", name: "Grands nombres (4e)", emoji: "🔢", section: "avance", grade: "4eprimaire", exercises: grandsNombres4eExercises },
+  { id: "aires-perimetres-4eprimaire", name: "Aires et périmètres (4e)", emoji: "📐", section: "avance", grade: "4eprimaire", exercises: airesPerimetres4eExercises },
+  { id: "problemes-4eprimaire", name: "Problèmes (4e)", emoji: "📝", section: "avance", grade: "4eprimaire", exercises: problemes4eExercises },
+
+  { id: "decimaux-5eprimaire", name: "Nombres décimaux (5e)", emoji: "🔟", section: "avance", grade: "5eprimaire", exercises: decimaux5eExercises },
+  { id: "proportionnalite-5eprimaire", name: "Proportionnalité (5e)", emoji: "📊", section: "avance", grade: "5eprimaire", exercises: proportionnalite5eExercises },
+  { id: "pourcentages-5eprimaire", name: "Pourcentages (5e)", emoji: "💯", section: "avance", grade: "5eprimaire", exercises: pourcentages5eExercises },
+  { id: "conversions-5eprimaire", name: "Conversions (5e)", emoji: "⚖️", section: "avance", grade: "5eprimaire", exercises: conversions5eExercises },
+
+  { id: "nombres-relatifs-6eprimaire", name: "Nombres relatifs (6e)", emoji: "➖", section: "avance", grade: "6eprimaire", exercises: nombresRelatifs6eExercises },
+  { id: "fractions-6eprimaire", name: "Fractions avancées (6e)", emoji: "🍕", section: "avance", grade: "6eprimaire", exercises: fractions6eExercises },
+  { id: "aires-formules-6eprimaire", name: "Aires et formules (6e)", emoji: "📐", section: "avance", grade: "6eprimaire", exercises: airesFormules6eExercises },
+  { id: "proportionnalite-6eprimaire", name: "Proportionnalité (6e)", emoji: "📈", section: "avance", grade: "6eprimaire", exercises: proportionnalite6eExercises },
 ];
+
 
 const NL_CHAPTER_DEFS: ChapterDef[] = [
   { id: "kleuren-nl", name: "Couleurs et vêtements", emoji: "🎨", section: "ce2", description: "De kleuren, de kledij", exercises: kleurenExercises },
