@@ -695,6 +695,17 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_game_detail_stats: {
+        Args: { p_child_id: string; p_game_type: string; p_weeks?: number }
+        Returns: {
+          avg_success_rate: number
+          difficulty: string
+          difficulty_sessions: number
+          difficulty_success_rate: number
+          sessions_count: number
+          week_start: string
+        }[]
+      }
       get_top_games: {
         Args: { p_child_id: string; p_days?: number; p_limit?: number }
         Returns: {
