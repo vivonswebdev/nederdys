@@ -88,10 +88,23 @@ export const useGameSession = (gameType: string) => {
       const newDiff = await updateGameDifficulty(user.id, activeChild.id, gameType, errorRate);
       setDifficulty(newDiff);
 
+      // Série quotidienne & badges
+      await recordDailyActivity(user.id, activeChild.id, xp);
+      await unlockBadge(user.id, activeChild.id, "first_steps");
+      if (maxScore > 0 && errorsCount === 0 && newDiff === "hard") {
+        await unlockBadge(user.id, activeChild.id, "perfectionist");
+      }
+      if (durationSeconds >= 1800) {
+        await unlockBadge(user.id, activeChild.id, "marathon");
+      }
+
       // Invalidate queries
       queryClient.invalidateQueries({ queryKey: ["sessions"] });
       queryClient.invalidateQueries({ queryKey: ["childLevel"] });
       queryClient.invalidateQueries({ queryKey: ["childCoins"] });
+      queryClient.invalidateQueries({ queryKey: ["achievements"] });
+      queryClient.invalidateQueries({ queryKey: ["streaks"] });
+
     },
     [user, activeChild, gameType, queryClient]
   );
