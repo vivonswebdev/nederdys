@@ -17,6 +17,7 @@ const AddChild = () => {
   const [age, setAge] = useState(8);
   const [avatar, setAvatar] = useState("🐸");
   const [dysLevel, setDysLevel] = useState("moderate");
+  const [gender, setGender] = useState<"girl" | "boy" | "other">("girl");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -24,7 +25,7 @@ const AddChild = () => {
     if (!user) return;
     setLoading(true);
     try {
-      const { error } = await supabase.from("children").insert({ user_id: user.id, first_name: name, age, avatar_emoji: avatar, dys_level: dysLevel });
+      const { error } = await supabase.from("children").insert({ user_id: user.id, first_name: name, age, avatar_emoji: avatar, dys_level: dysLevel, gender });
       if (error) throw error;
       toast.success(`${name} ${t("addChild.success")}`);
       navigate("/");
@@ -49,6 +50,29 @@ const AddChild = () => {
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">{t("addChild.age")}</label>
               <input type="number" min={3} max={16} value={age} onChange={(e) => setAge(Number(e.target.value))} className="w-full px-4 py-3 rounded-xl bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary" required />
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-foreground mb-2">Sexe</label>
+              <div className="grid grid-cols-3 gap-2">
+                {([
+                  { id: "girl", label: "👧 Fille" },
+                  { id: "boy", label: "👦 Garçon" },
+                  { id: "other", label: "🌈 Autre" },
+                ] as const).map((g) => (
+                  <button
+                    key={g.id}
+                    type="button"
+                    onClick={() => setGender(g.id)}
+                    className={`py-3 rounded-xl border-2 font-bold text-sm transition-colors ${
+                      gender === g.id
+                        ? "border-primary bg-primary/10 text-primary"
+                        : "border-border bg-muted text-muted-foreground hover:bg-accent"
+                    }`}
+                  >
+                    {g.label}
+                  </button>
+                ))}
+              </div>
             </div>
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">{t("addChild.avatar")}</label>
