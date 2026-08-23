@@ -102,6 +102,7 @@ export type Database = {
           created_at: string
           dicebear_option: string
           dicebear_value: string
+          gender: string
           id: string
           is_premium: boolean
           name: string
@@ -114,6 +115,7 @@ export type Database = {
           created_at?: string
           dicebear_option: string
           dicebear_value: string
+          gender?: string
           id?: string
           is_premium?: boolean
           name: string
@@ -126,6 +128,7 @@ export type Database = {
           created_at?: string
           dicebear_option?: string
           dicebear_value?: string
+          gender?: string
           id?: string
           is_premium?: boolean
           name?: string
@@ -355,6 +358,7 @@ export type Database = {
           dys_level: string
           first_name: string
           font_preference: string
+          gender: string
           high_contrast: boolean
           id: string
           school_level: string
@@ -368,6 +372,7 @@ export type Database = {
           dys_level?: string
           first_name: string
           font_preference?: string
+          gender?: string
           high_contrast?: boolean
           id?: string
           school_level?: string
@@ -381,6 +386,7 @@ export type Database = {
           dys_level?: string
           first_name?: string
           font_preference?: string
+          gender?: string
           high_contrast?: boolean
           id?: string
           school_level?: string
@@ -757,6 +763,21 @@ export type Database = {
           difficulty_success_rate: number
           sessions_count: number
           week_start: string
+        }[]
+      }
+      get_leaderboard: {
+        Args: { p_limit?: number; p_metric?: string }
+        Returns: {
+          avatar_emoji: string
+          badges_earned: number
+          child_id: string
+          display_name: string
+          games_played: number
+          gender: string
+          is_mine: boolean
+          rank: number
+          streak_days: number
+          total_xp: number
         }[]
       }
       get_top_games: {
