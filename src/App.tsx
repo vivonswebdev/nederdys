@@ -7,6 +7,8 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import MurDesNombres from "./pages/math/MurDesNombres";
+import ChronoCalcul from "./pages/math/ChronoCalcul";
 import SyllabesGame from "./pages/SyllabesGame";
 import ChasseGame from "./pages/ChasseGame";
 import MemoireGame from "./pages/MemoireGame";
@@ -97,6 +99,14 @@ const App = () => (
               <Route path="/jeu/mot-troue" element={<MotTroueGame />} />
               <Route path="/jeu/chrono" element={<ChronoBilingueGame />} />
               <Route path="/jeu/mouton" element={<MoutonNoirGame />} />
+              <Route path="/child/:id/math/mur-des-nombres" element={<MurDesNombres />} />
+              <Route path="/child/:id/math/mur-des-nombres/:level" element={<MurDesNombres />} />
+              <Route path="/child/:id/math/chrono-calcul" element={<ChronoCalcul />} />
+              <Route path="/child/:id/math/chrono-calcul/:level" element={<ChronoCalcul />} />
+              <Route path="/jeu/mur-des-nombres" element={<MurDesNombres />} />
+              <Route path="/jeu/mur-des-nombres/:level" element={<MurDesNombres />} />
+              <Route path="/jeu/chrono-calcul" element={<ChronoCalcul />} />
+              <Route path="/jeu/chrono-calcul/:level" element={<ChronoCalcul />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

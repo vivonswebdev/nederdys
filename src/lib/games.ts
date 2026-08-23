@@ -44,6 +44,8 @@ export const GAMES: GameMeta[] = [
   { id: "tir", subject: "nl", titleKey: "game.tir.title", descKey: "game.tir.desc", icon: "🎯", color: "bg-rose-700", route: "/jeu/tir" },
   { id: "mottroue", subject: "nl", titleKey: "game.mottroue.title", descKey: "game.mottroue.desc", icon: "🕳️", color: "bg-stone-700", route: "/jeu/mot-troue" },
   { id: "chrono", subject: "nl", titleKey: "game.chrono.title", descKey: "game.chrono.desc", icon: "⏱️", color: "bg-blue-800", route: "/jeu/chrono" },
+  { id: "murnombres", subject: "math", titleKey: "game.murnombres.title", descKey: "game.murnombres.desc", icon: "🧱", color: "bg-kids-orange", route: "/jeu/mur-des-nombres" },
+  { id: "chronocalcul", subject: "math", titleKey: "game.chronocalcul.title", descKey: "game.chronocalcul.desc", icon: "⏱️", color: "bg-kids-blue", route: "/jeu/chrono-calcul" },
   { id: "mouton", subject: "nl", titleKey: "game.mouton.title", descKey: "game.mouton.desc", icon: "🐑", color: "bg-neutral-800", route: "/jeu/mouton" },
 ];
 
