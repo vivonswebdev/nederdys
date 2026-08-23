@@ -78,10 +78,10 @@ const ChildDashboard = () => {
         <div className="container max-w-4xl px-4 py-3 flex flex-wrap items-center gap-4">
           <button
             onClick={() => setAboutOpen(true)}
-            className="text-4xl hover:scale-110 transition-transform"
+            className="hover:scale-110 transition-transform"
             aria-label="À propos de moi"
           >
-            {child.avatar_emoji}
+            <AvatarRenderer seed={child.first_name} options={avatarConfig ?? {}} size="sm" />
           </button>
           <div className="flex-1 min-w-[12rem]">
             <div className="flex items-center gap-2 flex-wrap">
