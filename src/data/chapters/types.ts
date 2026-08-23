@@ -10,6 +10,8 @@ interface BaseExercise {
   visualAid?: string;
   /** Étapes de résolution montrées après la réponse (problèmes multi-étapes). */
   steps?: { operation: string; description: string }[];
+  /** Audio nl-NL optionnel (chapitres néerlandais). */
+  audioUrl?: string;
 }
 
 export interface QcmExercise extends BaseExercise {
