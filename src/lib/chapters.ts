@@ -24,6 +24,14 @@ import { airesExercises } from "@/data/chapters/aires";
 import { longueursExercises } from "@/data/chapters/longueurs";
 import { massesExercises } from "@/data/chapters/masses";
 import { dureesExercises } from "@/data/chapters/durees";
+import { grandsNombresExercises } from "@/data/chapters/grands-nombres";
+import { symetrieExercises } from "@/data/chapters/symetrie";
+import { anglesDroitsExercises } from "@/data/chapters/angles-droits";
+import { reperageQuadrillageExercises } from "@/data/chapters/reperage-quadrillage";
+import { monnaieRenduExercises } from "@/data/chapters/monnaie-rendu";
+import { problemesEspritCritiqueExercises } from "@/data/chapters/problemes-esprit-critique";
+import { calendrierExercises } from "@/data/chapters/calendrier";
+import { tableauxDoubleEntreeExercises } from "@/data/chapters/tableaux-double-entree";
 import { kleurenExercises } from "@/data/exercises/nl/kleuren";
 import { dierenExercises } from "@/data/exercises/nl/dieren";
 import { getallenExercises } from "@/data/exercises/nl/getallen";
@@ -86,6 +94,14 @@ const MATH_CHAPTERS: ChapterDef[] = [
   { id: "longueurs", name: "Longueurs", emoji: "📐", section: "ce2", exercises: longueursExercises },
   { id: "masses", name: "Masses", emoji: "⚖️", section: "ce2", exercises: massesExercises },
   { id: "durees", name: "Durées", emoji: "⏰", section: "ce2", exercises: dureesExercises },
+  { id: "grands-nombres", name: "Grands nombres", emoji: "🔟", section: "stretch", exercises: grandsNombresExercises },
+  { id: "symetrie", name: "Symétrie", emoji: "🦋", section: "stretch", exercises: symetrieExercises },
+  { id: "angles-droits", name: "Angles droits", emoji: "📐", section: "stretch", exercises: anglesDroitsExercises },
+  { id: "reperage-quadrillage", name: "Repérage sur quadrillage", emoji: "🗺️", section: "stretch", exercises: reperageQuadrillageExercises },
+  { id: "monnaie-rendu", name: "Rendu de monnaie", emoji: "💶", section: "ce2", exercises: monnaieRenduExercises },
+  { id: "problemes-esprit-critique", name: "Problèmes malins", emoji: "🧐", section: "stretch", exercises: problemesEspritCritiqueExercises },
+  { id: "calendrier", name: "Calendrier", emoji: "📅", section: "ce2", exercises: calendrierExercises },
+  { id: "tableaux-double-entree", name: "Tableaux à double entrée", emoji: "📋", section: "ce2", exercises: tableauxDoubleEntreeExercises },
 ];
 
 const NL_CHAPTER_DEFS: ChapterDef[] = [

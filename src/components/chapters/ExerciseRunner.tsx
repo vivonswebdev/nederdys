@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Check, X } from "lucide-react";
+import { ArrowLeft, Check, Volume2, X } from "lucide-react";
 import { toast } from "sonner";
 import { Navbar } from "@/components/Navbar";
 import { Confetti } from "@/components/Confetti";
@@ -34,6 +34,23 @@ const normalize = (value: string) =>
     .replace(/\s+/g, "")
     .replace(/,/g, ".")
     .replace(/€|cm|kg|g\b/g, "");
+
+/** Lecture audio nl-BE : fichier fourni sinon synthèse vocale néerlandaise. */
+function playNl(ex: Exercise) {
+  if (ex.audioUrl) {
+    new Audio(ex.audioUrl).play().catch(() => undefined);
+    return;
+  }
+  if (typeof window === "undefined" || !window.speechSynthesis) return;
+  const text = ex.question;
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = "nl-BE";
+  utter.rate = 0.85;
+  const voice = window.speechSynthesis.getVoices().find((v) => v.lang.startsWith("nl"));
+  if (voice) utter.voice = voice;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utter);
+}
 
 export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Props) => {
   const navigate = useNavigate();
@@ -212,7 +229,20 @@ export const ExerciseRunner = ({ childId, chapter, level, sessionSize = 6 }: Pro
           animate={{ opacity: 1, y: 0 }}
           className="bg-card border-4 border-border rounded-3xl p-6 kids-shadow-card"
         >
-          <h2 className="text-xl font-bold text-foreground font-dyslexic mb-3">{ex.question}</h2>
+          <div className="flex items-start gap-3 mb-3">
+            <h2 className="text-xl font-bold text-foreground font-dyslexic flex-1">{ex.question}</h2>
+            {chapter.subject === "nl" && (
+              <button
+                type="button"
+                onClick={() => playNl(ex)}
+                aria-label="Écouter en néerlandais"
+                className="shrink-0 w-11 h-11 rounded-full bg-kids-blue/40 border-2 border-primary flex items-center justify-center hover:scale-105 transition-transform"
+              >
+                <Volume2 className="w-5 h-5 text-foreground" />
+              </button>
+            )}
+          </div>
+
           {ex.visualAid && (
             <p className="text-lg text-center bg-muted rounded-2xl py-3 px-4 mb-4 font-dyslexic">
               {ex.visualAid}

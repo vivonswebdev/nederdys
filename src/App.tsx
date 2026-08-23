@@ -10,6 +10,9 @@ import Home from "./pages/Home";
 import PlayHub from "./pages/PlayHub";
 import NotFound from "./pages/NotFound";
 import MurDesNombres from "./pages/math/MurDesNombres";
+import MemoryCalcul from "./pages/math/MemoryCalcul";
+import PuzzleNumerique from "./pages/math/PuzzleNumerique";
+import LabyrintheNombres from "./pages/math/LabyrintheNombres";
 import PyramideNombres from "./pages/math/PyramideNombres";
 import CompteEstBon from "./pages/math/CompteEstBon";
 import ChainesCalcul from "./pages/math/ChainesCalcul";
@@ -170,6 +173,18 @@ const App = () => (
           <Route path="/child/:id/math/tangram/:level" element={<Tangram />} />
           <Route path="/jeu/tangram" element={<Tangram />} />
           <Route path="/jeu/tangram/:level" element={<Tangram />} />
+          <Route path="/child/:id/math/memory-calcul" element={<MemoryCalcul />} />
+          <Route path="/child/:id/math/memory-calcul/:level" element={<MemoryCalcul />} />
+          <Route path="/jeu/memory-calcul" element={<MemoryCalcul />} />
+          <Route path="/jeu/memory-calcul/:level" element={<MemoryCalcul />} />
+          <Route path="/child/:id/math/puzzle-numerique" element={<PuzzleNumerique />} />
+          <Route path="/child/:id/math/puzzle-numerique/:level" element={<PuzzleNumerique />} />
+          <Route path="/jeu/puzzle-numerique" element={<PuzzleNumerique />} />
+          <Route path="/jeu/puzzle-numerique/:level" element={<PuzzleNumerique />} />
+          <Route path="/child/:id/math/labyrinthe-nombres" element={<LabyrintheNombres />} />
+          <Route path="/child/:id/math/labyrinthe-nombres/:level" element={<LabyrintheNombres />} />
+          <Route path="/jeu/labyrinthe-nombres" element={<LabyrintheNombres />} />
+          <Route path="/jeu/labyrinthe-nombres/:level" element={<LabyrintheNombres />} />
               <Route path="/jeu/chrono-calcul" element={<ChronoCalcul />} />
               <Route path="/jeu/chrono-calcul/:level" element={<ChronoCalcul />} />
               <Route path="/child/:id/math/nombre-troue" element={<NombreTroue />} />
