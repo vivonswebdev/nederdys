@@ -64,7 +64,7 @@ const Index = () => {
             <p className="text-lg md:text-xl text-muted-foreground max-w-lg mb-8 font-dyslexic">{t("hero.desc")}</p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link to="/jeu/syllabes">
+              <Link to="/profils">
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="bg-primary text-primary-foreground px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-2">
                   <Gamepad2 className="w-5 h-5" /> {t("hero.play")}
                 </motion.button>
