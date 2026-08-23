@@ -146,6 +146,20 @@ const ChildDashboard = () => {
           ))}
         </div>
 
+        {/* Réviser mes erreurs */}
+        <Link
+          to={`/child/${activeChild.id}/reviser`}
+          className="flex items-center gap-4 bg-card border-2 border-border rounded-3xl p-5 mb-10 kids-shadow-card hover:scale-[1.01] transition-transform"
+        >
+          <span className="text-4xl">🔁</span>
+          <div>
+            <p className="font-bold text-foreground">Réviser mes erreurs</p>
+            <p className="text-sm text-muted-foreground font-dyslexic">
+              Revois tes réponses incorrectes et les étapes de résolution.
+            </p>
+          </div>
+        </Link>
+
         {/* Défi du jour */}
         <section className="bg-secondary/30 border border-border rounded-3xl p-5 mb-10 flex items-center gap-4">
           <span className="text-4xl">{challenge.emoji}</span>

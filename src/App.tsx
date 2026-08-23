@@ -61,6 +61,7 @@ import ChildHome from "./pages/ChildHome";
 import AvatarShop from "./pages/AvatarShop";
 import AvatarEditor from "./pages/AvatarEditor";
 import BadgesPage from "./pages/child/BadgesPage";
+import ReviewPage from "./pages/child/ReviewPage";
 import ChallengePage from "./pages/child/ChallengePage";
 import ChildSettingsPage from "./pages/child/ChildSettingsPage";
 import ManageChildren from "./pages/parent/ManageChildren";
@@ -98,6 +99,7 @@ const App = () => (
               <Route path="/child/:id/boutique" element={<AvatarShop />} />
               <Route path="/child/:id/avatar" element={<AvatarEditor />} />
               <Route path="/child/:id/badges" element={<BadgesPage />} />
+              <Route path="/child/:id/reviser" element={<ReviewPage />} />
               <Route path="/child/:id/defi" element={<ChallengePage />} />
               <Route path="/child/:id/settings" element={<ChildSettingsPage />} />
               <Route path="/child/:id/games" element={<GamesHub />} />
