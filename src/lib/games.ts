@@ -54,3 +54,64 @@ export const GAMES: GameMeta[] = [
 ];
 
 export const gamesBySubject = (subject: Subject) => GAMES.filter((g) => g.subject === subject);
+
+/** Catégorie pédagogique de chaque jeu (utilisée par les filtres de la liste). */
+export const GAME_CATEGORY: Record<string, string> = {
+  syllabes: "phonologie",
+  chasse: "vocabulaire",
+  memoire: "ecoute",
+  phonemes: "phonologie",
+  dictee: "orthographe",
+  lettres: "orthographe",
+  burger: "phrases",
+  graphemes: "orthographe",
+  train: "phonologie",
+  miroir: "phonologie",
+  fauxamis: "vocabulaire",
+  phare: "ecoute",
+  peintre: "phonologie",
+  puzzle: "phrases",
+  pont: "phrases",
+  trieur: "vocabulaire",
+  mur: "phrases",
+  oreille: "ecoute",
+  tir: "vocabulaire",
+  mottroue: "orthographe",
+  chrono: "phrases",
+  mouton: "vocabulaire",
+  murnombres: "calcul",
+  chronocalcul: "calcul",
+  nombretroue: "calcul",
+  oreillenombres: "ecoute",
+  tirnombres: "ecoute",
+  moutonnoirmaths: "logique",
+};
+
+export interface GameCategoryMeta {
+  id: string;
+  name: string;
+  icon: string;
+}
+
+export const CATEGORIES_BY_SUBJECT: Record<Subject, GameCategoryMeta[]> = {
+  nl: [
+    { id: "all", name: "Tous", icon: "📦" },
+    { id: "phonologie", name: "Sons", icon: "🔤" },
+    { id: "vocabulaire", name: "Vocabulaire", icon: "📖" },
+    { id: "phrases", name: "Phrases", icon: "💬" },
+    { id: "orthographe", name: "Orthographe", icon: "✏️" },
+    { id: "ecoute", name: "Écoute", icon: "👂" },
+  ],
+  math: [
+    { id: "all", name: "Tous", icon: "📦" },
+    { id: "calcul", name: "Calcul", icon: "🔢" },
+    { id: "ecoute", name: "Écoute", icon: "👂" },
+    { id: "logique", name: "Logique", icon: "🧠" },
+  ],
+  fr: [{ id: "all", name: "Tous", icon: "📦" }],
+};
+
+export const categoriesForSubject = (subject: Subject): GameCategoryMeta[] => {
+  const used = new Set(gamesBySubject(subject).map((g) => GAME_CATEGORY[g.id]));
+  return CATEGORIES_BY_SUBJECT[subject].filter((c) => c.id === "all" || used.has(c.id));
+};
