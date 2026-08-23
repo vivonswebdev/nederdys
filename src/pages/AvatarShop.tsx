@@ -118,7 +118,7 @@ const AvatarShop = () => {
                   {item.rarity}
                 </span>
                 {isOwned ? (
-                  <div className="w-full mt-1 py-2 rounded-xl bg-kids-green-light/30 text-kids-green text-sm font-bold flex items-center justify-center gap-1">
+                  <div className="w-full mt-1 py-2 rounded-xl bg-kids-green-light/30 text-kids-green-dark text-sm font-bold flex items-center justify-center gap-1">
                     <Check className="w-4 h-4" /> Possédé
                   </div>
                 ) : (

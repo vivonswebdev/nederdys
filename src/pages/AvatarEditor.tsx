@@ -125,7 +125,7 @@ const AvatarEditor = () => {
                     onClick={() => handleSelect(item)}
                     title={item.name}
                     className={`p-2 rounded-xl flex flex-col items-center gap-1 border-2 transition-colors ${
-                      selected ? "border-kids-green bg-kids-green-light/20" : "border-transparent bg-muted"
+                      selected ? "border-kids-green-dark bg-kids-green-light/20" : "border-transparent bg-muted"
                     }`}
                   >
                     <AvatarRenderer seed={seed} options={{ [option]: item.dicebear_value }} size="xs" />
@@ -140,7 +140,7 @@ const AvatarEditor = () => {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="flex-1 inline-flex items-center justify-center gap-2 bg-kids-green text-white py-3 rounded-xl font-bold disabled:opacity-60"
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 rounded-xl font-bold disabled:opacity-60"
             >
               <Save className="w-4 h-4" /> Sauvegarder
             </button>
