@@ -12,7 +12,9 @@ interface Props {
     first_name: string;
     age: number;
     school_level: string;
+    gender?: string | null;
     created_at: string;
+
   };
   totalXp: number;
   badgeCount: number;
