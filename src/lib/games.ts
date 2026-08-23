@@ -23,6 +23,9 @@ export const SUBJECTS: {
 ];
 
 export const GAMES: GameMeta[] = [
+  { id: "memorycalcul", subject: "math", titleKey: "game.memorycalcul.title", descKey: "game.memorycalcul.desc", icon: "🃏", color: "bg-kids-blue", route: "/jeu/memory-calcul" },
+  { id: "puzzlenumerique", subject: "math", titleKey: "game.puzzlenumerique.title", descKey: "game.puzzlenumerique.desc", icon: "🧮", color: "bg-kids-purple", route: "/jeu/puzzle-numerique" },
+  { id: "labyrinthenombres", subject: "math", titleKey: "game.labyrinthenombres.title", descKey: "game.labyrinthenombres.desc", icon: "🌀", color: "bg-kids-green-light", route: "/jeu/labyrinthe-nombres" },
   { id: "pyramidenombres", subject: "math", titleKey: "game.pyramidenombres.title", descKey: "game.pyramidenombres.desc", icon: "🔺", color: "bg-kids-red", route: "/jeu/pyramide-nombres" },
   { id: "compteestbon", subject: "math", titleKey: "game.compteestbon.title", descKey: "game.compteestbon.desc", icon: "🎯", color: "bg-kids-orange", route: "/jeu/compte-est-bon" },
   { id: "chainescalcul", subject: "math", titleKey: "game.chainescalcul.title", descKey: "game.chainescalcul.desc", icon: "🔗", color: "bg-kids-blue", route: "/jeu/chaines-calcul" },
@@ -63,6 +66,9 @@ export const gamesBySubject = (subject: Subject) => GAMES.filter((g) => g.subjec
 
 /** Catégorie pédagogique de chaque jeu (utilisée par les filtres de la liste). */
 export const GAME_CATEGORY: Record<string, string> = {
+  memorycalcul: "calcul",
+  puzzlenumerique: "logique",
+  labyrinthenombres: "calcul",
   pyramidenombres: "calcul",
   compteestbon: "logique",
   chainescalcul: "calcul",
