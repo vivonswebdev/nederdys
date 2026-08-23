@@ -1,4 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
+import { allBadges } from "@/data/badges";
+import { localDateISO } from "@/lib/date";
 
 // --- Niveaux (paliers XP) ---
 
@@ -42,16 +44,15 @@ export interface BadgeDef {
   descNl: string;
 }
 
-export const BADGES: BadgeDef[] = [
-  { name: "first_steps", icon: "👣", category: "special", labelFr: "Premiers pas", labelNl: "Eerste stappen", descFr: "Terminer un premier jeu", descNl: "Een eerste spel voltooien" },
-  { name: "serious", icon: "📅", category: "streak", labelFr: "Sérieux", labelNl: "Serieus", descFr: "7 jours de connexion", descNl: "7 dagen op rij spelen" },
-  { name: "polyglot", icon: "🗣️", category: "special", labelFr: "Polyglotte", labelNl: "Polyglot", descFr: "Jouer en NL et en FR", descNl: "In NL en FR spelen" },
-  { name: "mathematician", icon: "🧮", category: "math", labelFr: "Mathématicien", labelNl: "Wiskundige", descFr: "100 bonnes réponses en maths", descNl: "100 juiste antwoorden in wiskunde" },
-  { name: "perfectionist", icon: "💯", category: "special", labelFr: "Perfectionniste", labelNl: "Perfectionist", descFr: "Un sans-faute en niveau difficile", descNl: "Foutloos op moeilijk niveau" },
-  { name: "marathon", icon: "🏃", category: "special", labelFr: "Marathonien", labelNl: "Marathonloper", descFr: "30 minutes de jeu", descNl: "30 minuten spelen" },
-  { name: "nl_explorer", icon: "🇳🇱", category: "nl", labelFr: "Explorateur NL", labelNl: "NL Ontdekker", descFr: "10 jeux néerlandais terminés", descNl: "10 Nederlandse spellen voltooid" },
-  { name: "fr_explorer", icon: "🇫🇷", category: "fr", labelFr: "Explorateur FR", labelNl: "FR Ontdekker", descFr: "10 jeux français terminés", descNl: "10 Franse spellen voltooid" },
-];
+export const BADGES: BadgeDef[] = allBadges.map((b) => ({
+  name: b.id,
+  icon: b.icon,
+  category: b.category,
+  labelFr: b.name,
+  labelNl: b.name,
+  descFr: b.description,
+  descNl: b.description,
+}));
 
 export const badgeByName = (name: string) => BADGES.find((b) => b.name === name);
 
@@ -82,7 +83,7 @@ export const unlockBadge = async (userId: string, childId: string, name: string)
 
 // --- Séries quotidiennes ---
 
-const today = () => new Date().toISOString().slice(0, 10);
+const today = () => localDateISO();
 
 export const getStreakDays = async (childId: string) => {
   const { data, error } = await supabase
@@ -96,15 +97,15 @@ export const getStreakDays = async (childId: string) => {
 };
 
 export const computeStreak = (dates: string[]): number => {
-  const set = new Set(dates);
+  const set = new Set(dates.map((d) => String(d).slice(0, 10)));
   let streak = 0;
   const cursor = new Date();
-  // La série reste valide si l'enfant a joué aujourd'hui ou hier
-  if (!set.has(cursor.toISOString().slice(0, 10))) {
+  // La série reste valide si l'enfant a joué aujourd'hui ou hier (heure locale)
+  if (!set.has(localDateISO(cursor))) {
     cursor.setDate(cursor.getDate() - 1);
-    if (!set.has(cursor.toISOString().slice(0, 10))) return 0;
+    if (!set.has(localDateISO(cursor))) return 0;
   }
-  while (set.has(cursor.toISOString().slice(0, 10))) {
+  while (set.has(localDateISO(cursor))) {
     streak++;
     cursor.setDate(cursor.getDate() - 1);
   }

@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { localDateISO } from "@/lib/date";
 
 export type ChallengeType = "games_played" | "xp_earned" | "perfect_score" | "play_minutes";
 
@@ -18,11 +19,7 @@ export const CHALLENGE_DEFS: ChallengeDef[] = [
   { type: "play_minutes", emoji: "⏱️", target: 15, fr: "Joue pendant 15 minutes", nl: "Speel 15 minuten", unit: "min" },
 ];
 
-export const todayISO = () => {
-  const d = new Date();
-  const off = d.getTimezoneOffset();
-  return new Date(d.getTime() - off * 60000).toISOString().split("T")[0];
-};
+export const todayISO = () => localDateISO();
 
 export const challengeDefOfTheDay = (): ChallengeDef => {
   const [y, m, day] = todayISO().split("-").map(Number);
