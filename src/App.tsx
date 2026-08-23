@@ -38,6 +38,9 @@ import MoutonNoirGame from "./pages/MoutonNoirGame";
 import ProfileSelect from "./pages/ProfileSelect";
 import ChildDashboard from "./pages/ChildDashboard";
 import SubjectPage from "./pages/SubjectPage";
+import ParentGate from "./pages/ParentGate";
+import ParentDashboard from "./pages/ParentDashboard";
+import ParentSettings from "./pages/ParentSettings";
 import { ChildProvider } from "@/contexts/ChildContext";
 
 const queryClient = new QueryClient();
@@ -64,6 +67,9 @@ const App = () => (
               <Route path="/jeu/chasse" element={<ChasseGame />} />
               <Route path="/jeu/memoire" element={<MemoireGame />} />
               <Route path="/parents" element={<ParentsDashboard />} />
+              <Route path="/parent" element={<ParentGate />} />
+              <Route path="/parent/dashboard" element={<ParentDashboard />} />
+              <Route path="/parent/settings" element={<ParentSettings />} />
               <Route path="/jeu/phonemes" element={<PhonemesGame />} />
               <Route path="/jeu/dictee" element={<DicteeGame />} />
               <Route path="/jeu/lettres" element={<LettresGame />} />
