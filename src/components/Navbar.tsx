@@ -49,7 +49,9 @@ export const Navbar = () => {
     { to: user ? "/accueil" : "/", icon: <Home className="w-4 h-4" />, label: t("nav.home") },
     { to: "/jouer", icon: <Gamepad2 className="w-4 h-4" />, label: t("nav.play") },
     { to: "/classement", icon: <Trophy className="w-4 h-4" />, label: "Classement" },
-    { to: "/parents", icon: <BarChart3 className="w-4 h-4" />, label: t("nav.parents") },
+    ...(isChildMode
+      ? []
+      : [{ to: "/parents", icon: <BarChart3 className="w-4 h-4" />, label: t("nav.parents") }]),
   ];
 
   const linkClass = (to: string) =>
