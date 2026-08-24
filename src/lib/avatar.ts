@@ -36,8 +36,20 @@ export function getAvatarUrl({ seed, ...options }: DiceBearOptions): string {
   params.append("seed", seed || "nederdys");
   Object.entries(options).forEach(([key, value]) => {
     if (!value) return;
-    params.append(key, Array.isArray(value) ? value.join(",") : String(value));
-    if (key === "accessories") params.append("accessoriesProbability", "100");
+    const raw = Array.isArray(value) ? value.join(",") : String(value);
+    // Le style "adventurer" n'a pas d'option "accessories" : les lunettes
+    // passent par "glasses" (variant01 → variant05), sinon rien ne s'affiche.
+    if (key === "accessories") {
+      const valid = raw
+        .split(",")
+        .map((v) => v.trim())
+        .filter((v) => /^variant0[1-5]$/.test(v));
+      if (!valid.length) return;
+      params.append("glasses", valid.join(","));
+      params.append("glassesProbability", "100");
+      return;
+    }
+    params.append(key, raw);
   });
   return `https://api.dicebear.com/9.x/adventurer/svg?${params.toString()}`;
 }
