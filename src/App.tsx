@@ -84,6 +84,9 @@ import ParentGate from "./pages/ParentGate";
 import ParentDashboard from "./pages/ParentDashboard";
 import ParentSettings from "./pages/ParentSettings";
 import { ChildProvider } from "@/contexts/ChildContext";
+import { ChildModeProvider } from "@/contexts/ChildModeContext";
+import { RequireParentPin } from "@/components/parent/RequireParentPin";
+import { ExitChildModeButton } from "@/components/child/ExitChildModeButton";
 
 import { useErrorTracker } from "@/hooks/useErrorTracker";
 
@@ -99,6 +102,7 @@ const App = () => (
     <AuthProvider>
       <LanguageProvider>
         <ChildProvider>
+        <ChildModeProvider>
         <TooltipProvider>
           <ErrorTracking />
           <Toaster />
@@ -148,9 +152,9 @@ const App = () => (
               <Route path="/jeu/memoire" element={<MemoireGame />} />
               <Route path="/parents" element={<ParentsDashboard />} />
               <Route path="/parent" element={<ParentGate />} />
-              <Route path="/parent/dashboard" element={<ParentDashboard />} />
-              <Route path="/parent/settings" element={<ParentSettings />} />
-              <Route path="/parent/children" element={<ManageChildren />} />
+              <Route path="/parent/dashboard" element={<RequireParentPin><ParentDashboard /></RequireParentPin>} />
+              <Route path="/parent/settings" element={<RequireParentPin><ParentSettings /></RequireParentPin>} />
+              <Route path="/parent/children" element={<RequireParentPin><ManageChildren /></RequireParentPin>} />
               <Route path="/jeu/phonemes" element={<PhonemesGame />} />
               <Route path="/jeu/dictee" element={<DicteeGame />} />
               <Route path="/jeu/lettres" element={<LettresGame />} />
@@ -239,8 +243,10 @@ const App = () => (
               <Route path="/jeu/mouton-noir-maths/:level" element={<MoutonNoirMaths />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <ExitChildModeButton />
           </BrowserRouter>
         </TooltipProvider>
+        </ChildModeProvider>
         </ChildProvider>
       </LanguageProvider>
     </AuthProvider>

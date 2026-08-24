@@ -20,12 +20,14 @@ import { getChildLevel, getChildCoins } from "@/lib/database";
 import { useChild } from "@/contexts/ChildContext";
 import { LevelBadge } from "./LevelBadge";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useChildMode } from "@/contexts/ChildModeContext";
 
 export const Navbar = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
   const { lang, setLang, t } = useLanguage();
   const { activeChild } = useChild();
+  const { isChildMode } = useChildMode();
   const [open, setOpen] = useState(false);
 
   // Close the mobile menu on route change
@@ -49,7 +51,9 @@ export const Navbar = () => {
     { to: user ? "/accueil" : "/", icon: <Home className="w-4 h-4" />, label: t("nav.home") },
     { to: "/jouer", icon: <Gamepad2 className="w-4 h-4" />, label: t("nav.play") },
     { to: "/classement", icon: <Trophy className="w-4 h-4" />, label: "Classement" },
-    { to: "/parents", icon: <BarChart3 className="w-4 h-4" />, label: t("nav.parents") },
+    ...(isChildMode
+      ? []
+      : [{ to: "/parents", icon: <BarChart3 className="w-4 h-4" />, label: t("nav.parents") }]),
   ];
 
   const linkClass = (to: string) =>

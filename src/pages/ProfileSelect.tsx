@@ -5,11 +5,13 @@ import { Navbar } from "@/components/Navbar";
 import { useChild } from "@/contexts/ChildContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useChildMode } from "@/contexts/ChildModeContext";
 
 const ProfileSelect = () => {
   const { children, setActiveChildId, loading } = useChild();
   const { user } = useAuth();
   const { t } = useLanguage();
+  const { isChildMode } = useChildMode();
   const navigate = useNavigate();
 
   const pick = (id: string) => {
@@ -72,14 +74,16 @@ const ProfileSelect = () => {
               <p className="text-center text-muted-foreground mt-8">{t("profiles.empty")}</p>
             )}
 
-            <div className="text-center mt-12">
-              <Link
-                to="/parents"
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"
-              >
-                <BarChart3 className="w-4 h-4" /> {t("profiles.parents")}
-              </Link>
-            </div>
+            {!isChildMode && (
+              <div className="text-center mt-12">
+                <Link
+                  to="/parents"
+                  className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"
+                >
+                  <BarChart3 className="w-4 h-4" /> {t("profiles.parents")}
+                </Link>
+              </div>
+            )}
           </>
         )}
       </main>

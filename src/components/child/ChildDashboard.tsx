@@ -28,11 +28,13 @@ import { getAchievements } from "@/lib/gamification";
 import { getOrCreateDailyChallenge } from "@/lib/challenges";
 import { msUntilLocalMidnight } from "@/lib/date";
 import { getChildCoins } from "@/lib/database";
+import { useChildMode } from "@/contexts/ChildModeContext";
 
 const ChildDashboard = () => {
   const { id } = useParams<{ id: string }>();
   const { user, signOut } = useAuth();
   const { children, activeChild, setActiveChildId, loading } = useChild();
+  const { isChildMode, enterChildMode } = useChildMode();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -291,15 +293,31 @@ const ChildDashboard = () => {
           >
             <Settings className="w-4 h-4" /> <BilingualText {...biFromFr("Paramètres")} />
           </button>
-          <button
-            onClick={async () => {
-              await signOut();
-              navigate("/auth");
-            }}
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground rounded-full border border-border px-4 py-2"
-          >
-            <LogOut className="w-4 h-4" /> <BilingualText {...biFromFr("Déconnexion")} />
-          </button>
+          {!isChildMode && (
+            <>
+              <button
+                onClick={() => navigate("/profils")}
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground rounded-full border border-border px-4 py-2"
+              >
+                👦 <BilingualText {...biFromFr("Changer d'enfant")} />
+              </button>
+              <button
+                onClick={enterChildMode}
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground rounded-full border border-border px-4 py-2"
+              >
+                📱 Donner l'appareil à {child.first_name}
+              </button>
+              <button
+                onClick={async () => {
+                  await signOut();
+                  navigate("/auth");
+                }}
+                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground rounded-full border border-border px-4 py-2"
+              >
+                <LogOut className="w-4 h-4" /> <BilingualText {...biFromFr("Déconnexion")} />
+              </button>
+            </>
+          )}
         </footer>
       </main>
 
