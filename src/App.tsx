@@ -26,6 +26,10 @@ import ChapterLevelSelect from "./pages/math/ChapterLevelSelect";
 import ChapterSession from "./pages/math/ChapterSession";
 import ChronoCalcul from "./pages/math/ChronoCalcul";
 import NombreTroue from "./pages/math/NombreTroue";
+import RoueDuHasard from "./pages/math/RoueDuHasard";
+import MarathonMental from "./pages/math/MarathonMental";
+import CoffreFort from "./pages/math/CoffreFort";
+import DesMaths from "./pages/math/DesMaths";
 import OreilleDesNombres from "./pages/math/OreilleDesNombres";
 import TirAuxNombres from "./pages/math/TirAuxNombres";
 import MoutonNoirMaths from "./pages/math/MoutonNoirMaths";
@@ -244,6 +248,22 @@ const App = () => (
               <Route path="/child/:id/math/nombre-troue/:level" element={<NombreTroue />} />
               <Route path="/jeu/nombre-troue" element={<NombreTroue />} />
               <Route path="/jeu/nombre-troue/:level" element={<NombreTroue />} />
+              <Route path="/child/:id/math/roue-du-hasard" element={<RoueDuHasard />} />
+              <Route path="/child/:id/math/roue-du-hasard/:level" element={<RoueDuHasard />} />
+              <Route path="/jeu/roue-du-hasard" element={<RoueDuHasard />} />
+              <Route path="/jeu/roue-du-hasard/:level" element={<RoueDuHasard />} />
+              <Route path="/child/:id/math/marathon-mental" element={<MarathonMental />} />
+              <Route path="/child/:id/math/marathon-mental/:level" element={<MarathonMental />} />
+              <Route path="/jeu/marathon-mental" element={<MarathonMental />} />
+              <Route path="/jeu/marathon-mental/:level" element={<MarathonMental />} />
+              <Route path="/child/:id/math/coffre-fort" element={<CoffreFort />} />
+              <Route path="/child/:id/math/coffre-fort/:level" element={<CoffreFort />} />
+              <Route path="/jeu/coffre-fort" element={<CoffreFort />} />
+              <Route path="/jeu/coffre-fort/:level" element={<CoffreFort />} />
+              <Route path="/child/:id/math/des-mathematiques" element={<DesMaths />} />
+              <Route path="/child/:id/math/des-mathematiques/:level" element={<DesMaths />} />
+              <Route path="/jeu/des-mathematiques" element={<DesMaths />} />
+              <Route path="/jeu/des-mathematiques/:level" element={<DesMaths />} />
               <Route path="/child/:id/math/oreille-des-nombres" element={<OreilleDesNombres />} />
               <Route path="/child/:id/math/oreille-des-nombres/:level" element={<OreilleDesNombres />} />
               <Route path="/jeu/oreille-des-nombres" element={<OreilleDesNombres />} />
