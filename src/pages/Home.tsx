@@ -9,7 +9,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useQuery } from "@tanstack/react-query";
 import { getChildLevel, getChildCoins, getGameSessions } from "@/lib/database";
 import { getLevelInfo } from "@/lib/gamification";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { getStreakDays, computeStreak } from "@/lib/gamification";
 import { ProgressRing } from "@/components/child/ProgressRing";
 import { StreakCounter } from "@/components/child/StreakCounter";
