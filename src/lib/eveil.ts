@@ -8,6 +8,13 @@ export interface EveilActivity {
   description: string;
 }
 
+/** Une option de réponse Éveil est TOUJOURS visuelle — jamais un mot à lire. */
+export interface EveilOption {
+  id: string;
+  visual: string; // emoji, image ou pastille de couleur
+  audioLabel?: string; // ce que la voix dit si l'option est touchée
+}
+
 export const EVEIL_ACTIVITIES: EveilActivity[] = [
   {
     id: "arc-en-ciel",
@@ -36,6 +43,34 @@ export const EVEIL_ACTIVITIES: EveilActivity[] = [
     emoji: "🧩",
     category: "phrases-simples",
     description: "Choisis les images de la phrase",
+  },
+  {
+    id: "chasse-aux-couleurs",
+    name: "Chasse aux Couleurs",
+    emoji: "🔍",
+    category: "couleurs",
+    description: "Trouve tous les objets d'une couleur",
+  },
+  {
+    id: "compte-avec-moi",
+    name: "Compte avec Moi",
+    emoji: "🔢",
+    category: "premiers-mots",
+    description: "Compte les objets avec la voix",
+  },
+  {
+    id: "quel-animal",
+    name: "Quel Animal ?",
+    emoji: "🐾",
+    category: "premiers-mots",
+    description: "Écoute le cri, touche l'animal",
+  },
+  {
+    id: "puzzle-formes",
+    name: "Puzzle des Formes",
+    emoji: "🧩",
+    category: "motricite",
+    description: "Place chaque forme au bon endroit",
   },
 ];
 
