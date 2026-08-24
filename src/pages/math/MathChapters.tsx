@@ -87,7 +87,10 @@ const MathChapters = () => {
           <span className="text-3xl mr-2">🎯</span>
           <span className="text-lg font-bold text-foreground"><BilingualText {...biFromFr("Faire le test de placement")} /></span>
           <p className="font-dyslexic text-muted-foreground mt-1">
-            6 questions pour débloquer directement le bon niveau.
+            <BilingualText
+              nl="6 vragen om meteen het juiste niveau vrij te spelen."
+              fr="6 questions pour débloquer directement le bon niveau."
+            />
           </p>
         </Link>
 
