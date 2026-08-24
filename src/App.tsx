@@ -86,6 +86,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminErrors from "./pages/admin/AdminErrors";
 import StoriesPage from "./pages/nl/StoriesPage";
+import CodeHome from "./pages/code/CodeHome";
+import CodeEpisodePage from "./pages/code/CodeEpisodePage";
+
 import StoryReader from "./pages/nl/StoryReader";
 import NlChapters from "./pages/nl/NlChapters";
 import FrExercises from "./pages/fr/FrExercises";
