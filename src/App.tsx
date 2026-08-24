@@ -83,7 +83,14 @@ import ParentDashboard from "./pages/ParentDashboard";
 import ParentSettings from "./pages/ParentSettings";
 import { ChildProvider } from "@/contexts/ChildContext";
 
+import { useErrorTracker } from "@/hooks/useErrorTracker";
+
 const queryClient = new QueryClient();
+
+const ErrorTracking = () => {
+  useErrorTracker();
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -91,6 +98,7 @@ const App = () => (
       <LanguageProvider>
         <ChildProvider>
         <TooltipProvider>
+          <ErrorTracking />
           <Toaster />
           <Sonner />
           <BrowserRouter>
