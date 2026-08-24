@@ -10,6 +10,7 @@ import { RecommendationsCard } from "@/components/parent/RecommendationsCard";
 import { ExportPDF } from "@/components/parent/ExportPDF";
 import { TimeTrackingCard } from "@/components/parent/TimeTrackingCard";
 import { GameRadarCard } from "@/components/parent/GameRadarCard";
+import { MathFocusCard } from "@/components/parent/MathFocusCard";
 import { useChild } from "@/contexts/ChildContext";
 import {
   Period,
@@ -122,6 +123,11 @@ const ParentDashboard = () => {
               </div>
               <GameRadarCard stats={games} />
               <TimeTrackingCard childId={activeChild.id} totalXp={childLevel?.xp ?? 0} />
+              <MathFocusCard
+                childId={activeChild.id}
+                sessions={sessions}
+                achievements={achievements}
+              />
               <div className="grid lg:grid-cols-2 gap-6">
                 <TopGamesTable stats={games} childId={activeChild.id} />
                 <RecommendationsCard
