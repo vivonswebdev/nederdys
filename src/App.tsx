@@ -84,6 +84,9 @@ import ParentGate from "./pages/ParentGate";
 import ParentDashboard from "./pages/ParentDashboard";
 import ParentSettings from "./pages/ParentSettings";
 import { ChildProvider } from "@/contexts/ChildContext";
+import { ChildModeProvider } from "@/contexts/ChildModeContext";
+import { RequireParentPin } from "@/components/parent/RequireParentPin";
+import { ExitChildModeButton } from "@/components/child/ExitChildModeButton";
 
 import { useErrorTracker } from "@/hooks/useErrorTracker";
 
