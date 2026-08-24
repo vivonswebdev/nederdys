@@ -102,6 +102,7 @@ const App = () => (
     <AuthProvider>
       <LanguageProvider>
         <ChildProvider>
+        <ChildModeProvider>
         <TooltipProvider>
           <ErrorTracking />
           <Toaster />
