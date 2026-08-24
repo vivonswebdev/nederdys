@@ -103,7 +103,10 @@ const MathChapters = () => {
             <BilingualText nl="Rekenspellen" fr="Jeux de maths par catégorie" stacked />
           </span>
           <p className="font-dyslexic text-muted-foreground mt-1">
-            Calcul, logique, écoute, vitesse — accès direct à chaque jeu.
+            <BilingualText
+              nl="Rekenen, logica, luisteren, snelheid — direct naar elk spel."
+              fr="Calcul, logique, écoute, vitesse — accès direct à chaque jeu."
+            />
           </p>
         </Link>
 
