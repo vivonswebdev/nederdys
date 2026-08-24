@@ -213,3 +213,21 @@
     border-radius: 4px;
   }
 }
+
+@layer base {
+  /* Cibles tactiles minimales (44px) — enfants, tablette, motricité fine */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Anneau de focus au clavier uniquement */
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--ring)), 0 0 0 4px hsl(var(--background));
+  }
+}
