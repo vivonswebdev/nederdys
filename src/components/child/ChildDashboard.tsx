@@ -246,12 +246,10 @@ const ChildDashboard = () => {
           </div>
         </section>
 
+        <SeasonPassCard childId={child.id} />
+
         <div className="space-y-2">
           <DailyChallenge childId={child.id} />
-        </section>
-
-        <section>
-          <SeasonPassCard childId={child.id} />
           <button
             onClick={() => navigate(`/child/${child.id}/defi`)}
             className="text-sm text-primary font-medium hover:underline"
