@@ -5,7 +5,8 @@ import { toast } from "sonner";
 import { Navbar } from "@/components/Navbar";
 import { BilingualText } from "@/components/ui/BilingualText";
 import { StoryPlayer } from "@/components/stories/StoryPlayer";
-import { storyById, STORY_XP } from "@/data/stories";
+import { storyById } from "@/data/stories";
+import { STORY_XP } from "@/lib/stories";
 import { recordGameCompletion } from "@/lib/mathSession";
 import { useChild } from "@/contexts/ChildContext";
 
