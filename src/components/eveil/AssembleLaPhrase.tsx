@@ -3,7 +3,7 @@ import { Volume2 } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
 import { Confetti } from "@/components/Confetti";
 import { sounds } from "@/lib/sounds";
-import { recordEveilCompletion, speakFr } from "@/lib/eveil";
+import { recordEveilCompletion, speakBilingual } from "@/lib/eveil";
 
 interface Props {
   childId: string;
@@ -13,25 +13,26 @@ interface Option {
   id: string;
   emoji: string;
   label: string;
+  labelNl: string;
 }
 
 type SlotKey = "sujet" | "verbe" | "objet";
 
 const OPTIONS: Record<SlotKey, Option[]> = {
   sujet: [
-    { id: "chien", emoji: "🐶", label: "Le chien" },
-    { id: "chat", emoji: "🐱", label: "Le chat" },
-    { id: "fille", emoji: "👧", label: "La fille" },
+    { id: "chien", emoji: "🐶", label: "Le chien", labelNl: "De hond" },
+    { id: "chat", emoji: "🐱", label: "Le chat", labelNl: "De kat" },
+    { id: "fille", emoji: "👧", label: "La fille", labelNl: "Het meisje" },
   ],
   verbe: [
-    { id: "court", emoji: "🏃", label: "court vers" },
-    { id: "mange", emoji: "🍽️", label: "mange" },
-    { id: "regarde", emoji: "👀", label: "regarde" },
+    { id: "court", emoji: "🏃", label: "court vers", labelNl: "rent naar" },
+    { id: "mange", emoji: "🍽️", label: "mange", labelNl: "eet" },
+    { id: "regarde", emoji: "👀", label: "regarde", labelNl: "kijkt naar" },
   ],
   objet: [
-    { id: "maison", emoji: "🏠", label: "la maison" },
-    { id: "pomme", emoji: "🍎", label: "la pomme" },
-    { id: "ballon", emoji: "⚽", label: "le ballon" },
+    { id: "maison", emoji: "🏠", label: "la maison", labelNl: "het huis" },
+    { id: "pomme", emoji: "🍎", label: "la pomme", labelNl: "de appel" },
+    { id: "ballon", emoji: "⚽", label: "le ballon", labelNl: "de bal" },
   ],
 };
 
@@ -52,13 +53,15 @@ export const AssembleLaPhrase = ({ childId }: Props) => {
   const handleSelect = (slot: SlotKey, option: Option) => {
     sounds.click();
     setSlots((prev) => ({ ...prev, [slot]: option }));
-    speakFr(option.label);
+    speakBilingual({ nl: option.labelNl, fr: option.label });
   };
 
   const speakSentence = () => {
     if (!complete) return;
-    const sentence = SLOTS.map((s) => slots[s]!.label).join(" ");
-    speakFr(sentence);
+    speakBilingual({
+      nl: SLOTS.map((s) => slots[s]!.labelNl).join(" "),
+      fr: SLOTS.map((s) => slots[s]!.label).join(" "),
+    });
     sounds.correct();
     const nextStars = Math.min(3, stars + 1);
     setStars(nextStars);
@@ -78,7 +81,7 @@ export const AssembleLaPhrase = ({ childId }: Props) => {
   };
 
   return (
-    <EveilLayout childId={childId} title="Assemble la Phrase" emoji="🧩" stars={stars} maxStars={3}>
+    <EveilLayout childId={childId} title="Assemble la Phrase" titleNl="Maak de Zin" emoji="🧩" stars={stars} maxStars={3}>
       {done && <Confetti />}
       <div className="space-y-8">
         <div className="grid grid-cols-3 gap-3 sm:gap-4">
@@ -119,7 +122,7 @@ export const AssembleLaPhrase = ({ childId }: Props) => {
           aria-label="Écouter la phrase"
           className="min-h-[80px] w-full flex items-center justify-center gap-3 rounded-3xl bg-primary text-primary-foreground text-2xl font-bold disabled:opacity-40"
         >
-          <Volume2 className="w-9 h-9" /> Écouter la phrase
+          <Volume2 className="w-9 h-9" /> Zin / Phrase
         </button>
       </div>
     </EveilLayout>
