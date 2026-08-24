@@ -133,7 +133,7 @@ const MiniGamePause = () => {
                 onClick={() => handleFlip(card.id)}
                 whileTap={{ scale: 0.92 }}
                 disabled={card.flipped || card.matched || selected.length === 2}
-                className={`aspect-square min-h-[3rem] min-w-[3rem] rounded-2xl shadow-md flex items-center justify-center text-3xl sm:text-4xl transition-colors touch-target
+                className={`aspect-square min-h-[3rem] min-w-[3rem] rounded-2xl shadow-md flex items-center justify-center text-3xl sm:text-4xl transition-colors
                   ${
                     card.flipped || card.matched
                       ? "bg-white dark:bg-slate-800 border-2 border-primary"
