@@ -40,7 +40,7 @@ export const chasseurErreursChallenges: ChasseurErreursChallenge[] = [
 
   // Niveau 3 — ordre des mots et adjectifs
   { id: 21, sentence: "Morgen ik ga zwemmen.", sentenceFr: "Demain je vais nager.", options: ["Morgen", "ik", "ga"], correctAnswer: "ik", fix: "Morgen ga ik zwemmen.", difficulty: 3 },
-  { id: 22, sentence: "Het grote huis is oud.", sentenceFr: "La grande maison est vieille.", options: ["grote", "huis", "oud"], correctAnswer: "grote", fix: "Correct : het grote huis (piège, la phrase est juste avec 'grote').", difficulty: 3 },
+  { id: 22, sentence: "Een groot huis met een grote raam.", sentenceFr: "Une grande maison avec une grande fenêtre.", options: ["groot", "grote", "huis"], correctAnswer: "grote", fix: "Een groot huis met een groot raam.", difficulty: 3 },
   { id: 23, sentence: "Een groot man loopt daar.", sentenceFr: "Un grand homme marche là.", options: ["Een", "groot", "loopt"], correctAnswer: "groot", fix: "Een grote man loopt daar.", difficulty: 3 },
   { id: 24, sentence: "Vandaag wij eten pannenkoeken.", sentenceFr: "Aujourd'hui nous mangeons des crêpes.", options: ["Vandaag", "wij", "eten"], correctAnswer: "wij", fix: "Vandaag eten wij pannenkoeken.", difficulty: 3 },
   { id: 25, sentence: "Ik heb geen tijd niet.", sentenceFr: "Je n'ai pas le temps.", options: ["geen", "tijd", "niet"], correctAnswer: "niet", fix: "Ik heb geen tijd.", difficulty: 3 },
