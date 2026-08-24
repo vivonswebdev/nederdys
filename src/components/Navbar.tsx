@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Gamepad2,
   BarChart3,
+  BookOpen,
   Home,
   LogIn,
   LogOut,
@@ -57,6 +58,7 @@ export const Navbar = () => {
   const links = [
     { to: user ? "/accueil" : "/", icon: <Home className="w-4 h-4" />, label: t("nav.home") },
     { to: "/jouer", icon: <Gamepad2 className="w-4 h-4" />, label: t("nav.play") },
+    { to: "/apprendre", icon: <BookOpen className="w-4 h-4" />, label: t("nav.learn") },
     { to: "/classement", icon: <Trophy className="w-4 h-4" />, label: "Classement" },
     ...(inChildSpace
       ? []
