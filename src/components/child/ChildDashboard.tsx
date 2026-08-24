@@ -17,6 +17,7 @@ import { StreakCounter } from "./StreakCounter";
 import { ChildLevelBadge } from "./LevelBadge";
 import { SubjectCard } from "./SubjectCard";
 import { DailyChallenge } from "./DailyChallenge";
+import { SeasonPassCard } from "./SeasonPassCard";
 import { BadgeShowcase } from "./BadgeShowcase";
 import { AvatarRenderer } from "./AvatarRenderer";
 import { getAvatarConfig } from "@/lib/avatar";
@@ -244,6 +245,8 @@ const ChildDashboard = () => {
             />
           </div>
         </section>
+
+        <SeasonPassCard childId={child.id} />
 
         <div className="space-y-2">
           <DailyChallenge childId={child.id} />
