@@ -1,0 +1,40 @@
+import { FrChallenge } from "./types";
+
+/** Dialogue Éclair (FR) — complète le mini-dialogue (30 défis). */
+export const dialogueEclairFrChallenges: FrChallenge[] = [
+  // Niveau 1
+  { id: 1, prompt: "— Bonjour, comment tu t'appelles ?\n— ___", options: ["Je m'appelle Nora.", "J'ai huit pommes.", "Il fait froid.", "Merci beaucoup."], correctAnswer: "Je m'appelle Nora.", speak: "Bonjour, comment tu t'appelles ?", difficulty: 1 },
+  { id: 2, prompt: "— Quel âge as-tu ?\n— ___", options: ["J'ai neuf ans.", "Je vais bien.", "C'est lundi.", "Au revoir !"], correctAnswer: "J'ai neuf ans.", speak: "Quel âge as-tu ?", difficulty: 1 },
+  { id: 3, prompt: "— Merci pour ton aide !\n— ___", options: ["De rien !", "Bonne nuit.", "J'ai faim.", "Il pleut."], correctAnswer: "De rien !", speak: "Merci pour ton aide !", difficulty: 1 },
+  { id: 4, prompt: "— Comment ça va ?\n— ___", options: ["Ça va très bien, merci.", "J'habite à Meise.", "C'est un chien.", "Il est midi."], correctAnswer: "Ça va très bien, merci.", speak: "Comment ça va ?", difficulty: 1 },
+  { id: 5, prompt: "— Où habites-tu ?\n— ___", options: ["J'habite à Bruxelles.", "J'aime le rouge.", "J'ai un frère.", "Il est tard."], correctAnswer: "J'habite à Bruxelles.", speak: "Où habites-tu ?", difficulty: 1 },
+  { id: 6, prompt: "— Tu veux jouer avec moi ?\n— ___", options: ["Oui, avec plaisir !", "Il a douze ans.", "C'est un vélo.", "Bon appétit."], correctAnswer: "Oui, avec plaisir !", speak: "Tu veux jouer avec moi ?", difficulty: 1 },
+  { id: 7, prompt: "— Bonne nuit !\n— ___", options: ["Dors bien !", "Bon appétit !", "Bienvenue !", "Attention !"], correctAnswer: "Dors bien !", speak: "Bonne nuit !", difficulty: 1 },
+  { id: 8, prompt: "— Quelle heure est-il ?\n— ___", options: ["Il est trois heures.", "Il fait beau.", "J'ai deux chats.", "C'est bon."], correctAnswer: "Il est trois heures.", speak: "Quelle heure est-il ?", difficulty: 1 },
+  { id: 9, prompt: "— Tu as faim ?\n— ___", options: ["Oui, un peu.", "Il est vert.", "C'est mardi.", "Elle chante."], correctAnswer: "Oui, un peu.", speak: "Tu as faim ?", difficulty: 1 },
+  { id: 10, prompt: "— À demain !\n— ___", options: ["À demain !", "Bon anniversaire.", "S'il te plaît.", "Pardon."], correctAnswer: "À demain !", speak: "À demain !", difficulty: 1 },
+
+  // Niveau 2
+  { id: 11, prompt: "— Excuse-moi, je t'ai bousculé.\n— ___", options: ["Ce n'est pas grave.", "Bon appétit.", "J'ai gagné.", "Il est huit heures."], correctAnswer: "Ce n'est pas grave.", speak: "Excuse-moi, je t'ai bousculé.", difficulty: 2 },
+  { id: 12, prompt: "— Qu'est-ce que tu fais ce week-end ?\n— ___", options: ["Je vais chez ma grand-mère.", "J'ai douze crayons.", "Il pleut souvent ici.", "C'est ma couleur."], correctAnswer: "Je vais chez ma grand-mère.", speak: "Qu'est-ce que tu fais ce week-end ?", difficulty: 2 },
+  { id: 13, prompt: "— Tu peux m'aider, s'il te plaît ?\n— ___", options: ["Bien sûr, dis-moi.", "J'ai mangé hier.", "Il est très grand.", "Bonne route."], correctAnswer: "Bien sûr, dis-moi.", speak: "Tu peux m'aider, s'il te plaît ?", difficulty: 2 },
+  { id: 14, prompt: "— Pourquoi es-tu en retard ?\n— ___", options: ["J'ai raté le bus.", "J'aime les crêpes.", "Il fait nuit tôt.", "Elle est partie hier."], correctAnswer: "J'ai raté le bus.", speak: "Pourquoi es-tu en retard ?", difficulty: 2 },
+  { id: 15, prompt: "— Qu'est-ce que tu préfères, le foot ou la natation ?\n— ___", options: ["Je préfère la natation.", "Il y a deux ballons.", "C'est très loin.", "Merci quand même."], correctAnswer: "Je préfère la natation.", speak: "Qu'est-ce que tu préfères, le foot ou la natation ?", difficulty: 2 },
+  { id: 16, prompt: "— Comment vas-tu à l'école ?\n— ___", options: ["À vélo, tous les jours.", "J'ai un cartable rouge.", "Elle est maîtresse.", "C'est bientôt fini."], correctAnswer: "À vélo, tous les jours.", speak: "Comment vas-tu à l'école ?", difficulty: 2 },
+  { id: 17, prompt: "— Je peux emprunter ton livre ?\n— ___", options: ["Oui, rends-le-moi demain.", "Il est huit heures moins dix.", "Elle habite ici.", "C'est trop sucré."], correctAnswer: "Oui, rends-le-moi demain.", speak: "Je peux emprunter ton livre ?", difficulty: 2 },
+  { id: 18, prompt: "— Bon anniversaire !\n— ___", options: ["Merci beaucoup !", "À tes souhaits.", "Bon courage.", "Bonne chance à lui."], correctAnswer: "Merci beaucoup !", speak: "Bon anniversaire !", difficulty: 2 },
+  { id: 19, prompt: "— Tu as fini tes devoirs ?\n— ___", options: ["Presque, il me reste la lecture.", "Il y a du vent dehors.", "J'aime bien ce chien.", "C'est mon frère."], correctAnswer: "Presque, il me reste la lecture.", speak: "Tu as fini tes devoirs ?", difficulty: 2 },
+  { id: 20, prompt: "— On se retrouve où ?\n— ___", options: ["Devant la bibliothèque.", "Parce que j'ai froid.", "Avec mon cousin hier.", "C'était très bien."], correctAnswer: "Devant la bibliothèque.", speak: "On se retrouve où ?", difficulty: 2 },
+
+  // Niveau 3
+  { id: 21, prompt: "— Tu aurais pu me prévenir plus tôt.\n— ___", options: ["Tu as raison, je m'excuse.", "Il fait vraiment beau.", "J'adore les frites.", "Elle arrive samedi soir."], correctAnswer: "Tu as raison, je m'excuse.", speak: "Tu aurais pu me prévenir plus tôt.", difficulty: 3 },
+  { id: 22, prompt: "— Qu'en penses-tu ?\n— ___", options: ["Je trouve que c'est une bonne idée.", "J'ai deux sœurs jumelles.", "Il est parti à midi.", "C'est au fond du couloir."], correctAnswer: "Je trouve que c'est une bonne idée.", speak: "Qu'en penses-tu ?", difficulty: 3 },
+  { id: 23, prompt: "— Si tu avais le choix, que ferais-tu ?\n— ___", options: ["Je partirais en voyage.", "Je suis parti hier.", "J'ai fini mon assiette.", "Il pleuvait beaucoup."], correctAnswer: "Je partirais en voyage.", speak: "Si tu avais le choix, que ferais-tu ?", difficulty: 3 },
+  { id: 24, prompt: "— Pourrais-tu répéter, s'il te plaît ?\n— ___", options: ["Bien sûr, je parlais du rendez-vous.", "Oui, il fait douze degrés.", "Non merci, j'ai déjà mangé.", "Elle est arrivée en train."], correctAnswer: "Bien sûr, je parlais du rendez-vous.", speak: "Pourrais-tu répéter, s'il te plaît ?", difficulty: 3 },
+  { id: 25, prompt: "— Je crains que ce ne soit trop tard.\n— ___", options: ["Essayons quand même !", "Il a trois vélos.", "C'est bien meilleur froid.", "Nous étions dix hier."], correctAnswer: "Essayons quand même !", speak: "Je crains que ce ne soit trop tard.", difficulty: 3 },
+  { id: 26, prompt: "— Comment as-tu réussi cet exercice ?\n— ___", options: ["J'ai relu la consigne deux fois.", "Il y a une gomme rose.", "Elle danse le mercredi.", "C'est derrière l'école."], correctAnswer: "J'ai relu la consigne deux fois.", speak: "Comment as-tu réussi cet exercice ?", difficulty: 3 },
+  { id: 27, prompt: "— Tu viendrais avec nous si on t'invitait ?\n— ___", options: ["Volontiers, si mes parents acceptent.", "J'ai perdu mes clés hier.", "Il faisait vraiment sombre.", "C'est une histoire vraie."], correctAnswer: "Volontiers, si mes parents acceptent.", speak: "Tu viendrais avec nous si on t'invitait ?", difficulty: 3 },
+  { id: 28, prompt: "— Ce n'est pas ma faute !\n— ___", options: ["Alors explique-moi ce qui s'est passé.", "Il fait chaud en été.", "Je préfère le bleu.", "Nous partons à huit heures."], correctAnswer: "Alors explique-moi ce qui s'est passé.", speak: "Ce n'est pas ma faute !", difficulty: 3 },
+  { id: 29, prompt: "— Je te félicite pour ton résultat.\n— ___", options: ["Merci, j'ai beaucoup travaillé.", "Oui, il pleut encore.", "Non, c'est à gauche.", "Elle a douze ans aujourd'hui."], correctAnswer: "Merci, j'ai beaucoup travaillé.", speak: "Je te félicite pour ton résultat.", difficulty: 3 },
+  { id: 30, prompt: "— Tu préfères qu'on en reparle demain ?\n— ___", options: ["Oui, je serai plus disponible.", "Il a mangé une pomme.", "C'est un très vieux pont.", "Nous jouons au ballon."], correctAnswer: "Oui, je serai plus disponible.", speak: "Tu préfères qu'on en reparle demain ?", difficulty: 3 },
+];
