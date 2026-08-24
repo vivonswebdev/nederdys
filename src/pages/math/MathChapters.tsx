@@ -91,6 +91,19 @@ const MathChapters = () => {
           </p>
         </Link>
 
+        <Link
+          to={`/child/${childId}/math/jeux`}
+          className="block mb-8 border-4 border-kids-blue bg-kids-blue/30 rounded-3xl p-5 kids-shadow-card hover:kids-shadow-hover transition-shadow"
+        >
+          <span className="text-3xl mr-2">🎮</span>
+          <span className="text-lg font-bold text-foreground">
+            <BilingualText nl="Rekenspellen" fr="Jeux de maths par catégorie" stacked />
+          </span>
+          <p className="font-dyslexic text-muted-foreground mt-1">
+            Calcul, logique, écoute, vitesse — accès direct à chaque jeu.
+          </p>
+        </Link>
+
         <div className="flex gap-3 overflow-x-auto pb-2 mb-8 -mx-4 px-4 md:mx-0 md:px-0">
           {GRADE_TABS.map((g) => (
             <button
