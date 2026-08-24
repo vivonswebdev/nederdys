@@ -6,6 +6,7 @@ import { useChild } from "@/contexts/ChildContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useChildMode } from "@/contexts/ChildModeContext";
+import { setParentSession } from "@/lib/pin";
 
 const ProfileSelect = () => {
   const { children, setActiveChildId, loading } = useChild();
