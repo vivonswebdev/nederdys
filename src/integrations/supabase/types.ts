@@ -902,6 +902,76 @@ export type Database = {
           },
         ]
       }
+      sibling_challenges: {
+        Row: {
+          challenged_id: string
+          challenged_session_id: string | null
+          challenger_id: string
+          challenger_session_id: string | null
+          chapter_id: string | null
+          completed_at: string | null
+          created_at: string
+          expires_at: string
+          game_type: string | null
+          id: string
+          status: string
+          winner_id: string | null
+          xp_reward: number
+        }
+        Insert: {
+          challenged_id: string
+          challenged_session_id?: string | null
+          challenger_id: string
+          challenger_session_id?: string | null
+          chapter_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          expires_at?: string
+          game_type?: string | null
+          id?: string
+          status?: string
+          winner_id?: string | null
+          xp_reward?: number
+        }
+        Update: {
+          challenged_id?: string
+          challenged_session_id?: string | null
+          challenger_id?: string
+          challenger_session_id?: string | null
+          chapter_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          expires_at?: string
+          game_type?: string | null
+          id?: string
+          status?: string
+          winner_id?: string | null
+          xp_reward?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sibling_challenges_challenged_id_fkey"
+            columns: ["challenged_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sibling_challenges_challenger_id_fkey"
+            columns: ["challenger_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sibling_challenges_winner_id_fkey"
+            columns: ["winner_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -934,6 +1004,14 @@ export type Database = {
           p_child_id: string
           p_item_id?: string
           p_threshold: number
+        }
+        Returns: Json
+      }
+      complete_sibling_challenge: {
+        Args: {
+          p_challenge_id: string
+          p_child_id: string
+          p_session_id?: string
         }
         Returns: Json
       }
