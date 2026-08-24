@@ -1,4 +1,5 @@
 import { BilingualText } from "@/components/ui/BilingualText";
+import { mathTextToNl } from "@/lib/mathSpeechNl";
 import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
@@ -21,7 +22,7 @@ interface Props {
 
 export const ChronoCalcGame = ({ childId, level, backTo }: Props) => {
   const navigate = useNavigate();
-  const { playAudio, isPlaying } = useAudio();
+  const { playBilingual, isPlaying } = useAudio();
 
   const [sessionChallenges, setSessionChallenges] = useState<ChronoCalcChallenge[]>([]);
   const [index, setIndex] = useState(0);
@@ -64,7 +65,7 @@ export const ChronoCalcGame = ({ childId, level, backTo }: Props) => {
     setSelected(null);
     setFeedback(null);
 
-    const audioTimer = window.setTimeout(() => playAudio(current.audioUrl, current.audioText), 500);
+    const audioTimer = window.setTimeout(() => playBilingual({ url: current.audioUrl, text: current.audioText }, { text: mathTextToNl(current.audioText) ?? undefined }), 500);
     timerRef.current = window.setInterval(() => {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
@@ -202,7 +203,7 @@ export const ChronoCalcGame = ({ childId, level, backTo }: Props) => {
 
         <div className="flex justify-center mb-6">
           <button
-            onClick={() => playAudio(current.audioUrl, current.audioText)}
+            onClick={() => playBilingual({ url: current.audioUrl, text: current.audioText }, { text: mathTextToNl(current.audioText) ?? undefined })}
             className="inline-flex items-center gap-2 bg-kids-blue text-foreground font-bold px-5 py-3 rounded-xl kids-shadow-card"
           >
             <Play className="w-5 h-5" />

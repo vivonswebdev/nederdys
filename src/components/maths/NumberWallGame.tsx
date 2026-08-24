@@ -1,4 +1,5 @@
 import { BilingualText } from "@/components/ui/BilingualText";
+import { mathTextToNl } from "@/lib/mathSpeechNl";
 import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
@@ -21,7 +22,7 @@ interface Props {
 
 export const NumberWallGame = ({ childId, level, backTo }: Props) => {
   const navigate = useNavigate();
-  const { playAudio, isPlaying } = useAudio();
+  const { playBilingual, isPlaying } = useAudio();
 
   const [sessionChallenges, setSessionChallenges] = useState<NumberWallChallenge[]>([]);
   const [index, setIndex] = useState(0);
@@ -55,7 +56,7 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
     setAvailable(pickSession(current.bricks, current.bricks.length));
     setPlaced([]);
     setFeedback(null);
-    const timer = setTimeout(() => playAudio(current.audioUrl, current.audioText), 500);
+    const timer = setTimeout(() => playBilingual({ url: current.audioUrl, text: current.audioText }, { text: mathTextToNl(current.audioText) ?? undefined }), 500);
     return () => clearTimeout(timer);
   }, [current, playAudio]);
 
@@ -175,7 +176,7 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
 
         <div className="flex justify-center mb-6">
           <button
-            onClick={() => playAudio(current.audioUrl, current.audioText)}
+            onClick={() => playBilingual({ url: current.audioUrl, text: current.audioText }, { text: mathTextToNl(current.audioText) ?? undefined })}
             className="inline-flex items-center gap-2 bg-kids-blue text-foreground font-bold px-5 py-3 rounded-xl kids-shadow-card"
           >
             <Play className="w-5 h-5" />
