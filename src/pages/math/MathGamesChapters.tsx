@@ -61,7 +61,10 @@ const MathGamesChapters = () => {
             <BilingualText nl="Rekenspellen" fr="Jeux de maths" stacked />
           </h1>
           <p className="text-muted-foreground font-dyslexic mt-1">
-            {allGames.length} jeux · {categories.length - 1} catégories
+            <BilingualText
+              nl={`${allGames.length} spellen · ${categories.length - 1} categorieën`}
+              fr={`${allGames.length} jeux · ${categories.length - 1} catégories`}
+            />
           </p>
         </header>
 
