@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import { Exercise, Difficulty } from "@/data/chapters/types";
+import { chapterNl } from "@/data/nl/chaptersNl";
 import { numerationCe2Exercises } from "@/data/chapters/numeration-ce2";
 import { additionCe2Exercises } from "@/data/chapters/addition-ce2";
 import { soustractionCe2Exercises } from "@/data/chapters/soustraction-ce2";
@@ -68,6 +69,10 @@ export type ChapterGrade = "4eprimaire" | "5eprimaire" | "6eprimaire";
 export interface Chapter {
   id: string;
   name: string;
+  /** Titre néerlandais (toujours affiché à côté du français). */
+  nameNl?: string;
+  /** Sous-titre néerlandais. */
+  descriptionNl?: string;
   emoji: string;
   section: "bases" | "ce2" | "stretch" | "avance";
   subject: ChapterSubject;
@@ -163,8 +168,13 @@ const NL_CHAPTER_DEFS: ChapterDef[] = [
   { id: "dialogue-nl", name: "Petit dialogue", emoji: "🗨️", section: "stretch", description: "Compléter une conversation", exercises: dialogueNlExercises },
 ];
 
-export const CHAPTERS: Chapter[] = MATH_CHAPTERS.map((c) => ({ ...c, subject: "math" as const }));
-export const NL_CHAPTERS: Chapter[] = NL_CHAPTER_DEFS.map((c) => ({ ...c, subject: "nl" as const }));
+const withNl = (c: ChapterDef, subject: ChapterSubject): Chapter => {
+  const nl = chapterNl(c.id);
+  return { ...c, subject, nameNl: nl?.name, descriptionNl: nl?.description };
+};
+
+export const CHAPTERS: Chapter[] = MATH_CHAPTERS.map((c) => withNl(c, "math"));
+export const NL_CHAPTERS: Chapter[] = NL_CHAPTER_DEFS.map((c) => withNl(c, "nl"));
 export const ALL_CHAPTERS: Chapter[] = [...CHAPTERS, ...NL_CHAPTERS];
 
 export const chaptersBySubject = (subject: ChapterSubject) =>
@@ -178,6 +188,7 @@ export const getChapter = (id?: string) => ALL_CHAPTERS.find((c) => c.id === id)
 
 
 export const LEVEL_LABEL: Record<Difficulty, string> = { 1: "Facile", 2: "Moyen", 3: "Difficile" };
+export const LEVEL_LABEL_NL: Record<Difficulty, string> = { 1: "Makkelijk", 2: "Gemiddeld", 3: "Moeilijk" };
 export const LEVEL_EMOJI: Record<Difficulty, string> = { 1: "🌱", 2: "🌿", 3: "🌳" };
 export const LEVEL_CARD: Record<Difficulty, string> = {
   1: "bg-kids-green-light border-kids-green-dark",
