@@ -17,11 +17,19 @@ export const CHILD_LANGUAGES: { id: ChildLanguage; flag: string; label: Bilingua
 
 export const bi = (nl: string, fr: string): Bilingual => ({ nl, fr });
 
+/**
+ * Dernière langue d'enfant connue — permet aux helpers audio hors composant
+ * (palier Éveil) de respecter le choix fait à l'inscription.
+ */
+let currentChildLanguage: ChildLanguage = "nl";
+export const getChildLanguage = (): ChildLanguage => currentChildLanguage;
+
 /** Langue principale de l'enfant actif (affichée et lue en premier). */
 export function useChildLanguage(): ChildLanguage {
   const { activeChild } = useChild();
   const lang = (activeChild as { language?: string } | null)?.language;
-  return lang === "fr" ? "fr" : "nl";
+  currentChildLanguage = lang === "fr" ? "fr" : "nl";
+  return currentChildLanguage;
 }
 
 /** Retourne [texte principal, texte secondaire] selon la langue de l'enfant. */

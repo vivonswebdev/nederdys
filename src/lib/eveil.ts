@@ -1,3 +1,4 @@
+import { getChildLanguage } from "@/lib/bilingual";
 import { supabase } from "@/integrations/supabase/client";
 
 /** Tout contenu Éveil est bilingue : néerlandais d'abord, français ensuite. */
@@ -109,11 +110,14 @@ export function speakFr(text: string) {
   speak(text, "fr-BE");
 }
 
-/** Consigne bilingue : néerlandais puis français, sans texte à lire. */
+/** Consigne bilingue : langue de l'enfant d'abord, puis l'autre — sans texte à lire. */
 export function speakBilingual(phrase: Bilingual) {
   window.speechSynthesis?.cancel();
-  speak(phrase.nl, "nl-BE", () => {
-    window.setTimeout(() => speak(phrase.fr, "fr-BE"), 400);
+  const nlFirst = getChildLanguage() !== "fr";
+  const first = nlFirst ? { t: phrase.nl, l: "nl-BE" as const } : { t: phrase.fr, l: "fr-BE" as const };
+  const second = nlFirst ? { t: phrase.fr, l: "fr-BE" as const } : { t: phrase.nl, l: "nl-BE" as const };
+  speak(first.t, first.l, () => {
+    window.setTimeout(() => speak(second.t, second.l), 400);
   });
 }
 
