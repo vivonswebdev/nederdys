@@ -86,6 +86,7 @@ import { ChildProvider } from "@/contexts/ChildContext";
 import { ChildModeProvider } from "@/contexts/ChildModeContext";
 import { RequireParentPin } from "@/components/parent/RequireParentPin";
 import { ExitChildModeButton } from "@/components/child/ExitChildModeButton";
+import { ChildModeGuard } from "@/components/child/ChildModeGuard";
 
 import { useErrorTracker } from "@/hooks/useErrorTracker";
 
@@ -107,6 +108,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <ChildModeGuard>
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/accueil" element={<Home />} />
@@ -243,6 +245,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ExitChildModeButton />
+            </ChildModeGuard>
           </BrowserRouter>
         </TooltipProvider>
         </ChildModeProvider>
