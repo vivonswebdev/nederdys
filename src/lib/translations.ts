@@ -347,6 +347,18 @@ const t = {
   "tir.bravo": { fr: "Tu es un tireur d'élite des mots ! 🏆", nl: "Je bent een woordenscherpschutter! 🏆" },
 
   // Mot Troué game
+  "game.rimemalin.title": { fr: "Rime Malin", nl: "Slimme Rijm" },
+  "game.rimemalin.desc": { fr: "Trouve le mot qui rime avec celui que tu entends !", nl: "Zoek het woord dat rijmt op wat je hoort!" },
+  "rimemalin.instruction": { fr: "Écoute le mot, puis clique sur celui qui rime 🎵", nl: "Luister naar het woord en klik op het woord dat rijmt 🎵" },
+  "game.desyllabes.title": { fr: "Dé des Syllabes", nl: "Lettergreep-dobbelsteen" },
+  "game.desyllabes.desc": { fr: "Lance le dé et complète le mot avec la bonne syllabe !", nl: "Gooi de dobbelsteen en vul het woord aan met de juiste lettergreep!" },
+  "desyllabes.instruction": { fr: "Le dé a roulé : choisis la syllabe qui complète le mot 🎲", nl: "De dobbelsteen is gerold: kies de lettergreep die het woord aanvult 🎲" },
+  "game.cirquemots.title": { fr: "Le Cirque des Mots", nl: "Het Woordencircus" },
+  "game.cirquemots.desc": { fr: "Fais éclater la bulle du bon thème !", nl: "Laat de bel van het juiste thema knappen!" },
+  "cirquemots.instruction": { fr: "Fais éclater la bulle qui appartient au thème demandé 🎪", nl: "Laat de bel knappen die bij het gevraagde thema hoort 🎪" },
+  "game.dialogueeclair.title": { fr: "Dialogue Éclair", nl: "Bliksemgesprek" },
+  "game.dialogueeclair.desc": { fr: "Complète le mini-dialogue avec la bonne réponse !", nl: "Vul het minigesprek aan met het juiste antwoord!" },
+  "dialogueeclair.instruction": { fr: "Écoute la question, puis choisis la bonne réponse ⚡", nl: "Luister naar de vraag en kies het juiste antwoord ⚡" },
   "game.mottroue.title": { fr: "Le Mot Troué", nl: "Het Gatenwoord" },
   "game.mottroue.desc": { fr: "Complète les mots NL avec les bonnes lettres !", nl: "Vul de NL-woorden aan met de juiste letters!" },
   "mottroue.instruction": { fr: "Écoute le mot et bouche les trous ! 🕳️", nl: "Luister naar het woord en vul de gaten! 🕳️" },

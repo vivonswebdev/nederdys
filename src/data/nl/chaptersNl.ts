@@ -63,6 +63,7 @@ export const CHAPTERS_NL: Record<string, ChapterNl> = {
   "dagen-nl": { name: "Dagen en uur", description: "De dagen, hoe laat is het" },
   "de-of-het": { name: "De of het?", description: "Kies het juiste lidwoord" },
   "pluriel-noms": { name: "Het meervoud", description: "-en, -s, -eren" },
+  "rimes-nl": { name: "Rijmwoorden", description: "Woorden zoeken die rijmen" },
   "vrai-faux-nl": { name: "Waar of niet waar", description: "Luister naar de zin en beslis" },
   "question-reponse-nl": { name: "Vraag en antwoord", description: "Vraag en antwoord verbinden" },
   "conjugaison-presente": { name: "Vervoegen in de tegenwoordige tijd", description: "ik / jij / hij + werkwoord" },

@@ -59,6 +59,10 @@ export const GAMES: GameMeta[] = [
   { id: "oreillenombres", subject: "math", titleKey: "game.oreillenombres.title", descKey: "game.oreillenombres.desc", icon: "👂", color: "bg-kids-yellow", route: "/jeu/oreille-des-nombres" },
   { id: "tirnombres", subject: "math", titleKey: "game.tirnombres.title", descKey: "game.tirnombres.desc", icon: "🎯", color: "bg-kids-red", route: "/jeu/tir-aux-nombres" },
   { id: "moutonnoirmaths", subject: "math", titleKey: "game.moutonnoirmaths.title", descKey: "game.moutonnoirmaths.desc", icon: "🐑", color: "bg-kids-purple", route: "/jeu/mouton-noir-maths" },
+  { id: "rimemalin", subject: "nl", titleKey: "game.rimemalin.title", descKey: "game.rimemalin.desc", icon: "🎵", color: "bg-kids-blue", route: "/jeu/rime-malin" },
+  { id: "desyllabes", subject: "nl", titleKey: "game.desyllabes.title", descKey: "game.desyllabes.desc", icon: "🎲", color: "bg-kids-orange", route: "/jeu/de-syllabes" },
+  { id: "cirquemots", subject: "nl", titleKey: "game.cirquemots.title", descKey: "game.cirquemots.desc", icon: "🎪", color: "bg-kids-pink", route: "/jeu/cirque-mots" },
+  { id: "dialogueeclair", subject: "nl", titleKey: "game.dialogueeclair.title", descKey: "game.dialogueeclair.desc", icon: "⚡", color: "bg-kids-yellow", route: "/jeu/dialogue-eclair" },
   { id: "mouton", subject: "nl", titleKey: "game.mouton.title", descKey: "game.mouton.desc", icon: "🐑", color: "bg-neutral-800", route: "/jeu/mouton" },
 ];
 
@@ -97,6 +101,10 @@ export const GAME_CATEGORY: Record<string, string> = {
   mottroue: "orthographe",
   chrono: "phrases",
   mouton: "vocabulaire",
+  rimemalin: "phonologie",
+  desyllabes: "phonologie",
+  cirquemots: "vocabulaire",
+  dialogueeclair: "phrases",
   murnombres: "calcul",
   chronocalcul: "calcul",
   nombretroue: "calcul",
