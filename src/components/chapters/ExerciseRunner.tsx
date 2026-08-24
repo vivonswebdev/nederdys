@@ -249,6 +249,19 @@ export const ExerciseRunner = ({
             animate={{ scale: 1, opacity: 1 }}
             className="bg-card border-4 border-border rounded-3xl p-8 kids-shadow-card"
           >
+            {activeChild && (
+              <div className="flex justify-center mb-3">
+                <AvatarBuddy
+                  childId={activeChild.id}
+                  seed={activeChild.first_name}
+                  gender={(activeChild as { gender?: string }).gender ?? null}
+                  mood={mastered ? "happy" : "neutral"}
+                  trigger={reaction}
+                  onReactionDone={() => setReaction(null)}
+                  size="md"
+                />
+              </div>
+            )}
             <span className="text-6xl block mb-3">{mastered ? "🏆" : "💪"}</span>
             <h1 className="text-2xl font-bold text-foreground mb-1">
               <Bi phrase={mastered ? UI.wellDone : UI.keepGoing} stacked />
@@ -300,6 +313,8 @@ export const ExerciseRunner = ({
   }
 
   const ex = exercise!;
+  const runnerMood: AvatarMood =
+    feedback === "correct" ? "happy" : feedback === "wrong" ? "neutral" : "thinking";
 
   return (
     <div className="min-h-screen bg-background">
@@ -318,9 +333,22 @@ export const ExerciseRunner = ({
             {chapter.emoji} {chapter.nameNl ?? chapter.name} / {chapter.name} ·{" "}
             {LEVEL_EMOJI[level]} {LEVEL_LABEL_NL[level]} / {LEVEL_LABEL[level]}
           </p>
-          <p className="text-sm text-muted-foreground">
-            {index + 1} / {session.length}
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-sm text-muted-foreground">
+              {index + 1} / {session.length}
+            </p>
+            {activeChild && (
+              <AvatarBuddy
+                childId={activeChild.id}
+                seed={activeChild.first_name}
+                gender={(activeChild as { gender?: string }).gender ?? null}
+                mood={runnerMood}
+                trigger={reaction}
+                onReactionDone={() => setReaction(null)}
+                size="xs"
+              />
+            )}
+          </div>
         </div>
         <div className="h-3 bg-muted rounded-full overflow-hidden mb-6">
           <motion.div
