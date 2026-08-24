@@ -37,6 +37,7 @@ import { basesNumerationExercises } from "@/data/chapters/bases-numeration";
 import { deOfHetExercises } from "@/data/chapters/de-of-het";
 import { plurielNomsExercises } from "@/data/chapters/pluriel-noms";
 import { rimesNlExercises } from "@/data/chapters/rimes-nl";
+import { chasseFautesNlExercises } from "@/data/chapters/chasse-fautes-nl";
 import { conjugaisonPresenteExercises } from "@/data/chapters/conjugaison-presente";
 import { adjectifsNlExercises } from "@/data/chapters/adjectifs-nl";
 import { vraiFauxNlExercises } from "@/data/chapters/vrai-faux-nl";
@@ -163,6 +164,7 @@ const NL_CHAPTER_DEFS: ChapterDef[] = [
   { id: "de-of-het", name: "De ou Het ?", emoji: "🏷️", section: "ce2", description: "Choisir le bon article", exercises: deOfHetExercises },
   { id: "pluriel-noms", name: "Le pluriel", emoji: "➕", section: "ce2", description: "-en, -s, -eren", exercises: plurielNomsExercises },
   { id: "rimes-nl", name: "Les rimes", emoji: "🎵", section: "ce2", description: "Trouver les mots qui riment", exercises: rimesNlExercises },
+  { id: "chasse-fautes-nl", name: "La chasse aux fautes", emoji: "🔍", section: "ce2", description: "Repérer et corriger les erreurs", exercises: chasseFautesNlExercises },
   { id: "vrai-faux-nl", name: "Vrai ou Faux", emoji: "✅", section: "ce2", description: "Écoute la phrase et décide", exercises: vraiFauxNlExercises },
   { id: "question-reponse-nl", name: "Question-Réponse", emoji: "💭", section: "ce2", description: "Associer question et réponse", exercises: questionReponseNlExercises },
   { id: "conjugaison-presente", name: "Conjugaison au présent", emoji: "✍️", section: "stretch", description: "ik / jij / hij + verbe", exercises: conjugaisonPresenteExercises },

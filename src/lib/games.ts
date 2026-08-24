@@ -63,6 +63,10 @@ export const GAMES: GameMeta[] = [
   { id: "desyllabes", subject: "nl", titleKey: "game.desyllabes.title", descKey: "game.desyllabes.desc", icon: "🎲", color: "bg-kids-orange", route: "/jeu/de-syllabes" },
   { id: "cirquemots", subject: "nl", titleKey: "game.cirquemots.title", descKey: "game.cirquemots.desc", icon: "🎪", color: "bg-kids-pink", route: "/jeu/cirque-mots" },
   { id: "dialogueeclair", subject: "nl", titleKey: "game.dialogueeclair.title", descKey: "game.dialogueeclair.desc", icon: "⚡", color: "bg-kids-yellow", route: "/jeu/dialogue-eclair" },
+  { id: "chasseurerreurs", subject: "nl", titleKey: "game.chasseurerreurs.title", descKey: "game.chasseurerreurs.desc", icon: "🔍", color: "bg-kids-green", route: "/jeu/chasseur-erreurs" },
+  { id: "magicienmots", subject: "nl", titleKey: "game.magicienmots.title", descKey: "game.magicienmots.desc", icon: "🪄", color: "bg-kids-purple", route: "/jeu/magicien-mots" },
+  { id: "rouegenres", subject: "nl", titleKey: "game.rouegenres.title", descKey: "game.rouegenres.desc", icon: "🎡", color: "bg-kids-blue", route: "/jeu/roue-genres" },
+  { id: "echosons", subject: "nl", titleKey: "game.echosons.title", descKey: "game.echosons.desc", icon: "🔊", color: "bg-kids-orange", route: "/jeu/echo-sons" },
   { id: "mouton", subject: "nl", titleKey: "game.mouton.title", descKey: "game.mouton.desc", icon: "🐑", color: "bg-neutral-800", route: "/jeu/mouton" },
 ];
 
@@ -105,6 +109,10 @@ export const GAME_CATEGORY: Record<string, string> = {
   desyllabes: "phonologie",
   cirquemots: "vocabulaire",
   dialogueeclair: "phrases",
+  chasseurerreurs: "grammaire",
+  magicienmots: "grammaire",
+  rouegenres: "grammaire",
+  echosons: "phonologie",
   murnombres: "calcul",
   chronocalcul: "calcul",
   nombretroue: "calcul",
