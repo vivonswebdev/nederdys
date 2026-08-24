@@ -192,8 +192,8 @@ export const LESSONS: Lesson[] = [
         headingNl: "-en, het vaakste einde",
         content: "La plupart des noms ajoutent -en au pluriel.",
         contentNl: "De meeste woorden krijgen -en in het meervoud.",
-        example: "boek → boeken, tafel → tafels ? Non : tafel → tafels (voir plus bas).",
-        exampleNl: "boek → boeken.",
+        example: "boek → boeken, huis → huizen.",
+        exampleNl: "boek → boeken, huis → huizen.",
       },
       {
         heading: "-s après certaines fins",
