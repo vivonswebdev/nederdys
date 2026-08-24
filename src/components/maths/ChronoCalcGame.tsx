@@ -237,7 +237,7 @@ export const ChronoCalcGame = ({ childId, level, backTo }: Props) => {
 
         {feedback && (
           <div className="text-center mt-6 font-dyslexic text-lg font-bold">
-            {feedback === "correct" && <p className="text-kids-green-dark">✅ Bravo ! Bonne réponse !</p>}
+            {feedback === "correct" && <p className="text-kids-green-dark">✅ <BilingualText {...biFromFr("Bravo ! Bonne réponse !")} /></p>}
             {feedback === "wrong" && (
               <p className="text-destructive">❌ Oups ! La bonne réponse était {current.correctAnswer}</p>
             )}
