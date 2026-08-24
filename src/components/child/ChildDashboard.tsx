@@ -17,6 +17,7 @@ import { StreakCounter } from "./StreakCounter";
 import { ChildLevelBadge } from "./LevelBadge";
 import { SubjectCard } from "./SubjectCard";
 import { DailyChallenge } from "./DailyChallenge";
+import { SeasonPassCard } from "./SeasonPassCard";
 import { BadgeShowcase } from "./BadgeShowcase";
 import { AvatarRenderer } from "./AvatarRenderer";
 import { getAvatarConfig } from "@/lib/avatar";
@@ -247,6 +248,10 @@ const ChildDashboard = () => {
 
         <div className="space-y-2">
           <DailyChallenge childId={child.id} />
+        </section>
+
+        <section>
+          <SeasonPassCard childId={child.id} />
           <button
             onClick={() => navigate(`/child/${child.id}/defi`)}
             className="text-sm text-primary font-medium hover:underline"
