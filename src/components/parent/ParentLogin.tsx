@@ -9,11 +9,13 @@ import { toast } from "sonner";
 
 interface Props {
   onSuccess: () => void;
+  /** Optionnel : affiche un bouton "Annuler" (utilisé par le mode enfant). */
+  onCancel?: () => void;
 }
 
 const digits = (v: string) => v.replace(/\D/g, "").slice(0, 4);
 
-export const ParentLogin = ({ onSuccess }: Props) => {
+export const ParentLogin = ({ onSuccess, onCancel }: Props) => {
   const { user } = useAuth();
   const [mode, setMode] = useState<"loading" | "verify" | "create">("loading");
   const [pin, setPin] = useState("");
