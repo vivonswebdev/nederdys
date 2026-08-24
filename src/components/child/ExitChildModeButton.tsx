@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Lock } from "lucide-react";
 import { ParentLogin } from "@/components/parent/ParentLogin";
 import { useChildMode } from "@/contexts/ChildModeContext";
 
@@ -9,6 +11,7 @@ import { useChildMode } from "@/contexts/ChildModeContext";
 export function ExitChildModeButton() {
   const { isChildMode, exitChildMode } = useChildMode();
   const [showPinPrompt, setShowPinPrompt] = useState(false);
+  const navigate = useNavigate();
 
   if (!isChildMode) return null;
 
@@ -16,10 +19,10 @@ export function ExitChildModeButton() {
     <>
       <button
         onClick={() => setShowPinPrompt(true)}
-        className="fixed bottom-2 right-2 z-40 opacity-40 hover:opacity-100 transition-opacity text-xs min-w-[44px] min-h-[44px] rounded-full bg-card border border-border"
-        aria-label="Quitter le mode enfant (code PIN parent)"
+        className="fixed bottom-2 right-2 z-40 opacity-40 hover:opacity-100 transition-opacity flex items-center gap-1 text-xs font-bold px-3 min-h-[44px] rounded-full bg-card border border-border text-muted-foreground"
+        aria-label="Espace parent — code PIN requis"
       >
-        🔒
+        <Lock className="w-4 h-4" /> Parent
       </button>
 
       {showPinPrompt && (
@@ -29,6 +32,7 @@ export function ExitChildModeButton() {
               onSuccess={() => {
                 exitChildMode();
                 setShowPinPrompt(false);
+                navigate("/parent/dashboard");
               }}
               onCancel={() => setShowPinPrompt(false)}
             />

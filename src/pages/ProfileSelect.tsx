@@ -11,11 +11,15 @@ const ProfileSelect = () => {
   const { children, setActiveChildId, loading } = useChild();
   const { user } = useAuth();
   const { t } = useLanguage();
-  const { isChildMode } = useChildMode();
+  const { isChildMode, enterChildMode } = useChildMode();
   const navigate = useNavigate();
 
+  // Choisir un enfant verrouille l'appareil sur son espace :
+  // ses jeux, son classement, sa page dédiée. Retour au menu parent = code PIN.
   const pick = (id: string) => {
     setActiveChildId(id);
+    setParentSession(false);
+    enterChildMode(id);
     navigate(`/child/${id}`);
   };
 
