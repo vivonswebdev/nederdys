@@ -19,6 +19,7 @@ const AddChild = () => {
   const [avatar, setAvatar] = useState("🐸");
   const [dysLevel, setDysLevel] = useState("moderate");
   const [gender, setGender] = useState<"girl" | "boy">("girl");
+  const [language, setLanguage] = useState<ChildLanguage>("nl");
   const [schoolLevel, setSchoolLevel] = useState<string>(DEFAULT_SCHOOL_LEVEL);
   const [loading, setLoading] = useState(false);
 
