@@ -13,6 +13,8 @@ import {
   Subject,
 } from "@/lib/games";
 import { chaptersBySubject, chaptersListRoute } from "@/lib/chapters";
+import { BilingualText } from "@/components/ui/BilingualText";
+import { STORIES } from "@/data/stories";
 
 const SubjectPage = () => {
   const { subject, id } = useParams<{ subject: string; id?: string }>();
