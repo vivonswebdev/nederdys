@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Navbar } from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SCHOOL_LEVELS, DEFAULT_SCHOOL_LEVEL, GENDER_OPTIONS } from "@/lib/schoolLevels";
+import { CHILD_LANGUAGES, ChildLanguage } from "@/lib/bilingual";
 
 const AVATARS = ["🐸", "🦁", "🐯", "🦊", "🐻", "🐼", "🐰", "🦒"];
 
@@ -28,7 +29,7 @@ const AddChild = () => {
     if (!user) return;
     setLoading(true);
     try {
-      const { error } = await supabase.from("children").insert({ user_id: user.id, first_name: name, age, avatar_emoji: avatar, dys_level: dysLevel, gender, school_level: schoolLevel });
+      const { error } = await supabase.from("children").insert({ user_id: user.id, first_name: name, age, avatar_emoji: avatar, dys_level: dysLevel, gender, school_level: schoolLevel, language });
       if (error) throw error;
       toast.success(`${name} ${t("addChild.success")}`);
       navigate("/");
@@ -72,6 +73,30 @@ const AddChild = () => {
                   </button>
                 ))}
               </div>
+            </div>
+            <div>
+              <label className="block text-sm font-bold text-foreground mb-2">
+                Taal van het kind / Langue de l'enfant
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {CHILD_LANGUAGES.map((l) => (
+                  <button
+                    key={l.id}
+                    type="button"
+                    onClick={() => setLanguage(l.id)}
+                    className={`py-3 rounded-xl border-2 font-bold text-sm transition-colors ${
+                      language === l.id
+                        ? "border-primary bg-primary/10 text-primary"
+                        : "border-border bg-muted text-muted-foreground hover:bg-accent"
+                    }`}
+                  >
+                    {l.flag} {l.label.nl} / {l.label.fr}
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Tout reste affiché en NL et FR : cette langue est simplement lue et affichée en premier.
+              </p>
             </div>
             <div>
               <label className="block text-sm font-bold text-foreground mb-2">Niveau scolaire (Belgique)</label>
