@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -83,10 +85,7 @@ const MiroirGame = () => {
 
   const speak = useCallback(() => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(current.sound);
-    u.lang = "nl-NL";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(current.sound, undefined, 0.6);
     sounds.click();
   }, [current]);
 
@@ -178,7 +177,7 @@ const MiroirGame = () => {
         <div className="container flex items-center justify-between">
           <Link to="/">
             <Button variant="ghost" size="sm" className="text-purple-200 hover:text-white hover:bg-purple-800">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <div className="flex items-center gap-3">
@@ -188,7 +187,7 @@ const MiroirGame = () => {
             </span>
           </div>
           <span className="text-lg font-bold text-purple-100">
-            {t("game.score")}: {score}/{totalRounds}
+            <Tb k="game.score" />: {score}/{totalRounds}
           </span>
         </div>
       </div>
@@ -211,18 +210,18 @@ const MiroirGame = () => {
           {finished ? (
             <motion.div key="done" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center space-y-6">
               <div className="text-6xl mb-4">🪞✨</div>
-              <h2 className="text-3xl font-bold text-white">{t("game.bravo")}</h2>
+              <h2 className="text-3xl font-bold text-white"><Tb k="game.bravo" /></h2>
               <p className="text-xl text-purple-200">
-                {t("game.score")}: {score}/{totalRounds}
+                <Tb k="game.score" />: {score}/{totalRounds}
               </p>
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-purple-500 hover:bg-purple-600 text-white">
-                  <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4 mr-2" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" size="lg" className="border-purple-400 text-purple-100 hover:bg-purple-800">
-                    <Home className="w-4 h-4 mr-2" /> {t("game.home")}
+                    <Home className="w-4 h-4 mr-2" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>
@@ -238,8 +237,8 @@ const MiroirGame = () => {
                 >
                   🪞
                 </motion.div>
-                <h2 className="text-xl font-bold text-white">{t("miroir.instruction")}</h2>
-                <p className="text-purple-200 text-sm">{t("miroir.hint")}</p>
+                <h2 className="text-xl font-bold text-white"><BilingualInstruction k="miroir.instruction" /></h2>
+                <p className="text-purple-200 text-sm"><Tb k="miroir.hint" /></p>
               </div>
 
               {/* Sound display + listen */}
@@ -263,7 +262,7 @@ const MiroirGame = () => {
                   onClick={speak}
                   className="gap-2 border-purple-400 text-purple-200 hover:bg-purple-400/20 hover:text-purple-100"
                 >
-                  <Volume2 className="w-5 h-5" /> {t("miroir.listen")}
+                  <Volume2 className="w-5 h-5" /> <Tb k="miroir.listen" />
                 </Button>
               </div>
 
@@ -337,8 +336,8 @@ const MiroirGame = () => {
                     }`}
                   >
                     {feedback === "correct"
-                      ? `${t("miroir.correct")}`
-                      : `${t("miroir.wrong")} → ${current.targetLetter}`}
+                      ? `$<Tb k="miroir.correct" />`
+                      : `$<Tb k="miroir.wrong" /> → ${current.targetLetter}`}
                   </motion.div>
                 )}
               </AnimatePresence>

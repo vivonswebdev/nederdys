@@ -1,4 +1,5 @@
 import { BilingualText } from "@/components/ui/BilingualText";
+import { mathTextToNl } from "@/lib/mathSpeechNl";
 import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
@@ -21,7 +22,7 @@ interface Props {
 
 export const NumberWallGame = ({ childId, level, backTo }: Props) => {
   const navigate = useNavigate();
-  const { playAudio, isPlaying } = useAudio();
+  const { playBilingual, isPlaying } = useAudio();
 
   const [sessionChallenges, setSessionChallenges] = useState<NumberWallChallenge[]>([]);
   const [index, setIndex] = useState(0);
@@ -55,9 +56,9 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
     setAvailable(pickSession(current.bricks, current.bricks.length));
     setPlaced([]);
     setFeedback(null);
-    const timer = setTimeout(() => playAudio(current.audioUrl, current.audioText), 500);
+    const timer = setTimeout(() => playBilingual({ url: current.audioUrl, text: current.audioText }, { text: mathTextToNl(current.audioText) ?? undefined }), 500);
     return () => clearTimeout(timer);
-  }, [current, playAudio]);
+  }, [current, playBilingual]);
 
   async function finishSession(finalScore: number, finalErrors: number) {
     if (savedRef.current) return;
@@ -160,10 +161,12 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
         </button>
 
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold">🧱 Le Mur des Nombres — Niveau {level}</h1>
+          <h1 className="text-2xl font-bold">
+            🧱 <BilingualText {...biFromFr("Le Mur des Nombres")} /> — <BilingualText {...biFromFr("Niveau")} /> {level}
+          </h1>
           <p className="text-muted-foreground font-dyslexic">
-            Défi {index + 1}/{sessionChallenges.length} · Score : {score}/{sessionChallenges.length} ·{" "}
-            {xpPerCorrect} XP par réponse
+            <BilingualText {...biFromFr("Défi")} /> {index + 1}/{sessionChallenges.length} · <BilingualText {...biFromFr("Score")} />{" "}
+            {score}/{sessionChallenges.length} · {xpPerCorrect} <BilingualText {...biFromFr("XP par réponse")} />
           </p>
           <div className="h-3 bg-muted rounded-full overflow-hidden mt-3">
             <motion.div
@@ -175,11 +178,11 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
 
         <div className="flex justify-center mb-6">
           <button
-            onClick={() => playAudio(current.audioUrl, current.audioText)}
+            onClick={() => playBilingual({ url: current.audioUrl, text: current.audioText }, { text: mathTextToNl(current.audioText) ?? undefined })}
             className="inline-flex items-center gap-2 bg-kids-blue text-foreground font-bold px-5 py-3 rounded-xl kids-shadow-card"
           >
             <Play className="w-5 h-5" />
-            {isPlaying ? "Écoute en cours..." : "Réécouter la consigne"}
+            <BilingualText {...biFromFr(isPlaying ? "Écoute en cours..." : "Réécouter la consigne")} />
           </button>
         </div>
 

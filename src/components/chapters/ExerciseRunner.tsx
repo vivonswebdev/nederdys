@@ -22,7 +22,9 @@ import {
   shuffle,
 } from "@/lib/chapters";
 import { BilingualText, Bi } from "@/components/ui/BilingualText";
-import { UI, biFromFr, speakBoth, useChildLanguage } from "@/lib/bilingual";
+import { UI, biFromFr, speakBoth, useChildLanguage, type Bilingual } from "@/lib/bilingual";
+import { nlFor } from "@/data/nl/uiStringsNl";
+import type { QcmExercise } from "@/data/chapters/types";
 import { ShareAchievement } from "@/components/child/ShareAchievement";
 import { useChild } from "@/contexts/ChildContext";
 
@@ -56,6 +58,15 @@ function playExercise(ex: Exercise, primary: "nl" | "fr") {
     return;
   }
   speakBoth({ nl: ex.questionNl ?? ex.question, fr: ex.question }, primary);
+}
+
+/** Libellé bilingue d'une option de QCM (NL fourni par la donnée ou le lexique). */
+function optionLabel(ex: QcmExercise, opt: string | number): Bilingual {
+  const fr = String(opt);
+  const i = ex.options.findIndex((o) => String(o) === fr);
+  const explicit = ex.optionsNl?.[i];
+  const nl = explicit !== undefined ? String(explicit) : (nlFor(fr) ?? fr);
+  return { nl, fr };
 }
 
 export const ExerciseRunner = ({
@@ -334,16 +345,23 @@ export const ExerciseRunner = ({
           {/* QCM */}
           {ex.type === "qcm" && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {shuffledOptions.map((opt) => (
-                <button
-                  key={String(opt)}
-                  disabled={!!feedback}
-                  onClick={() => validate(String(opt) === String(ex.answer), String(opt))}
-                  className="border-4 border-border rounded-2xl p-4 text-lg font-bold font-dyslexic bg-background hover:bg-muted transition-colors disabled:opacity-70"
-                >
-                  {String(opt)}
-                </button>
-              ))}
+              {shuffledOptions.map((opt) => {
+                const label = optionLabel(ex, opt);
+                return (
+                  <button
+                    key={String(opt)}
+                    disabled={!!feedback}
+                    onClick={() => validate(String(opt) === String(ex.answer), String(opt))}
+                    className="border-4 border-border rounded-2xl p-4 text-lg font-bold font-dyslexic bg-background hover:bg-muted transition-colors disabled:opacity-70"
+                  >
+                    {label.nl === label.fr ? (
+                      label.fr
+                    ) : (
+                      <BilingualText nl={label.nl} fr={label.fr} stacked />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           )}
 

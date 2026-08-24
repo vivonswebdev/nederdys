@@ -168,3 +168,38 @@ export const hasNl = (fr: string): boolean => {
   const trimmed = fr.trim();
   return Boolean(FR_TO_NL[trimmed] ?? nlFor(trimmed));
 };
+
+/* ------------------------------------------------------------------ */
+/* Clés i18n → contenu bilingue (jeux et exercices 6-12 ans)           */
+/* ------------------------------------------------------------------ */
+
+/** Transforme une clé du dictionnaire i18n en contenu bilingue NL+FR. */
+export function biFromKey(key: string): Bilingual {
+  const nl = (translations.nl as Record<string, string>)[key];
+  const fr = (translations.fr as Record<string, string>)[key];
+  return { nl: nl ?? fr ?? key, fr: fr ?? nl ?? key };
+}
+
+/** Lit une clé i18n dans les deux langues (langue de l'enfant en premier). */
+export function speakKeyBoth(key: string, primary: ChildLanguage = getChildLanguage()) {
+  speakBoth(biFromKey(key), primary);
+}
+
+/**
+ * Lit un mot/phrase cible en néerlandais (phonologie de Flandre), puis sa
+ * traduction française si elle est connue — même comportement bilingue
+ * que le palier Éveil, appliqué au contenu des jeux 6-12 ans.
+ */
+export function speakTarget(nlText: string, frText?: string, rate = 0.8) {
+  if (typeof window === "undefined" || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(nlText);
+  utter.lang = "nl-BE";
+  utter.rate = rate;
+  const nlVoice = window.speechSynthesis.getVoices().find((v) => v.lang.startsWith("nl"));
+  if (nlVoice) utter.voice = nlVoice;
+  if (frText && frText.trim() && frText.trim() !== nlText.trim()) {
+    utter.onend = () => window.setTimeout(() => speakOne(frText, "fr-BE"), 400);
+  }
+  window.speechSynthesis.speak(utter);
+}

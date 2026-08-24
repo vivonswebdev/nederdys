@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Tb } from "@/components/ui/BilingualText";
 import { Difficulty } from "@/lib/database";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -20,7 +21,7 @@ export const DifficultyIndicator = ({ difficulty }: DifficultyIndicatorProps) =>
       animate={{ opacity: 1, scale: 1 }}
       className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-bold ${colors[difficulty]}`}
     >
-      {t(`difficulty.${difficulty}` as any)}
+      <Tb k={`difficulty.${difficulty}`} />
     </motion.div>
   );
 };

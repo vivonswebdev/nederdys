@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2, Palette } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -97,10 +99,7 @@ const PeintreGame = () => {
 
   const speak = useCallback((text?: string) => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(text || current.word);
-    u.lang = "nl-NL";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(text || current.word, undefined, 0.6);
     sounds.click();
   }, [current]);
 
@@ -125,10 +124,7 @@ const PeintreGame = () => {
 
     // Speak the syllable
     if (current) {
-      const u = new SpeechSynthesisUtterance(current.syllables[index]);
-      u.lang = "nl-NL";
-      u.rate = 0.5;
-      speechSynthesis.speak(u);
+      speakTarget(current.syllables[index], undefined, 0.5);
     }
   }, [feedback, current]);
 
@@ -195,7 +191,7 @@ const PeintreGame = () => {
         <div className="container flex items-center justify-between">
           <Link to="/">
             <Button variant="ghost" size="sm" className="text-pink-200 hover:text-white hover:bg-pink-800/50">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <div className="flex items-center gap-3">
@@ -205,7 +201,7 @@ const PeintreGame = () => {
             </span>
           </div>
           <span className="text-lg font-bold text-pink-100">
-            {t("game.score")}: {score}/{totalRounds}
+            <Tb k="game.score" />: {score}/{totalRounds}
           </span>
         </div>
       </div>
@@ -234,19 +230,19 @@ const PeintreGame = () => {
               >
                 🎨
               </motion.div>
-              <h2 className="text-3xl font-bold text-white">{t("game.bravo")}</h2>
+              <h2 className="text-3xl font-bold text-white"><Tb k="game.bravo" /></h2>
               <p className="text-xl text-pink-200">
-                {t("game.score")}: {score}/{totalRounds}
+                <Tb k="game.score" />: {score}/{totalRounds}
               </p>
-              <p className="text-pink-300">{t("peintre.bravo")}</p>
+              <p className="text-pink-300"><Tb k="peintre.bravo" /></p>
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-pink-600 hover:bg-pink-700 text-white">
-                  <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4 mr-2" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" size="lg" className="border-pink-400 text-pink-100 hover:bg-pink-800/50">
-                    <Home className="w-4 h-4 mr-2" /> {t("game.home")}
+                    <Home className="w-4 h-4 mr-2" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>
@@ -255,8 +251,8 @@ const PeintreGame = () => {
             <motion.div key={round} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} className="space-y-8 mt-8">
               {/* Instruction */}
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-bold text-white">{t("peintre.instruction")}</h2>
-                <p className="text-pink-300 text-sm">{t("peintre.hint")}</p>
+                <h2 className="text-xl font-bold text-white"><BilingualInstruction k="peintre.instruction" /></h2>
+                <p className="text-pink-300 text-sm"><Tb k="peintre.hint" /></p>
               </div>
 
               {/* Word display with listen button */}
@@ -277,7 +273,7 @@ const PeintreGame = () => {
                   </span>
                   {current.phonemeHighlight && (
                     <p className="text-pink-300 text-sm mt-2">
-                      🔊 {t("peintre.specialSound")}: <span className="font-bold text-yellow-300">"{current.phonemeHighlight}"</span>
+                      🔊 <Tb k="peintre.specialSound" />: <span className="font-bold text-yellow-300">"{current.phonemeHighlight}"</span>
                     </p>
                   )}
                 </motion.div>
@@ -287,7 +283,7 @@ const PeintreGame = () => {
                   onClick={() => speak()}
                   className="gap-2 border-pink-500/50 text-pink-200 hover:bg-pink-500/20"
                 >
-                  <Volume2 className="w-4 h-4" /> {t("peintre.listen")}
+                  <Volume2 className="w-4 h-4" /> <Tb k="peintre.listen" />
                 </Button>
               </div>
 
@@ -333,7 +329,7 @@ const PeintreGame = () => {
               </div>
 
               <p className="text-center text-pink-200/80 text-sm">
-                {t("peintre.tapHint")}
+                <Tb k="peintre.tapHint" />
               </p>
 
               {/* Validate */}
@@ -345,7 +341,7 @@ const PeintreGame = () => {
                   className="bg-pink-500 hover:bg-pink-600 text-white px-8"
                 >
                   <Palette className="w-5 h-5 mr-2" />
-                  {t("peintre.validate")}
+                  <Tb k="peintre.validate" />
                 </Button>
               </div>
 
@@ -367,7 +363,7 @@ const PeintreGame = () => {
                     </p>
                     {feedback === "wrong" && (
                       <p className="text-pink-200 text-sm mt-1">
-                        {t("peintre.stressHint")}: <span className="font-bold text-yellow-300">"{current.syllables[current.stressIndex]}"</span>
+                        <Tb k="peintre.stressHint" />: <span className="font-bold text-yellow-300">"{current.syllables[current.stressIndex]}"</span>
                       </p>
                     )}
                   </motion.div>

@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence, Reorder } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -107,18 +109,12 @@ const TrainGame = () => {
 
   const speakWord = useCallback(() => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(current.word);
-    u.lang = "nl-NL";
-    u.rate = 0.75;
-    speechSynthesis.speak(u);
+    speakTarget(current.word, undefined, 0.75);
     sounds.click();
   }, [current]);
 
   const speakSyllable = useCallback((syllable: string) => {
-    const u = new SpeechSynthesisUtterance(syllable);
-    u.lang = "nl-NL";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(syllable, undefined, 0.6);
     sounds.click();
   }, []);
 
@@ -185,7 +181,7 @@ const TrainGame = () => {
         <div className="container flex items-center justify-between">
           <Link to="/">
             <Button variant="ghost" size="sm" className="text-emerald-100 hover:text-white hover:bg-emerald-600">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <div className="flex items-center gap-3">
@@ -195,7 +191,7 @@ const TrainGame = () => {
             </span>
           </div>
           <div className="text-lg font-bold text-emerald-100">
-            {t("game.score")}: {score}/{totalRounds}
+            <Tb k="game.score" />: {score}/{totalRounds}
           </div>
         </div>
       </div>
@@ -221,22 +217,22 @@ const TrainGame = () => {
               >
                 🚂💨
               </motion.div>
-              <h2 className="text-3xl font-bold text-foreground">{t("game.bravo")}</h2>
+              <h2 className="text-3xl font-bold text-foreground"><Tb k="game.bravo" /></h2>
               <div className="flex items-center justify-center gap-2">
                 <span className="text-4xl">🐸</span>
                 <p className="text-xl text-muted-foreground font-bold">Goed gedaan!</p>
               </div>
               <p className="text-lg text-muted-foreground">
-                {t("game.score")}: {score}/{totalRounds}
+                <Tb k="game.score" />: {score}/{totalRounds}
               </p>
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                  <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4 mr-2" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" size="lg">
-                    <Home className="w-4 h-4 mr-2" /> {t("game.home")}
+                    <Home className="w-4 h-4 mr-2" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>
@@ -252,8 +248,8 @@ const TrainGame = () => {
                 >
                   🐸🧢
                 </motion.div>
-                <h2 className="text-xl font-bold text-foreground">{t("train.instruction")}</h2>
-                <p className="text-muted-foreground text-sm">{t("train.hint")}</p>
+                <h2 className="text-xl font-bold text-foreground"><BilingualInstruction k="train.instruction" /></h2>
+                <p className="text-muted-foreground text-sm"><Tb k="train.hint" /></p>
               </div>
 
               {/* Listen to full word */}
@@ -264,7 +260,7 @@ const TrainGame = () => {
                   onClick={speakWord}
                   className="gap-2 border-emerald-400 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900"
                 >
-                  <Volume2 className="w-5 h-5" /> {t("train.listenWord")}
+                  <Volume2 className="w-5 h-5" /> <Tb k="train.listenWord" />
                 </Button>
               </div>
 
@@ -346,7 +342,7 @@ const TrainGame = () => {
                   disabled={feedback === "correct"}
                   className="text-lg px-8 py-6 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white"
                 >
-                  {t("train.depart")} 🚂💨
+                  <Tb k="train.depart" /> 🚂💨
                 </Button>
               </div>
 
@@ -364,8 +360,8 @@ const TrainGame = () => {
                     }`}
                   >
                     {feedback === "correct"
-                      ? `✅ ${t("train.correct")} → ${current.word}`
-                      : `🚃💨 ${t("train.wrong")}`}
+                      ? `✅ $<Tb k="train.correct" /> → ${current.word}`
+                      : `🚃💨 $<Tb k="train.wrong" />`}
                   </motion.div>
                 )}
               </AnimatePresence>

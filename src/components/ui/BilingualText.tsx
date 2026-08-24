@@ -1,4 +1,5 @@
-import { Bilingual, useChildLanguage } from "@/lib/bilingual";
+import { Volume2 } from "lucide-react";
+import { Bilingual, biFromKey, speakBoth, useChildLanguage } from "@/lib/bilingual";
 
 interface Props {
   nl: string;
@@ -58,3 +59,38 @@ export const Bi = ({ phrase, ...rest }: { phrase: Bilingual } & Omit<Props, "nl"
 );
 
 export default BilingualText;
+
+/* ------------------------------------------------------------------ */
+/* Affichage bilingue à partir d'une clé i18n (jeux/exercices 6-12)    */
+/* ------------------------------------------------------------------ */
+
+/** Affiche une clé du dictionnaire i18n simultanément en NL et en FR. */
+export const Tb = ({ k, ...rest }: { k: string } & Omit<Props, "nl" | "fr">) => {
+  const phrase = biFromKey(k);
+  return <BilingualText nl={phrase.nl} fr={phrase.fr} {...rest} />;
+};
+
+/** Consigne bilingue + bouton d'écoute (NL puis FR). */
+export function BilingualInstruction({
+  k,
+  className = "",
+}: {
+  k: string;
+  className?: string;
+}) {
+  const childLang = useChildLanguage();
+  const phrase = biFromKey(k);
+  return (
+    <span className={`inline-flex items-center justify-center gap-2 flex-wrap ${className}`}>
+      <BilingualText nl={phrase.nl} fr={phrase.fr} stacked />
+      <button
+        type="button"
+        aria-label={childLang === "fr" ? "Écouter la consigne" : "Luister naar de opdracht"}
+        onClick={() => speakBoth(phrase, childLang)}
+        className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-full text-primary hover:bg-primary/10 transition-colors"
+      >
+        <Volume2 className="w-5 h-5" />
+      </button>
+    </span>
+  );
+}

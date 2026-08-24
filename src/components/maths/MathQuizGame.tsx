@@ -1,4 +1,5 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { mathTextToNl } from "@/lib/mathSpeechNl";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, Volume2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +53,7 @@ export function MathQuizGame<T extends MathChallengeBase>({
   optionsClassName = "grid grid-cols-2 sm:grid-cols-4 gap-3",
 }: Props<T>) {
   const navigate = useNavigate();
-  const { playAudio, isPlaying } = useAudio();
+  const { playBilingual, isPlaying } = useAudio();
   const childLang = useChildLanguage();
   const titleBi = biFromFr(title);
   const { challenge, index, total, score, setScore, errors, setErrors, isLast, next } =
@@ -85,7 +86,7 @@ export function MathQuizGame<T extends MathChallengeBase>({
     setOptions(getOptions(challenge));
 
     const audio = getAudio(challenge);
-    const audioTimer = window.setTimeout(() => playAudio(audio.url, audio.text), 400);
+    const audioTimer = window.setTimeout(() => playBilingual({ url: audio.url, text: audio.text }, { text: mathTextToNl(audio.text) ?? undefined }), 400);
 
     if (getTimeLimit) {
       setTimeLeft(getTimeLimit(challenge));
@@ -99,7 +100,7 @@ export function MathQuizGame<T extends MathChallengeBase>({
       clearTimer();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [challenge, playAudio]);
+  }, [challenge, playBilingual]);
 
   async function finishSession(finalScore: number, finalErrors: number) {
     if (savedRef.current) return;
@@ -241,7 +242,7 @@ export function MathQuizGame<T extends MathChallengeBase>({
           <button
             onClick={() => {
               const a = getAudio(challenge);
-              playAudio(a.url, a.text);
+              playBilingual({ url: a.url, text: a.text }, { text: mathTextToNl(a.text) ?? undefined });
             }}
             disabled={isPlaying}
             className="inline-flex items-center gap-2 bg-kids-blue text-foreground font-bold px-5 py-3 rounded-2xl kids-shadow-card disabled:opacity-60"

@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -92,10 +94,7 @@ const PuzzleGame = () => {
   const speak = useCallback(() => {
     if (!current) return;
     const fullSentence = current.sentence.replace("___", current.answer);
-    const u = new SpeechSynthesisUtterance(fullSentence);
-    u.lang = "nl-NL";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(fullSentence, undefined, 0.6);
     sounds.click();
   }, [current]);
 
@@ -177,7 +176,7 @@ const PuzzleGame = () => {
         <div className="container flex items-center justify-between">
           <Link to="/">
             <Button variant="ghost" size="sm" className="text-teal-200 hover:text-white hover:bg-teal-800/50">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <div className="flex items-center gap-3">
@@ -187,7 +186,7 @@ const PuzzleGame = () => {
             </span>
           </div>
           <span className="text-lg font-bold text-teal-100">
-            {t("game.score")}: {score}/{totalRounds}
+            <Tb k="game.score" />: {score}/{totalRounds}
           </span>
         </div>
       </div>
@@ -241,19 +240,19 @@ const PuzzleGame = () => {
               >
                 🧩
               </motion.div>
-              <h2 className="text-3xl font-bold text-white">{t("game.bravo")}</h2>
+              <h2 className="text-3xl font-bold text-white"><Tb k="game.bravo" /></h2>
               <p className="text-xl text-teal-200">
-                {t("game.score")}: {score}/{totalRounds}
+                <Tb k="game.score" />: {score}/{totalRounds}
               </p>
-              <p className="text-teal-300">{t("puzzle.bravo")}</p>
+              <p className="text-teal-300"><Tb k="puzzle.bravo" /></p>
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-teal-600 hover:bg-teal-700 text-white">
-                  <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4 mr-2" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" size="lg" className="border-teal-400 text-teal-100 hover:bg-teal-800/50">
-                    <Home className="w-4 h-4 mr-2" /> {t("game.home")}
+                    <Home className="w-4 h-4 mr-2" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>
@@ -262,8 +261,8 @@ const PuzzleGame = () => {
             <motion.div key={round} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} className="space-y-8 mt-8">
               {/* Instruction */}
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-bold text-white">{t("puzzle.instruction")}</h2>
-                <p className="text-teal-300 text-sm">{t("puzzle.hint")}</p>
+                <h2 className="text-xl font-bold text-white"><BilingualInstruction k="puzzle.instruction" /></h2>
+                <p className="text-teal-300 text-sm"><Tb k="puzzle.hint" /></p>
               </div>
 
               {/* Sentence with blank */}
@@ -287,7 +286,7 @@ const PuzzleGame = () => {
                   onClick={speak}
                   className="gap-2 border-teal-500/50 text-teal-200 hover:bg-teal-500/20"
                 >
-                  <Volume2 className="w-4 h-4" /> {t("puzzle.listen")}
+                  <Volume2 className="w-4 h-4" /> <Tb k="puzzle.listen" />
                 </Button>
               </div>
 
@@ -340,7 +339,7 @@ const PuzzleGame = () => {
                     </p>
                     {feedback === "wrong" && (
                       <p className="text-teal-200 text-sm mt-1">
-                        {t("puzzle.answerWas")}: <span className="font-bold text-emerald-300">"{current.answer}"</span>
+                        <Tb k="puzzle.answerWas" />: <span className="font-bold text-emerald-300">"{current.answer}"</span>
                       </p>
                     )}
                   </motion.div>

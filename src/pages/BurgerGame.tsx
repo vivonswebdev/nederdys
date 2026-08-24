@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence, Reorder } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -167,10 +169,7 @@ const BurgerGame = () => {
 
   const speak = useCallback(() => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(current.sentence);
-    u.lang = "nl-NL";
-    u.rate = 0.8;
-    speechSynthesis.speak(u);
+    speakTarget(current.sentence, undefined, 0.8);
   }, [current]);
 
   const checkOrder = useCallback(() => {
@@ -235,7 +234,7 @@ const BurgerGame = () => {
         <div className="container flex items-center justify-between">
           <Link to="/">
             <Button variant="ghost" size="sm">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <div className="flex items-center gap-3">
@@ -245,7 +244,7 @@ const BurgerGame = () => {
             </span>
           </div>
           <div className="text-lg font-bold text-primary">
-            {t("game.score")}: {score}/{totalRounds}
+            <Tb k="game.score" />: {score}/{totalRounds}
           </div>
         </div>
       </div>
@@ -255,18 +254,18 @@ const BurgerGame = () => {
           {finished ? (
             <motion.div key="done" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center space-y-6">
               <div className="text-6xl mb-4">🍔</div>
-              <h2 className="text-3xl font-bold text-foreground">{t("game.bravo")}</h2>
+              <h2 className="text-3xl font-bold text-foreground"><Tb k="game.bravo" /></h2>
               <p className="text-xl text-muted-foreground">
-                {t("game.score")}: {score}/{totalRounds}
+                <Tb k="game.score" />: {score}/{totalRounds}
               </p>
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg">
-                  <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4 mr-2" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" size="lg">
-                    <Home className="w-4 h-4 mr-2" /> {t("game.home")}
+                    <Home className="w-4 h-4 mr-2" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>
@@ -275,14 +274,14 @@ const BurgerGame = () => {
             <motion.div key={round} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} className="space-y-6">
               {/* Instruction */}
               <div className="text-center space-y-2">
-                <h2 className="text-2xl font-bold text-foreground">{t("burger.instruction")}</h2>
-                <p className="text-muted-foreground">{t("burger.hint")}</p>
+                <h2 className="text-2xl font-bold text-foreground"><BilingualInstruction k="burger.instruction" /></h2>
+                <p className="text-muted-foreground"><Tb k="burger.hint" /></p>
               </div>
 
               {/* Listen button */}
               <div className="flex justify-center">
                 <Button variant="outline" size="lg" onClick={speak} className="gap-2">
-                  <Volume2 className="w-5 h-5" /> {t("burger.listen")}
+                  <Volume2 className="w-5 h-5" /> <Tb k="burger.listen" />
                 </Button>
               </div>
 
@@ -301,7 +300,7 @@ const BurgerGame = () => {
 
               {/* Burger assembly area */}
               <div className="bg-card rounded-2xl border-2 border-dashed border-border p-6 min-h-[280px]">
-                <div className="text-center text-sm text-muted-foreground mb-4">{t("burger.drag")}</div>
+                <div className="text-center text-sm text-muted-foreground mb-4"><Tb k="burger.drag" /></div>
                 <Reorder.Group axis="y" values={items} onReorder={setItems} className="space-y-3">
                   {items.map((item) => (
                     <Reorder.Item key={item.id} value={item}>
@@ -344,7 +343,7 @@ const BurgerGame = () => {
                   disabled={feedback === "correct"}
                   className="text-lg px-8 py-6 rounded-full"
                 >
-                  {t("burger.serve")} 🍔
+                  <Tb k="burger.serve" /> 🍔
                 </Button>
               </div>
 

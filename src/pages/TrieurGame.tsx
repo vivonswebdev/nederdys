@@ -1,4 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -288,11 +290,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 const speak = (text: string) => {
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "nl-NL";
-  u.rate = 0.85;
-  speechSynthesis.cancel();
-  speechSynthesis.speak(u);
+  speakTarget(text, undefined, 0.85);
 };
 
 const shuffle = <T,>(arr: T[]): T[] => {
@@ -413,7 +411,7 @@ const TrieurGame = () => {
         <div className="flex items-center justify-between mb-6">
           <Link to="/">
             <Button variant="ghost" size="sm">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <DifficultyIndicator difficulty={difficulty} />
@@ -424,16 +422,16 @@ const TrieurGame = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-2xl md:text-3xl font-bold text-foreground text-center mb-2"
         >
-          🗂️ {t("game.trieur.title")}
+          🗂️ <Tb k="game.trieur.title" />
         </motion.h1>
         <p className="text-muted-foreground text-center mb-6 text-sm">
-          {t("trieur.instruction")}
+          <BilingualInstruction k="trieur.instruction" />
         </p>
 
         {/* Progress */}
         <div className="mb-6">
           <div className="flex justify-between text-sm text-muted-foreground mb-1">
-            <span>{t("game.score")}: {score}/{maxScore}</span>
+            <span><Tb k="game.score" />: {score}/{maxScore}</span>
             <span>{currentIdx + 1}/{total}</span>
           </div>
           <div className="h-3 bg-secondary rounded-full overflow-hidden">
@@ -495,7 +493,7 @@ const TrieurGame = () => {
 
                 {/* Hint */}
                 <p className="text-center text-sm text-muted-foreground mb-4">
-                  {t("trieur.hint")}
+                  <Tb k="trieur.hint" />
                 </p>
 
                 {/* Words to sort */}
@@ -544,23 +542,23 @@ const TrieurGame = () => {
               className="text-center"
             >
               <div className="text-6xl mb-4">🗂️✨</div>
-              <h2 className="text-3xl font-bold text-foreground mb-2">{t("game.bravo")}</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-2"><Tb k="game.bravo" /></h2>
               <p className="text-xl text-muted-foreground mb-2">
-                {t("trieur.bravo")}
+                <Tb k="trieur.bravo" />
               </p>
               <p className="text-lg font-bold text-primary mb-6">
-                {t("game.score")}: {score}/{maxScore}
+                <Tb k="game.score" />: {score}/{maxScore}
               </p>
 
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
 
               <div className="flex gap-4 justify-center mt-8">
                 <Button onClick={restart} className="gap-2">
-                  <RotateCcw className="w-4 h-4" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" className="gap-2">
-                    <Home className="w-4 h-4" /> {t("game.home")}
+                    <Home className="w-4 h-4" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>

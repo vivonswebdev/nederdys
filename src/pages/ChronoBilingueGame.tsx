@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2, Timer, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -60,7 +61,7 @@ const HARD: ChronoChallenge[] = [
   { nl: "boodschappen", fr: "courses", distractors: ["promenade", "voyage", "sortie", "marché"] },
 ];
 
-const speak = (text: string, lang = "nl-NL") => {
+const speak = (text: string, lang = "nl-BE") => {
   const u = new SpeechSynthesisUtterance(text);
   u.lang = lang;
   u.rate = 0.85;
@@ -204,7 +205,7 @@ const ChronoBilingueGame = () => {
         <div className="flex items-center justify-between mb-6">
           <Link to="/">
             <Button variant="ghost" size="sm">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <DifficultyIndicator difficulty={difficulty} />
@@ -215,10 +216,10 @@ const ChronoBilingueGame = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-2xl md:text-3xl font-bold text-foreground text-center mb-2"
         >
-          ⏱️ {t("game.chrono.title")}
+          ⏱️ <Tb k="game.chrono.title" />
         </motion.h1>
         <p className="text-muted-foreground text-center mb-6 text-sm">
-          {t("chrono.instruction")}
+          <BilingualInstruction k="chrono.instruction" />
         </p>
 
         {!gameStarted ? (
@@ -234,12 +235,12 @@ const ChronoBilingueGame = () => {
             >
               ⏱️
             </motion.div>
-            <p className="text-lg text-muted-foreground mb-4">{t("chrono.hint")}</p>
+            <p className="text-lg text-muted-foreground mb-4"><Tb k="chrono.hint" /></p>
             <p className="text-sm text-muted-foreground mb-8">
-              ⏱️ {timePerWord}s {t("chrono.perWord")} · {total} {t("chrono.words")}
+              ⏱️ {timePerWord}s <Tb k="chrono.perWord" /> · {total} <Tb k="chrono.words" />
             </p>
             <Button onClick={startGame} size="lg" className="text-xl px-10 py-6 gap-2">
-              <Zap className="w-6 h-6" /> {t("chrono.start")}
+              <Zap className="w-6 h-6" /> <Tb k="chrono.start" />
             </Button>
           </motion.div>
         ) : (
@@ -247,7 +248,7 @@ const ChronoBilingueGame = () => {
             {/* Progress & global timer */}
             <div className="mb-4">
               <div className="flex justify-between text-sm text-muted-foreground mb-1">
-                <span>{t("game.score")}: {score}/{total}</span>
+                <span><Tb k="game.score" />: {score}/{total}</span>
                 <span className="flex items-center gap-1">
                   <Timer className="w-3 h-3" /> {totalTime}s
                 </span>
@@ -309,11 +310,11 @@ const ChronoBilingueGame = () => {
                       onClick={() => speak(challenge.nl)}
                       className="gap-1 mb-4 text-muted-foreground"
                     >
-                      <Volume2 className="w-4 h-4" /> {t("chrono.listen")}
+                      <Volume2 className="w-4 h-4" /> <Tb k="chrono.listen" />
                     </Button>
 
                     <p className="text-sm text-muted-foreground mb-4">
-                      🇫🇷 {t("chrono.chooseFR")}
+                      🇫🇷 <Tb k="chrono.chooseFR" />
                     </p>
 
                     {/* FR options */}
@@ -354,8 +355,8 @@ const ChronoBilingueGame = () => {
                           }`}
                         >
                           {feedback === "correct"
-                            ? `${t("chrono.correct")} ${challenge.nl} = ${challenge.fr}`
-                            : `${t("chrono.wrong")} ${challenge.fr}`}
+                            ? `$<Tb k="chrono.correct" /> ${challenge.nl} = ${challenge.fr}`
+                            : `$<Tb k="chrono.wrong" /> ${challenge.fr}`}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -368,16 +369,16 @@ const ChronoBilingueGame = () => {
                   className="text-center"
                 >
                   <div className="text-6xl mb-4">⏱️✨</div>
-                  <h2 className="text-3xl font-bold text-foreground mb-2">{t("game.bravo")}</h2>
-                  <p className="text-xl text-muted-foreground mb-2">{t("chrono.bravo")}</p>
+                  <h2 className="text-3xl font-bold text-foreground mb-2"><Tb k="game.bravo" /></h2>
+                  <p className="text-xl text-muted-foreground mb-2"><Tb k="chrono.bravo" /></p>
                   <div className="flex justify-center gap-6 mb-6">
                     <div className="text-center">
                       <p className="text-2xl font-bold text-primary">{score}/{total}</p>
-                      <p className="text-sm text-muted-foreground">{t("game.score")}</p>
+                      <p className="text-sm text-muted-foreground"><Tb k="game.score" /></p>
                     </div>
                     <div className="text-center">
                       <p className="text-2xl font-bold text-foreground">{totalTime}s</p>
-                      <p className="text-sm text-muted-foreground">{t("chrono.totalTime")}</p>
+                      <p className="text-sm text-muted-foreground"><Tb k="chrono.totalTime" /></p>
                     </div>
                   </div>
 
@@ -385,11 +386,11 @@ const ChronoBilingueGame = () => {
 
                   <div className="flex gap-4 justify-center mt-8">
                     <Button onClick={restart} className="gap-2">
-                      <RotateCcw className="w-4 h-4" /> {t("game.replay")}
+                      <RotateCcw className="w-4 h-4" /> <Tb k="game.replay" />
                     </Button>
                     <Link to="/">
                       <Button variant="outline" className="gap-2">
-                        <Home className="w-4 h-4" /> {t("game.home")}
+                        <Home className="w-4 h-4" /> <Tb k="game.home" />
                       </Button>
                     </Link>
                   </div>
