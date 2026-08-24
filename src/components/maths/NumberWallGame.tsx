@@ -58,7 +58,7 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
     setFeedback(null);
     const timer = setTimeout(() => playBilingual({ url: current.audioUrl, text: current.audioText }, { text: mathTextToNl(current.audioText) ?? undefined }), 500);
     return () => clearTimeout(timer);
-  }, [current, playAudio]);
+  }, [current, playBilingual]);
 
   async function finishSession(finalScore: number, finalErrors: number) {
     if (savedRef.current) return;

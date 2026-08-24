@@ -100,7 +100,7 @@ export function MathQuizGame<T extends MathChallengeBase>({
       clearTimer();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [challenge, playAudio]);
+  }, [challenge, playBilingual]);
 
   async function finishSession(finalScore: number, finalErrors: number) {
     if (savedRef.current) return;

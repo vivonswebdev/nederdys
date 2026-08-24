@@ -74,7 +74,7 @@ export const ChronoCalcGame = ({ childId, level, backTo }: Props) => {
       window.clearTimeout(audioTimer);
       clearTimer();
     };
-  }, [current, playAudio]);
+  }, [current, playBilingual]);
 
   async function finishSession(finalScore: number, finalErrors: number) {
     if (savedRef.current) return;
