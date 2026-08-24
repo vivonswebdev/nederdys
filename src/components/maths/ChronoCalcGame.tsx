@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Play, Clock, ArrowLeft } from "lucide-react";
@@ -143,7 +145,7 @@ export const ChronoCalcGame = ({ childId, level, backTo }: Props) => {
         <Navbar />
         <main className="container max-w-lg px-4 py-16 text-center">
           <span className="text-6xl block mb-4">🎉</span>
-          <h1 className="text-3xl font-bold mb-2">Session terminée !</h1>
+          <h1 className="text-3xl font-bold mb-2"><BilingualText {...biFromFr("Session terminée !")} /></h1>
           <p className="text-lg font-dyslexic text-muted-foreground">
             Score : {score}/{CHALLENGES_PER_SESSION} — {score * xpPerCorrect} XP
           </p>
@@ -156,7 +158,7 @@ export const ChronoCalcGame = ({ childId, level, backTo }: Props) => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <p className="text-center py-20 font-dyslexic">Chargement...</p>
+        <p className="text-center py-20 font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       </div>
     );
   }
@@ -176,7 +178,7 @@ export const ChronoCalcGame = ({ childId, level, backTo }: Props) => {
           onClick={() => navigate(backTo)}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-4"
         >
-          <ArrowLeft className="w-4 h-4" /> Quitter
+          <ArrowLeft className="w-4 h-4" /> <BilingualText {...biFromFr("Quitter")} />
         </button>
 
         <div className="text-center mb-6">

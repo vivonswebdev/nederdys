@@ -1,4 +1,6 @@
 import { MathQuizGame } from "./MathQuizGame";
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { numberShooterChallenges } from "@/data/math/numberShooterChallenges";
 import { MathLevel, pickSession } from "@/lib/mathSession";
 
@@ -30,7 +32,9 @@ export const NumberShooterGame = ({ childId, level, backTo }: Props) => (
     optionsClassName="grid grid-cols-2 sm:grid-cols-5 gap-3"
     renderPrompt={(c) => (
       <>
-        <p className="text-xl font-bold font-dyslexic">Trouve le nombre :</p>
+        <p className="text-xl font-bold font-dyslexic">
+          <BilingualText {...biFromFr("Trouve le nombre :")} stacked />
+        </p>
         <p className="text-4xl font-bold mt-1">{c.audioText}</p>
       </>
     )}

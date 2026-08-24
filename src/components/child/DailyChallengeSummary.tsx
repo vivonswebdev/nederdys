@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -83,14 +85,14 @@ export const DailyChallengeSummary = ({ childId }: Props) => {
         </div>
 
         <p className="text-xs text-muted-foreground mt-3">
-          Un nouveau défi arrive chaque jour à minuit.
+          <BilingualText {...biFromFr("Un nouveau défi arrive chaque jour à minuit.")} />
         </p>
       </section>
 
       <section className="bg-card border border-border rounded-3xl p-6 kids-shadow-card">
         <h2 className="text-lg font-bold text-foreground mb-3">📜 Tes derniers défis</h2>
         {history.length === 0 ? (
-          <p className="text-muted-foreground font-dyslexic">Aucun défi pour l'instant.</p>
+          <p className="text-muted-foreground font-dyslexic"><BilingualText {...biFromFr("Aucun défi pour l'instant.")} /></p>
         ) : (
           <ul className="space-y-2">
             {history.slice(0, 7).map((day) => {

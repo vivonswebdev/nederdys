@@ -24,13 +24,14 @@ import {
   normalizeSchoolLevel,
   schoolLevelLabel,
 } from "@/lib/schoolLevels";
+import { CHILD_LANGUAGES } from "@/lib/bilingual";
 
 const ManageChildren = () => {
   const { children: kids } = useChild();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState({ first_name: "", age: 8, school_level: DEFAULT_SCHOOL_LEVEL, gender: "girl" });
+  const [form, setForm] = useState({ first_name: "", age: 8, school_level: DEFAULT_SCHOOL_LEVEL, gender: "girl", language: "nl" });
   const [pendingDelete, setPendingDelete] = useState<{ id: string; name: string } | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -53,6 +54,7 @@ const ManageChildren = () => {
         age: form.age,
         school_level: form.school_level,
         gender: form.gender,
+        language: form.language,
       })
       .eq("id", childId);
     setBusy(false);
@@ -137,6 +139,18 @@ const ManageChildren = () => {
                         </option>
                       ))}
                     </select>
+                    <select
+                      value={form.language}
+                      onChange={(e) => setForm({ ...form, language: e.target.value })}
+                      aria-label="Langue de l'enfant"
+                      className="flex-1 min-w-[8rem] border border-border bg-background rounded-xl p-2.5"
+                    >
+                      {CHILD_LANGUAGES.map((l) => (
+                        <option key={l.id} value={l.id}>
+                          {l.flag} {l.label.nl} / {l.label.fr}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   <div className="flex gap-2">
@@ -175,6 +189,8 @@ const ManageChildren = () => {
                           age: child.age,
                           school_level: normalizeSchoolLevel(String(child.school_level)),
                           gender: String(child.gender ?? "girl") === "boy" ? "boy" : "girl",
+                          language:
+                            String((child as { language?: string }).language ?? "nl") === "fr" ? "fr" : "nl",
                         });
 
                       }}

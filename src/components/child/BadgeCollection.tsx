@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
@@ -60,7 +62,7 @@ export const BadgeCollection = ({ childId }: Props) => {
         </div>
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
           <div className="rounded-2xl bg-muted/60 px-4 py-3">
-            <p className="text-muted-foreground text-xs">Dernier débloqué</p>
+            <p className="text-muted-foreground text-xs"><BilingualText {...biFromFr("Dernier débloqué")} /></p>
             <p className="font-bold text-foreground">
               {last
                 ? `${last.badge_icon} ${badgeById(last.badge_name as string)?.name} · ${formatLocalDay(
@@ -70,7 +72,7 @@ export const BadgeCollection = ({ childId }: Props) => {
             </p>
           </div>
           <div className="rounded-2xl bg-muted/60 px-4 py-3">
-            <p className="text-muted-foreground text-xs">Le plus rare</p>
+            <p className="text-muted-foreground text-xs"><BilingualText {...biFromFr("Le plus rare")} /></p>
             <p className="font-bold text-foreground">
               {rarest ? `${rarest.icon} ${rarest.name}` : "Aucun pour l'instant"}
             </p>

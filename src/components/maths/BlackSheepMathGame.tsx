@@ -1,4 +1,6 @@
 import { MathQuizGame } from "./MathQuizGame";
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { blackSheepMathChallenges } from "@/data/math/blackSheepMathChallenges";
 import { MathLevel, pickSession } from "@/lib/mathSession";
 
@@ -25,7 +27,9 @@ export const BlackSheepMathGame = ({ childId, level, backTo }: Props) => (
     getAudio={(c) => ({ url: c.audioUrl, text: c.audioText })}
     optionsClassName="grid grid-cols-2 sm:grid-cols-5 gap-3"
     renderPrompt={(c) => (
-      <p className="text-xl font-bold font-dyslexic">{c.rule}</p>
+      <p className="text-xl font-bold font-dyslexic">
+        <BilingualText {...biFromFr(c.rule)} stacked />
+      </p>
     )}
   />
 );

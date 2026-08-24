@@ -1,3 +1,6 @@
+import { biFromFr } from "@/lib/bilingual";
+import { BilingualText, Bi } from "@/components/ui/BilingualText";
+import { UI } from "@/lib/bilingual";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
@@ -16,12 +19,12 @@ const NlChapters = () => {
           to={`/child/${childId}/games`}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
         >
-          <ArrowLeft className="w-4 h-4" /> Retour aux jeux
+          <ArrowLeft className="w-4 h-4" /> <BilingualText {...biFromFr("Retour aux jeux")} />
         </Link>
 
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-foreground">🇳🇱 Exercices de Néerlandais</h1>
-          <p className="text-muted-foreground font-dyslexic mt-1">Choisis ton chapitre :</p>
+          <p className="text-muted-foreground font-dyslexic mt-1"><BilingualText {...biFromFr("Choisis ton chapitre :")} /></p>
         </header>
 
         <Link
@@ -29,7 +32,7 @@ const NlChapters = () => {
           className="block mb-8 border-4 border-kids-orange bg-kids-orange/30 rounded-3xl p-5 kids-shadow-card hover:kids-shadow-hover transition-shadow"
         >
           <span className="text-3xl mr-2">🎯</span>
-          <span className="text-lg font-bold text-foreground">Faire le test de placement</span>
+          <span className="text-lg font-bold text-foreground"><BilingualText {...biFromFr("Faire le test de placement")} /></span>
           <p className="font-dyslexic text-muted-foreground mt-1">
             6 questions pour débloquer directement le bon niveau.
           </p>
@@ -47,10 +50,20 @@ const NlChapters = () => {
               <Link to={`/child/${childId}/nl/chapitre/${chapter.id}`}>
                 <div className="bg-kids-blue/30 border-4 border-kids-blue rounded-3xl p-6 kids-shadow-card hover:kids-shadow-hover transition-shadow h-full">
                   <span className="text-5xl block mb-3">{chapter.emoji}</span>
-                  <h2 className="text-xl font-bold text-foreground">{chapter.name}</h2>
-                  <p className="font-dyslexic text-muted-foreground">{chapter.description}</p>
+                  <h2 className="text-xl font-bold text-foreground">
+                    <BilingualText nl={chapter.nameNl ?? chapter.name} fr={chapter.name} stacked />
+                  </h2>
+                  {chapter.description && (
+                    <p className="font-dyslexic text-muted-foreground mt-1 text-sm">
+                      <BilingualText
+                        nl={chapter.descriptionNl ?? chapter.description}
+                        fr={chapter.description}
+                        stacked
+                      />
+                    </p>
+                  )}
                   <p className="text-sm text-muted-foreground mt-2">
-                    {chapter.exercises.length} exercices · 3 niveaux
+                    {chapter.exercises.length} <Bi phrase={UI.exercisesCount} />
                   </p>
                 </div>
               </Link>

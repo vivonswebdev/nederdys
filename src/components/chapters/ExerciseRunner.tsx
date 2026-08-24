@@ -15,11 +15,14 @@ import {
   Exercise,
   LEVEL_EMOJI,
   LEVEL_LABEL,
+  LEVEL_LABEL_NL,
   MASTERY_THRESHOLD,
   exercisesForLevel,
   recordExerciseSession,
   shuffle,
 } from "@/lib/chapters";
+import { BilingualText, Bi } from "@/components/ui/BilingualText";
+import { UI, biFromFr, speakBoth, useChildLanguage } from "@/lib/bilingual";
 
 interface Props {
   childId: string;
@@ -44,21 +47,13 @@ const normalize = (value: string) =>
     .replace(/,/g, ".")
     .replace(/€|cm|kg|g\b/g, "");
 
-/** Lecture audio nl-BE : fichier fourni sinon synthèse vocale néerlandaise. */
-function playNl(ex: Exercise) {
+/** Lecture bilingue de l'énoncé : néerlandais puis français (ordre selon la langue de l'enfant). */
+function playExercise(ex: Exercise, primary: "nl" | "fr") {
   if (ex.audioUrl) {
     new Audio(ex.audioUrl).play().catch(() => undefined);
     return;
   }
-  if (typeof window === "undefined" || !window.speechSynthesis) return;
-  const text = ex.question;
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = "nl-BE";
-  utter.rate = 0.85;
-  const voice = window.speechSynthesis.getVoices().find((v) => v.lang.startsWith("nl"));
-  if (voice) utter.voice = voice;
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(utter);
+  speakBoth({ nl: ex.questionNl ?? ex.question, fr: ex.question }, primary);
 }
 
 export const ExerciseRunner = ({
@@ -72,6 +67,7 @@ export const ExerciseRunner = ({
   exitTo,
 }: Props) => {
   const navigate = useNavigate();
+  const childLang = useChildLanguage();
   const testMode = !!onFinish;
   const backTo = exitTo ?? `/child/${childId}/${chapter.subject}/chapitre/${chapter.id}`;
 
@@ -150,7 +146,9 @@ export const ExerciseRunner = ({
     toast.success(`+${res.xp_awarded} XP et ${res.xp_awarded} pièces ! 🎉`);
     if (Number(res.score_pct) >= MASTERY_THRESHOLD && res.unlocked_level > level) {
       sounds.correct();
-      toast.success(`🎉 Tu as débloqué le niveau ${LEVEL_LABEL[res.unlocked_level]} !`);
+      toast.success(
+        `🎉 ${UI.unlockedLevel.nl} ${LEVEL_LABEL_NL[res.unlocked_level]} — ${UI.unlockedLevel.fr} ${LEVEL_LABEL[res.unlocked_level]}`
+      );
     }
   };
 
@@ -162,6 +160,7 @@ export const ExerciseRunner = ({
     }
     setFeedback(isCorrect ? "correct" : "wrong");
     isCorrect ? sounds.correct() : sounds.wrong();
+    speakBoth(isCorrect ? UI.correct : UI.wrong, childLang);
     const nextCorrect = correctCount + (isCorrect ? 1 : 0);
     if (isCorrect) setCorrectCount(nextCorrect);
     window.setTimeout(() => {
@@ -179,10 +178,10 @@ export const ExerciseRunner = ({
         <Navbar />
         <main className="container max-w-2xl px-4 py-16 text-center">
           <p className="font-dyslexic text-muted-foreground">
-            Ce niveau n'a pas encore d'exercices. Reviens bientôt !
+            <Bi phrase={UI.noExercises} stacked />
           </p>
           <Button className="mt-4" onClick={() => navigate(backTo)}>
-            Retour au chapitre
+            <Bi phrase={UI.backToChapter} />
           </Button>
         </main>
       </div>
@@ -195,7 +194,7 @@ export const ExerciseRunner = ({
         <Navbar />
         <main className="container max-w-xl px-4 py-12">
           {saving ? (
-            <p className="text-center font-dyslexic text-muted-foreground">Enregistrement…</p>
+            <p className="text-center font-dyslexic text-muted-foreground"><Bi phrase={UI.saving} /></p>
           ) : (
             finishedContent
           )}
@@ -219,24 +218,32 @@ export const ExerciseRunner = ({
           >
             <span className="text-6xl block mb-3">{mastered ? "🏆" : "💪"}</span>
             <h1 className="text-2xl font-bold text-foreground mb-1">
-              {mastered ? "Bravo, c'est réussi !" : "Bien joué, continue !"}
+              <Bi phrase={mastered ? UI.wellDone : UI.keepGoing} stacked />
             </h1>
             <p className="font-dyslexic text-muted-foreground mb-4">
-              {correctCount} bonnes réponses sur {session.length} — {pct}%
+              {correctCount} <Bi phrase={UI.goodAnswersOutOf} /> {session.length} — {pct}%
             </p>
             {result && (
-              <p className="text-lg font-bold text-foreground mb-2">+{result.xp} XP · +{result.xp} pièces</p>
+              <p className="text-lg font-bold text-foreground mb-2">
+                +{result.xp} XP · +{result.xp} <Bi phrase={UI.coins} />
+              </p>
             )}
             {!mastered && (
               <p className="font-dyslexic text-muted-foreground mb-2">
-                Objectif : 80 % pour débloquer le niveau suivant. Tu y es presque !
+                <Bi phrase={UI.masteryGoal} stacked />
               </p>
             )}
-            {saving && <p className="text-sm text-muted-foreground">Enregistrement…</p>}
+            {saving && (
+              <p className="text-sm text-muted-foreground">
+                <Bi phrase={UI.saving} />
+              </p>
+            )}
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
-              <Button onClick={() => navigate(backTo)}>Retour au chapitre</Button>
+              <Button onClick={() => navigate(backTo)}>
+                <Bi phrase={UI.backToChapter} />
+              </Button>
               <Button variant="secondary" onClick={() => window.location.reload()}>
-                Rejouer ce niveau
+                <Bi phrase={UI.replayLevel} />
               </Button>
             </div>
           </motion.div>
@@ -256,12 +263,13 @@ export const ExerciseRunner = ({
           onClick={() => navigate(backTo)}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-4"
         >
-          <ArrowLeft className="w-4 h-4" /> Quitter
+          <ArrowLeft className="w-4 h-4" /> <Bi phrase={UI.quit} />
         </button>
 
         <div className="flex items-center justify-between mb-4">
           <p className="font-bold text-foreground">
-            {chapter.emoji} {chapter.name} · {LEVEL_EMOJI[level]} {LEVEL_LABEL[level]}
+            {chapter.emoji} {chapter.nameNl ?? chapter.name} / {chapter.name} ·{" "}
+            {LEVEL_EMOJI[level]} {LEVEL_LABEL_NL[level]} / {LEVEL_LABEL[level]}
           </p>
           <p className="text-sm text-muted-foreground">
             {index + 1} / {session.length}
@@ -281,12 +289,18 @@ export const ExerciseRunner = ({
           className="bg-card border-4 border-border rounded-3xl p-6 kids-shadow-card"
         >
           <div className="flex items-start gap-3 mb-3">
-            <h2 className="text-xl font-bold text-foreground font-dyslexic flex-1">{ex.question}</h2>
-            {chapter.subject === "nl" && (
+            <h2 className="text-xl font-bold text-foreground font-dyslexic flex-1">
+              {ex.questionNl ? (
+                <BilingualText nl={ex.questionNl} fr={ex.question} stacked />
+              ) : (
+                ex.question
+              )}
+            </h2>
+            {(chapter.subject === "nl" || !!ex.questionNl) && (
               <button
                 type="button"
-                onClick={() => playNl(ex)}
-                aria-label="Écouter en néerlandais"
+                onClick={() => playExercise(ex, childLang)}
+                aria-label={`${UI.listenNl.nl} / ${UI.listenNl.fr}`}
                 className="shrink-0 w-11 h-11 rounded-full bg-kids-blue/40 border-2 border-primary flex items-center justify-center hover:scale-105 transition-transform"
               >
                 <Volume2 className="w-5 h-5 text-foreground" />
@@ -324,14 +338,14 @@ export const ExerciseRunner = ({
                 onClick={() => validate(ex.answer === true, "Vrai")}
                 className="border-4 border-kids-green-dark bg-kids-green-light rounded-2xl p-5 text-lg font-bold"
               >
-                ✅ Vrai
+                ✅ <Bi phrase={UI.true} />
               </button>
               <button
                 disabled={!!feedback}
                 onClick={() => validate(ex.answer === false, "Faux")}
                 className="border-4 border-red-700 bg-kids-red rounded-2xl p-5 text-lg font-bold"
               >
-                ❌ Faux
+                ❌ <Bi phrase={UI.false} />
               </button>
             </div>
           )}
@@ -349,13 +363,13 @@ export const ExerciseRunner = ({
               <Input
                 value={textAnswer}
                 onChange={(e) => setTextAnswer(e.target.value)}
-                placeholder="Ta réponse"
+                placeholder={`${UI.yourAnswer.nl} / ${UI.yourAnswer.fr}`}
                 disabled={!!feedback}
                 className="text-lg font-dyslexic h-14"
                 autoFocus
               />
               <Button type="submit" disabled={!!feedback} className="h-14 px-8 text-lg">
-                Valider
+                <Bi phrase={UI.validate} />
               </Button>
             </form>
           )}
@@ -365,7 +379,9 @@ export const ExerciseRunner = ({
             <div>
               <div className="min-h-16 border-4 border-dashed border-border rounded-2xl p-3 mb-4 flex flex-wrap gap-2">
                 {orderPicks.length === 0 && (
-                  <span className="text-muted-foreground font-dyslexic">Clique dans le bon ordre…</span>
+                  <span className="text-muted-foreground font-dyslexic">
+                    <Bi phrase={UI.clickInOrder} stacked />
+                  </span>
                 )}
                 {orderPicks.map((item, i) => (
                   <span key={item} className="bg-primary text-primary-foreground rounded-xl px-3 py-2 font-bold">
@@ -397,13 +413,13 @@ export const ExerciseRunner = ({
                   disabled={!!feedback || orderPicks.length === 0}
                   onClick={() => setOrderPicks([])}
                 >
-                  Recommencer
+                  <Bi phrase={UI.restart} />
                 </Button>
                 <Button
                   disabled={!!feedback || orderPicks.length !== ex.answer.length}
                   onClick={() => validate(orderPicks.every((v, i) => v === ex.answer[i]), orderPicks.join(" · "))}
                 >
-                  Valider
+                  <Bi phrase={UI.validate} />
                 </Button>
               </div>
             </div>
@@ -464,7 +480,7 @@ export const ExerciseRunner = ({
                 </div>
               </div>
               <p className="text-sm text-muted-foreground font-dyslexic mt-3">
-                Choisis à gauche, puis sa réponse à droite.
+                <Bi phrase={UI.matchHint} stacked />
               </p>
             </div>
           )}
@@ -482,14 +498,14 @@ export const ExerciseRunner = ({
             >
               <p className="font-bold flex items-center gap-2">
                 {feedback === "correct" ? <Check className="w-5 h-5" /> : <X className="w-5 h-5" />}
-                {feedback === "correct" ? "Super, c'est juste !" : "Pas encore — regarde la solution :"}
+                <Bi phrase={feedback === "correct" ? UI.correct : UI.wrong} stacked />
               </p>
               {feedback === "wrong" && (
                 <p className="font-dyslexic mt-1">
                   {ex.type === "true_false"
                     ? ex.answer
-                      ? "C'était Vrai"
-                      : "C'était Faux"
+                      ? `${UI.true.nl} / ${UI.true.fr}`
+                      : `${UI.false.nl} / ${UI.false.fr}`
                     : ex.type === "order"
                       ? ex.answer.join(" · ")
                       : ex.type === "match"

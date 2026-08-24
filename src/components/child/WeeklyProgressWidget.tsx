@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Target, Clock, Flame } from "lucide-react";
@@ -48,10 +50,10 @@ export function WeeklyProgressWidget({ stats, childId }: Props) {
       </div>
 
       <div className="mt-6 space-y-3">
-        <h3 className="font-bold text-foreground text-sm">Mes compétences</h3>
+        <h3 className="font-bold text-foreground text-sm"><BilingualText {...biFromFr("Mes compétences")} /></h3>
         {topSkills.length === 0 ? (
           <p className="text-sm text-muted-foreground font-dyslexic">
-            Joue cette semaine pour voir tes progrès apparaître ici ! 🐸
+            <BilingualText {...biFromFr("Joue cette semaine pour voir tes progrès apparaître ici ! 🐸")} />
           </p>
         ) : (
           topSkills.map((s) => (

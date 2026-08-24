@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -53,7 +55,7 @@ export const SubjectCard = ({
       </span>
       {!available && (
         <span className="absolute top-4 right-4 text-[11px] font-bold uppercase tracking-wide bg-muted text-muted-foreground rounded-full px-2.5 py-1">
-          Coming soon
+          <BilingualText {...biFromFr("Coming soon")} />
         </span>
       )}
     </motion.button>

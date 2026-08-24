@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -43,7 +45,7 @@ export const PyramideNombresGame = ({ childId, level, backTo }: Props) => {
         finished={run.finished}
         backTo={backTo}
       >
-        <p className="text-center font-dyslexic">Chargement...</p>
+        <p className="text-center font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       </MathGameLayout>
     );
   }
@@ -83,7 +85,7 @@ export const PyramideNombresGame = ({ childId, level, backTo }: Props) => {
       backTo={backTo}
     >
       <p className="text-center font-dyslexic text-muted-foreground mb-6">
-        Chaque brique est la <strong>somme des deux briques juste en dessous</strong>. Remplis
+        <BilingualText {...biFromFr("Chaque brique est la")} /> <strong>somme des deux briques juste en dessous</strong>. Remplis
         jusqu'au sommet !
       </p>
 
@@ -131,14 +133,14 @@ export const PyramideNombresGame = ({ childId, level, backTo }: Props) => {
           disabled={feedback === "correct"}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3 rounded-xl kids-shadow-card disabled:opacity-60"
         >
-          <Check className="w-5 h-5" /> Vérifier
+          <Check className="w-5 h-5" /> <BilingualText {...biFromFr("Vérifier")} />
         </button>
         <button
           onClick={giveUp}
           disabled={feedback === "correct"}
           className="bg-muted text-foreground font-bold px-6 py-3 rounded-xl disabled:opacity-60"
         >
-          Passer
+          <BilingualText {...biFromFr("Passer")} />
         </button>
       </div>
     </MathGameLayout>

@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useRef, useState } from "react";
 import { Volume2, Mic } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
@@ -118,7 +120,7 @@ export const MonPremierMot = ({ childId }: Props) => {
             aria-label="J'ai dit le mot"
             className="min-h-[80px] w-full max-w-sm mx-auto flex items-center justify-center gap-3 rounded-3xl bg-primary text-primary-foreground text-2xl font-bold"
           >
-            <Mic className="w-9 h-9" /> J'ai dit le mot !
+            <Mic className="w-9 h-9" /> <BilingualText {...biFromFr("J'ai dit le mot !")} />
           </button>
         </div>
       )}

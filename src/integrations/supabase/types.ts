@@ -364,6 +364,7 @@ export type Database = {
           gender: string
           high_contrast: boolean
           id: string
+          language: string
           school_level: string
           updated_at: string
           user_id: string
@@ -378,6 +379,7 @@ export type Database = {
           gender?: string
           high_contrast?: boolean
           id?: string
+          language?: string
           school_level?: string
           updated_at?: string
           user_id: string
@@ -392,6 +394,7 @@ export type Database = {
           gender?: string
           high_contrast?: boolean
           id?: string
+          language?: string
           school_level?: string
           updated_at?: string
           user_id?: string

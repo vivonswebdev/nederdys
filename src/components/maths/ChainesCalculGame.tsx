@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -50,7 +52,7 @@ export const ChainesCalculGame = ({ childId, level, backTo }: Props) => {
         finished={run.finished}
         backTo={backTo}
       >
-        <p className="text-center font-dyslexic">Chargement...</p>
+        <p className="text-center font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       </MathGameLayout>
     );
   }
@@ -90,7 +92,7 @@ export const ChainesCalculGame = ({ childId, level, backTo }: Props) => {
       backTo={backTo}
     >
       <p className="text-center font-dyslexic text-muted-foreground mb-6">
-        Suis la chaîne : calcule chaque étape l'une après l'autre.
+        <BilingualText {...biFromFr("Suis la chaîne : calcule chaque étape l'une après l'autre.")} />
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-3">
@@ -137,7 +139,7 @@ export const ChainesCalculGame = ({ childId, level, backTo }: Props) => {
             onClick={validate}
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 rounded-xl kids-shadow-card"
           >
-            <Check className="w-5 h-5" /> Valider
+            <Check className="w-5 h-5" /> <BilingualText {...biFromFr("Valider")} />
           </button>
         </motion.div>
       )}

@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Timer } from "lucide-react";
@@ -58,7 +60,7 @@ export const BatailleNombresGame = ({ childId, level, backTo }: Props) => {
         finished={run.finished}
         backTo={backTo}
       >
-        <p className="text-center font-dyslexic">Chargement...</p>
+        <p className="text-center font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       </MathGameLayout>
     );
   }
@@ -106,7 +108,7 @@ export const BatailleNombresGame = ({ childId, level, backTo }: Props) => {
       </div>
 
       <p className="text-center font-dyslexic text-muted-foreground mt-6">
-        Quel signe va au milieu ?
+        <BilingualText {...biFromFr("Quel signe va au milieu ?")} />
       </p>
 
       <div className="flex justify-center gap-4 mt-4">

@@ -5,7 +5,10 @@ export type Difficulty = 1 | 2 | 3;
 interface BaseExercise {
   id: number;
   difficulty: Difficulty;
+  /** Énoncé en français. */
   question: string;
+  /** Énoncé en néerlandais — affiché à côté du français pour les enfants NL. */
+  questionNl?: string;
   /** Aide visuelle (emoji / schéma textuel) — niveaux faciles uniquement. */
   visualAid?: string;
   /** Étapes de résolution montrées après la réponse (problèmes multi-étapes). */

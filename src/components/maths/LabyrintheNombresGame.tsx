@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MathLevel } from "@/lib/mathSession";
@@ -48,7 +50,7 @@ export const LabyrintheNombresGame = ({ childId, level, backTo }: Props) => {
         finished={run.finished}
         backTo={backTo}
       >
-        <p className="text-center font-dyslexic">Chargement...</p>
+        <p className="text-center font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       </MathGameLayout>
     );
   }
@@ -87,7 +89,7 @@ export const LabyrintheNombresGame = ({ childId, level, backTo }: Props) => {
       backTo={backTo}
     >
       <p className="text-center font-dyslexic text-muted-foreground mb-4">
-        Choisis le bon chemin à chaque intersection pour sortir du labyrinthe.
+        <BilingualText {...biFromFr("Choisis le bon chemin à chaque intersection pour sortir du labyrinthe.")} />
       </p>
 
       <div className="flex justify-center gap-2 mb-8">
@@ -116,7 +118,7 @@ export const LabyrintheNombresGame = ({ childId, level, backTo }: Props) => {
                 : "bg-card border-primary hover:bg-muted"
             }`}
           >
-            <span className="block text-base font-normal text-muted-foreground">Chemin</span>
+            <span className="block text-base font-normal text-muted-foreground"><BilingualText {...biFromFr("Chemin")} /></span>
             {v}
           </motion.button>
         ))}

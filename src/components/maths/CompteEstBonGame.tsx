@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { RotateCcw } from "lucide-react";
@@ -59,7 +61,7 @@ export const CompteEstBonGame = ({ childId, level, backTo }: Props) => {
         finished={run.finished}
         backTo={backTo}
       >
-        <p className="text-center font-dyslexic">Chargement...</p>
+        <p className="text-center font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       </MathGameLayout>
     );
   }
@@ -118,7 +120,7 @@ export const CompteEstBonGame = ({ childId, level, backTo }: Props) => {
       backTo={backTo}
     >
       <div className="text-center mb-6">
-        <p className="font-dyslexic text-muted-foreground">Atteins le nombre cible :</p>
+        <p className="font-dyslexic text-muted-foreground"><BilingualText {...biFromFr("Atteins le nombre cible :")} /></p>
         <motion.p
           key={c.target}
           initial={{ scale: 0.8 }}
@@ -166,12 +168,12 @@ export const CompteEstBonGame = ({ childId, level, backTo }: Props) => {
           onClick={reset}
           className="inline-flex items-center gap-2 bg-muted text-foreground font-bold px-4 rounded-full"
         >
-          <RotateCcw className="w-4 h-4" /> Recommencer
+          <RotateCcw className="w-4 h-4" /> <BilingualText {...biFromFr("Recommencer")} />
         </button>
       </div>
 
       <p className="text-center text-sm text-muted-foreground font-dyslexic mb-3">
-        Choisis un nombre, une opération, puis un second nombre.
+        <BilingualText {...biFromFr("Choisis un nombre, une opération, puis un second nombre.")} />
       </p>
 
       <ul className="max-w-xs mx-auto space-y-1 text-center font-bold">
