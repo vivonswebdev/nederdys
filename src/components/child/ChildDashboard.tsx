@@ -34,6 +34,7 @@ const ChildDashboard = () => {
   const { id } = useParams<{ id: string }>();
   const { user, signOut } = useAuth();
   const { children, activeChild, setActiveChildId, loading } = useChild();
+  const { isChildMode, enterChildMode } = useChildMode();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [aboutOpen, setAboutOpen] = useState(false);
