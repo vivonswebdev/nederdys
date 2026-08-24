@@ -59,6 +59,10 @@ export const GAMES: GameMeta[] = [
   { id: "oreillenombres", subject: "math", titleKey: "game.oreillenombres.title", descKey: "game.oreillenombres.desc", icon: "👂", color: "bg-kids-yellow", route: "/jeu/oreille-des-nombres" },
   { id: "tirnombres", subject: "math", titleKey: "game.tirnombres.title", descKey: "game.tirnombres.desc", icon: "🎯", color: "bg-kids-red", route: "/jeu/tir-aux-nombres" },
   { id: "moutonnoirmaths", subject: "math", titleKey: "game.moutonnoirmaths.title", descKey: "game.moutonnoirmaths.desc", icon: "🐑", color: "bg-kids-purple", route: "/jeu/mouton-noir-maths" },
+  { id: "rouehasard", subject: "math", titleKey: "game.rouehasard.title", descKey: "game.rouehasard.desc", icon: "🎡", color: "bg-kids-yellow", route: "/jeu/roue-du-hasard" },
+  { id: "marathonmental", subject: "math", titleKey: "game.marathonmental.title", descKey: "game.marathonmental.desc", icon: "🏃", color: "bg-kids-green", route: "/jeu/marathon-mental" },
+  { id: "coffrefort", subject: "math", titleKey: "game.coffrefort.title", descKey: "game.coffrefort.desc", icon: "🔐", color: "bg-neutral-700", route: "/jeu/coffre-fort" },
+  { id: "desmaths", subject: "math", titleKey: "game.desmaths.title", descKey: "game.desmaths.desc", icon: "🎲", color: "bg-kids-blue", route: "/jeu/des-mathematiques" },
   { id: "rimemalin", subject: "nl", titleKey: "game.rimemalin.title", descKey: "game.rimemalin.desc", icon: "🎵", color: "bg-kids-blue", route: "/jeu/rime-malin" },
   { id: "desyllabes", subject: "nl", titleKey: "game.desyllabes.title", descKey: "game.desyllabes.desc", icon: "🎲", color: "bg-kids-orange", route: "/jeu/de-syllabes" },
   { id: "cirquemots", subject: "nl", titleKey: "game.cirquemots.title", descKey: "game.cirquemots.desc", icon: "🎪", color: "bg-kids-pink", route: "/jeu/cirque-mots" },
@@ -119,6 +123,10 @@ export const GAME_CATEGORY: Record<string, string> = {
   oreillenombres: "ecoute",
   tirnombres: "ecoute",
   moutonnoirmaths: "logique",
+  rouehasard: "calcul",
+  marathonmental: "vitesse",
+  coffrefort: "logique",
+  desmaths: "calcul",
 };
 
 export interface GameCategoryMeta {
@@ -133,6 +141,7 @@ export const CATEGORIES_BY_SUBJECT: Record<Subject, GameCategoryMeta[]> = {
     { id: "phonologie", name: "Sons", icon: "🔤" },
     { id: "vocabulaire", name: "Vocabulaire", icon: "📖" },
     { id: "phrases", name: "Phrases", icon: "💬" },
+    { id: "grammaire", name: "Grammaire", icon: "🧩" },
     { id: "orthographe", name: "Orthographe", icon: "✏️" },
     { id: "ecoute", name: "Écoute", icon: "👂" },
   ],
@@ -141,6 +150,7 @@ export const CATEGORIES_BY_SUBJECT: Record<Subject, GameCategoryMeta[]> = {
     { id: "calcul", name: "Calcul", icon: "🔢" },
     { id: "ecoute", name: "Écoute", icon: "👂" },
     { id: "logique", name: "Logique", icon: "🧠" },
+    { id: "vitesse", name: "Vitesse", icon: "⏱️" },
   ],
   fr: [{ id: "all", name: "Tous", icon: "📦" }],
 };
