@@ -71,6 +71,27 @@ const t = {
   "feature.parent.title": { fr: "Dashboard Parents", nl: "Ouderdashboard" },
   "feature.parent.desc": { fr: "Suivez les progrès avec des graphiques détaillés et des alertes", nl: "Volg de voortgang met gedetailleerde grafieken en meldingen" },
 
+  // Modules (vitrine : tout ce que l'app contient)
+  "modules.title": { fr: "Tout ce que ton enfant trouve dans NederDys 🎒", nl: "Alles wat je kind in NederDys vindt 🎒" },
+  "modules.subtitle": { fr: "Néerlandais, français, maths, éveil 3-5 ans et informatique/IA — en FR et NL", nl: "Nederlands, Frans, rekenen, 3-5 jaar en informatica/AI — in FR en NL" },
+  "module.nl.title": { fr: "Néerlandais DYS", nl: "Nederlands DYS" },
+  "module.nl.desc": { fr: "Phonologie, syllabes, grammaire et histoires interactives", nl: "Fonologie, lettergrepen, grammatica en interactieve verhalen" },
+  "module.fr.title": { fr: "Français", nl: "Frans" },
+  "module.fr.desc": { fr: "16 jeux : rimes, homophones, synonymes, dictée muette", nl: "16 spellen: rijmen, homofonen, synoniemen, stil dictee" },
+  "module.math.title": { fr: "Maths par chapitres", nl: "Rekenen per kapittel" },
+  "module.math.desc": { fr: "De la 1re à la 6e primaire, déblocage par maîtrise", nl: "Van 1e tot 6e leerjaar, vrijspelen door beheersing" },
+  "module.eveil.title": { fr: "Éveil 3-5 ans", nl: "Ontwaken 3-5 jaar" },
+  "module.eveil.desc": { fr: "Activités tactiles sans lecture, boutons XXL", nl: "Tactiele activiteiten zonder lezen, XXL-knoppen" },
+  "module.code.title": { fr: "Coder & IA de A à Z", nl: "Coderen & AI van A tot Z" },
+  "module.code.desc": { fr: "3 parcours par âge, épisodes courts et questionnaire de niveau", nl: "3 trajecten per leeftijd, korte afleveringen en niveauquiz" },
+  "module.gamif.title": { fr: "Badges, saison & défis", nl: "Badges, seizoen & uitdagingen" },
+  "module.gamif.desc": { fr: "XP, séries, avatar, boutique et défis frères et sœurs", nl: "XP, reeksen, avatar, winkel en uitdagingen tussen broers en zussen" },
+  "module.parent.title": { fr: "Espace parents protégé", nl: "Beveiligde oudersruimte" },
+  "module.parent.desc": { fr: "Code PIN, temps d'écran, points faibles et export PDF", nl: "Pincode, schermtijd, zwakke punten en PDF-export" },
+  "module.offline.title": { fr: "Hors-ligne (PWA)", nl: "Offline (PWA)" },
+  "module.offline.desc": { fr: "Jeux et chapitres jouables même sans connexion", nl: "Spellen en kapittels ook zonder verbinding" },
+
+
   // CTA
   "cta.title": { fr: "Prêt à apprendre ? 🚀", nl: "Klaar om te leren? 🚀" },
   "cta.desc": { fr: "Essai gratuit · 5 jeux offerts · Sans engagement", nl: "Gratis proef · 5 gratis spellen · Vrijblijvend" },

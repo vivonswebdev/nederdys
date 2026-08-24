@@ -1,5 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
-import { allBadges } from "@/data/badges";
+import { allBadges, BadgeCategory } from "@/data/badges";
 import { localDateISO } from "@/lib/date";
 
 // --- Niveaux (paliers XP) ---
@@ -57,7 +57,7 @@ export function getLevelInfo(totalXp: number, lang: "fr" | "nl") {
 export interface BadgeDef {
   name: string;
   icon: string;
-  category: "nl" | "fr" | "math" | "streak" | "special";
+  category: BadgeCategory;
   labelFr: string;
   labelNl: string;
   descFr: string;

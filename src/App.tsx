@@ -86,6 +86,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminErrors from "./pages/admin/AdminErrors";
 import StoriesPage from "./pages/nl/StoriesPage";
+import CodeHome from "./pages/code/CodeHome";
+import CodeEpisodePage from "./pages/code/CodeEpisodePage";
+
 import StoryReader from "./pages/nl/StoryReader";
 import NlChapters from "./pages/nl/NlChapters";
 import FrExercises from "./pages/fr/FrExercises";
@@ -163,6 +166,9 @@ const App = () => (
               <Route path="/child/:id/settings" element={<ChildSettingsPage />} />
               <Route path="/child/:id/eveil" element={<EveilHome />} />
               <Route path="/child/:id/eveil/:activityId" element={<EveilActivity />} />
+              <Route path="/child/:id/code" element={<CodeHome />} />
+              <Route path="/child/:id/code/:episodeId" element={<CodeEpisodePage />} />
+
               <Route path="/child/:id/pause" element={<MiniGamePause />} />
               <Route path="/child/:id/defis" element={<SiblingChallenges />} />
               <Route path="/child/:id/games" element={<GamesHub />} />

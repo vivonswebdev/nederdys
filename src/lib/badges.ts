@@ -9,12 +9,19 @@ export interface ChildBadgeStats {
   nl_xp: number;
   fr_xp: number;
   math_xp: number;
+  code_xp: number;
   nl_level: number;
   fr_level: number;
   math_level: number;
   streak: number;
   games_played: number;
   unique_games: number;
+  /** Épisodes "Coder & IA" terminés (sessions distinctes). */
+  code_episodes: number;
+  /** Histoires interactives NL terminées. */
+  stories_read: number;
+  /** Activités du palier Éveil terminées. */
+  eveil_played: number;
 }
 
 /** Paliers de niveau par matière (XP cumulé dans la matière). */
@@ -34,14 +41,21 @@ export const getChildBadgeStats = async (childId: string): Promise<ChildBadgeSta
   ]);
 
   const sessions = sessionsRes.data ?? [];
-  const bySubject: Record<string, number> = { nl: 0, fr: 0, math: 0 };
+  const bySubject: Record<string, number> = { nl: 0, fr: 0, math: 0, code: 0 };
   const uniqueGames = new Set<string>();
+  const codeEpisodes = new Set<string>();
+  const stories = new Set<string>();
+  const eveil = new Set<string>();
 
   for (const s of sessions) {
-    uniqueGames.add(s.game_type);
+    const gameType = String(s.game_type ?? "");
+    uniqueGames.add(gameType);
     const xp = calculateXpGain(s.score ?? 0, s.max_score ?? 0);
     const subject = (s.subject ?? "nl") as string;
     if (subject in bySubject) bySubject[subject] += xp;
+    if (gameType.startsWith("code-")) codeEpisodes.add(gameType);
+    if (gameType.startsWith("histoire-")) stories.add(gameType);
+    if (subject === "eveil") eveil.add(gameType);
   }
 
   return {
@@ -49,14 +63,19 @@ export const getChildBadgeStats = async (childId: string): Promise<ChildBadgeSta
     nl_xp: bySubject.nl,
     fr_xp: bySubject.fr,
     math_xp: bySubject.math,
+    code_xp: bySubject.code,
     nl_level: subjectLevel(bySubject.nl),
     fr_level: subjectLevel(bySubject.fr),
     math_level: subjectLevel(bySubject.math),
     streak: computeStreak((streakRes.data ?? []).map((r) => r.date as string)),
     games_played: sessions.length,
     unique_games: uniqueGames.size,
+    code_episodes: codeEpisodes.size,
+    stories_read: stories.size,
+    eveil_played: eveil.size,
   };
 };
+
 
 /** Évalue une condition du type "champ >= valeur". */
 export const evaluateCondition = (condition: string, stats: ChildBadgeStats): boolean => {

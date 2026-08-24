@@ -121,7 +121,42 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Modules : tout ce que l'app contient */}
+      <section className="py-16 px-4 bg-muted/40">
+        <div className="container max-w-5xl">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">{t("modules.title")}</h2>
+            <p className="text-muted-foreground text-lg">{t("modules.subtitle")}</p>
+          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              { icon: "🇳🇱", title: t("module.nl.title"), desc: t("module.nl.desc") },
+              { icon: "🇫🇷", title: t("module.fr.title"), desc: t("module.fr.desc") },
+              { icon: "🔢", title: t("module.math.title"), desc: t("module.math.desc") },
+              { icon: "🌟", title: t("module.eveil.title"), desc: t("module.eveil.desc") },
+              { icon: "🧑‍💻", title: t("module.code.title"), desc: t("module.code.desc") },
+              { icon: "🏆", title: t("module.gamif.title"), desc: t("module.gamif.desc") },
+              { icon: "👨‍👩‍👧", title: t("module.parent.title"), desc: t("module.parent.desc") },
+              { icon: "📴", title: t("module.offline.title"), desc: t("module.offline.desc") },
+            ].map((m, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.06 }}
+                className="bg-card rounded-2xl p-5 kids-shadow-card border border-border"
+              >
+                <span className="text-3xl mb-2 block" aria-hidden>{m.icon}</span>
+                <h3 className="font-bold text-foreground mb-1">{m.title}</h3>
+                <p className="text-sm text-muted-foreground">{m.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Features */}
+
       <section className="kids-gradient-hero py-16 px-4">
         <div className="container max-w-4xl">
           <h2 className="text-3xl font-bold text-foreground text-center mb-10">{t("features.title")}</h2>
