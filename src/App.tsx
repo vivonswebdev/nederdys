@@ -56,6 +56,10 @@ import TirGame from "./pages/TirGame";
 import MotTroueGame from "./pages/MotTroueGame";
 import ChronoBilingueGame from "./pages/ChronoBilingueGame";
 import MoutonNoirGame from "./pages/MoutonNoirGame";
+import RimeMalinGame from "./pages/RimeMalinGame";
+import DeSyllabesGame from "./pages/DeSyllabesGame";
+import CirqueMotsGame from "./pages/CirqueMotsGame";
+import DialogueEclairGame from "./pages/DialogueEclairGame";
 import ProfileSelect from "./pages/ProfileSelect";
 import ChildDashboard from "./pages/ChildDashboard";
 import ChildHome from "./pages/ChildHome";
@@ -176,6 +180,10 @@ const App = () => (
               <Route path="/jeu/mot-troue" element={<MotTroueGame />} />
               <Route path="/jeu/chrono" element={<ChronoBilingueGame />} />
               <Route path="/jeu/mouton" element={<MoutonNoirGame />} />
+              <Route path="/jeu/rime-malin" element={<RimeMalinGame />} />
+              <Route path="/jeu/de-syllabes" element={<DeSyllabesGame />} />
+              <Route path="/jeu/cirque-mots" element={<CirqueMotsGame />} />
+              <Route path="/jeu/dialogue-eclair" element={<DialogueEclairGame />} />
               <Route path="/child/:id/test-placement/:subject" element={<PlacementTest />} />
               <Route path="/child/:id/math/chapitres" element={<MathChapters />} />
               <Route path="/child/:id/math/chapitre/:chapterId" element={<ChapterLevelSelect />} />
