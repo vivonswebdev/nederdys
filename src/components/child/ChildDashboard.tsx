@@ -11,11 +11,12 @@ import { getChildLevel } from "@/lib/database";
 import { computeStreak, getStreakDays, recordDailyActivity } from "@/lib/gamification";
 import { getLevelInfo } from "@/lib/gamification";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { gamesBySubject } from "@/lib/games";
+import { gamesBySubject, Subject } from "@/lib/games";
+import { chaptersBySubject, chaptersListRoute } from "@/lib/chapters";
+import { lessonsBySubject } from "@/lib/lessons";
 import { ProgressRing } from "./ProgressRing";
 import { StreakCounter } from "./StreakCounter";
 import { ChildLevelBadge } from "./LevelBadge";
-import { SubjectCard } from "./SubjectCard";
 import { DailyChallenge } from "./DailyChallenge";
 import { SeasonPassCard } from "./SeasonPassCard";
 import { BadgeShowcase } from "./BadgeShowcase";
@@ -30,6 +31,12 @@ import { msUntilLocalMidnight } from "@/lib/date";
 import { getChildCoins } from "@/lib/database";
 import { useChildMode } from "@/contexts/ChildModeContext";
 import { isKindergartenLevel } from "@/lib/schoolLevels";
+
+const SUBJECT_BLOCKS: { id: Subject; name: string; icon: string; cardClass: string }[] = [
+  { id: "nl", name: "Néerlandais / Nederlands", icon: "🇳🇱", cardClass: "border-kids-blue bg-kids-blue/20" },
+  { id: "math", name: "Mathématiques / Wiskunde", icon: "🔢", cardClass: "border-kids-orange bg-kids-orange/20" },
+  { id: "fr", name: "Français / Frans", icon: "🇫🇷", cardClass: "border-kids-green-dark bg-kids-green-light/40" },
+];
 
 const ChildDashboard = () => {
   const { id } = useParams<{ id: string }>();
@@ -179,16 +186,93 @@ const ChildDashboard = () => {
           </button>
         )}
 
-        <button
-          onClick={() => navigate(`/child/${child.id}/games`)}
-          className="w-full bg-kids-blue/30 border-4 border-primary rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
-        >
-          <span className="text-4xl block mb-1">🎮</span>
-          <p className="text-xl font-bold text-foreground"><BilingualText {...biFromFr("Voir tous les jeux")} /></p>
-          <p className="font-dyslexic text-muted-foreground">
-            <BilingualText {...biFromFr("Jeux et exercices de toutes tes matières !")} />
-          </p>
-        </button>
+        {/* Bloc unique matières : jouer / s'exercer / apprendre */}
+        <section>
+          <h2 className="text-xl font-bold text-foreground mb-4">
+            <BilingualText {...biFromFr("Choisis ta matière")} />
+          </h2>
+          <div className="space-y-5">
+            {SUBJECT_BLOCKS.map((s) => (
+              <div
+                key={s.id}
+                className={`border-4 rounded-3xl p-5 kids-shadow-card ${s.cardClass}`}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">{s.icon}</span>
+                  <h3 className="text-xl font-bold text-foreground">{s.name}</h3>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <button
+                    onClick={() => navigate(`/child/${child.id}/${s.id}`)}
+                    className="bg-card border-2 border-border rounded-2xl p-4 text-left hover:border-primary transition-colors"
+                  >
+                    <span className="text-2xl block mb-1">🎮</span>
+                    <p className="font-bold text-foreground">
+                      <BilingualText {...biFromFr("Jouer")} />
+                    </p>
+                    <p className="text-xs font-dyslexic text-muted-foreground">
+                      {gamesBySubject(s.id).length} <BilingualText {...biFromFr("jeux")} />
+                    </p>
+                  </button>
+                  <button
+                    onClick={() => navigate(chaptersListRoute(child.id, s.id))}
+                    className="bg-card border-2 border-border rounded-2xl p-4 text-left hover:border-primary transition-colors"
+                  >
+                    <span className="text-2xl block mb-1">📚</span>
+                    <p className="font-bold text-foreground">
+                      <BilingualText {...biFromFr("Exercices")} />
+                    </p>
+                    <p className="text-xs font-dyslexic text-muted-foreground">
+                      {chaptersBySubject(s.id).length}{" "}
+                      <BilingualText {...biFromFr("chapitres")} />
+                    </p>
+                  </button>
+                  <button
+                    onClick={() => navigate(`/child/${child.id}/apprendre/${s.id}`)}
+                    className="bg-card border-2 border-border rounded-2xl p-4 text-left hover:border-primary transition-colors"
+                  >
+                    <span className="text-2xl block mb-1">📘</span>
+                    <p className="font-bold text-foreground">
+                      <BilingualText {...biFromFr("Leçons")} />
+                    </p>
+                    <p className="text-xs font-dyslexic text-muted-foreground">
+                      {lessonsBySubject(s.id).length}{" "}
+                      <BilingualText {...biFromFr("leçons")} />
+                    </p>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 mt-5">
+            <button
+              onClick={() => navigate(`/child/${child.id}/math/chapitres`)}
+              className="border-4 border-kids-purple bg-kids-purple/25 rounded-3xl p-5 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+            >
+              <span className="text-3xl block mb-1">🔥</span>
+              <p className="text-lg font-bold text-foreground">
+                <BilingualText {...biFromFr("Maths avancées")} />
+              </p>
+              <p className="font-dyslexic text-muted-foreground text-sm">
+                <BilingualText {...biFromFr("4e, 5e, 6e primaire")} />
+              </p>
+            </button>
+            <button
+              onClick={() => navigate(`/child/${child.id}/nl/exercices`)}
+              className="border-4 border-kids-blue bg-kids-blue/25 rounded-3xl p-5 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+            >
+              <span className="text-3xl block mb-1">🎓</span>
+              <p className="text-lg font-bold text-foreground">
+                <BilingualText {...biFromFr("NL avancé")} />
+              </p>
+              <p className="font-dyslexic text-muted-foreground text-sm">
+                <BilingualText {...biFromFr("Grammaire, vocabulaire, compréhension…")} />
+              </p>
+            </button>
+          </div>
+        </section>
+
 
         <button
           onClick={() => navigate(`/child/${child.id}/code`)}
@@ -270,41 +354,6 @@ const ChildDashboard = () => {
           </button>
         </div>
 
-        <section>
-          <h2 className="text-xl font-bold text-foreground mb-4"><BilingualText {...biFromFr("Choisis ta matière")} /></h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            <SubjectCard
-              subject="nl"
-              title="Néerlandais"
-              icon="🇳🇱"
-              colorClass="bg-kids-blue"
-              available
-              gameCount={gamesBySubject("nl").length}
-              childId={child.id}
-              index={0}
-            />
-            <SubjectCard
-              subject="fr"
-              title="Français"
-              icon="🇫🇷"
-              colorClass="bg-kids-green-light"
-              available={false}
-              gameCount={gamesBySubject("fr").length}
-              childId={child.id}
-              index={1}
-            />
-            <SubjectCard
-              subject="math"
-              title="Mathématiques"
-              icon="🔢"
-              colorClass="bg-kids-orange"
-              available
-              gameCount={gamesBySubject("math").length}
-              childId={child.id}
-              index={2}
-            />
-          </div>
-        </section>
 
         <SeasonPassCard childId={child.id} />
 

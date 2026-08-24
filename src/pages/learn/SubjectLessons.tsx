@@ -38,8 +38,13 @@ const SubjectLessons = () => {
           <h1 className="text-3xl font-bold text-foreground">
             {orderedPair({ nl: meta.titleNl, fr: meta.title }, lang)[0]}
           </h1>
+          <p className="text-lg text-muted-foreground font-dyslexic">
+            {orderedPair({ nl: meta.titleNl, fr: meta.title }, lang)[1]}
+          </p>
           <p className="text-muted-foreground font-dyslexic mt-1">
             {orderedPair({ nl: "Lessen om te lezen", fr: "Des leçons à lire" }, lang)[0]}
+            {" · "}
+            {orderedPair({ nl: "Lessen om te lezen", fr: "Des leçons à lire" }, lang)[1]}
           </p>
         </header>
 
@@ -67,18 +72,24 @@ const SubjectLessons = () => {
                   <p className="text-lg font-bold text-foreground">
                     {orderedPair({ nl: lesson.titleNl ?? lesson.title, fr: lesson.title }, lang)[0]}
                   </p>
+                  <p className="text-sm font-dyslexic text-muted-foreground">
+                    {orderedPair({ nl: lesson.titleNl ?? lesson.title, fr: lesson.title }, lang)[1]}
+                  </p>
+                  <p className="text-sm font-dyslexic text-muted-foreground mt-1">
+                    {orderedPair({ nl: lesson.introNl ?? lesson.intro, fr: lesson.intro }, lang)[0]}
+                  </p>
                   <div className="flex flex-wrap gap-2 mt-2 text-xs font-bold">
                     <span className="px-2 py-1 rounded-full bg-muted text-muted-foreground">
-                      📖 {lesson.sections.length} {lang === "nl" ? "begrippen" : "notions"}
+                      📖 {lesson.sections.length} {lang === "nl" ? "begrippen / notions" : "notions / begrippen"}
                     </span>
                     {lesson.linkedChapterId && (
                       <span className="px-2 py-1 rounded-full bg-kids-blue/30 text-foreground">
-                        📚 {lang === "nl" ? "oefeningen" : "exercices"}
+                        📚 {lang === "nl" ? "oefeningen / exercices" : "exercices / oefeningen"}
                       </span>
                     )}
                     {lesson.linkedGameIds?.length ? (
                       <span className="px-2 py-1 rounded-full bg-kids-yellow/40 text-foreground">
-                        🎮 {lang === "nl" ? "spel" : "jeu"}
+                        🎮 {lang === "nl" ? "spel / jeu" : "jeu / spel"}
                       </span>
                     ) : null}
                   </div>

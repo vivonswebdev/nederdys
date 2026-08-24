@@ -42,7 +42,7 @@ const LessonPage = () => {
           <p className="text-lg text-muted-foreground font-dyslexic">{title[1]}</p>
           <p className="text-xs font-bold text-muted-foreground mt-2">
             ⏱️ {lesson.durationMin} min · 📖 {lesson.sections.length}{" "}
-            {lang === "nl" ? "begrippen" : "notions"}
+            {lang === "nl" ? "begrippen / notions" : "notions / begrippen"}
           </p>
           <p className="mt-4 font-dyslexic text-foreground">{intro[0]}</p>
           <p className="font-dyslexic text-muted-foreground">{intro[1]}</p>
@@ -97,7 +97,7 @@ const LessonPage = () => {
                 {example && (
                   <div className="mt-4 rounded-2xl bg-kids-yellow/30 border-2 border-kids-yellow p-3">
                     <p className="text-xs font-bold text-muted-foreground mb-1">
-                      {lang === "nl" ? "Voorbeeld" : "Exemple"}
+                      {lang === "nl" ? "Voorbeeld / Exemple" : "Exemple / Voorbeeld"}
                     </p>
                     <p className="font-dyslexic text-foreground">{example[0]}</p>
                     <p className="font-dyslexic text-muted-foreground text-sm">{example[1]}</p>
@@ -114,7 +114,7 @@ const LessonPage = () => {
               to={chapterRoute}
               className="flex items-center justify-center gap-2 rounded-2xl bg-primary text-primary-foreground font-bold py-4 px-5 text-center"
             >
-              📚 {lang === "nl" ? "Oefenen op dit hoofdstuk" : "S'exercer sur ce chapitre"}
+              📚 {lang === "nl" ? "Oefenen · S'exercer" : "S'exercer · Oefenen"}
             </Link>
           )}
           {games.map((game) => (
