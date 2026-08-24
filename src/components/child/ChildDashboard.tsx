@@ -172,6 +172,17 @@ const ChildDashboard = () => {
         </button>
 
         <button
+          onClick={() => navigate(`/child/${child.id}/pause`)}
+          className="w-full bg-muted border-4 border-border rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+        >
+          <span className="text-4xl block mb-1">🎮</span>
+          <p className="text-xl font-bold text-foreground"><BilingualText {...biFromFr("Petite pause")} /></p>
+          <p className="font-dyslexic text-muted-foreground">
+            <BilingualText {...biFromFr("Un memory pour se détendre, sans points.")} />
+          </p>
+        </button>
+
+        <button
           onClick={() => navigate(`/child/${child.id}/eveil`)}
           className="w-full bg-kids-orange/20 border-4 border-kids-orange rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
         >
