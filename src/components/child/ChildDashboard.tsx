@@ -183,6 +183,19 @@ const ChildDashboard = () => {
         </button>
 
         <button
+          onClick={() => navigate(`/child/${child.id}/defis`)}
+          className="w-full bg-card border-4 border-border rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+        >
+          <span className="text-4xl block mb-1">🏆</span>
+          <p className="text-xl font-bold text-foreground"><BilingualText {...biFromFr("Défis frères et sœurs")} /></p>
+          <p className="font-dyslexic text-muted-foreground">
+            <BilingualText {...biFromFr("Défie ton frère ou ta sœur sur un jeu ou un chapitre.")} />
+          </p>
+        </button>
+
+
+
+        <button
           onClick={() => navigate(`/child/${child.id}/eveil`)}
           className="w-full bg-kids-orange/20 border-4 border-kids-orange rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
         >
