@@ -110,15 +110,15 @@ export function speakFr(text: string) {
   speak(text, "fr-BE");
 }
 
-/** Consigne bilingue : langue de l'enfant d'abord, puis l'autre — sans texte à lire. */
+/**
+ * Consigne Éveil : parlée dans la langue du profil enfant uniquement.
+ * Éveil est un module d'éveil général (langue maternelle/cible), contrairement
+ * aux chapitres NL où le néerlandais est la matière enseignée.
+ */
 export function speakBilingual(phrase: Bilingual) {
   window.speechSynthesis?.cancel();
-  const nlFirst = getChildLanguage() !== "fr";
-  const first = nlFirst ? { t: phrase.nl, l: "nl-BE" as const } : { t: phrase.fr, l: "fr-BE" as const };
-  const second = nlFirst ? { t: phrase.fr, l: "fr-BE" as const } : { t: phrase.nl, l: "nl-BE" as const };
-  speak(first.t, first.l, () => {
-    window.setTimeout(() => speak(second.t, second.l), 400);
-  });
+  const fr = getChildLanguage() === "fr";
+  speak(fr ? phrase.fr : phrase.nl, fr ? "fr-BE" : "nl-BE");
 }
 
 /** Félicitations bilingues réutilisées par toutes les activités. */

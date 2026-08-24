@@ -8,14 +8,25 @@ interface Props {
   priority?: "nl" | "fr" | "both";
   /** Empile les deux langues au lieu de les mettre sur une ligne. */
   stacked?: boolean;
+  /** N'affiche QUE la langue de l'enfant (interface générale, palier Éveil). */
+  single?: boolean;
 }
 
 /**
  * Affiche un contenu toujours en néerlandais ET en français.
  * La langue de l'enfant (choisie à l'inscription) est affichée en premier, en gras.
  */
-export function BilingualText({ nl, fr, className = "", priority = "both", stacked = false }: Props) {
+export function BilingualText({
+  nl,
+  fr,
+  className = "",
+  priority = "both",
+  stacked = false,
+  single = false,
+}: Props) {
   const childLang = useChildLanguage();
+
+  if (single) return <span className={className}>{childLang === "fr" ? fr : nl}</span>;
 
   if (priority === "nl") return <span className={className}>{nl}</span>;
   if (priority === "fr") return <span className={className}>{fr}</span>;
