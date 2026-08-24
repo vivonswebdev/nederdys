@@ -5,11 +5,13 @@ import { Navbar } from "@/components/Navbar";
 import { useChild } from "@/contexts/ChildContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useChildMode } from "@/contexts/ChildModeContext";
 
 const ProfileSelect = () => {
   const { children, setActiveChildId, loading } = useChild();
   const { user } = useAuth();
   const { t } = useLanguage();
+  const { isChildMode } = useChildMode();
   const navigate = useNavigate();
 
   const pick = (id: string) => {
