@@ -11,11 +11,12 @@ import { getChildLevel } from "@/lib/database";
 import { computeStreak, getStreakDays, recordDailyActivity } from "@/lib/gamification";
 import { getLevelInfo } from "@/lib/gamification";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { gamesBySubject } from "@/lib/games";
+import { gamesBySubject, Subject } from "@/lib/games";
+import { chaptersBySubject, chaptersListRoute } from "@/lib/chapters";
+import { lessonsBySubject } from "@/lib/lessons";
 import { ProgressRing } from "./ProgressRing";
 import { StreakCounter } from "./StreakCounter";
 import { ChildLevelBadge } from "./LevelBadge";
-import { SubjectCard } from "./SubjectCard";
 import { DailyChallenge } from "./DailyChallenge";
 import { SeasonPassCard } from "./SeasonPassCard";
 import { BadgeShowcase } from "./BadgeShowcase";
@@ -30,6 +31,12 @@ import { msUntilLocalMidnight } from "@/lib/date";
 import { getChildCoins } from "@/lib/database";
 import { useChildMode } from "@/contexts/ChildModeContext";
 import { isKindergartenLevel } from "@/lib/schoolLevels";
+
+const SUBJECT_BLOCKS: { id: Subject; name: string; icon: string; cardClass: string }[] = [
+  { id: "nl", name: "Néerlandais / Nederlands", icon: "🇳🇱", cardClass: "border-kids-blue bg-kids-blue/20" },
+  { id: "math", name: "Mathématiques / Wiskunde", icon: "🔢", cardClass: "border-kids-orange bg-kids-orange/20" },
+  { id: "fr", name: "Français / Frans", icon: "🇫🇷", cardClass: "border-kids-green-dark bg-kids-green-light/40" },
+];
 
 const ChildDashboard = () => {
   const { id } = useParams<{ id: string }>();
