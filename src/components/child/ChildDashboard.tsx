@@ -29,6 +29,7 @@ import { getOrCreateDailyChallenge } from "@/lib/challenges";
 import { msUntilLocalMidnight } from "@/lib/date";
 import { getChildCoins } from "@/lib/database";
 import { useChildMode } from "@/contexts/ChildModeContext";
+import { isKindergartenLevel } from "@/lib/schoolLevels";
 
 const ChildDashboard = () => {
   const { id } = useParams<{ id: string }>();
@@ -41,6 +42,7 @@ const ChildDashboard = () => {
   useChildSettings(id);
 
   const child = children.find((c) => c.id === id) ?? null;
+  const isLittleOne = !!child && (child.age < 7 || isKindergartenLevel(child.school_level));
 
   useEffect(() => {
     if (loading) return;
@@ -172,7 +174,7 @@ const ChildDashboard = () => {
               <BilingualText {...biFromFr("Mes jeux 3-5 ans")} />
             </p>
             <p className="font-dyslexic text-muted-foreground">
-              <BilingualText {...biFromFr("活")} />
+              <BilingualText {...biFromFr("Des activités toutes simples, sans lecture !")} />
             </p>
           </button>
         )}
