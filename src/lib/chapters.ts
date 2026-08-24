@@ -1,6 +1,11 @@
 import { supabase } from "@/integrations/supabase/client";
 import { Exercise, Difficulty } from "@/data/chapters/types";
 import { chapterNl } from "@/data/nl/chaptersNl";
+import { homophonesFrExercises } from "@/data/chapters/fr/homophones-fr";
+import { synonymesFrExercises } from "@/data/chapters/fr/synonymes-fr";
+import { phrasesFrExercises } from "@/data/chapters/fr/phrases-fr";
+import { rimesFrExercises } from "@/data/chapters/fr/rimes-fr";
+import { articlesFrExercises } from "@/data/chapters/fr/articles-fr";
 import { numerationCe2Exercises } from "@/data/chapters/numeration-ce2";
 import { additionCe2Exercises } from "@/data/chapters/addition-ce2";
 import { soustractionCe2Exercises } from "@/data/chapters/soustraction-ce2";
@@ -172,6 +177,14 @@ const NL_CHAPTER_DEFS: ChapterDef[] = [
   { id: "dialogue-nl", name: "Petit dialogue", emoji: "🗨️", section: "stretch", description: "Compléter une conversation", exercises: dialogueNlExercises },
 ];
 
+const FR_CHAPTER_DEFS: ChapterDef[] = [
+  { id: "rimes-fr", name: "Rimes et syllabes", emoji: "🎵", section: "ce2", description: "Écouter, découper, faire rimer", exercises: rimesFrExercises },
+  { id: "articles-fr", name: "Le, la, l' et le pluriel", emoji: "🏷️", section: "ce2", description: "Genre, articles et accords", exercises: articlesFrExercises },
+  { id: "phrases-fr", name: "La phrase", emoji: "💬", section: "ce2", description: "Ordre des mots et ponctuation", exercises: phrasesFrExercises },
+  { id: "synonymes-fr", name: "Synonymes et contraires", emoji: "📖", section: "ce2", description: "Enrichir son vocabulaire", exercises: synonymesFrExercises },
+  { id: "homophones-fr", name: "Les homophones", emoji: "🪤", section: "stretch", description: "a/à, ou/où, son/sont…", exercises: homophonesFrExercises },
+];
+
 const withNl = (c: ChapterDef, subject: ChapterSubject): Chapter => {
   const nl = chapterNl(c.id);
   return { ...c, subject, nameNl: nl?.name, descriptionNl: nl?.description };
@@ -179,7 +192,8 @@ const withNl = (c: ChapterDef, subject: ChapterSubject): Chapter => {
 
 export const CHAPTERS: Chapter[] = MATH_CHAPTERS.map((c) => withNl(c, "math"));
 export const NL_CHAPTERS: Chapter[] = NL_CHAPTER_DEFS.map((c) => withNl(c, "nl"));
-export const ALL_CHAPTERS: Chapter[] = [...CHAPTERS, ...NL_CHAPTERS];
+export const FR_CHAPTERS: Chapter[] = FR_CHAPTER_DEFS.map((c) => withNl(c, "fr"));
+export const ALL_CHAPTERS: Chapter[] = [...CHAPTERS, ...NL_CHAPTERS, ...FR_CHAPTERS];
 
 export const chaptersBySubject = (subject: ChapterSubject) =>
   ALL_CHAPTERS.filter((c) => c.subject === subject);

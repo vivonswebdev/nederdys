@@ -54,6 +54,13 @@ export const CHAPTERS_NL: Record<string, ChapterNl> = {
   "aires-formules-6eprimaire": { name: "Oppervlaktes en formules (6e)" },
   "proportionnalite-6eprimaire": { name: "Evenredigheid (6e)" },
 
+  // --- Français ---
+  "rimes-fr": { name: "Rijmen en lettergrepen", description: "Luisteren, splitsen, rijmen" },
+  "articles-fr": { name: "Le, la, l' en het meervoud", description: "Geslacht, lidwoorden en overeenkomst" },
+  "phrases-fr": { name: "De zin", description: "Woordorde en interpunctie" },
+  "synonymes-fr": { name: "Synoniemen en tegenstellingen", description: "Je woordenschat uitbreiden" },
+  "homophones-fr": { name: "Homofonen", description: "a/à, ou/où, son/sont…" },
+
   // --- Néerlandais ---
   "kleuren-nl": { name: "Kleuren en kleren", description: "De kleuren, de kledij" },
   "dieren-nl": { name: "De dieren", description: "De dieren, de/het" },
