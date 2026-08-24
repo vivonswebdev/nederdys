@@ -3,7 +3,7 @@ import { mathTextToNl } from "@/lib/mathSpeechNl";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, Volume2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { biToast } from "@/lib/biToast";
 import { Navbar } from "@/components/Navbar";
 import { Confetti } from "@/components/Confetti";
 import { useAudio } from "@/hooks/useAudio";
@@ -11,7 +11,7 @@ import { MathChallengeBase, useMathSession } from "@/hooks/useMathSession";
 import { sounds } from "@/lib/sounds";
 import { MathLevel, XP_PER_LEVEL, recordGameCompletion } from "@/lib/mathSession";
 import { BilingualText, Bi } from "@/components/ui/BilingualText";
-import { UI, biFromFr, useChildLanguage, speakBoth } from "@/lib/bilingual";
+import { bi, UI, biFromFr, useChildLanguage, speakBoth } from "@/lib/bilingual";
 
 export type QuizOption = string | number;
 
@@ -120,8 +120,8 @@ export function MathQuizGame<T extends MathChallengeBase>({
       durationSeconds: Math.round((Date.now() - startTime.current) / 1000),
       errorsCount: finalErrors,
     });
-    if (!result.ok) toast.error("Erreur lors de l'enregistrement");
-    else toast.success(`+${result.xp_awarded ?? xp} XP & ${result.xp_awarded ?? xp} pièces ! 🎉`);
+    if (!result.ok) biToast.error(bi("Fout bij het opslaan", "Erreur lors de l'enregistrement"));
+    else biToast.success(bi(`+${result.xp_awarded ?? xp} XP & ${result.xp_awarded ?? xp} muntjes! 🎉`, `+${result.xp_awarded ?? xp} XP & ${result.xp_awarded ?? xp} pièces ! 🎉`));
     setTimeout(() => navigate(backTo), 2500);
   }
 

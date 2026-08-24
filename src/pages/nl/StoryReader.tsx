@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { toast } from "sonner";
+import { biToast } from "@/lib/biToast";
 import { Navbar } from "@/components/Navbar";
 import { BilingualText } from "@/components/ui/BilingualText";
 import { StoryPlayer } from "@/components/stories/StoryPlayer";
@@ -34,7 +34,7 @@ const StoryReader = () => {
         durationSeconds: Math.round((Date.now() - startedAt) / 1000),
         errorsCount: 0,
       });
-      if (res.ok) toast.success(`+${res.xp_awarded ?? STORY_XP} XP ! 🎉`);
+      if (res.ok) biToast.success(bi(`+${res.xp_awarded ?? STORY_XP} XP! 🎉`, `+${res.xp_awarded ?? STORY_XP} XP ! 🎉`));
     }
     navigate(id ? `/child/${id}/nl/histoires` : "/enfant");
   };
