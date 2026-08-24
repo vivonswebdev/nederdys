@@ -4,13 +4,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { LESSON_SUBJECTS, lessonsBySubject } from "@/lib/lessons";
-import { useChildLanguage, orderedPair } from "@/lib/bilingual";
+import { orderedPair } from "@/lib/bilingual";
+import { LearnLangToggle, useLearnLanguage } from "@/components/learn/LearnLangToggle";
 
 /** Hub « Apprendre » : leçons NL / Math / FR + accès au parcours Code & IA. */
 const LearnHome = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const lang = useChildLanguage();
+  const [lang, setLang] = useLearnLanguage();
 
   useEffect(() => {
     document.title = "Apprendre — NederDys";
@@ -39,18 +40,24 @@ const LearnHome = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="container max-w-4xl px-4 py-8">
+        <div className="flex items-center justify-between gap-3 mb-6">
         <Link
           to={`/child/${id}`}
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground "
         >
           <ArrowLeft className="w-4 h-4" /> {lang === "nl" ? "Terug" : "Retour"}
         </Link>
+          <LearnLangToggle lang={lang} onChange={setLang} />
+        </div>
 
         <header className="text-center mb-8">
           <span className="text-5xl block mb-2">📘</span>
           <h1 className="text-3xl font-bold text-foreground">
             {orderedPair({ nl: "Wat wil je leren?", fr: "Que veux-tu apprendre ?" }, lang)[0]}
           </h1>
+          <p className="text-lg text-muted-foreground font-dyslexic">
+            {orderedPair({ nl: "Wat wil je leren?", fr: "Que veux-tu apprendre ?" }, lang)[1]}
+          </p>
           <p className="text-muted-foreground font-dyslexic mt-1">
             {orderedPair(
               {
@@ -60,6 +67,7 @@ const LearnHome = () => {
               lang
             )[0]}
           </p>
+
         </header>
 
         <div className="grid gap-5 sm:grid-cols-2">
