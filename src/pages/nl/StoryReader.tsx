@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { biToast } from "@/lib/biToast";
+import { bi } from "@/lib/bilingual";
 import { Navbar } from "@/components/Navbar";
 import { BilingualText } from "@/components/ui/BilingualText";
 import { StoryPlayer } from "@/components/stories/StoryPlayer";
