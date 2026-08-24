@@ -179,16 +179,93 @@ const ChildDashboard = () => {
           </button>
         )}
 
-        <button
-          onClick={() => navigate(`/child/${child.id}/games`)}
-          className="w-full bg-kids-blue/30 border-4 border-primary rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
-        >
-          <span className="text-4xl block mb-1">🎮</span>
-          <p className="text-xl font-bold text-foreground"><BilingualText {...biFromFr("Voir tous les jeux")} /></p>
-          <p className="font-dyslexic text-muted-foreground">
-            <BilingualText {...biFromFr("Jeux et exercices de toutes tes matières !")} />
-          </p>
-        </button>
+        {/* Bloc unique matières : jouer / s'exercer / apprendre */}
+        <section>
+          <h2 className="text-xl font-bold text-foreground mb-4">
+            <BilingualText {...biFromFr("Choisis ta matière")} />
+          </h2>
+          <div className="space-y-5">
+            {SUBJECT_BLOCKS.map((s) => (
+              <div
+                key={s.id}
+                className={`border-4 rounded-3xl p-5 kids-shadow-card ${s.cardClass}`}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">{s.icon}</span>
+                  <h3 className="text-xl font-bold text-foreground">{s.name}</h3>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <button
+                    onClick={() => navigate(`/child/${child.id}/${s.id}`)}
+                    className="bg-card border-2 border-border rounded-2xl p-4 text-left hover:border-primary transition-colors"
+                  >
+                    <span className="text-2xl block mb-1">🎮</span>
+                    <p className="font-bold text-foreground">
+                      <BilingualText {...biFromFr("Jouer")} />
+                    </p>
+                    <p className="text-xs font-dyslexic text-muted-foreground">
+                      {gamesBySubject(s.id).length} <BilingualText {...biFromFr("jeux")} />
+                    </p>
+                  </button>
+                  <button
+                    onClick={() => navigate(chaptersListRoute(child.id, s.id))}
+                    className="bg-card border-2 border-border rounded-2xl p-4 text-left hover:border-primary transition-colors"
+                  >
+                    <span className="text-2xl block mb-1">📚</span>
+                    <p className="font-bold text-foreground">
+                      <BilingualText {...biFromFr("Exercices")} />
+                    </p>
+                    <p className="text-xs font-dyslexic text-muted-foreground">
+                      {chaptersBySubject(s.id).length}{" "}
+                      <BilingualText {...biFromFr("chapitres")} />
+                    </p>
+                  </button>
+                  <button
+                    onClick={() => navigate(`/child/${child.id}/apprendre/${s.id}`)}
+                    className="bg-card border-2 border-border rounded-2xl p-4 text-left hover:border-primary transition-colors"
+                  >
+                    <span className="text-2xl block mb-1">📘</span>
+                    <p className="font-bold text-foreground">
+                      <BilingualText {...biFromFr("Leçons")} />
+                    </p>
+                    <p className="text-xs font-dyslexic text-muted-foreground">
+                      {lessonsBySubject(s.id).length}{" "}
+                      <BilingualText {...biFromFr("leçons")} />
+                    </p>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 mt-5">
+            <button
+              onClick={() => navigate(`/child/${child.id}/math/chapitres`)}
+              className="border-4 border-kids-purple bg-kids-purple/25 rounded-3xl p-5 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+            >
+              <span className="text-3xl block mb-1">🔥</span>
+              <p className="text-lg font-bold text-foreground">
+                <BilingualText {...biFromFr("Maths avancées")} />
+              </p>
+              <p className="font-dyslexic text-muted-foreground text-sm">
+                <BilingualText {...biFromFr("4e, 5e, 6e primaire")} />
+              </p>
+            </button>
+            <button
+              onClick={() => navigate(`/child/${child.id}/nl/exercices`)}
+              className="border-4 border-kids-blue bg-kids-blue/25 rounded-3xl p-5 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+            >
+              <span className="text-3xl block mb-1">🎓</span>
+              <p className="text-lg font-bold text-foreground">
+                <BilingualText {...biFromFr("NL avancé")} />
+              </p>
+              <p className="font-dyslexic text-muted-foreground text-sm">
+                <BilingualText {...biFromFr("Grammaire, vocabulaire, compréhension…")} />
+              </p>
+            </button>
+          </div>
+        </section>
+
 
         <button
           onClick={() => navigate(`/child/${child.id}/code`)}
