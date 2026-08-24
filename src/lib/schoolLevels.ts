@@ -1,5 +1,7 @@
 // Niveaux scolaires belges (enseignement primaire)
 export const SCHOOL_LEVELS = [
+  { id: "m1", label: "1re maternelle (3-4 ans)" },
+  { id: "m2", label: "2e maternelle (4-5 ans)" },
   { id: "p1", label: "1re primaire" },
   { id: "p2", label: "2e primaire" },
   { id: "p3", label: "3e primaire" },
@@ -7,6 +9,10 @@ export const SCHOOL_LEVELS = [
   { id: "p5", label: "5e primaire" },
   { id: "p6", label: "6e primaire" },
 ] as const;
+
+export const isKindergartenLevel = (value?: string | null) =>
+  normalizeSchoolLevel(value).startsWith("m");
+
 
 export const DEFAULT_SCHOOL_LEVEL = "p3";
 
