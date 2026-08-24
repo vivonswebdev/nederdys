@@ -60,7 +60,7 @@ function playExercise(ex: Exercise, primary: "nl" | "fr") {
   speakBoth({ nl: ex.questionNl ?? ex.question, fr: ex.question }, primary);
 }
 
-export /** Libellé bilingue d'une option de QCM (NL fourni par la donnée ou le lexique). */
+/** Libellé bilingue d'une option de QCM (NL fourni par la donnée ou le lexique). */
 function optionLabel(ex: QcmExercise, opt: string | number): Bilingual {
   const fr = String(opt);
   const i = ex.options.findIndex((o) => String(o) === fr);
@@ -69,7 +69,7 @@ function optionLabel(ex: QcmExercise, opt: string | number): Bilingual {
   return { nl, fr };
 }
 
-const ExerciseRunner = ({
+export const ExerciseRunner = ({
   childId,
   chapter,
   level,
