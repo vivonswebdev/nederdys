@@ -21,6 +21,7 @@ import { useChild } from "@/contexts/ChildContext";
 import { LevelBadge } from "./LevelBadge";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useChildMode } from "@/contexts/ChildModeContext";
+import { ChildSwitcher } from "./child/ChildSwitcher";
 
 export const Navbar = () => {
   const location = useLocation();
@@ -28,6 +29,12 @@ export const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
   const { activeChild } = useChild();
   const { isChildMode } = useChildMode();
+  // Espaces enfants : on masque aussi les accès parent (+ Enfant, Déconnexion).
+  const inChildSpace =
+    isChildMode ||
+    ["/child", "/jouer", "/eveil", "/jeu", "/classement", "/boutique", "/avatar"].some((p) =>
+      location.pathname.startsWith(p)
+    );
   const [open, setOpen] = useState(false);
 
   // Close the mobile menu on route change
@@ -51,7 +58,7 @@ export const Navbar = () => {
     { to: user ? "/accueil" : "/", icon: <Home className="w-4 h-4" />, label: t("nav.home") },
     { to: "/jouer", icon: <Gamepad2 className="w-4 h-4" />, label: t("nav.play") },
     { to: "/classement", icon: <Trophy className="w-4 h-4" />, label: "Classement" },
-    ...(isChildMode
+    ...(inChildSpace
       ? []
       : [{ to: "/parents", icon: <BarChart3 className="w-4 h-4" />, label: t("nav.parents") }]),
   ];
@@ -72,8 +79,12 @@ export const Navbar = () => {
       <div className="container flex items-center justify-between h-16 gap-2 px-3 sm:px-4">
         <Link to={user ? "/accueil" : "/"} className="flex items-center gap-2 shrink-0">
           <span className="text-2xl">🐸</span>
-          <span className="text-lg sm:text-xl font-bold text-primary">NederDys</span>
+          <span className="hidden sm:inline text-lg sm:text-xl font-bold text-primary">
+            NederDys
+          </span>
         </Link>
+
+        {user && <ChildSwitcher />}
 
         {/* Desktop / tablet navigation */}
         <div className="hidden md:flex items-center gap-1">
@@ -103,7 +114,7 @@ export const Navbar = () => {
                 <ShoppingBag className="w-4 h-4" />
                 <span className="hidden lg:inline">🪙 {coinsData?.coins ?? 0}</span>
               </Link>
-              {!isChildMode && (
+              {!inChildSpace && (
                 <>
                   <Link
                     to="/ajouter-enfant"
@@ -185,7 +196,7 @@ export const Navbar = () => {
                     <ShoppingBag className="w-4 h-4" />
                     <span>Boutique · 🪙 {coinsData?.coins ?? 0}</span>
                   </Link>
-                  {!isChildMode && (
+                  {!inChildSpace && (
                     <Link
                       to="/ajouter-enfant"
                       className={`${linkClass("/ajouter-enfant")} !rounded-xl py-3 text-base`}
@@ -210,7 +221,7 @@ export const Navbar = () => {
                   <Globe className="w-4 h-4" />
                   <span className="uppercase">{lang === "fr" ? "NL" : "FR"}</span>
                 </button>
-                {user && !isChildMode && (
+                {user && !inChildSpace && (
                   <button
                     onClick={signOut}
                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-3 rounded-xl text-sm font-bold bg-destructive/10 text-destructive"
