@@ -128,6 +128,7 @@ const App = () => (
               <Route path="/child/:id/eveil" element={<EveilHome />} />
               <Route path="/child/:id/eveil/:activityId" element={<EveilActivity />} />
               <Route path="/child/:id/pause" element={<MiniGamePause />} />
+              <Route path="/child/:id/defis" element={<SiblingChallenges />} />
               <Route path="/child/:id/games" element={<GamesHub />} />
               <Route path="/child/:id/jeux" element={<GamesHub />} />
               <Route path="/child/:id/nl/histoires" element={<StoriesPage />} />
