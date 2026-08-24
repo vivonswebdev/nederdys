@@ -8,6 +8,13 @@ export interface EveilActivity {
   description: string;
 }
 
+/** Une option de réponse Éveil est TOUJOURS visuelle — jamais un mot à lire. */
+export interface EveilOption {
+  id: string;
+  visual: string; // emoji, image ou pastille de couleur
+  audioLabel?: string; // ce que la voix dit si l'option est touchée
+}
+
 export const EVEIL_ACTIVITIES: EveilActivity[] = [
   {
     id: "arc-en-ciel",
