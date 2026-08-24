@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { OfflineBanner } from "@/components/OfflineBanner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -117,9 +118,10 @@ const App = () => (
         <ChildProvider>
         <ChildModeProvider>
         <TooltipProvider>
-          <ErrorTracking />
-          <Toaster />
-          <Sonner />
+           <ErrorTracking />
+           <Toaster />
+           <Sonner />
+           <OfflineBanner />
           <BrowserRouter>
             <ChildModeGuard>
             <Routes>

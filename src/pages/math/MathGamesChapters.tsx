@@ -61,7 +61,10 @@ const MathGamesChapters = () => {
             <BilingualText nl="Rekenspellen" fr="Jeux de maths" stacked />
           </h1>
           <p className="text-muted-foreground font-dyslexic mt-1">
-            {allGames.length} jeux · {categories.length - 1} catégories
+            <BilingualText
+              nl={`${allGames.length} spellen · ${categories.length - 1} categorieën`}
+              fr={`${allGames.length} jeux · ${categories.length - 1} catégories`}
+            />
           </p>
         </header>
 
@@ -135,7 +138,10 @@ const MathGamesChapters = () => {
                   <BilingualText {...biFromFr("Exercices par chapitre")} />
                 </h2>
                 <p className="font-dyslexic text-muted-foreground">
-                  {chapterCount} chapitres · 3 niveaux à débloquer un par un
+                  <BilingualText
+                    nl={`${chapterCount} hoofdstukken · 3 niveaus, één voor één vrij te spelen`}
+                    fr={`${chapterCount} chapitres · 3 niveaux à débloquer un par un`}
+                  />
                 </p>
               </div>
               <ArrowRight className="w-6 h-6 text-foreground" />

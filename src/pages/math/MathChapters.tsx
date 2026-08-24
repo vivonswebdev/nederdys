@@ -87,7 +87,10 @@ const MathChapters = () => {
           <span className="text-3xl mr-2">🎯</span>
           <span className="text-lg font-bold text-foreground"><BilingualText {...biFromFr("Faire le test de placement")} /></span>
           <p className="font-dyslexic text-muted-foreground mt-1">
-            6 questions pour débloquer directement le bon niveau.
+            <BilingualText
+              nl="6 vragen om meteen het juiste niveau vrij te spelen."
+              fr="6 questions pour débloquer directement le bon niveau."
+            />
           </p>
         </Link>
 
@@ -100,7 +103,10 @@ const MathChapters = () => {
             <BilingualText nl="Rekenspellen" fr="Jeux de maths par catégorie" stacked />
           </span>
           <p className="font-dyslexic text-muted-foreground mt-1">
-            Calcul, logique, écoute, vitesse — accès direct à chaque jeu.
+            <BilingualText
+              nl="Rekenen, logica, luisteren, snelheid — direct naar elk spel."
+              fr="Calcul, logique, écoute, vitesse — accès direct à chaque jeu."
+            />
           </p>
         </Link>
 
