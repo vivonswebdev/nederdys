@@ -92,6 +92,12 @@ export const NL_STRINGS: Record<string, string> = {
   "Écoute bien, puis clique sur le nombre entendu 🎧":
     "Luister goed en klik op het getal dat je hoort 🎧",
   "Trouve le nombre :": "Zoek het getal:",
+  "Trouve l'intrus : un seul nombre casse la suite":
+    "Zoek de indringer: één getal past niet in de reeks",
+  "Trouve l'intrus : un seul nombre n'est pas comme les autres":
+    "Zoek de indringer: één getal is anders dan de andere",
+  "Trouve l'intrus : un seul nombre ne suit pas la règle":
+    "Zoek de indringer: één getal volgt de regel niet",
 };
 
 /** Traduction NL d'une chaîne FR d'interface enfant (retourne `undefined` si absente). */

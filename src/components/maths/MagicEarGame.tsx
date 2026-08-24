@@ -1,4 +1,6 @@
 import { MathQuizGame } from "./MathQuizGame";
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { magicEarChallenges } from "@/data/math/magicEarChallenges";
 import { MathLevel } from "@/lib/mathSession";
 
@@ -24,7 +26,7 @@ export const MagicEarGame = ({ childId, level, backTo }: Props) => (
     getAudio={(c) => ({ url: c.audioUrl, text: c.audioText })}
     renderPrompt={() => (
       <p className="text-2xl font-bold font-dyslexic">
-        Écoute bien, puis clique sur le nombre entendu 🎧
+        <BilingualText {...biFromFr("Écoute bien, puis clique sur le nombre entendu 🎧")} stacked />
       </p>
     )}
   />
