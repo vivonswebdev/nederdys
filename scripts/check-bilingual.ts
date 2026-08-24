@@ -68,6 +68,8 @@ for (const file of CHILD_DIRS.flatMap(walk)) {
     const text = match[1].trim();
     if (IGNORE.test(text)) continue;
     if (/^[A-Z_]+$/.test(text)) continue;
+    // Déjà bilingue à l'écran : "Luisteren / Écouter"
+    if (/\s\/\s/.test(text)) continue;
     console.log(`[texte FR sans NL] ${file} → "${text}"`);
     problems++;
   }
