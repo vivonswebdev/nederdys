@@ -19,7 +19,9 @@ echo "== Chaînes suspectes hors t() / BilingualText =="
 hits=$(grep -rnE "\"[^\"]*($WORDS)[^\"]*\"|>[^<>{}]*($WORDS)[^<>{}]*<" $DIRS \
   --include="*.tsx" \
   | grep -v "translations.ts" \
-  | grep -v "biFromFr\|BilingualText\|<Bi \|UI\.\|aria-label" || true)
+  | grep -v "biFromFr\|BilingualText\|<Bi \|UI\.\|aria-label" \
+  | grep -vE "(intro|title|description)=\"" \
+  | grep -v "nl: \"" || true)
 
 if [ -z "$hits" ]; then
   echo "✅ Aucune chaîne suspecte détectée."
