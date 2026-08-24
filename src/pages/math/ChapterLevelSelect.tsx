@@ -1,3 +1,5 @@
+import { BilingualText, Bi } from "@/components/ui/BilingualText";
+import { UI } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
@@ -10,6 +12,7 @@ import {
   LEVEL_CARD,
   LEVEL_EMOJI,
   LEVEL_LABEL,
+  LEVEL_LABEL_NL,
   fetchBestScores,
   fetchUnlockedLevel,
   getChapter,
@@ -81,13 +84,17 @@ const ChapterLevelSelect = () => {
           to={listRoute}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
         >
-          <ArrowLeft className="w-4 h-4" /> Tous les chapitres
+          <ArrowLeft className="w-4 h-4" /> <Bi phrase={UI.allChapters} />
         </Link>
 
         <div className="text-center mb-8">
           <span className="text-5xl block mb-2">{chapter.emoji}</span>
-          <h1 className="text-3xl font-bold text-foreground">{chapter.name}</h1>
-          <p className="text-muted-foreground font-dyslexic mt-1">Choisis ton niveau :</p>
+          <h1 className="text-3xl font-bold text-foreground">
+            <BilingualText nl={chapter.nameNl ?? chapter.name} fr={chapter.name} stacked />
+          </h1>
+          <p className="text-muted-foreground font-dyslexic mt-1">
+            <Bi phrase={UI.chooseLevel} />
+          </p>
         </div>
 
         {justUnlocked && (
@@ -97,7 +104,8 @@ const ChapterLevelSelect = () => {
             className="bg-kids-green-light border-4 border-kids-green-dark rounded-2xl p-4 mb-6 text-center"
           >
             <p className="font-bold text-lg">
-              🎉 Bravo ! Tu as débloqué le niveau {LEVEL_LABEL[unlockedLevel]} !
+              🎉 <Bi phrase={UI.unlockedLevel} stacked /> {LEVEL_LABEL_NL[unlockedLevel]} /{" "}
+              {LEVEL_LABEL[unlockedLevel]}
             </p>
           </motion.div>
         )}
@@ -123,18 +131,24 @@ const ChapterLevelSelect = () => {
                   {locked ? "🔒" : played ? "⭐" : "🔓"}
                 </span>
                 <span className="text-4xl block mb-2">{LEVEL_EMOJI[level]}</span>
-                <h2 className="text-xl font-bold text-foreground">{LEVEL_LABEL[level]}</h2>
+                <h2 className="text-xl font-bold text-foreground">
+                  <BilingualText nl={LEVEL_LABEL_NL[level]} fr={LEVEL_LABEL[level]} stacked />
+                </h2>
 
                 {!locked && played && (
                   <div className="mt-3">
-                    <p className="text-sm text-foreground/80 font-dyslexic">Meilleur score</p>
+                    <p className="text-sm text-foreground/80 font-dyslexic">
+                      <Bi phrase={UI.bestScore} />
+                    </p>
                     <p className="text-3xl font-bold text-foreground">{best} %</p>
                   </div>
                 )}
 
                 {locked && (
                   <div className="mt-3">
-                    <p className="text-sm text-foreground/80 font-dyslexic">Pour débloquer :</p>
+                    <p className="text-sm text-foreground/80 font-dyslexic">
+                      <Bi phrase={UI.toUnlock} />
+                    </p>
                     <p className="font-bold text-foreground font-dyslexic">{REQUIREMENT[level]}</p>
                   </div>
                 )}

@@ -119,6 +119,14 @@ export const UI = {
   ),
   goodAnswersOutOf: bi("juiste antwoorden op", "bonnes réponses sur"),
   coins: bi("muntjes", "pièces"),
+  chooseLevel: bi("Kies je niveau:", "Choisis ton niveau :"),
+  allChapters: bi("Alle hoofdstukken", "Tous les chapitres"),
+  threeLevels: bi("3 moeilijkheidsniveaus", "3 niveaux de difficulté"),
+  bestScore: bi("Beste score", "Meilleur score"),
+  toUnlock: bi("Om te openen:", "Pour débloquer :"),
+  exercisesCount: bi("oefeningen · 3 niveaus", "exercices · 3 niveaux"),
+  higherLevel: bi("Hoger niveau", "Niveau supérieur"),
+  unlockedLevel: bi("Je hebt een nieuw niveau geopend!", "Tu as débloqué un nouveau niveau !"),
 } satisfies Record<string, Bilingual>;
 
 export type UiKey = keyof typeof UI;

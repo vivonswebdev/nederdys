@@ -15,6 +15,7 @@ import {
   Exercise,
   LEVEL_EMOJI,
   LEVEL_LABEL,
+  LEVEL_LABEL_NL,
   MASTERY_THRESHOLD,
   exercisesForLevel,
   recordExerciseSession,
@@ -145,7 +146,9 @@ export const ExerciseRunner = ({
     toast.success(`+${res.xp_awarded} XP et ${res.xp_awarded} pièces ! 🎉`);
     if (Number(res.score_pct) >= MASTERY_THRESHOLD && res.unlocked_level > level) {
       sounds.correct();
-      toast.success(`🎉 Tu as débloqué le niveau ${LEVEL_LABEL[res.unlocked_level]} !`);
+      toast.success(
+        `🎉 ${UI.unlockedLevel.nl} ${LEVEL_LABEL_NL[res.unlocked_level]} — ${UI.unlockedLevel.fr} ${LEVEL_LABEL[res.unlocked_level]}`
+      );
     }
   };
 
@@ -265,7 +268,8 @@ export const ExerciseRunner = ({
 
         <div className="flex items-center justify-between mb-4">
           <p className="font-bold text-foreground">
-            {chapter.emoji} {chapter.name} · {LEVEL_EMOJI[level]} {LEVEL_LABEL[level]}
+            {chapter.emoji} {chapter.nameNl ?? chapter.name} / {chapter.name} ·{" "}
+            {LEVEL_EMOJI[level]} {LEVEL_LABEL_NL[level]} / {LEVEL_LABEL[level]}
           </p>
           <p className="text-sm text-muted-foreground">
             {index + 1} / {session.length}

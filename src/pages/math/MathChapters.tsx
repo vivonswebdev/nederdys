@@ -1,3 +1,5 @@
+import { BilingualText, Bi } from "@/components/ui/BilingualText";
+import { UI } from "@/lib/bilingual";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
@@ -46,12 +48,16 @@ const MathChapters = () => {
         >
           {variant === "stretch" && (
             <span className="absolute top-3 right-3 bg-kids-purple text-white px-3 py-1 rounded-full text-xs font-bold">
-              Niveau supérieur
+              <Bi phrase={UI.higherLevel} priority="nl" />
             </span>
           )}
           <span className="text-5xl block mb-3">{chapter.emoji}</span>
-          <h3 className="text-xl font-bold text-foreground">{chapter.name}</h3>
-          <p className="text-muted-foreground font-dyslexic mt-1">3 niveaux de difficulté</p>
+          <h3 className="text-xl font-bold text-foreground">
+            <BilingualText nl={chapter.nameNl ?? chapter.name} fr={chapter.name} stacked />
+          </h3>
+          <p className="text-muted-foreground font-dyslexic mt-1 text-sm">
+            <Bi phrase={UI.threeLevels} />
+          </p>
         </div>
       </Link>
     </motion.div>
