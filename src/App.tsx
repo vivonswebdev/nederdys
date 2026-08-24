@@ -69,6 +69,9 @@ import ChildSettingsPage from "./pages/child/ChildSettingsPage";
 import ManageChildren from "./pages/parent/ManageChildren";
 import SubjectPage from "./pages/SubjectPage";
 import GamesHub from "./pages/child/GamesHub";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminErrors from "./pages/admin/AdminErrors";
 import StoriesPage from "./pages/nl/StoriesPage";
 import StoryReader from "./pages/nl/StoryReader";
 import NlChapters from "./pages/nl/NlChapters";
@@ -80,7 +83,14 @@ import ParentDashboard from "./pages/ParentDashboard";
 import ParentSettings from "./pages/ParentSettings";
 import { ChildProvider } from "@/contexts/ChildContext";
 
+import { useErrorTracker } from "@/hooks/useErrorTracker";
+
 const queryClient = new QueryClient();
+
+const ErrorTracking = () => {
+  useErrorTracker();
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -88,12 +98,16 @@ const App = () => (
       <LanguageProvider>
         <ChildProvider>
         <TooltipProvider>
+          <ErrorTracking />
           <Toaster />
           <Sonner />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/accueil" element={<Home />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/utilisateurs" element={<AdminUsers />} />
+              <Route path="/admin/bugs" element={<AdminErrors />} />
               <Route path="/classement" element={<Leaderboard />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
