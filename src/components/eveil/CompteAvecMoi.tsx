@@ -4,14 +4,15 @@ import { Volume2 } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
 import { Confetti } from "@/components/Confetti";
 import { sounds } from "@/lib/sounds";
-import { recordEveilCompletion, speakFr } from "@/lib/eveil";
+import { PRAISE, recordEveilCompletion, speakBilingual } from "@/lib/eveil";
 
 interface Props {
   childId: string;
 }
 
 const OBJECTS = ["🍎", "🐤", "⚽", "🌸", "🐟", "🚗"];
-const WORDS = ["", "un", "deux", "trois", "quatre", "cinq", "six"];
+const WORDS_FR = ["", "un", "deux", "trois", "quatre", "cinq", "six"];
+const WORDS_NL = ["", "een", "twee", "drie", "vier", "vijf", "zes"];
 const ROUNDS = 4;
 
 const shuffle = <T,>(arr: T[]) => [...arr].sort(() => Math.random() - 0.5);
@@ -40,14 +41,14 @@ export const CompteAvecMoi = ({ childId }: Props) => {
     const step = () => {
       i += 1;
       setLit(i);
-      speakFr(WORDS[i]);
+      speakBilingual({ nl: WORDS_NL[i], fr: WORDS_FR[i] });
       sounds.click();
       if (i < count) {
-        window.setTimeout(step, 900);
+        window.setTimeout(step, 1500);
       } else {
         window.setTimeout(() => {
           setPhase("question");
-          speakFr("Combien y en a-t-il ?");
+          speakBilingual({ nl: "Hoeveel zijn er?", fr: "Combien y en a-t-il ?" });
         }, 1000);
       }
     };
@@ -66,12 +67,12 @@ export const CompteAvecMoi = ({ childId }: Props) => {
       sounds.correct();
       const nextStars = stars + 1;
       setStars(nextStars);
-      speakFr("Bravo !");
+      speakBilingual(PRAISE);
       window.setTimeout(() => {
         if (round + 1 >= ROUNDS) {
           setDone(true);
           sounds.victory();
-          speakFr("Super, tu sais compter !");
+          speakBilingual({ nl: "Super, je kan tellen!", fr: "Super, tu sais compter !" });
           void recordEveilCompletion({
             childId,
             activityId: "compte-avec-moi",
@@ -101,7 +102,7 @@ export const CompteAvecMoi = ({ childId }: Props) => {
   };
 
   return (
-    <EveilLayout childId={childId} title="Compte avec Moi" emoji="🔢" stars={stars} maxStars={ROUNDS}>
+    <EveilLayout childId={childId} title="Compte avec Moi" titleNl="Tel met Mij" emoji="🔢" stars={stars} maxStars={ROUNDS}>
       {done && <Confetti />}
       {done ? (
         <div className="text-center space-y-6 py-10">
