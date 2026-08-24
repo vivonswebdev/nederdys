@@ -190,6 +190,19 @@ const ChildDashboard = () => {
           </p>
         </button>
 
+        <button
+          onClick={() => navigate(`/child/${child.id}/code`)}
+          className="w-full bg-kids-purple/25 border-4 border-kids-purple rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+        >
+          <span className="text-4xl block mb-1">🧑‍💻</span>
+          <p className="text-xl font-bold text-foreground">
+            <BilingualText {...biFromFr("Coder & IA (de A à Z)")} />
+          </p>
+          <p className="font-dyslexic text-muted-foreground">
+            <BilingualText {...biFromFr("Des épisodes courts par âge, avec un questionnaire à la fin.")} />
+          </p>
+        </button>
+
 
         <button
           onClick={() => navigate(`/child/${child.id}/pause`)}
