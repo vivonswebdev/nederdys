@@ -26,6 +26,10 @@ import { UI, biFromFr, speakBoth, useChildLanguage, type Bilingual } from "@/lib
 import { nlFor } from "@/data/nl/uiStringsNl";
 import type { QcmExercise } from "@/data/chapters/types";
 import { ShareAchievement } from "@/components/child/ShareAchievement";
+import { AvatarBuddy } from "@/components/child/AvatarBuddy";
+import type { ReactionTrigger } from "@/components/child/AvatarReaction";
+import type { AvatarMood } from "@/lib/avatar";
+import { getStreakDays } from "@/lib/gamification";
 import { useChild } from "@/contexts/ChildContext";
 
 interface Props {
@@ -98,6 +102,8 @@ export const ExerciseRunner = ({
   const [finished, setFinished] = useState(false);
   const [saving, setSaving] = useState(false);
   const [result, setResult] = useState<{ xp: number; pct: number; unlocked: Difficulty } | null>(null);
+  const [reaction, setReaction] = useState<ReactionTrigger | null>(null);
+  const streakAtStartRef = useRef<number | null>(null);
 
   // état des réponses selon le type
   const [textAnswer, setTextAnswer] = useState("");
@@ -121,7 +127,12 @@ export const ExerciseRunner = ({
 
   useEffect(() => {
     startedAtRef.current = Date.now();
-  }, [chapter.id, level]);
+    if (!testMode) {
+      void getStreakDays(childId).then((d) => {
+        streakAtStartRef.current = d;
+      });
+    }
+  }, [chapter.id, level, childId, testMode]);
 
   useEffect(() => {
     setTextAnswer("");
@@ -157,6 +168,13 @@ export const ExerciseRunner = ({
       return;
     }
     setResult({ xp: res.xp_awarded, pct: Number(res.score_pct), unlocked: res.unlocked_level });
+    if (res.leveled_up) {
+      setReaction("levelup");
+    } else {
+      void getStreakDays(childId).then((days) => {
+        if (streakAtStartRef.current !== null && days > streakAtStartRef.current) setReaction("streak");
+      });
+    }
     toast.success(`+${res.xp_awarded} XP et ${res.xp_awarded} pièces ! 🎉`);
     if (Number(res.score_pct) >= MASTERY_THRESHOLD && res.unlocked_level > level) {
       sounds.correct();
@@ -173,6 +191,7 @@ export const ExerciseRunner = ({
       void logMistake({ childId, chapter, exercise, level, givenAnswer });
     }
     setFeedback(isCorrect ? "correct" : "wrong");
+    if (isCorrect) setReaction("correct");
     isCorrect ? sounds.correct() : sounds.wrong();
     speakBoth(isCorrect ? UI.correct : UI.wrong, childLang);
     const nextCorrect = correctCount + (isCorrect ? 1 : 0);
@@ -230,6 +249,19 @@ export const ExerciseRunner = ({
             animate={{ scale: 1, opacity: 1 }}
             className="bg-card border-4 border-border rounded-3xl p-8 kids-shadow-card"
           >
+            {activeChild && (
+              <div className="flex justify-center mb-3">
+                <AvatarBuddy
+                  childId={activeChild.id}
+                  seed={activeChild.first_name}
+                  gender={(activeChild as { gender?: string }).gender ?? null}
+                  mood={mastered ? "happy" : "neutral"}
+                  trigger={reaction}
+                  onReactionDone={() => setReaction(null)}
+                  size="md"
+                />
+              </div>
+            )}
             <span className="text-6xl block mb-3">{mastered ? "🏆" : "💪"}</span>
             <h1 className="text-2xl font-bold text-foreground mb-1">
               <Bi phrase={mastered ? UI.wellDone : UI.keepGoing} stacked />
@@ -281,6 +313,8 @@ export const ExerciseRunner = ({
   }
 
   const ex = exercise!;
+  const runnerMood: AvatarMood =
+    feedback === "correct" ? "happy" : feedback === "wrong" ? "neutral" : "thinking";
 
   return (
     <div className="min-h-screen bg-background">
@@ -299,9 +333,22 @@ export const ExerciseRunner = ({
             {chapter.emoji} {chapter.nameNl ?? chapter.name} / {chapter.name} ·{" "}
             {LEVEL_EMOJI[level]} {LEVEL_LABEL_NL[level]} / {LEVEL_LABEL[level]}
           </p>
-          <p className="text-sm text-muted-foreground">
-            {index + 1} / {session.length}
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-sm text-muted-foreground">
+              {index + 1} / {session.length}
+            </p>
+            {activeChild && (
+              <AvatarBuddy
+                childId={activeChild.id}
+                seed={activeChild.first_name}
+                gender={(activeChild as { gender?: string }).gender ?? null}
+                mood={runnerMood}
+                trigger={reaction}
+                onReactionDone={() => setReaction(null)}
+                size="xs"
+              />
+            )}
+          </div>
         </div>
         <div className="h-3 bg-muted rounded-full overflow-hidden mb-6">
           <motion.div

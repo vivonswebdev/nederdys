@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { motion } from "framer-motion";
-import { getAvatarUrl, mergeAvatarOptions, AvatarConfig, Gender } from "@/lib/avatar";
+import { getAvatarUrl, mergeAvatarOptions, MOOD_OPTIONS, AvatarConfig, AvatarMood, Gender } from "@/lib/avatar";
 
 interface Props {
   seed: string;
@@ -8,6 +8,8 @@ interface Props {
   gender?: Gender | string | null;
   size?: "xs" | "sm" | "md" | "lg";
   animated?: boolean;
+  /** Humeur transitoire (absent = rendu inchangé). */
+  mood?: AvatarMood;
   className?: string;
 }
 
@@ -19,11 +21,12 @@ const sizeClasses = {
 };
 
 export const AvatarRenderer = forwardRef<HTMLDivElement, Props>(function AvatarRenderer(
-  { seed, options = {}, gender, size = "md", animated = false, className = "" },
+  { seed, options = {}, gender, size = "md", animated = false, mood, className = "" },
   ref
 ) {
   const resolved = gender ? mergeAvatarOptions(gender as Gender, options) : options;
-  const avatarUrl = getAvatarUrl({ seed, ...resolved });
+  const moodOptions = mood ? MOOD_OPTIONS[mood] : {};
+  const avatarUrl = getAvatarUrl({ seed, ...resolved, ...moodOptions });
 
   return (
     <motion.div

@@ -13,6 +13,8 @@ import {
   Subject,
 } from "@/lib/games";
 import { chaptersBySubject, chaptersListRoute } from "@/lib/chapters";
+import { BilingualText } from "@/components/ui/BilingualText";
+import { STORIES } from "@/data/stories";
 
 const SubjectPage = () => {
   const { subject, id } = useParams<{ subject: string; id?: string }>();
@@ -122,6 +124,32 @@ const SubjectPage = () => {
             </motion.div>
           </Link>
         )}
+
+        {id && subjectId === "nl" && (
+          <Link to={`/child/${id}/nl/histoires`} className="block mt-6">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-kids-orange/40 border-4 border-orange-400 rounded-3xl p-6 kids-shadow-card hover:kids-shadow-hover transition-shadow flex items-center gap-4"
+            >
+              <span className="text-5xl" aria-hidden>📖</span>
+              <div className="flex-1">
+                <h2 className="text-xl font-bold text-foreground">
+                  <BilingualText nl="Verhalen" fr="Histoires" stacked />
+                </h2>
+                <p className="font-dyslexic text-muted-foreground">
+                  <BilingualText
+                    nl={`${STORIES.length} interactieve verhalen`}
+                    fr={`${STORIES.length} histoires interactives`}
+                    stacked
+                  />
+                </p>
+              </div>
+              <ArrowRight className="w-6 h-6 text-foreground" />
+            </motion.div>
+          </Link>
+        )}
+
       </main>
     </div>
   );
