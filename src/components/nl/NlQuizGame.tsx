@@ -243,7 +243,7 @@ export function NlQuizGame<T extends NlChallengeBase>({
           ) : null}
         </AnimatePresence>
 
-        <XpGainPopup xp={xpGained} coins={coinsGained} leveledUp={leveledUp} />
+        <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
       </div>
     </div>
   );
