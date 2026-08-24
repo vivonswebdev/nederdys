@@ -84,7 +84,7 @@ const MathChapters = () => {
           </p>
         </Link>
 
-        <div className="flex gap-3 overflow-x-auto pb-2 mb-8 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none">
+        <div className="flex gap-3 overflow-x-auto pb-2 mb-8 -mx-4 px-4 md:mx-0 md:px-0">
           {GRADE_TABS.map((g) => (
             <button
               key={g.id}
