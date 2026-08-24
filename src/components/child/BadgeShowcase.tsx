@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
@@ -36,7 +38,7 @@ export const BadgeShowcase = ({ childId }: BadgeShowcaseProps) => {
           onClick={() => setOpen(true)}
           className="text-sm text-primary font-medium hover:underline"
         >
-          Voir tous mes badges
+          <BilingualText {...biFromFr("Voir tous mes badges")} />
         </button>
       </div>
 
@@ -44,7 +46,7 @@ export const BadgeShowcase = ({ childId }: BadgeShowcaseProps) => {
         <div className="bg-card border border-border rounded-3xl p-6 text-center kids-shadow-card">
           <span className="text-4xl block mb-2">✨</span>
           <p className="text-muted-foreground font-dyslexic">
-            Tes premiers badges arrivent bientôt ! Joue à un jeu pour en gagner un.
+            <BilingualText {...biFromFr("Tes premiers badges arrivent bientôt ! Joue à un jeu pour en gagner un.")} />
           </p>
         </div>
       ) : (
@@ -77,7 +79,7 @@ export const BadgeShowcase = ({ childId }: BadgeShowcaseProps) => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Tous mes badges</DialogTitle>
+            <DialogTitle><BilingualText {...biFromFr("Tous mes badges")} /></DialogTitle>
           </DialogHeader>
           <div className="grid grid-cols-3 gap-4">
             {BADGES.map((b) => {

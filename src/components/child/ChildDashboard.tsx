@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
@@ -160,9 +162,9 @@ const ChildDashboard = () => {
           className="w-full bg-kids-blue/30 border-4 border-primary rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
         >
           <span className="text-4xl block mb-1">🎮</span>
-          <p className="text-xl font-bold text-foreground">Voir tous les jeux</p>
+          <p className="text-xl font-bold text-foreground"><BilingualText {...biFromFr("Voir tous les jeux")} /></p>
           <p className="font-dyslexic text-muted-foreground">
-            Jeux et exercices de toutes tes matières !
+            <BilingualText {...biFromFr("Jeux et exercices de toutes tes matières !")} />
           </p>
         </button>
 
@@ -171,7 +173,7 @@ const ChildDashboard = () => {
           className="w-full bg-kids-orange/20 border-4 border-kids-orange rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
         >
           <span className="text-4xl block mb-1">🌟</span>
-          <p className="text-xl font-bold text-foreground">Éveil (3-5 ans)</p>
+          <p className="text-xl font-bold text-foreground"><BilingualText {...biFromFr("Éveil (3-5 ans)")} /></p>
           <p className="font-dyslexic text-muted-foreground">
             4 activités toutes simples, sans lecture !
           </p>
@@ -206,7 +208,7 @@ const ChildDashboard = () => {
         </div>
 
         <section>
-          <h2 className="text-xl font-bold text-foreground mb-4">Choisis ta matière</h2>
+          <h2 className="text-xl font-bold text-foreground mb-4"><BilingualText {...biFromFr("Choisis ta matière")} /></h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <SubjectCard
               subject="nl"
@@ -247,7 +249,7 @@ const ChildDashboard = () => {
             onClick={() => navigate(`/child/${child.id}/defi`)}
             className="text-sm text-primary font-medium hover:underline"
           >
-            Voir le récapitulatif des défis →
+            <BilingualText {...biFromFr("Voir le récapitulatif des défis →")} />
           </button>
         </div>
 
@@ -258,7 +260,7 @@ const ChildDashboard = () => {
             onClick={() => navigate(`/child/${child.id}/settings`)}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground rounded-full border border-border px-4 py-2"
           >
-            <Settings className="w-4 h-4" /> Paramètres
+            <Settings className="w-4 h-4" /> <BilingualText {...biFromFr("Paramètres")} />
           </button>
           <button
             onClick={async () => {
@@ -267,7 +269,7 @@ const ChildDashboard = () => {
             }}
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground rounded-full border border-border px-4 py-2"
           >
-            <LogOut className="w-4 h-4" /> Déconnexion
+            <LogOut className="w-4 h-4" /> <BilingualText {...biFromFr("Déconnexion")} />
           </button>
         </footer>
       </main>

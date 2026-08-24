@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, CheckCircle2, RefreshCw } from "lucide-react";
@@ -57,24 +59,24 @@ export default function ReviewPage() {
           onClick={() => navigate(`/child/${childId}`)}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-4"
         >
-          <ArrowLeft className="w-4 h-4" /> Retour
+          <ArrowLeft className="w-4 h-4" /> <BilingualText {...biFromFr("Retour")} />
         </button>
 
         <h1 className="text-3xl font-bold text-foreground mb-1">🔁 Réviser</h1>
         <p className="font-dyslexic text-muted-foreground mb-6">
-          Voici les réponses que tu n'as pas encore réussies, avec les étapes pour comprendre.
+          <BilingualText {...biFromFr("Voici les réponses que tu n'as pas encore réussies, avec les étapes pour comprendre.")} />
         </p>
 
-        {loading && <p className="font-dyslexic text-muted-foreground">Chargement…</p>}
+        {loading && <p className="font-dyslexic text-muted-foreground"><BilingualText {...biFromFr("Chargement…")} /></p>}
 
         {!loading && rows.length === 0 && (
           <div className="bg-card border-4 border-border rounded-3xl p-8 text-center kids-shadow-card">
             <span className="text-5xl block mb-3">🌟</span>
             <p className="font-dyslexic text-foreground">
-              Aucune erreur à réviser pour l'instant. Continue comme ça !
+              <BilingualText {...biFromFr("Aucune erreur à réviser pour l'instant. Continue comme ça !")} />
             </p>
             <Button className="mt-4" onClick={() => navigate(`/child/${childId}/jeux`)}>
-              Aller jouer
+              <BilingualText {...biFromFr("Aller jouer")} />
             </Button>
           </div>
         )}
@@ -94,7 +96,7 @@ export default function ReviewPage() {
                   </h2>
                   <Button asChild variant="secondary" size="sm">
                     <Link to={`/child/${childId}/${subject}/chapitre/${chapterId}`}>
-                      <RefreshCw className="w-4 h-4 mr-1" /> Refaire
+                      <RefreshCw className="w-4 h-4 mr-1" /> <BilingualText {...biFromFr("Refaire")} />
                     </Link>
                   </Button>
                 </div>
@@ -120,13 +122,13 @@ export default function ReviewPage() {
                         </AccordionTrigger>
                         <AccordionContent className="font-dyslexic space-y-3 pb-4">
                           <p className="text-sm">
-                            <span className="text-muted-foreground">Ta réponse : </span>
+                            <span className="text-muted-foreground"><BilingualText {...biFromFr("Ta réponse :")} /> </span>
                             <span className="font-bold text-destructive">
                               {row.given_answer || "—"}
                             </span>
                           </p>
                           <p className="text-sm">
-                            <span className="text-muted-foreground">Bonne réponse : </span>
+                            <span className="text-muted-foreground"><BilingualText {...biFromFr("Bonne réponse :")} /> </span>
                             <span className="font-bold text-primary">{row.correct_answer}</span>
                           </p>
 
@@ -151,7 +153,7 @@ export default function ReviewPage() {
                           )}
 
                           <Button size="sm" onClick={() => resolve(row.id)}>
-                            <CheckCircle2 className="w-4 h-4 mr-1" /> J'ai compris
+                            <CheckCircle2 className="w-4 h-4 mr-1" /> <BilingualText {...biFromFr("J'ai compris")} />
                           </Button>
                         </AccordionContent>
                       </AccordionItem>

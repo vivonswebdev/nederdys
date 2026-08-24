@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
@@ -34,7 +36,7 @@ const ChallengePage = () => {
           onClick={() => navigate(`/child/${child.id}`)}
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6"
         >
-          <ArrowLeft className="w-4 h-4" /> Retour
+          <ArrowLeft className="w-4 h-4" /> <BilingualText {...biFromFr("Retour")} />
         </button>
         <DailyChallengeSummary childId={child.id} />
       </main>

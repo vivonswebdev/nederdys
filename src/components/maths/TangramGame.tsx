@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MathLevel, pickSession } from "@/lib/mathSession";
@@ -52,7 +54,7 @@ export const TangramGame = ({ childId, level, backTo }: Props) => {
         finished={run.finished}
         backTo={backTo}
       >
-        <p className="text-center font-dyslexic">Chargement...</p>
+        <p className="text-center font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       </MathGameLayout>
     );
   }
@@ -93,7 +95,7 @@ export const TangramGame = ({ childId, level, backTo }: Props) => {
         <span className="text-5xl block">{c.emoji}</span>
         <h2 className="text-xl font-bold mt-1">Reconstitue : {c.name}</h2>
         <p className="font-dyslexic text-muted-foreground text-sm mt-1">
-          Choisis une pièce, puis clique sur l'emplacement qui lui correspond.
+          <BilingualText {...biFromFr("Choisis une pièce, puis clique sur l'emplacement qui lui correspond.")} />
         </p>
       </div>
 
@@ -126,7 +128,7 @@ export const TangramGame = ({ childId, level, backTo }: Props) => {
 
       <section>
         <h3 className="text-sm font-bold text-muted-foreground mb-3 text-center">
-          Pièces disponibles
+          <BilingualText {...biFromFr("Pièces disponibles")} />
         </h3>
         <div className="flex flex-wrap justify-center gap-3">
           {pieces.map((p) => (
@@ -145,7 +147,7 @@ export const TangramGame = ({ childId, level, backTo }: Props) => {
             </motion.button>
           ))}
           {pieces.length === 0 && (
-            <p className="font-dyslexic text-muted-foreground">Bravo, la forme est complète ! 🎉</p>
+            <p className="font-dyslexic text-muted-foreground"><BilingualText {...biFromFr("Bravo, la forme est complète ! 🎉")} /></p>
           )}
         </div>
       </section>

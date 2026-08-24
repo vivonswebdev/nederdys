@@ -1,3 +1,4 @@
+import { biFromFr } from "@/lib/bilingual";
 import { BilingualText, Bi } from "@/components/ui/BilingualText";
 import { UI } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
@@ -170,7 +171,7 @@ const ChapterLevelSelect = () => {
           </p>
         </div>
 
-        {loading && <p className="sr-only">Chargement…</p>}
+        {loading && <p className="sr-only"><BilingualText {...biFromFr("Chargement…")} /></p>}
       </main>
     </div>
   );

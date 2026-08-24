@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MathLevel, pickSession } from "@/lib/mathSession";
@@ -93,11 +95,11 @@ export const MemoryCalculGame = ({ childId, level, backTo }: Props) => {
       backTo={backTo}
     >
       {!c ? (
-        <p className="text-center font-dyslexic">Chargement...</p>
+        <p className="text-center font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       ) : (
         <>
           <p className="text-center font-dyslexic text-muted-foreground mb-5">
-            Retourne les cartes deux par deux : associe chaque calcul à son résultat.
+            <BilingualText {...biFromFr("Retourne les cartes deux par deux : associe chaque calcul à son résultat.")} />
           </p>
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-w-xl mx-auto">
             {cards.map((card) => {

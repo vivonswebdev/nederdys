@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -44,7 +46,7 @@ export const DroiteGradueeGame = ({ childId, level, backTo }: Props) => {
         finished={run.finished}
         backTo={backTo}
       >
-        <p className="text-center font-dyslexic">Chargement...</p>
+        <p className="text-center font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       </MathGameLayout>
     );
   }
@@ -89,7 +91,7 @@ export const DroiteGradueeGame = ({ childId, level, backTo }: Props) => {
       backTo={backTo}
     >
       <p className="text-center font-dyslexic text-muted-foreground mb-2">
-        Place le nombre sur la droite (glisse ou clique) :
+        <BilingualText {...biFromFr("Place le nombre sur la droite (glisse ou clique) :")} />
       </p>
       <p className="text-center text-5xl font-bold text-primary mb-10 tabular-nums">{c.target}</p>
 
@@ -152,7 +154,7 @@ export const DroiteGradueeGame = ({ childId, level, backTo }: Props) => {
           disabled={pos === null || feedback !== null}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3 rounded-xl kids-shadow-card disabled:opacity-60"
         >
-          <Check className="w-5 h-5" /> Valider ma position
+          <Check className="w-5 h-5" /> <BilingualText {...biFromFr("Valider ma position")} />
         </button>
       </div>
     </MathGameLayout>

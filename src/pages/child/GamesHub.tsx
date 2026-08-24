@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { motion } from "framer-motion";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -60,7 +62,7 @@ const GamesHub = () => {
           to={`/child/${childId}`}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
         >
-          <ArrowLeft className="w-4 h-4" /> Mon tableau de bord
+          <ArrowLeft className="w-4 h-4" /> <BilingualText {...biFromFr("Mon tableau de bord")} />
         </Link>
 
         <header className="bg-card border-4 border-border rounded-3xl p-6 kids-shadow-card mb-10">
@@ -145,7 +147,7 @@ const GamesHub = () => {
               className="border-4 border-kids-purple bg-kids-purple/30 rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
             >
               <span className="text-4xl block mb-2">🔥</span>
-              <p className="text-xl font-bold text-foreground">Maths avancées</p>
+              <p className="text-xl font-bold text-foreground"><BilingualText {...biFromFr("Maths avancées")} /></p>
               <p className="font-dyslexic text-muted-foreground">
                 4e, 5e, 6e primaire — fractions, décimaux, pourcentages…
               </p>
@@ -156,9 +158,9 @@ const GamesHub = () => {
               className="border-4 border-kids-blue bg-kids-blue/30 rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
             >
               <span className="text-4xl block mb-2">🎓</span>
-              <p className="text-xl font-bold text-foreground">NL avancé</p>
+              <p className="text-xl font-bold text-foreground"><BilingualText {...biFromFr("NL avancé")} /></p>
               <p className="font-dyslexic text-muted-foreground">
-                Grammaire, vocabulaire, compréhension…
+                <BilingualText {...biFromFr("Grammaire, vocabulaire, compréhension…")} />
               </p>
             </button>
           </div>

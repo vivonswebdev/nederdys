@@ -1,3 +1,4 @@
+import { biFromFr } from "@/lib/bilingual";
 import { BilingualText, Bi } from "@/components/ui/BilingualText";
 import { UI } from "@/lib/bilingual";
 import { useState } from "react";
@@ -71,12 +72,12 @@ const MathChapters = () => {
           to={`/child/${childId}/math`}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
         >
-          <ArrowLeft className="w-4 h-4" /> Retour
+          <ArrowLeft className="w-4 h-4" /> <BilingualText {...biFromFr("Retour")} />
         </Link>
 
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-foreground">📚 Mathématiques</h1>
-          <p className="text-muted-foreground font-dyslexic mt-1">Choisis ton chapitre :</p>
+          <p className="text-muted-foreground font-dyslexic mt-1"><BilingualText {...biFromFr("Choisis ton chapitre :")} /></p>
         </header>
 
         <Link
@@ -84,7 +85,7 @@ const MathChapters = () => {
           className="block mb-8 border-4 border-kids-orange bg-kids-orange/30 rounded-3xl p-5 kids-shadow-card hover:kids-shadow-hover transition-shadow"
         >
           <span className="text-3xl mr-2">🎯</span>
-          <span className="text-lg font-bold text-foreground">Faire le test de placement</span>
+          <span className="text-lg font-bold text-foreground"><BilingualText {...biFromFr("Faire le test de placement")} /></span>
           <p className="font-dyslexic text-muted-foreground mt-1">
             6 questions pour débloquer directement le bon niveau.
           </p>

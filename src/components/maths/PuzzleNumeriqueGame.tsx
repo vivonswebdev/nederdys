@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MathLevel, pickSession } from "@/lib/mathSession";
@@ -71,7 +73,7 @@ export const PuzzleNumeriqueGame = ({ childId, level, backTo }: Props) => {
       backTo={backTo}
     >
       {!c ? (
-        <p className="text-center font-dyslexic">Chargement...</p>
+        <p className="text-center font-dyslexic"><BilingualText {...biFromFr("Chargement...")} /></p>
       ) : (
         <>
           <div className="text-center mb-5">
@@ -100,7 +102,7 @@ export const PuzzleNumeriqueGame = ({ childId, level, backTo }: Props) => {
           </motion.div>
 
           <h3 className="text-sm font-bold text-muted-foreground text-center mb-3">
-            Pièces restantes
+            <BilingualText {...biFromFr("Pièces restantes")} />
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
             {remaining.map((v) => (
@@ -114,7 +116,7 @@ export const PuzzleNumeriqueGame = ({ childId, level, backTo }: Props) => {
               </motion.button>
             ))}
             {remaining.length === 0 && (
-              <p className="font-dyslexic text-muted-foreground">Puzzle terminé ! 🎉</p>
+              <p className="font-dyslexic text-muted-foreground"><BilingualText {...biFromFr("Puzzle terminé ! 🎉")} /></p>
             )}
           </div>
         </>

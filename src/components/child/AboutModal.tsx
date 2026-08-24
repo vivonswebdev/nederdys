@@ -1,3 +1,5 @@
+import { BilingualText } from "@/components/ui/BilingualText";
+import { biFromFr } from "@/lib/bilingual";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AvatarRenderer } from "./AvatarRenderer";
 import { AvatarConfig } from "@/lib/avatar";
@@ -42,7 +44,7 @@ export const AboutModal = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>À propos de moi</DialogTitle>
+          <DialogTitle><BilingualText {...biFromFr("À propos de moi")} /></DialogTitle>
         </DialogHeader>
 
         <div className="flex flex-col items-center gap-3">
@@ -62,7 +64,7 @@ export const AboutModal = ({
           <li className="flex items-center gap-3 rounded-2xl bg-muted/60 px-4 py-3">
             <span className="text-xl">🎓</span>
             <div>
-              <p className="text-xs text-muted-foreground">Niveau scolaire</p>
+              <p className="text-xs text-muted-foreground"><BilingualText {...biFromFr("Niveau scolaire")} /></p>
               <p className="font-bold text-foreground">
                 {String(child.school_level).toUpperCase()} · {child.age} ans
               </p>
@@ -71,14 +73,14 @@ export const AboutModal = ({
           <li className="flex items-center gap-3 rounded-2xl bg-muted/60 px-4 py-3">
             <span className="text-xl">📅</span>
             <div>
-              <p className="text-xs text-muted-foreground">Inscrit depuis</p>
+              <p className="text-xs text-muted-foreground"><BilingualText {...biFromFr("Inscrit depuis")} /></p>
               <p className="font-bold text-foreground">{created}</p>
             </div>
           </li>
           <li className="flex items-center gap-3 rounded-2xl bg-muted/60 px-4 py-3">
             <span className="text-xl">🏅</span>
             <div>
-              <p className="text-xs text-muted-foreground">Badges</p>
+              <p className="text-xs text-muted-foreground"><BilingualText {...biFromFr("Badges")} /></p>
               <p className="font-bold text-foreground tabular-nums">
                 {badgeCount} / {allBadges.length}
               </p>
