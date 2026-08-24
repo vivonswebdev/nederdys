@@ -4,7 +4,7 @@ import { Volume2 } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
 import { Confetti } from "@/components/Confetti";
 import { sounds } from "@/lib/sounds";
-import { recordEveilCompletion, speakFr } from "@/lib/eveil";
+import { PRAISE, recordEveilCompletion, speakBilingual } from "@/lib/eveil";
 
 interface Props {
   childId: string;
@@ -28,6 +28,7 @@ const OBJECTS: { visual: string; color: ColorName }[] = [
 ];
 
 const COLORS: ColorName[] = ["bleu", "rouge", "vert", "jaune"];
+const COLOR_NL: Record<ColorName, string> = { bleu: "blauw", rouge: "rood", vert: "groen", jaune: "geel" };
 const ROUNDS = 3;
 
 const shuffle = <T,>(arr: T[]) => [...arr].sort(() => Math.random() - 0.5);
@@ -49,7 +50,11 @@ export const ChasseAuxCouleurs = ({ childId }: Props) => {
   const startedAt = useRef(Date.now());
 
   const targetCount = useMemo(() => items.filter((i) => i.color === target).length, [items, target]);
-  const say = () => speakFr(`Touche tout ce qui est ${target} !`);
+  const say = () =>
+    speakBilingual({
+      nl: `Raak alles aan wat ${COLOR_NL[target]} is!`,
+      fr: `Touche tout ce qui est ${target} !`,
+    });
 
   useEffect(() => {
     if (done) return;
@@ -67,12 +72,12 @@ export const ChasseAuxCouleurs = ({ childId }: Props) => {
       if (next.length >= targetCount) {
         const nextStars = stars + 1;
         setStars(nextStars);
-        speakFr("Bravo !");
+        speakBilingual(PRAISE);
         window.setTimeout(() => {
           if (round + 1 >= ROUNDS) {
             setDone(true);
             sounds.victory();
-            speakFr("Super, tu as tout trouvé !");
+            speakBilingual({ nl: "Super, je hebt alles gevonden!", fr: "Super, tu as tout trouvé !" });
             void recordEveilCompletion({
               childId,
               activityId: "chasse-aux-couleurs",
@@ -105,7 +110,7 @@ export const ChasseAuxCouleurs = ({ childId }: Props) => {
   };
 
   return (
-    <EveilLayout childId={childId} title="Chasse aux Couleurs" emoji="🔍" stars={stars} maxStars={ROUNDS}>
+    <EveilLayout childId={childId} title="Chasse aux Couleurs" titleNl="Kleurenjacht" emoji="🔍" stars={stars} maxStars={ROUNDS}>
       {done && <Confetti />}
       {done ? (
         <div className="text-center space-y-6 py-10">

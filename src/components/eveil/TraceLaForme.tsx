@@ -3,7 +3,7 @@ import { Volume2 } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
 import { Confetti } from "@/components/Confetti";
 import { sounds } from "@/lib/sounds";
-import { recordEveilCompletion, speakFr } from "@/lib/eveil";
+import { recordEveilCompletion, speakBilingual } from "@/lib/eveil";
 
 interface Props {
   childId: string;
@@ -17,6 +17,7 @@ type Point = { x: number; y: number };
 interface Shape {
   id: string;
   name: string;
+  nameNl: string;
   points: Point[];
 }
 
@@ -40,10 +41,11 @@ const polyline = (corners: Point[]): Point[] => {
 };
 
 const SHAPES: Shape[] = [
-  { id: "ligne", name: "la ligne", points: polyline([{ x: 40, y: 160 }, { x: 280, y: 160 }]) },
+  { id: "ligne", name: "la ligne", nameNl: "de lijn", points: polyline([{ x: 40, y: 160 }, { x: 280, y: 160 }]) },
   {
     id: "carre",
     name: "le carré",
+    nameNl: "het vierkant",
     points: polyline([
       { x: 60, y: 60 },
       { x: 260, y: 60 },
@@ -55,6 +57,7 @@ const SHAPES: Shape[] = [
   {
     id: "triangle",
     name: "le triangle",
+    nameNl: "de driehoek",
     points: polyline([
       { x: 160, y: 45 },
       { x: 275, y: 265 },
@@ -62,7 +65,7 @@ const SHAPES: Shape[] = [
       { x: 160, y: 45 },
     ]),
   },
-  { id: "cercle", name: "le rond", points: circle() },
+  { id: "cercle", name: "le rond", nameNl: "de cirkel", points: circle() },
 ];
 
 export const TraceLaForme = ({ childId }: Props) => {
@@ -76,7 +79,11 @@ export const TraceLaForme = ({ childId }: Props) => {
   const [done, setDone] = useState(false);
   const shape = SHAPES[shapeIndex];
 
-  const say = () => speakFr(`Suis ${shape.name} avec ton doigt !`);
+  const say = () =>
+    speakBilingual({
+      nl: `Volg ${shape.nameNl} met je vinger!`,
+      fr: `Suis ${shape.name} avec ton doigt !`,
+    });
 
   const paintGuide = () => {
     const canvas = canvasRef.current;
@@ -135,7 +142,7 @@ export const TraceLaForme = ({ childId }: Props) => {
     const nextStars = stars + 1;
     setStars(nextStars);
     sounds.victory();
-    speakFr("Bravo, c'est réussi !");
+    speakBilingual({ nl: "Goed zo, het is gelukt!", fr: "Bravo, c'est réussi !" });
     if (shapeIndex + 1 >= SHAPES.length) {
       setDone(true);
       void recordEveilCompletion({
@@ -154,6 +161,7 @@ export const TraceLaForme = ({ childId }: Props) => {
     <EveilLayout
       childId={childId}
       title="Trace la Forme"
+      titleNl="Teken de Vorm"
       emoji="✏️"
       stars={stars}
       maxStars={SHAPES.length}
@@ -165,7 +173,7 @@ export const TraceLaForme = ({ childId }: Props) => {
           aria-label="Réécouter la consigne"
           className="min-h-[80px] w-full max-w-sm mx-auto flex items-center justify-center gap-3 rounded-3xl bg-primary/15 text-primary text-2xl font-bold"
         >
-          <Volume2 className="w-9 h-9" /> Écouter
+          <Volume2 className="w-9 h-9" /> Luisteren / Écouter
         </button>
 
         <canvas

@@ -4,17 +4,17 @@ import { Volume2 } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
 import { Confetti } from "@/components/Confetti";
 import { sounds } from "@/lib/sounds";
-import { recordEveilCompletion, speakFr } from "@/lib/eveil";
+import { PRAISE, recordEveilCompletion, speakBilingual } from "@/lib/eveil";
 
 interface Props {
   childId: string;
 }
 
 const SHAPES = [
-  { id: "cercle", label: "rond", className: "rounded-full bg-red-500" },
-  { id: "carre", label: "carré", className: "rounded-lg bg-blue-500" },
-  { id: "triangle", label: "triangle", className: "bg-green-500 [clip-path:polygon(50%_0,100%_100%,0_100%)]" },
-  { id: "etoile", label: "étoile", className: "bg-yellow-400 [clip-path:polygon(50%_0,61%_35%,98%_35%,68%_57%,79%_91%,50%_70%,21%_91%,32%_57%,2%_35%,39%_35%)]" },
+  { id: "cercle", label: "rond", labelNl: "rondje", className: "rounded-full bg-red-500" },
+  { id: "carre", label: "carré", labelNl: "vierkant", className: "rounded-lg bg-blue-500" },
+  { id: "triangle", label: "triangle", labelNl: "driehoek", className: "bg-green-500 [clip-path:polygon(50%_0,100%_100%,0_100%)]" },
+  { id: "etoile", label: "étoile", labelNl: "ster", className: "bg-yellow-400 [clip-path:polygon(50%_0,61%_35%,98%_35%,68%_57%,79%_91%,50%_70%,21%_91%,32%_57%,2%_35%,39%_35%)]" },
 ];
 
 const shuffle = <T,>(arr: T[]) => [...arr].sort(() => Math.random() - 0.5);
@@ -29,7 +29,7 @@ export const PuzzleFormes = ({ childId }: Props) => {
   const startedAt = useRef(Date.now());
 
   useEffect(() => {
-    const t = window.setTimeout(() => speakFr("Glisse chaque forme dans le bon trou !"), 500);
+    const t = window.setTimeout(() => speakBilingual({ nl: "Sleep elke vorm in het juiste vak!", fr: "Glisse chaque forme dans le bon trou !" }), 500);
     return () => window.clearTimeout(t);
   }, []);
 
@@ -41,11 +41,11 @@ export const PuzzleFormes = ({ childId }: Props) => {
       setPlaced(next);
       setPieces((p) => p.filter((piece) => piece.id !== slotId));
       setSelected(null);
-      speakFr("Bravo !");
+      speakBilingual(PRAISE);
       if (next.length === SHAPES.length) {
         setDone(true);
         sounds.victory();
-        window.setTimeout(() => speakFr("Super, le puzzle est fini !"), 700);
+        window.setTimeout(() => speakBilingual({ nl: "Super, de puzzel is klaar!", fr: "Super, le puzzle est fini !" }), 700);
         void recordEveilCompletion({
           childId,
           activityId: "puzzle-formes",
@@ -73,6 +73,7 @@ export const PuzzleFormes = ({ childId }: Props) => {
     <EveilLayout
       childId={childId}
       title="Puzzle des Formes"
+      titleNl="Vormenpuzzel"
       emoji="🧩"
       stars={placed.length}
       maxStars={SHAPES.length}
@@ -92,7 +93,7 @@ export const PuzzleFormes = ({ childId }: Props) => {
       ) : (
         <div className="space-y-10">
           <button
-            onClick={() => speakFr("Glisse chaque forme dans le bon trou !")}
+            onClick={() => speakBilingual({ nl: "Sleep elke vorm in het juiste vak!", fr: "Glisse chaque forme dans le bon trou !" })}
             aria-label="Réécouter la consigne"
             className="mx-auto flex min-h-[72px] items-center justify-center gap-3 rounded-3xl bg-primary/15 px-8 text-primary"
           >
@@ -126,7 +127,7 @@ export const PuzzleFormes = ({ childId }: Props) => {
                 onClick={() => {
                   setSelected(p.id);
                   sounds.click();
-                  speakFr(p.label);
+                  speakBilingual({ nl: p.labelNl, fr: p.label });
                 }}
                 aria-label={p.label}
                 whileTap={{ scale: 0.92 }}

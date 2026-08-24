@@ -3,19 +3,26 @@ import { Volume2, Mic } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
 import { Confetti } from "@/components/Confetti";
 import { sounds } from "@/lib/sounds";
-import { recordEveilCompletion, speakFr } from "@/lib/eveil";
+import { PRAISE, recordEveilCompletion, speakFr, speakNl } from "@/lib/eveil";
 
 interface Props {
   childId: string;
 }
 
+const speakBilingualHelper = () => {
+  speakNl(PRAISE.nl);
+  window.setTimeout(() => speakFr(PRAISE.fr), 900);
+};
+
 const WORDS = [
-  { fr: "chat", emoji: "🐱" },
-  { fr: "chien", emoji: "🐶" },
-  { fr: "pomme", emoji: "🍎" },
-  { fr: "maison", emoji: "🏠" },
-  { fr: "soleil", emoji: "☀️" },
+  { fr: "chat", nl: "kat", emoji: "🐱" },
+  { fr: "chien", nl: "hond", emoji: "🐶" },
+  { fr: "pomme", nl: "appel", emoji: "🍎" },
+  { fr: "maison", nl: "huis", emoji: "🏠" },
+  { fr: "soleil", nl: "zon", emoji: "☀️" },
 ];
+
+const speakBilingualPraise = () => speakBilingualHelper();
 
 export const MonPremierMot = ({ childId }: Props) => {
   const [index, setIndex] = useState(0);
@@ -24,7 +31,9 @@ export const MonPremierMot = ({ childId }: Props) => {
   const startedAt = useRef(Date.now());
   const word = WORDS[index];
 
-  const say = () => speakFr(word.fr);
+  const sayNl = () => speakNl(word.nl);
+  const sayFr = () => speakFr(word.fr);
+  const say = sayNl;
 
   useEffect(() => {
     if (done) return;
@@ -37,7 +46,7 @@ export const MonPremierMot = ({ childId }: Props) => {
     sounds.xp();
     const nextStars = stars + 1;
     setStars(nextStars);
-    speakFr("Bravo !");
+    speakBilingualPraise();
     window.setTimeout(() => {
       if (index + 1 >= WORDS.length) {
         setDone(true);
@@ -59,6 +68,7 @@ export const MonPremierMot = ({ childId }: Props) => {
     <EveilLayout
       childId={childId}
       title="Mon Premier Mot"
+      titleNl="Mijn Eerste Woord"
       emoji="🗣️"
       stars={stars}
       maxStars={WORDS.length}
@@ -86,13 +96,22 @@ export const MonPremierMot = ({ childId }: Props) => {
             <span aria-label={word.fr}>{word.emoji}</span>
           </div>
 
-          <button
-            onClick={say}
-            aria-label="Écouter le mot"
-            className="min-h-[80px] w-full max-w-sm mx-auto flex items-center justify-center gap-3 rounded-3xl bg-primary/15 text-primary text-2xl font-bold"
-          >
-            <Volume2 className="w-9 h-9" /> Écouter
-          </button>
+          <div className="mx-auto flex w-full max-w-sm gap-3">
+            <button
+              onClick={sayNl}
+              aria-label="Luister in het Nederlands"
+              className="min-h-[80px] flex-1 flex items-center justify-center gap-2 rounded-3xl bg-primary/15 text-primary text-2xl font-bold"
+            >
+              <Volume2 className="w-8 h-8" /> NL
+            </button>
+            <button
+              onClick={sayFr}
+              aria-label="Écouter en français"
+              className="min-h-[80px] flex-1 flex items-center justify-center gap-2 rounded-3xl bg-secondary/20 text-secondary-foreground text-2xl font-bold"
+            >
+              <Volume2 className="w-8 h-8" /> FR
+            </button>
+          </div>
 
           <button
             onClick={handleAttempt}
