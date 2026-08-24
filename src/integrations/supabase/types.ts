@@ -52,6 +52,50 @@ export type Database = {
           },
         ]
       }
+      admin_logs: {
+        Row: {
+          action: string
+          child_id: string | null
+          created_at: string
+          error_message: string | null
+          id: string
+          metadata: Json | null
+          page: string | null
+          stack_trace: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          child_id?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          metadata?: Json | null
+          page?: string | null
+          stack_trace?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          child_id?: string | null
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          metadata?: Json | null
+          page?: string | null
+          stack_trace?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_logs_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       avatar_config: {
         Row: {
           accessories: string | null
@@ -486,6 +530,45 @@ export type Database = {
           },
         ]
       }
+      error_reports: {
+        Row: {
+          browser_info: string | null
+          created_at: string
+          description: string | null
+          error_type: string
+          id: string
+          page_url: string | null
+          resolved: boolean
+          resolved_at: string | null
+          stack_trace: string | null
+          user_id: string | null
+        }
+        Insert: {
+          browser_info?: string | null
+          created_at?: string
+          description?: string | null
+          error_type: string
+          id?: string
+          page_url?: string | null
+          resolved?: boolean
+          resolved_at?: string | null
+          stack_trace?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          browser_info?: string | null
+          created_at?: string
+          description?: string | null
+          error_type?: string
+          id?: string
+          page_url?: string | null
+          resolved?: boolean
+          resolved_at?: string | null
+          stack_trace?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       exercise_mistakes: {
         Row: {
           chapter_id: string
@@ -755,11 +838,79 @@ export type Database = {
           },
         ]
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      get_admin_stats: {
+        Args: never
+        Returns: {
+          active_today: number
+          active_week: number
+          avg_session_minutes: number
+          error_count_24h: number
+          top_exercise: string
+          top_game: string
+          total_children: number
+          total_exercises_completed: number
+          total_games_played: number
+          total_parents: number
+        }[]
+      }
+      get_admin_top_games: {
+        Args: { p_days?: number }
+        Returns: {
+          avg_duration_seconds: number
+          avg_score: number
+          game_type: string
+          play_count: number
+          unique_players: number
+        }[]
+      }
+      get_admin_users: {
+        Args: never
+        Returns: {
+          created_at: string
+          id: string
+          kind: string
+          label: string
+          parent_email: string
+          school_level: string
+        }[]
+      }
+      get_error_heatmap: {
+        Args: { p_days?: number }
+        Returns: {
+          chapter_id: string
+          error_rate: number
+          errors: number
+          exercise_id: string
+          subject: string
+          total_attempts: number
+        }[]
+      }
       get_game_detail_stats: {
         Args: { p_child_id: string; p_game_type: string; p_weeks?: number }
         Returns: {
@@ -809,6 +960,13 @@ export type Database = {
         Returns: number
       }
       has_parent_pin: { Args: never; Returns: boolean }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       purchase_avatar_item: {
         Args: { p_child_id: string; p_item_id: string }
         Returns: Json
@@ -845,7 +1003,7 @@ export type Database = {
       verify_parent_pin: { Args: { input_pin: string }; Returns: Json }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -972,6 +1130,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
