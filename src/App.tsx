@@ -243,8 +243,10 @@ const App = () => (
               <Route path="/jeu/mouton-noir-maths/:level" element={<MoutonNoirMaths />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <ExitChildModeButton />
           </BrowserRouter>
         </TooltipProvider>
+        </ChildModeProvider>
         </ChildProvider>
       </LanguageProvider>
     </AuthProvider>
