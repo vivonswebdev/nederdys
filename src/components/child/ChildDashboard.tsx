@@ -162,6 +162,21 @@ const ChildDashboard = () => {
       </header>
 
       <main className="container max-w-4xl px-4 py-8 space-y-10">
+        {isLittleOne && (
+          <button
+            onClick={() => navigate(`/child/${child.id}/eveil`)}
+            className="w-full bg-kids-orange/30 border-4 border-kids-orange rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+          >
+            <span className="text-5xl block mb-1">🌟</span>
+            <p className="text-2xl font-bold text-foreground">
+              <BilingualText {...biFromFr("Mes jeux 3-5 ans")} />
+            </p>
+            <p className="font-dyslexic text-muted-foreground">
+              <BilingualText {...biFromFr("活")} />
+            </p>
+          </button>
+        )}
+
         <button
           onClick={() => navigate(`/child/${child.id}/games`)}
           className="w-full bg-kids-blue/30 border-4 border-primary rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
@@ -172,6 +187,7 @@ const ChildDashboard = () => {
             <BilingualText {...biFromFr("Jeux et exercices de toutes tes matières !")} />
           </p>
         </button>
+
 
         <button
           onClick={() => navigate(`/child/${child.id}/pause`)}
