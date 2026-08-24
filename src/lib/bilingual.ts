@@ -1,4 +1,6 @@
 import { useChild } from "@/contexts/ChildContext";
+import { translations } from "@/lib/translations";
+import { nlFor } from "@/data/nl/uiStringsNl";
 
 /** Tout texte montré à un enfant existe TOUJOURS en néerlandais et en français. */
 export interface Bilingual {
@@ -120,3 +122,33 @@ export const UI = {
 } satisfies Record<string, Bilingual>;
 
 export type UiKey = keyof typeof UI;
+
+/* ------------------------------------------------------------------ */
+/* Résolution FR -> NL des chaînes codées en dur                       */
+/* ------------------------------------------------------------------ */
+
+/** Index inverse construit depuis le dictionnaire i18n : texte FR -> texte NL. */
+const FR_TO_NL: Record<string, string> = (() => {
+  const map: Record<string, string> = {};
+  for (const key of Object.keys(translations.fr)) {
+    const fr = translations.fr[key as keyof typeof translations.fr];
+    const nl = translations.nl[key as keyof typeof translations.nl];
+    if (fr && nl && !(fr in map)) map[fr.trim()] = nl;
+  }
+  return map;
+})();
+
+/**
+ * Construit un couple NL/FR à partir d'une chaîne française d'interface enfant.
+ * Cherche d'abord dans l'i18n existant, puis dans le dictionnaire dédié.
+ */
+export function biFromFr(fr: string): Bilingual {
+  const trimmed = fr.trim();
+  return { nl: FR_TO_NL[trimmed] ?? nlFor(trimmed) ?? fr, fr };
+}
+
+/** Vrai si une traduction NL existe pour cette chaîne FR. */
+export const hasNl = (fr: string): boolean => {
+  const trimmed = fr.trim();
+  return Boolean(FR_TO_NL[trimmed] ?? nlFor(trimmed));
+};
