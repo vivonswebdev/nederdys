@@ -60,6 +60,10 @@ import RimeMalinGame from "./pages/RimeMalinGame";
 import DeSyllabesGame from "./pages/DeSyllabesGame";
 import CirqueMotsGame from "./pages/CirqueMotsGame";
 import DialogueEclairGame from "./pages/DialogueEclairGame";
+import ChasseurErreursGame from "./pages/ChasseurErreursGame";
+import MagicienMotsGame from "./pages/MagicienMotsGame";
+import RoueGenresGame from "./pages/RoueGenresGame";
+import EchoSonsGame from "./pages/EchoSonsGame";
 import ProfileSelect from "./pages/ProfileSelect";
 import ChildDashboard from "./pages/ChildDashboard";
 import ChildHome from "./pages/ChildHome";
@@ -184,6 +188,10 @@ const App = () => (
               <Route path="/jeu/de-syllabes" element={<DeSyllabesGame />} />
               <Route path="/jeu/cirque-mots" element={<CirqueMotsGame />} />
               <Route path="/jeu/dialogue-eclair" element={<DialogueEclairGame />} />
+              <Route path="/jeu/chasseur-erreurs" element={<ChasseurErreursGame />} />
+              <Route path="/jeu/magicien-mots" element={<MagicienMotsGame />} />
+              <Route path="/jeu/roue-genres" element={<RoueGenresGame />} />
+              <Route path="/jeu/echo-sons" element={<EchoSonsGame />} />
               <Route path="/child/:id/test-placement/:subject" element={<PlacementTest />} />
               <Route path="/child/:id/math/chapitres" element={<MathChapters />} />
               <Route path="/child/:id/math/chapitre/:chapterId" element={<ChapterLevelSelect />} />
