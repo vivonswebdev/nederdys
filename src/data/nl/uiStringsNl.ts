@@ -192,7 +192,6 @@ export const NL_STRINGS: Record<string, string> = {
   "Choisis ton niveau : 6 calculs à enchaîner sans t'arrêter.": "Kies je niveau: 6 berekeningen na elkaar zonder te stoppen.",
   "Choisis ton niveau : déduis le code secret grâce aux indices.": "Kies je niveau: ontdek de geheime code met de aanwijzingen.",
   "Choisis ton niveau : lance les dés et calcule le résultat.": "Kies je niveau: gooi de dobbelstenen en reken uit.",
-  "Additions et soustractions": "Optellen en aftrekken",
   "Tables et nombres à 2 chiffres": "Maaltafels en getallen met 2 cijfers",
   "Divisions et calculs mixtes": "Delingen en gemengde bewerkingen",
   "Nombres de 1 à 20": "Getallen van 1 tot 20",
