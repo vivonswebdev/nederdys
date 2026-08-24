@@ -23,6 +23,8 @@ import {
 } from "@/lib/chapters";
 import { BilingualText, Bi } from "@/components/ui/BilingualText";
 import { UI, biFromFr, speakBoth, useChildLanguage } from "@/lib/bilingual";
+import { ShareAchievement } from "@/components/child/ShareAchievement";
+import { useChild } from "@/contexts/ChildContext";
 
 interface Props {
   childId: string;
@@ -68,6 +70,7 @@ export const ExerciseRunner = ({
 }: Props) => {
   const navigate = useNavigate();
   const childLang = useChildLanguage();
+  const { activeChild } = useChild();
   const testMode = !!onFinish;
   const backTo = exitTo ?? `/child/${childId}/${chapter.subject}/chapitre/${chapter.id}`;
 
@@ -237,6 +240,20 @@ export const ExerciseRunner = ({
               <p className="text-sm text-muted-foreground">
                 <Bi phrase={UI.saving} />
               </p>
+            )}
+            {pct >= 100 && (
+              <div className="mt-4">
+                <ShareAchievement
+                  childName={activeChild?.first_name ?? ""}
+                  achievement={{
+                    icon: "🏆",
+                    labelFr: "Chapitre parfait : 100 % !",
+                    labelNl: "Perfect hoofdstuk: 100%!",
+                    detailFr: chapter.name,
+                    detailNl: chapter.nameNl ?? chapter.name,
+                  }}
+                />
+              </div>
             )}
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
               <Button onClick={() => navigate(backTo)}>

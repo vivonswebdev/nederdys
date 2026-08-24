@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { allBadges, BadgeCategory, CATEGORY_LABELS, badgeById } from "@/data/badges";
 import { getAchievements } from "@/lib/gamification";
 import { formatLocalDay } from "@/lib/date";
+import { ShareAchievement } from "@/components/child/ShareAchievement";
+import { nlFor } from "@/data/nl/uiStringsNl";
 
 type Filter = "all" | BadgeCategory;
 
@@ -20,9 +22,10 @@ const FILTERS: { key: Filter; label: string; icon: string }[] = [
 
 interface Props {
   childId: string;
+  childName?: string;
 }
 
-export const BadgeCollection = ({ childId }: Props) => {
+export const BadgeCollection = ({ childId, childName = "" }: Props) => {
   const [filter, setFilter] = useState<Filter>("all");
 
   const { data: achievements = [], isLoading } = useQuery({
@@ -132,6 +135,19 @@ export const BadgeCollection = ({ childId }: Props) => {
                 >
                   {isUnlocked ? "✅ Débloqué" : "🔒 Verrouillé"}
                 </span>
+                {isUnlocked && (
+                  <ShareAchievement
+                    compact
+                    childName={childName}
+                    achievement={{
+                      icon: badge.icon,
+                      labelFr: badge.name,
+                      labelNl: nlFor(badge.name) ?? badge.name,
+                      detailFr: badge.description,
+                      detailNl: nlFor(badge.description) ?? badge.description,
+                    }}
+                  />
+                )}
               </motion.div>
             );
           })}

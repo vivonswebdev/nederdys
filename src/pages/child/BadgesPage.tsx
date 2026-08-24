@@ -38,7 +38,7 @@ const BadgesPage = () => {
         >
           <ArrowLeft className="w-4 h-4" /> <BilingualText {...biFromFr("Retour")} />
         </button>
-        <BadgeCollection childId={child.id} />
+        <BadgeCollection childId={child.id} childName={child.first_name} />
       </main>
     </div>
   );
