@@ -87,6 +87,10 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import AdminErrors from "./pages/admin/AdminErrors";
 import StoriesPage from "./pages/nl/StoriesPage";
 import CodeHome from "./pages/code/CodeHome";
+import LearnHome from "./pages/learn/LearnHome";
+import SubjectLessons from "./pages/learn/SubjectLessons";
+import LessonPage from "./pages/learn/LessonPage";
+import LearnRedirect from "./pages/learn/LearnRedirect";
 import CodeEpisodePage from "./pages/code/CodeEpisodePage";
 
 import StoryReader from "./pages/nl/StoryReader";
@@ -156,6 +160,10 @@ const App = () => (
               <Route path="/ajouter-enfant" element={<AddChild />} />
               <Route path="/profils" element={<ProfileSelect />} />
               <Route path="/jouer" element={<PlayHub />} />
+              <Route path="/apprendre" element={<LearnRedirect />} />
+              <Route path="/child/:id/apprendre" element={<LearnHome />} />
+              <Route path="/child/:id/apprendre/:subject" element={<SubjectLessons />} />
+              <Route path="/child/:id/apprendre/:subject/:lessonId" element={<LessonPage />} />
               <Route path="/enfant" element={<ChildDashboard />} />
               <Route path="/child/:id" element={<ChildHome />} />
               <Route path="/child/:id/boutique" element={<AvatarShop />} />

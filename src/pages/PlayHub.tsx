@@ -9,7 +9,7 @@ import { useChild } from "@/contexts/ChildContext";
 import { gamesBySubject, Subject } from "@/lib/games";
 
 const SUBJECT_CARDS: {
-  id: Subject;
+  id: Subject | "code";
   name: string;
   icon: string;
   desc: string;
@@ -36,6 +36,13 @@ const SUBJECT_CARDS: {
     desc: "Lecture et orthographe",
     cardClass: "border-kids-green-dark bg-kids-green-light/40",
   },
+  {
+    id: "code",
+    name: "Coder & IA",
+    icon: "🧑‍💻",
+    desc: "12 épisodes, 3 parcours",
+    cardClass: "border-kids-purple bg-kids-purple/20",
+  },
 ];
 
 /** Page « Jouer » : choix de la matière (NL / Math / FR). */
@@ -51,8 +58,10 @@ const PlayHub = () => {
 
   const child = activeChild ?? children[0] ?? null;
 
-  const routeFor = (subject: Subject) =>
-    child ? `/child/${child.id}/${subject}` : `/matiere/${subject}`;
+  const routeFor = (subject: Subject | "code") => {
+    if (subject === "code") return child ? `/child/${child.id}/code` : "/profils";
+    return child ? `/child/${child.id}/${subject}` : `/matiere/${subject}`;
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -91,9 +100,9 @@ const PlayHub = () => {
           </div>
         )}
 
-        <div className="grid gap-5 sm:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {SUBJECT_CARDS.map((s, i) => {
-            const count = gamesBySubject(s.id).length;
+            const count = s.id === "code" ? 0 : gamesBySubject(s.id).length;
             return (
               <motion.button
                 key={s.id}
@@ -107,7 +116,7 @@ const PlayHub = () => {
                 <p className="text-xl font-bold text-foreground">{s.name}</p>
                 <p className="font-dyslexic text-muted-foreground">{s.desc}</p>
                 <p className="mt-3 text-sm font-bold text-foreground">
-                  {count > 0 ? `${count} jeux ▸` : "Bientôt…"}
+                  {s.id === "code" ? "12 épisodes ▸" : count > 0 ? `${count} jeux ▸` : "Bientôt…"}
                 </p>
               </motion.button>
             );

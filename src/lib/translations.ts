@@ -23,6 +23,7 @@ const t = {
   // Navbar
   "nav.home": { fr: "Accueil", nl: "Home" },
   "nav.play": { fr: "Jouer", nl: "Spelen" },
+  "nav.learn": { fr: "Apprendre", nl: "Leren" },
   "nav.parents": { fr: "Parents", nl: "Ouders" },
   "nav.child": { fr: "+ Enfant", nl: "+ Kind" },
   "nav.logout": { fr: "Déco", nl: "Uit" },
