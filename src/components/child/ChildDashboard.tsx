@@ -166,6 +166,17 @@ const ChildDashboard = () => {
           </p>
         </button>
 
+        <button
+          onClick={() => navigate(`/child/${child.id}/eveil`)}
+          className="w-full bg-kids-orange/20 border-4 border-kids-orange rounded-3xl p-6 text-left kids-shadow-card hover:kids-shadow-hover transition-shadow"
+        >
+          <span className="text-4xl block mb-1">🌟</span>
+          <p className="text-xl font-bold text-foreground">Éveil (3-5 ans)</p>
+          <p className="font-dyslexic text-muted-foreground">
+            4 activités toutes simples, sans lecture !
+          </p>
+        </button>
+
         <div className="flex flex-wrap gap-3">
 
           <button

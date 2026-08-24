@@ -8,6 +8,7 @@ import { TopGamesTable } from "@/components/parent/TopGamesTable";
 import { BadgeGrid } from "@/components/parent/BadgeGrid";
 import { RecommendationsCard } from "@/components/parent/RecommendationsCard";
 import { ExportPDF } from "@/components/parent/ExportPDF";
+import { TimeTrackingCard } from "@/components/parent/TimeTrackingCard";
 import { useChild } from "@/contexts/ChildContext";
 import {
   Period,
@@ -18,6 +19,7 @@ import {
   getSessionsForPeriod,
 } from "@/lib/parent";
 import { computeStreak, getAchievements, getStreakDays } from "@/lib/gamification";
+import { getChildLevel } from "@/lib/database";
 
 const PERIODS: { key: Period; label: string }[] = [
   { key: "7", label: "7 jours" },
@@ -55,6 +57,12 @@ const ParentDashboard = () => {
   const { data: streakRows = [] } = useQuery({
     queryKey: ["streaks", activeChild?.id],
     queryFn: () => getStreakDays(activeChild!.id),
+    enabled: !!activeChild,
+  });
+
+  const { data: childLevel } = useQuery({
+    queryKey: ["childLevel", activeChild?.id],
+    queryFn: () => getChildLevel(activeChild!.id),
     enabled: !!activeChild,
   });
 
@@ -111,6 +119,7 @@ const ParentDashboard = () => {
               <div ref={chartRef}>
                 <ProgressChart data={daily} />
               </div>
+              <TimeTrackingCard childId={activeChild.id} totalXp={childLevel?.xp ?? 0} />
               <div className="grid lg:grid-cols-2 gap-6">
                 <TopGamesTable stats={games} childId={activeChild.id} />
                 <RecommendationsCard

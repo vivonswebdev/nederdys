@@ -71,6 +71,8 @@ import SubjectPage from "./pages/SubjectPage";
 import GamesHub from "./pages/child/GamesHub";
 import NlChapters from "./pages/nl/NlChapters";
 import FrExercises from "./pages/fr/FrExercises";
+import EveilHome from "./pages/eveil/EveilHome";
+import EveilActivity from "./pages/eveil/EveilActivity";
 import ParentGate from "./pages/ParentGate";
 import ParentDashboard from "./pages/ParentDashboard";
 import ParentSettings from "./pages/ParentSettings";
@@ -105,6 +107,8 @@ const App = () => (
               <Route path="/child/:id/reviser" element={<ReviewPage />} />
               <Route path="/child/:id/defi" element={<ChallengePage />} />
               <Route path="/child/:id/settings" element={<ChildSettingsPage />} />
+              <Route path="/child/:id/eveil" element={<EveilHome />} />
+              <Route path="/child/:id/eveil/:activityId" element={<EveilActivity />} />
               <Route path="/child/:id/games" element={<GamesHub />} />
               <Route path="/child/:id/jeux" element={<GamesHub />} />
               <Route path="/child/:id/nl/exercices" element={<NlChapters />} />

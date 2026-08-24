@@ -255,6 +255,7 @@ export async function recordExerciseSession(params: {
   difficulty: Difficulty;
   correct: number;
   total: number;
+  durationSeconds?: number;
 }): Promise<SessionResult | null> {
   const { data, error } = await supabase.rpc("record_exercise_session", {
     p_child_id: params.childId,
@@ -262,6 +263,7 @@ export async function recordExerciseSession(params: {
     p_difficulty: params.difficulty,
     p_correct: params.correct,
     p_total: params.total,
+    p_duration_seconds: Math.max(0, Math.round(params.durationSeconds ?? 0)),
   });
   if (error) {
     console.error("record_exercise_session", error);

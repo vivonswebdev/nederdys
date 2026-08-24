@@ -80,6 +80,7 @@ export const ExerciseRunner = ({
     [chapter, level, sessionSize, customExercises]
   );
   const answersRef = useRef<{ exercise: Exercise; correct: boolean }[]>([]);
+  const startedAtRef = useRef<number>(Date.now());
 
   const [index, setIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
@@ -109,6 +110,10 @@ export const ExerciseRunner = ({
   );
 
   useEffect(() => {
+    startedAtRef.current = Date.now();
+  }, [chapter.id, level]);
+
+  useEffect(() => {
     setTextAnswer("");
     setOrderPicks([]);
     setMatchLeft(null);
@@ -133,6 +138,7 @@ export const ExerciseRunner = ({
       difficulty: level,
       correct: finalCorrect,
       total,
+      durationSeconds: Math.round((Date.now() - startedAtRef.current) / 1000),
     });
     setSaving(false);
     if (!res) {
