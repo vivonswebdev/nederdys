@@ -3,7 +3,8 @@ import { biFromFr } from "@/lib/bilingual";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AvatarRenderer } from "./AvatarRenderer";
 import { AvatarConfig } from "@/lib/avatar";
-import { getLevel } from "@/lib/levels";
+import { getLevelInfo } from "@/lib/gamification";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { allBadges } from "@/data/badges";
 
 interface Props {
@@ -33,7 +34,8 @@ export const AboutModal = ({
   avatarConfig,
   onEditAvatar,
 }: Props) => {
-  const info = getLevel(totalXp);
+  const { lang } = useLanguage();
+  const info = getLevelInfo(totalXp, lang);
   const created = new Date(child.created_at).toLocaleDateString("fr-BE", {
     year: "numeric",
     month: "long",

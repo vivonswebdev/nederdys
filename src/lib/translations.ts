@@ -17,6 +17,9 @@ const t = {
   "home.profilesDesc": { fr: "Voir tous les profils", nl: "Bekijk alle profielen" },
   "home.tipTitle": { fr: "Le conseil de Kikker", nl: "Kikkers tip" },
   "home.tipText": { fr: "Un petit jeu chaque jour aide ton cerveau à mémoriser. Même 5 minutes comptent !", nl: "Elke dag een klein spelletje helpt je brein om te onthouden. Zelfs 5 minuten telt!" },
+  // Partage
+  "share.title": { fr: "Regarde ma réussite !", nl: "Kijk naar mijn prestatie!" },
+  "share.button": { fr: "Partager", nl: "Delen" },
   // Navbar
   "nav.home": { fr: "Accueil", nl: "Home" },
   "nav.play": { fr: "Jouer", nl: "Spelen" },

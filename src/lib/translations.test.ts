@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { translations } from "./translations";
+import { LEVEL_TIERS } from "./gamification";
 
 /**
  * Structure réelle : `translations = { fr: { clé: "…" }, nl: { clé: "…" } }`.
@@ -18,6 +19,11 @@ describe("Complétude des traductions FR/NL", () => {
         if (!value || !value.trim()) missing.push(`${key} → ${lang} manquant`);
       }
     }
+    expect(missing).toEqual([]);
+  });
+
+  it("chaque palier de niveau a un titre FR et NL", () => {
+    const missing = LEVEL_TIERS.filter((tier) => !tier.titleFr?.trim() || !tier.titleNl?.trim());
     expect(missing).toEqual([]);
   });
 

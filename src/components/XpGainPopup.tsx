@@ -1,6 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Zap, ArrowUp } from "lucide-react";
-import { getLevelTitle } from "./LevelBadge";
+import { LEVEL_TIERS } from "@/lib/gamification";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useChild } from "@/contexts/ChildContext";
+import { ShareAchievement } from "@/components/child/ShareAchievement";
 import { useEffect } from "react";
 import { sounds } from "@/lib/sounds";
 
@@ -12,6 +15,10 @@ interface XpGainPopupProps {
 }
 
 export const XpGainPopup = ({ xpGained, coinsGained, leveledUp, newLevel }: XpGainPopupProps) => {
+  const { lang, t } = useLanguage();
+  const { activeChild } = useChild();
+  const tier = newLevel ? LEVEL_TIERS.find((l) => l.level === newLevel) : undefined;
+  const tierTitle = tier ? (lang === "nl" ? tier.titleNl : tier.titleFr) : "";
   useEffect(() => {
     if (xpGained !== null) sounds.xp();
     if (leveledUp) setTimeout(() => sounds.levelUp(), 300);
@@ -56,8 +63,19 @@ export const XpGainPopup = ({ xpGained, coinsGained, leveledUp, newLevel }: XpGa
               className="flex items-center gap-2 bg-secondary text-secondary-foreground px-5 py-2 rounded-full font-bold text-lg"
             >
               <ArrowUp className="w-5 h-5" />
-              Niveau {newLevel} ! {getLevelTitle(newLevel)}
+              {t("home.level")} {newLevel} ! {tier?.emoji} {tierTitle}
             </motion.div>
+          )}
+
+          {leveledUp && newLevel && (
+            <ShareAchievement
+              childName={activeChild?.first_name ?? ""}
+              achievement={{
+                icon: tier?.emoji ?? "🎉",
+                labelFr: `Niveau ${newLevel} — ${tier?.titleFr ?? ""}`,
+                labelNl: `Niveau ${newLevel} — ${tier?.titleNl ?? ""}`,
+              }}
+            />
           )}
         </motion.div>
       )}

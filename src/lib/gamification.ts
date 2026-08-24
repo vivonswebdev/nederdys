@@ -32,6 +32,26 @@ export const tierProgress = (xp: number) => {
   return { tier, percent: Math.min(100, (inTier / span) * 100), inTier, needed: tier.max - xp };
 };
 
+/**
+ * Adaptateur bilingue : seule source de vérité pour les niveaux affichés.
+ * Remplace l'ancien getLevel() de /lib/levels.ts (titres FR uniquement).
+ */
+export function getLevelInfo(totalXp: number, lang: "fr" | "nl") {
+  const xp = Math.max(0, totalXp || 0);
+  const { tier, percent, inTier } = tierProgress(xp);
+  const infinite = tier.max === Infinity;
+  return {
+    level: tier.level,
+    title: lang === "nl" ? tier.titleNl : tier.titleFr,
+    emoji: tier.emoji,
+    progress: percent,
+    current: inTier,
+    span: infinite ? 0 : tier.max - tier.min,
+    nextAt: infinite ? null : tier.max,
+    xpToNext: infinite ? 0 : tier.max - xp,
+  };
+}
+
 // --- Badges ---
 
 export interface BadgeDef {
