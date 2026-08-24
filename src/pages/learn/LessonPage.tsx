@@ -123,7 +123,7 @@ const LessonPage = () => {
               to={game.route}
               className="flex items-center justify-center gap-2 rounded-2xl bg-secondary text-secondary-foreground font-bold py-4 px-5 text-center"
             >
-              🎮 {t(game.titleKey)}
+              🎮 {t(game.titleKey as Parameters<typeof t>[0])}
             </Link>
           ))}
         </div>
