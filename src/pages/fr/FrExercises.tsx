@@ -29,7 +29,7 @@ const FrExercises = () => {
         </header>
 
         <Link
-          to={`/child/${childId}/fr/jeux`}
+          to={`/child/${childId}/fr`}
           className="block mb-8 border-4 border-kids-pink bg-kids-pink/30 rounded-3xl p-5 kids-shadow-card hover:kids-shadow-hover transition-shadow"
         >
           <span className="text-3xl mr-2">🎮</span>
