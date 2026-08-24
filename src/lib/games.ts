@@ -72,7 +72,26 @@ export const GAMES: GameMeta[] = [
   { id: "rouegenres", subject: "nl", titleKey: "game.rouegenres.title", descKey: "game.rouegenres.desc", icon: "🎡", color: "bg-kids-blue", route: "/jeu/roue-genres" },
   { id: "echosons", subject: "nl", titleKey: "game.echosons.title", descKey: "game.echosons.desc", icon: "🔊", color: "bg-kids-orange", route: "/jeu/echo-sons" },
   { id: "mouton", subject: "nl", titleKey: "game.mouton.title", descKey: "game.mouton.desc", icon: "🐑", color: "bg-neutral-800", route: "/jeu/mouton" },
+
+  // === FRANÇAIS (16 jeux) ===
+  { id: "syllabesfete", subject: "fr", titleKey: "game.syllabesfete.title", descKey: "game.syllabesfete.desc", icon: "🎉", color: "bg-kids-pink", route: "/jeu/syllabes-fete" },
+  { id: "chassesonsfr", subject: "fr", titleKey: "game.chassesonsfr.title", descKey: "game.chassesonsfr.desc", icon: "🔤", color: "bg-kids-blue", route: "/jeu/chasse-sons-fr" },
+  { id: "rimemalinfr", subject: "fr", titleKey: "game.rimemalinfr.title", descKey: "game.rimemalinfr.desc", icon: "🎵", color: "bg-kids-purple", route: "/jeu/rime-malin-fr" },
+  { id: "desyllabesfr", subject: "fr", titleKey: "game.desyllabesfr.title", descKey: "game.desyllabesfr.desc", icon: "🎲", color: "bg-kids-orange", route: "/jeu/de-syllabes-fr" },
+  { id: "jardinmots", subject: "fr", titleKey: "game.jardinmots.title", descKey: "game.jardinmots.desc", icon: "🌷", color: "bg-kids-green-light", route: "/jeu/jardin-mots" },
+  { id: "bullessynonymes", subject: "fr", titleKey: "game.bullessynonymes.title", descKey: "game.bullessynonymes.desc", icon: "🫧", color: "bg-cyan-700", route: "/jeu/bulles-synonymes" },
+  { id: "bullesmotsfr", subject: "fr", titleKey: "game.bullesmotsfr.title", descKey: "game.bullesmotsfr.desc", icon: "🎈", color: "bg-kids-yellow", route: "/jeu/bulles-mots-fr" },
+  { id: "cartetresorfr", subject: "fr", titleKey: "game.cartetresorfr.title", descKey: "game.cartetresorfr.desc", icon: "🗺️", color: "bg-amber-700", route: "/jeu/carte-tresor-fr" },
+  { id: "batisseurphrases", subject: "fr", titleKey: "game.batisseurphrases.title", descKey: "game.batisseurphrases.desc", icon: "🧱", color: "bg-red-800", route: "/jeu/batisseur-phrases" },
+  { id: "completehistoire", subject: "fr", titleKey: "game.completehistoire.title", descKey: "game.completehistoire.desc", icon: "📖", color: "bg-teal-700", route: "/jeu/complete-histoire" },
+  { id: "dialogueeclairfr", subject: "fr", titleKey: "game.dialogueeclairfr.title", descKey: "game.dialogueeclairfr.desc", icon: "⚡", color: "bg-kids-yellow", route: "/jeu/dialogue-eclair-fr" },
+  { id: "piegehomophones", subject: "fr", titleKey: "game.piegehomophones.title", descKey: "game.piegehomophones.desc", icon: "🪤", color: "bg-stone-700", route: "/jeu/piege-homophones" },
+  { id: "chasseurerreursfr", subject: "fr", titleKey: "game.chasseurerreursfr.title", descKey: "game.chasseurerreursfr.desc", icon: "🔍", color: "bg-kids-green", route: "/jeu/chasseur-erreurs-fr" },
+  { id: "rouegenresfr", subject: "fr", titleKey: "game.rouegenresfr.title", descKey: "game.rouegenresfr.desc", icon: "🎡", color: "bg-indigo-700", route: "/jeu/roue-genres-fr" },
+  { id: "dicteemuette", subject: "fr", titleKey: "game.dicteemuette.title", descKey: "game.dicteemuette.desc", icon: "🤫", color: "bg-violet-700", route: "/jeu/dictee-muette" },
+  { id: "echosonsfr", subject: "fr", titleKey: "game.echosonsfr.title", descKey: "game.echosonsfr.desc", icon: "🔊", color: "bg-fuchsia-700", route: "/jeu/echo-sons-fr" },
 ];
+
 
 export const gamesBySubject = (subject: Subject) => GAMES.filter((g) => g.subject === subject);
 
@@ -127,7 +146,26 @@ export const GAME_CATEGORY: Record<string, string> = {
   marathonmental: "vitesse",
   coffrefort: "logique",
   desmaths: "calcul",
+
+  // Français
+  syllabesfete: "phonologie",
+  chassesonsfr: "phonologie",
+  rimemalinfr: "phonologie",
+  desyllabesfr: "phonologie",
+  jardinmots: "vocabulaire",
+  bullessynonymes: "vocabulaire",
+  bullesmotsfr: "vocabulaire",
+  cartetresorfr: "vocabulaire",
+  batisseurphrases: "phrases",
+  completehistoire: "phrases",
+  dialogueeclairfr: "phrases",
+  piegehomophones: "orthographe",
+  chasseurerreursfr: "grammaire",
+  rouegenresfr: "grammaire",
+  dicteemuette: "ecoute",
+  echosonsfr: "ecoute",
 };
+
 
 export interface GameCategoryMeta {
   id: string;
@@ -152,7 +190,15 @@ export const CATEGORIES_BY_SUBJECT: Record<Subject, GameCategoryMeta[]> = {
     { id: "logique", name: "Logique", icon: "🧠" },
     { id: "vitesse", name: "Vitesse", icon: "⏱️" },
   ],
-  fr: [{ id: "all", name: "Tous", icon: "📦" }],
+  fr: [
+    { id: "all", name: "Tous", icon: "📦" },
+    { id: "phonologie", name: "Sons", icon: "🔤" },
+    { id: "vocabulaire", name: "Vocabulaire", icon: "📖" },
+    { id: "phrases", name: "Phrases", icon: "💬" },
+    { id: "grammaire", name: "Grammaire", icon: "🧩" },
+    { id: "orthographe", name: "Orthographe", icon: "✏️" },
+    { id: "ecoute", name: "Écoute", icon: "👂" },
+  ],
 };
 
 export const categoriesForSubject = (subject: Subject): GameCategoryMeta[] => {
