@@ -9,6 +9,8 @@ import { useAudio } from "@/hooks/useAudio";
 import { MathChallengeBase, useMathSession } from "@/hooks/useMathSession";
 import { sounds } from "@/lib/sounds";
 import { MathLevel, XP_PER_LEVEL, recordGameCompletion } from "@/lib/mathSession";
+import { BilingualText, Bi } from "@/components/ui/BilingualText";
+import { UI, biFromFr, useChildLanguage, speakBoth } from "@/lib/bilingual";
 
 export type QuizOption = string | number;
 
@@ -51,6 +53,8 @@ export function MathQuizGame<T extends MathChallengeBase>({
 }: Props<T>) {
   const navigate = useNavigate();
   const { playAudio, isPlaying } = useAudio();
+  const childLang = useChildLanguage();
+  const titleBi = biFromFr(title);
   const { challenge, index, total, score, setScore, errors, setErrors, isLast, next } =
     useMathSession(pool, level, sessionSize);
 
@@ -146,6 +150,7 @@ export function MathQuizGame<T extends MathChallengeBase>({
     if (isCorrect(challenge, option)) {
       setFeedback("correct");
       sounds.correct();
+      speakBoth(UI.correctShort, childLang);
       const newScore = score + 1;
       setScore(newScore);
       window.setTimeout(() => goNext(newScore, errors), 1500);
@@ -164,9 +169,11 @@ export function MathQuizGame<T extends MathChallengeBase>({
         <Navbar />
         <main className="container max-w-lg px-4 py-16 text-center">
           <span className="text-6xl block mb-4">🎉</span>
-          <h1 className="text-3xl font-bold mb-2">Session terminée !</h1>
+          <h1 className="text-3xl font-bold mb-2">
+            <Bi phrase={UI.sessionDone} stacked />
+          </h1>
           <p className="text-lg font-dyslexic text-muted-foreground">
-            Score : {score}/{total} — {score * xpPerCorrect} XP
+            <Bi phrase={UI.score} /> : {score}/{total} — {score * xpPerCorrect} XP
           </p>
         </main>
       </div>
@@ -177,7 +184,7 @@ export function MathQuizGame<T extends MathChallengeBase>({
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <p className="text-center py-20 font-dyslexic">Chargement...</p>
+        <p className="text-center py-20 font-dyslexic"><Bi phrase={UI.loading} /></p>
       </div>
     );
   }
@@ -198,15 +205,20 @@ export function MathQuizGame<T extends MathChallengeBase>({
           onClick={() => navigate(backTo)}
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-4"
         >
-          <ArrowLeft className="w-4 h-4" /> Quitter
+          <ArrowLeft className="w-4 h-4" /> <Bi phrase={UI.quit} />
         </button>
 
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold">
-            {emoji} {title} — Niveau {level}
+            <span className="mr-1">{emoji}</span>
+            <BilingualText nl={titleBi.nl} fr={titleBi.fr} stacked />
+            <span className="block text-base font-normal text-muted-foreground">
+              <Bi phrase={UI.level} priority="nl" /> {level}
+            </span>
           </h1>
           <p className="text-muted-foreground font-dyslexic">
-            Défi {index + 1}/{total} · Score : {score}/{total} · {xpPerCorrect} XP par réponse
+            <Bi phrase={UI.challenge} /> {index + 1}/{total} · <Bi phrase={UI.score} /> {score}/{total} ·{" "}
+            {xpPerCorrect} XP
           </p>
           <div className="h-3 bg-muted rounded-full overflow-hidden mt-3">
             <motion.div
@@ -234,7 +246,7 @@ export function MathQuizGame<T extends MathChallengeBase>({
             disabled={isPlaying}
             className="inline-flex items-center gap-2 bg-kids-blue text-foreground font-bold px-5 py-3 rounded-2xl kids-shadow-card disabled:opacity-60"
           >
-            <Volume2 className="w-5 h-5" /> Réécouter
+            <Volume2 className="w-5 h-5" /> <Bi phrase={UI.listenAgain} />
           </button>
         </div>
 
@@ -267,9 +279,21 @@ export function MathQuizGame<T extends MathChallengeBase>({
             animate={{ opacity: 1, y: 0 }}
             className="text-center text-xl font-bold font-dyslexic mt-6"
           >
-            {feedback === "correct" && "✅ Bravo ! Bonne réponse !"}
-            {feedback === "wrong" && `❌ Oups ! La bonne réponse était ${correctLabel(challenge)}`}
-            {feedback === "timeout" && `⏰ Temps écoulé ! C'était ${correctLabel(challenge)}`}
+            {feedback === "correct" && (
+              <>
+                ✅ <Bi phrase={UI.correctShort} stacked />
+              </>
+            )}
+            {feedback === "wrong" && (
+              <>
+                ❌ <Bi phrase={UI.theAnswerWas} stacked /> {correctLabel(challenge)}
+              </>
+            )}
+            {feedback === "timeout" && (
+              <>
+                ⏰ <Bi phrase={UI.timeout} stacked /> {correctLabel(challenge)}
+              </>
+            )}
           </motion.p>
         )}
       </main>
