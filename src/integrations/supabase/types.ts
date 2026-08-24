@@ -445,6 +445,53 @@ export type Database = {
         }
         Relationships: []
       }
+      code_progress: {
+        Row: {
+          attempts: number
+          best_score_pct: number
+          child_id: string
+          created_at: string
+          episode_id: string
+          id: string
+          passed: boolean
+          track_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number
+          best_score_pct?: number
+          child_id: string
+          created_at?: string
+          episode_id: string
+          id?: string
+          passed?: boolean
+          track_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number
+          best_score_pct?: number
+          child_id?: string
+          created_at?: string
+          episode_id?: string
+          id?: string
+          passed?: boolean
+          track_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "code_progress_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       daily_challenges: {
         Row: {
           challenge_type: string
