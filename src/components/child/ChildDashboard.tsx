@@ -354,41 +354,6 @@ const ChildDashboard = () => {
           </button>
         </div>
 
-        <section>
-          <h2 className="text-xl font-bold text-foreground mb-4"><BilingualText {...biFromFr("Choisis ta matière")} /></h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            <SubjectCard
-              subject="nl"
-              title="Néerlandais"
-              icon="🇳🇱"
-              colorClass="bg-kids-blue"
-              available
-              gameCount={gamesBySubject("nl").length}
-              childId={child.id}
-              index={0}
-            />
-            <SubjectCard
-              subject="fr"
-              title="Français"
-              icon="🇫🇷"
-              colorClass="bg-kids-green-light"
-              available={false}
-              gameCount={gamesBySubject("fr").length}
-              childId={child.id}
-              index={1}
-            />
-            <SubjectCard
-              subject="math"
-              title="Mathématiques"
-              icon="🔢"
-              colorClass="bg-kids-orange"
-              available
-              gameCount={gamesBySubject("math").length}
-              childId={child.id}
-              index={2}
-            />
-          </div>
-        </section>
 
         <SeasonPassCard childId={child.id} />
 
