@@ -234,7 +234,15 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3 rounded-xl kids-shadow-card disabled:opacity-60"
             >
               <Check className="w-5 h-5" />
-              {feedback === "correct" ? "Bravo ! 🎉" : feedback === "wrong" ? "Oups, essaie encore !" : "Vérifier mon mur !"}
+              <BilingualText
+                {...biFromFr(
+                  feedback === "correct"
+                    ? "Bravo ! 🎉"
+                    : feedback === "wrong"
+                      ? "Oups, essaie encore !"
+                      : "Vérifier mon mur !"
+                )}
+              />
             </button>
           </div>
         )}

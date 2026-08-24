@@ -4,10 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { EVEIL_ACTIVITIES, speakBilingual } from "@/lib/eveil";
 import { BilingualText } from "@/components/ui/BilingualText";
+import { useChildLanguage } from "@/lib/bilingual";
 
 const EveilHome = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const eveilLang = useChildLanguage();
 
   useEffect(() => {
     document.title = "Éveil 3-5 ans — activités ludiques | NederDys";
@@ -19,12 +21,14 @@ const EveilHome = () => {
         <div className="container max-w-3xl px-4 py-3 flex items-center gap-3">
           <button
             onClick={() => navigate(`/child/${id}`)}
-            aria-label="Retour"
+            aria-label={eveilLang === "fr" ? "Retour" : "Terug"}
             className="min-h-[56px] min-w-[56px] rounded-2xl bg-muted flex items-center justify-center"
           >
             <ArrowLeft className="w-7 h-7" />
           </button>
-          <h1 className="text-lg sm:text-xl font-bold text-foreground">🌟 Ontwaken / Éveil (3-5)</h1>
+          <h1 className="text-lg sm:text-xl font-bold text-foreground">
+            🌟 <BilingualText nl="Ontwaken (3-5)" fr="Éveil (3-5)" single />
+          </h1>
         </div>
       </header>
 
@@ -47,12 +51,12 @@ const EveilHome = () => {
               <span className="block text-6xl" aria-hidden>
                 {activity.emoji}
               </span>
-              <BilingualText nl={activity.name.nl} fr={activity.name.fr} stacked className="text-lg mt-3" />
+              <BilingualText nl={activity.name.nl} fr={activity.name.fr} single className="block text-lg font-bold mt-3" />
               <BilingualText
                 nl={activity.description.nl}
                 fr={activity.description.fr}
-                stacked
-                className="font-dyslexic text-xs mt-2"
+                single
+                className="block font-dyslexic text-xs text-muted-foreground mt-2"
               />
             </motion.button>
           ))}

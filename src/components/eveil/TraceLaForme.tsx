@@ -1,3 +1,4 @@
+import { BilingualText } from "@/components/ui/BilingualText";
 import { useEffect, useRef, useState } from "react";
 import { Volume2 } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
@@ -173,7 +174,7 @@ export const TraceLaForme = ({ childId }: Props) => {
           aria-label="Réécouter la consigne"
           className="min-h-[80px] w-full max-w-sm mx-auto flex items-center justify-center gap-3 rounded-3xl bg-primary/15 text-primary text-2xl font-bold"
         >
-          <Volume2 className="w-9 h-9" /> Luisteren / Écouter
+          <Volume2 className="w-9 h-9" /> <BilingualText nl="Luisteren" fr="Écouter" single />
         </button>
 
         <canvas

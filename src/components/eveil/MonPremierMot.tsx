@@ -1,20 +1,17 @@
 import { BilingualText } from "@/components/ui/BilingualText";
-import { biFromFr } from "@/lib/bilingual";
+import { biFromFr, useChildLanguage } from "@/lib/bilingual";
 import { useEffect, useRef, useState } from "react";
 import { Volume2, Mic } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
 import { Confetti } from "@/components/Confetti";
 import { sounds } from "@/lib/sounds";
-import { PRAISE, recordEveilCompletion, speakFr, speakNl } from "@/lib/eveil";
+import { PRAISE, recordEveilCompletion, speakBilingual } from "@/lib/eveil";
 
 interface Props {
   childId: string;
 }
 
-const speakBilingualHelper = () => {
-  speakNl(PRAISE.nl);
-  window.setTimeout(() => speakFr(PRAISE.fr), 900);
-};
+
 
 const WORDS = [
   { fr: "chat", nl: "kat", emoji: "🐱" },
@@ -24,7 +21,7 @@ const WORDS = [
   { fr: "soleil", nl: "zon", emoji: "☀️" },
 ];
 
-const speakBilingualPraise = () => speakBilingualHelper();
+
 
 export const MonPremierMot = ({ childId }: Props) => {
   const [index, setIndex] = useState(0);
@@ -33,9 +30,8 @@ export const MonPremierMot = ({ childId }: Props) => {
   const startedAt = useRef(Date.now());
   const word = WORDS[index];
 
-  const sayNl = () => speakNl(word.nl);
-  const sayFr = () => speakFr(word.fr);
-  const say = sayNl;
+  const lang = useChildLanguage();
+  const say = () => speakBilingual({ nl: word.nl, fr: word.fr });
 
   useEffect(() => {
     if (done) return;
@@ -48,7 +44,7 @@ export const MonPremierMot = ({ childId }: Props) => {
     sounds.xp();
     const nextStars = stars + 1;
     setStars(nextStars);
-    speakBilingualPraise();
+    speakBilingual(PRAISE);
     window.setTimeout(() => {
       if (index + 1 >= WORDS.length) {
         setDone(true);
@@ -95,32 +91,26 @@ export const MonPremierMot = ({ childId }: Props) => {
       ) : (
         <div className="space-y-8 text-center">
           <div className="mx-auto flex h-56 w-full max-w-sm items-center justify-center rounded-3xl bg-card border-4 border-primary/30 text-[7rem]">
-            <span aria-label={word.fr}>{word.emoji}</span>
+            <span aria-label={lang === "fr" ? word.fr : word.nl}>{word.emoji}</span>
           </div>
 
-          <div className="mx-auto flex w-full max-w-sm gap-3">
+          <div className="mx-auto flex w-full max-w-sm">
             <button
-              onClick={sayNl}
-              aria-label="Luister in het Nederlands"
-              className="min-h-[80px] flex-1 flex items-center justify-center gap-2 rounded-3xl bg-primary/15 text-primary text-2xl font-bold"
+              onClick={say}
+              aria-label={lang === "fr" ? "Écouter le mot" : "Luister naar het woord"}
+              className="min-h-[80px] flex-1 flex items-center justify-center gap-3 rounded-3xl bg-primary/15 text-primary text-2xl font-bold"
             >
-              <Volume2 className="w-8 h-8" /> NL
-            </button>
-            <button
-              onClick={sayFr}
-              aria-label="Écouter en français"
-              className="min-h-[80px] flex-1 flex items-center justify-center gap-2 rounded-3xl bg-secondary/20 text-secondary-foreground text-2xl font-bold"
-            >
-              <Volume2 className="w-8 h-8" /> FR
+              <Volume2 className="w-8 h-8" />
+              <BilingualText nl="Luisteren" fr="Écouter" single />
             </button>
           </div>
 
           <button
             onClick={handleAttempt}
-            aria-label="J'ai dit le mot"
+            aria-label={lang === "fr" ? "J'ai dit le mot" : "Ik heb het woord gezegd"}
             className="min-h-[80px] w-full max-w-sm mx-auto flex items-center justify-center gap-3 rounded-3xl bg-primary text-primary-foreground text-2xl font-bold"
           >
-            <Mic className="w-9 h-9" /> <BilingualText {...biFromFr("J'ai dit le mot !")} />
+            <Mic className="w-9 h-9" /> <BilingualText {...biFromFr("J'ai dit le mot !")} single />
           </button>
         </div>
       )}

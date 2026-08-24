@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/contexts/AuthContext";
 import { getChildren } from "@/lib/database";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type Child = Awaited<ReturnType<typeof getChildren>>[number];
 
@@ -53,6 +54,14 @@ export const ChildProvider = ({ children: node }: { children: ReactNode }) => {
   }, [childList]);
 
   const activeChild = childList.find((c) => c.id === activeChildId) ?? null;
+
+  // La langue du profil enfant pilote l'interface dès qu'il devient actif.
+  const { setLang } = useLanguage();
+  const childLanguage = (activeChild as { language?: string } | null)?.language;
+  useEffect(() => {
+    if (childLanguage === "fr" || childLanguage === "nl") setLang(childLanguage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeChild?.id, childLanguage]);
 
   return (
     <ChildContext.Provider

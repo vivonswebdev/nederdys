@@ -1,3 +1,4 @@
+import { BilingualText } from "@/components/ui/BilingualText";
 import { useRef, useState } from "react";
 import { Volume2 } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
@@ -122,7 +123,7 @@ export const AssembleLaPhrase = ({ childId }: Props) => {
           aria-label="Écouter la phrase"
           className="min-h-[80px] w-full flex items-center justify-center gap-3 rounded-3xl bg-primary text-primary-foreground text-2xl font-bold disabled:opacity-40"
         >
-          <Volume2 className="w-9 h-9" /> Zin / Phrase
+          <Volume2 className="w-9 h-9" /> <BilingualText nl="Zin" fr="Phrase" single />
         </button>
       </div>
     </EveilLayout>
