@@ -1096,6 +1096,16 @@ export type Database = {
           season_id: string
         }[]
       }
+      get_subject_breakdown: {
+        Args: { p_child_id: string }
+        Returns: {
+          sessions_count: number
+          strong_games: string[]
+          subject: string
+          success_rate: number
+          weak_games: string[]
+        }[]
+      }
       get_time_tracking: {
         Args: { p_child_id: string; p_days?: number }
         Returns: {

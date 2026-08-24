@@ -315,6 +315,31 @@ export const exportAllData = async (userId: string) => {
   };
 };
 
+// ---------- Répartition par matière (depuis game_sessions.subject) ----------
+
+export interface SubjectBreakdown {
+  subject: Subject;
+  sessions_count: number;
+  success_rate: number;
+  weak_games: string[];
+  strong_games: string[];
+}
+
+export const getSubjectBreakdown = async (childId: string): Promise<SubjectBreakdown[]> => {
+  const { data, error } = await supabase.rpc("get_subject_breakdown", { p_child_id: childId });
+  if (error) {
+    console.error("Error fetching subject breakdown:", error);
+    return [];
+  }
+  return (data ?? []).map((r) => ({
+    subject: r.subject as Subject,
+    sessions_count: Number(r.sessions_count),
+    success_rate: Number(r.success_rate),
+    weak_games: r.weak_games ?? [],
+    strong_games: r.strong_games ?? [],
+  }));
+};
+
 // ---------- Points faibles par difficulté ----------
 
 export interface DifficultyWeakness {
