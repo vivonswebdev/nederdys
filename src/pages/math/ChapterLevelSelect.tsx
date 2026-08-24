@@ -1,11 +1,11 @@
-import { biFromFr } from "@/lib/bilingual";
+import { bi, biFromFr } from "@/lib/bilingual";
 import { BilingualText, Bi } from "@/components/ui/BilingualText";
 import { UI } from "@/lib/bilingual";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { toast } from "sonner";
+import { biToast } from "@/lib/biToast";
 import { Navbar } from "@/components/Navbar";
 import { sounds } from "@/lib/sounds";
 import {
@@ -20,10 +20,10 @@ import {
   chaptersListRoute,
 } from "@/lib/chapters";
 
-const REQUIREMENT: Record<Difficulty, string | null> = {
+const REQUIREMENT: Record<Difficulty, { nl: string; fr: string } | null> = {
   1: null,
-  2: "80 % de réussite en niveau Facile",
-  3: "80 % de réussite en niveau Moyen",
+  2: bi("80 % juist op niveau Makkelijk", "80 % de réussite en niveau Facile"),
+  3: bi("80 % juist op niveau Gemiddeld", "80 % de réussite en niveau Moyen"),
 };
 
 const ChapterLevelSelect = () => {
@@ -70,7 +70,7 @@ const ChapterLevelSelect = () => {
 
   const handleClick = (level: Difficulty) => {
     if (level > unlockedLevel) {
-      toast(`🔒 Pour débloquer : ${REQUIREMENT[level]}`);
+      biToast.info(bi(`🔒 Om te openen: ${REQUIREMENT[level]?.nl}`, `🔒 Pour débloquer : ${REQUIREMENT[level]?.fr}`));
       return;
     }
     sounds.click();
@@ -150,7 +150,9 @@ const ChapterLevelSelect = () => {
                     <p className="text-sm text-foreground/80 font-dyslexic">
                       <Bi phrase={UI.toUnlock} />
                     </p>
-                    <p className="font-bold text-foreground font-dyslexic">{REQUIREMENT[level]}</p>
+                    <p className="font-bold text-foreground font-dyslexic">
+                      <BilingualText nl={REQUIREMENT[level]!.nl} fr={REQUIREMENT[level]!.fr} stacked />
+                    </p>
                   </div>
                 )}
 

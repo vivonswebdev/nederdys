@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check, Volume2, X } from "lucide-react";
-import { toast } from "sonner";
+import { biToast } from "@/lib/biToast";
 import { Navbar } from "@/components/Navbar";
 import { Confetti } from "@/components/Confetti";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,7 @@ import {
   shuffle,
 } from "@/lib/chapters";
 import { BilingualText, Bi } from "@/components/ui/BilingualText";
-import { UI, biFromFr, speakBoth, useChildLanguage, type Bilingual } from "@/lib/bilingual";
+import { bi, UI, biFromFr, speakBoth, useChildLanguage, type Bilingual } from "@/lib/bilingual";
 import { nlFor } from "@/data/nl/uiStringsNl";
 import type { QcmExercise } from "@/data/chapters/types";
 import { ShareAchievement } from "@/components/child/ShareAchievement";
@@ -163,7 +163,7 @@ export const ExerciseRunner = ({
     });
     setSaving(false);
     if (!res) {
-      toast.error("On n'a pas pu enregistrer ta partie, mais tes réponses comptent quand même 💚");
+      biToast.error(bi("We konden je spel niet opslaan, maar je antwoorden tellen toch mee 💚", "On n'a pas pu enregistrer ta partie, mais tes réponses comptent quand même 💚"));
       setResult({ xp: 0, pct, unlocked: level });
       return;
     }
@@ -176,11 +176,14 @@ export const ExerciseRunner = ({
         if (streakAtStartRef.current !== null && days > streakAtStartRef.current) setReaction("streak");
       });
     }
-    toast.success(`+${res.xp_awarded} XP et ${res.xp_awarded} pièces ! 🎉`);
+    biToast.success(bi(`+${res.xp_awarded} XP en ${res.xp_awarded} muntjes! 🎉`, `+${res.xp_awarded} XP et ${res.xp_awarded} pièces ! 🎉`));
     if (Number(res.score_pct) >= MASTERY_THRESHOLD && res.unlocked_level > level) {
       sounds.correct();
-      toast.success(
-        `🎉 ${UI.unlockedLevel.nl} ${LEVEL_LABEL_NL[res.unlocked_level]} — ${UI.unlockedLevel.fr} ${LEVEL_LABEL[res.unlocked_level]}`
+      biToast.success(
+        bi(
+          `🎉 ${UI.unlockedLevel.nl} ${LEVEL_LABEL_NL[res.unlocked_level]}`,
+          `🎉 ${UI.unlockedLevel.fr} ${LEVEL_LABEL[res.unlocked_level]}`
+        )
       );
     }
   };

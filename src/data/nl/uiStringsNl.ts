@@ -208,6 +208,10 @@ export const NL_STRINGS: Record<string, string> = {
   "Bravo ! 🎉": "Goed zo! 🎉",
   "Oups, essaie encore !": "Oeps, probeer opnieuw!",
   "Vérifier mon mur !": "Mijn muur nakijken!",
+  "Additions simples (12 s)": "Eenvoudige optellingen (12 s)",
+  "Résultat de l'étape": "Resultaat van de stap",
+  "Droite graduée": "Getallenlijn",
+  "Catégories de jeux de maths": "Categorieën rekenspellen",
 };
 
 /** Traduction NL d'une chaîne FR d'interface enfant (retourne `undefined` si absente). */

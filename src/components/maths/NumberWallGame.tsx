@@ -1,11 +1,11 @@
 import { BilingualText } from "@/components/ui/BilingualText";
 import { mathTextToNl } from "@/lib/mathSpeechNl";
-import { biFromFr } from "@/lib/bilingual";
+import { bi, biFromFr } from "@/lib/bilingual";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Play, Check, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { biToast } from "@/lib/biToast";
 import { Navbar } from "@/components/Navbar";
 import { useAudio } from "@/hooks/useAudio";
 import { sounds } from "@/lib/sounds";
@@ -78,9 +78,9 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
       errorsCount: finalErrors,
     });
     if (!result.ok) {
-      toast.error("Erreur lors de l'enregistrement");
+      biToast.error(bi("Fout bij het opslaan", "Erreur lors de l'enregistrement"));
     } else {
-      toast.success(`+${result.xp_awarded ?? xp} XP & ${result.xp_awarded ?? xp} pièces ! 🎉`);
+      biToast.success(bi(`+${result.xp_awarded ?? xp} XP & ${result.xp_awarded ?? xp} muntjes! 🎉`, `+${result.xp_awarded ?? xp} XP & ${result.xp_awarded ?? xp} pièces ! 🎉`));
     }
     setTimeout(() => navigate(backTo), 2500);
   }
