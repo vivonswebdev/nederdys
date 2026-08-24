@@ -22,6 +22,8 @@ export interface AvatarConfig {
   hair?: string | null;
   skinColor?: string | null;
   accessories?: string | null;
+  mouth?: string | null;
+  eyebrows?: string | null;
 }
 
 export interface DiceBearOptions extends AvatarConfig {
@@ -198,3 +200,19 @@ export function mergeAvatarOptions(gender: Gender | null | undefined, custom?: A
   });
   return merged;
 }
+
+/* ------------------------------------------------------------------ */
+/* Humeurs de l'avatar (réactions visuelles, aucun stockage en base)   */
+/* ------------------------------------------------------------------ */
+
+export type AvatarMood = "happy" | "neutral" | "thinking";
+
+/**
+ * Variantes DiceBear "adventurer" vérifiées au rendu (mouth: variant01-30,
+ * eyebrows: variant01-15) : sourires francs, bouches neutres, moue pensive.
+ */
+export const MOOD_OPTIONS: Record<AvatarMood, { mouth: string; eyebrows: string }> = {
+  happy: { mouth: "variant22,variant23,variant30", eyebrows: "variant06,variant09" },
+  neutral: { mouth: "variant09,variant10", eyebrows: "variant05,variant10" },
+  thinking: { mouth: "variant04,variant19", eyebrows: "variant13,variant01" },
+};
