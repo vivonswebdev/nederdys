@@ -4,6 +4,14 @@
  * vérifie qu'aucune chaîne affichée à un enfant ne manque ici.
  */
 export const NL_STRINGS: Record<string, string> = {
+  "Réécouter la consigne": "Luister de opdracht opnieuw",
+  "Écoute en cours...": "Aan het luisteren...",
+  "Réécouter": "Nog eens luisteren",
+  "Niveau": "Niveau",
+  "Défi": "Opdracht",
+  "Score": "Score",
+  "XP par réponse": "XP per antwoord",
+
   // Intros de sélection de niveau
   "Choisis ton niveau : 5 listes de nombres, trouve l'intrus à chaque fois.":
     "Kies je niveau: 5 rijen getallen, vind telkens de indringer.",
