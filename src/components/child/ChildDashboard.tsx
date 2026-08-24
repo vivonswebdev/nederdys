@@ -302,7 +302,7 @@ const ChildDashboard = () => {
                 👦 <BilingualText {...biFromFr("Changer d'enfant")} />
               </button>
               <button
-                onClick={enterChildMode}
+                onClick={() => enterChildMode(child.id)}
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground rounded-full border border-border px-4 py-2"
               >
                 📱 Donner l'appareil à {child.first_name}
