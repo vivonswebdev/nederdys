@@ -166,12 +166,22 @@ export const ParentLogin = ({ onSuccess, onCancel }: Props) => {
         </p>
       )}
 
-      <Link
-        to="/enfant"
-        className="block text-center mt-6 text-sm text-muted-foreground hover:text-foreground"
-      >
-        ← Retour à l'app enfant
-      </Link>
+      {onCancel ? (
+        <button
+          type="button"
+          onClick={onCancel}
+          className="block w-full text-center mt-6 text-sm text-muted-foreground hover:text-foreground"
+        >
+          Annuler
+        </button>
+      ) : (
+        <Link
+          to="/enfant"
+          className="block text-center mt-6 text-sm text-muted-foreground hover:text-foreground"
+        >
+          ← Retour à l'app enfant
+        </Link>
+      )}
     </form>
   );
 };
