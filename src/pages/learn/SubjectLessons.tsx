@@ -4,13 +4,14 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { LESSON_SUBJECTS, lessonsBySubject, parseLessonSubject } from "@/lib/lessons";
-import { useChildLanguage, orderedPair } from "@/lib/bilingual";
+import { orderedPair } from "@/lib/bilingual";
+import { LearnLangToggle, useLearnLanguage } from "@/components/learn/LearnLangToggle";
 
 /** Liste des leçons d'une matière, avec aperçu (durée, notions, pastilles). */
 const SubjectLessons = () => {
   const { id, subject } = useParams<{ id: string; subject: string }>();
   const navigate = useNavigate();
-  const lang = useChildLanguage();
+  const [lang, setLang] = useLearnLanguage();
   const subj = parseLessonSubject(subject);
 
   useEffect(() => {
@@ -26,12 +27,15 @@ const SubjectLessons = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="container max-w-3xl px-4 py-8">
+        <div className="flex items-center justify-between gap-3 mb-6">
         <Link
           to={`/child/${id}/apprendre`}
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground "
         >
           <ArrowLeft className="w-4 h-4" /> {lang === "nl" ? "Terug" : "Retour"}
         </Link>
+          <LearnLangToggle lang={lang} onChange={setLang} />
+        </div>
 
         <header className="text-center mb-8">
           <span className="text-5xl block mb-2">{meta.emoji}</span>
