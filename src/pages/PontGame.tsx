@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -89,7 +90,7 @@ const PontGame = () => {
 
   const speak = useCallback((word: string) => {
     const u = new SpeechSynthesisUtterance(word);
-    u.lang = "nl-NL";
+    u.lang = "nl-BE";
     u.rate = 0.6;
     speechSynthesis.speak(u);
     sounds.click();
@@ -204,7 +205,7 @@ const PontGame = () => {
         <div className="container flex items-center justify-between">
           <Link to="/">
             <Button variant="ghost" size="sm" className="text-indigo-200 hover:text-white hover:bg-indigo-800/50">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <div className="flex items-center gap-3">
@@ -214,7 +215,7 @@ const PontGame = () => {
             </span>
           </div>
           <span className="text-lg font-bold text-indigo-100">
-            {t("game.score")}: {score}/{totalRounds}
+            <Tb k="game.score" />: {score}/{totalRounds}
           </span>
         </div>
       </div>
@@ -257,17 +258,17 @@ const PontGame = () => {
               <motion.div className="text-7xl mb-4" animate={{ y: [0, -8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
                 🌉
               </motion.div>
-              <h2 className="text-3xl font-bold text-white">{t("game.bravo")}</h2>
-              <p className="text-xl text-indigo-200">{t("game.score")}: {score}/{totalRounds}</p>
-              <p className="text-indigo-300">{t("pont.bravo")}</p>
+              <h2 className="text-3xl font-bold text-white"><Tb k="game.bravo" /></h2>
+              <p className="text-xl text-indigo-200"><Tb k="game.score" />: {score}/{totalRounds}</p>
+              <p className="text-indigo-300"><Tb k="pont.bravo" /></p>
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white">
-                  <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4 mr-2" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" size="lg" className="border-indigo-400 text-indigo-100 hover:bg-indigo-800/50">
-                    <Home className="w-4 h-4 mr-2" /> {t("game.home")}
+                    <Home className="w-4 h-4 mr-2" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>
@@ -276,8 +277,8 @@ const PontGame = () => {
             <motion.div key={round} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} className="space-y-8 mt-8">
               {/* Instruction */}
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-bold text-white">{t("pont.instruction")}</h2>
-                <p className="text-indigo-300 text-sm">{t("pont.hint")}</p>
+                <h2 className="text-xl font-bold text-white"><BilingualInstruction k="pont.instruction" /></h2>
+                <p className="text-indigo-300 text-sm"><Tb k="pont.hint" /></p>
               </div>
 
               {/* Game area: words on left, emojis on right */}
@@ -285,7 +286,7 @@ const PontGame = () => {
                 {/* Words column */}
                 <div className="space-y-3">
                   <p className="text-center text-indigo-300 text-xs font-bold uppercase tracking-wider mb-2">
-                    {t("pont.words")}
+                    <Tb k="pont.words" />
                   </p>
                   {current.words.map((w, i) => {
                     const isMatched = matched.has(i);
@@ -320,7 +321,7 @@ const PontGame = () => {
                 {/* Emojis column */}
                 <div className="space-y-3">
                   <p className="text-center text-indigo-300 text-xs font-bold uppercase tracking-wider mb-2">
-                    {t("pont.images")}
+                    <Tb k="pont.images" />
                   </p>
                   {shuffledEmojis.map((originalIdx, shuffledIdx) => {
                     const isMatched = matched.has(originalIdx);
@@ -354,7 +355,7 @@ const PontGame = () => {
 
               {/* Match count */}
               <p className="text-center text-indigo-200 text-sm">
-                {matched.size}/{current.words.length} {t("pont.linked")}
+                {matched.size}/{current.words.length} <Tb k="pont.linked" />
               </p>
             </motion.div>
           )}

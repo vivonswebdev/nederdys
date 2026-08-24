@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Star, RotateCcw } from "lucide-react";
@@ -74,13 +75,13 @@ const ChasseGame = () => {
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
             <span className="text-6xl block mb-4">{score >= 5 ? "🎉" : "💪"}</span>
             <h2 className="text-3xl font-bold text-foreground mb-2">{score >= 5 ? t("chasse.super") : t("chasse.tryagain")}</h2>
-            <p className="text-xl text-muted-foreground mb-2">{t("chasse.caught")} {score} {t("chasse.words")}</p>
+            <p className="text-xl text-muted-foreground mb-2"><Tb k="chasse.caught" /> {score} <Tb k="chasse.words" /></p>
             <DifficultyIndicator difficulty={difficulty} />
             <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">{Array.from({ length: Math.min(score, 10) }).map((_, i) => (<Star key={i} className="w-6 h-6 text-secondary fill-secondary" />))}</div>
             <div className="flex gap-4 justify-center">
-              <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2"><RotateCcw className="w-4 h-4" /> {t("game.replay")}</button>
-              <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold">{t("game.home")}</Link>
+              <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2"><RotateCcw className="w-4 h-4" /> <Tb k="game.replay" /></button>
+              <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold"><Tb k="game.home" /></Link>
             </div>
           </motion.div>
         </div>
@@ -93,7 +94,7 @@ const ChasseGame = () => {
       <Navbar />
       <div className="container px-4 py-4">
         <div className="flex items-center justify-between mb-4">
-          <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"><ArrowLeft className="w-4 h-4" /> {t("game.back")}</Link>
+          <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"><ArrowLeft className="w-4 h-4" /> <Tb k="game.back" /></Link>
           <DifficultyIndicator difficulty={difficulty} />
           <div className="flex items-center gap-4">
             <span className="text-lg font-bold text-foreground">⭐ {score}</span>
@@ -101,8 +102,8 @@ const ChasseGame = () => {
           </div>
         </div>
         <div className="text-center mb-4">
-          <h2 className="text-xl font-bold text-foreground">{t("chasse.instruction")}</h2>
-          <p className="text-sm text-muted-foreground font-dyslexic">{t("chasse.avoid")}</p>
+          <h2 className="text-xl font-bold text-foreground"><BilingualInstruction k="chasse.instruction" /></h2>
+          <p className="text-sm text-muted-foreground font-dyslexic"><Tb k="chasse.avoid" /></p>
         </div>
         <div className="relative h-[60vh] bg-accent/20 rounded-3xl overflow-hidden border border-border">
           <AnimatePresence>

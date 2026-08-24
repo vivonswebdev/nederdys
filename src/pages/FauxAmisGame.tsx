@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2, ThumbsUp, ThumbsDown } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -83,7 +84,7 @@ const FauxAmisGame = () => {
   const speak = useCallback(() => {
     if (!current) return;
     const u = new SpeechSynthesisUtterance(current.word);
-    u.lang = "nl-NL";
+    u.lang = "nl-BE";
     u.rate = 0.7;
     speechSynthesis.speak(u);
     sounds.click();
@@ -150,7 +151,7 @@ const FauxAmisGame = () => {
         <div className="container flex items-center justify-between">
           <Link to="/">
             <Button variant="ghost" size="sm" className="text-amber-200 hover:text-white hover:bg-amber-800">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <div className="flex items-center gap-3">
@@ -160,7 +161,7 @@ const FauxAmisGame = () => {
             </span>
           </div>
           <span className="text-lg font-bold text-amber-100">
-            {t("game.score")}: {score}/{totalRounds}
+            <Tb k="game.score" />: {score}/{totalRounds}
           </span>
         </div>
       </div>
@@ -185,18 +186,18 @@ const FauxAmisGame = () => {
           {finished ? (
             <motion.div key="done" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center space-y-6">
               <div className="text-6xl mb-4">🤝</div>
-              <h2 className="text-3xl font-bold text-white">{t("game.bravo")}</h2>
+              <h2 className="text-3xl font-bold text-white"><Tb k="game.bravo" /></h2>
               <p className="text-xl text-amber-200">
-                {t("game.score")}: {score}/{totalRounds}
+                <Tb k="game.score" />: {score}/{totalRounds}
               </p>
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-amber-500 hover:bg-amber-600 text-white">
-                  <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4 mr-2" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" size="lg" className="border-amber-400 text-amber-100 hover:bg-amber-800">
-                    <Home className="w-4 h-4 mr-2" /> {t("game.home")}
+                    <Home className="w-4 h-4 mr-2" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>
@@ -205,8 +206,8 @@ const FauxAmisGame = () => {
             <motion.div key={round} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} className="space-y-8">
               {/* Instruction */}
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-bold text-white">{t("fauxamis.instruction")}</h2>
-                <p className="text-amber-200 text-sm">{t("fauxamis.hint")}</p>
+                <h2 className="text-xl font-bold text-white"><BilingualInstruction k="fauxamis.instruction" /></h2>
+                <p className="text-amber-200 text-sm"><Tb k="fauxamis.hint" /></p>
               </div>
 
               {/* Word card */}
@@ -230,13 +231,13 @@ const FauxAmisGame = () => {
                   onClick={speak}
                   className="gap-2 border-amber-400 text-amber-200 hover:bg-amber-400/20 hover:text-amber-100"
                 >
-                  <Volume2 className="w-5 h-5" /> {t("fauxamis.listen")}
+                  <Volume2 className="w-5 h-5" /> <Tb k="fauxamis.listen" />
                 </Button>
               </div>
 
               {/* Question */}
               <div className="text-center">
-                <p className="text-lg text-amber-100 font-bold">{t("fauxamis.question")}</p>
+                <p className="text-lg text-amber-100 font-bold"><Tb k="fauxamis.question" /></p>
               </div>
 
               {/* Answer buttons */}
@@ -259,8 +260,8 @@ const FauxAmisGame = () => {
                   `}
                 >
                   <ThumbsUp className="w-10 h-10 text-emerald-300" />
-                  <span className="text-lg font-bold text-emerald-200">{t("fauxamis.vraiAmi")}</span>
-                  <span className="text-xs text-emerald-300/70">{t("fauxamis.vraiAmiDesc")}</span>
+                  <span className="text-lg font-bold text-emerald-200"><Tb k="fauxamis.vraiAmi" /></span>
+                  <span className="text-xs text-emerald-300/70"><Tb k="fauxamis.vraiAmiDesc" /></span>
                 </motion.button>
 
                 {/* Faux Ami button */}
@@ -281,8 +282,8 @@ const FauxAmisGame = () => {
                   `}
                 >
                   <ThumbsDown className="w-10 h-10 text-red-300" />
-                  <span className="text-lg font-bold text-red-200">{t("fauxamis.fauxAmi")}</span>
-                  <span className="text-xs text-red-300/70">{t("fauxamis.fauxAmiDesc")}</span>
+                  <span className="text-lg font-bold text-red-200"><Tb k="fauxamis.fauxAmi" /></span>
+                  <span className="text-xs text-red-300/70"><Tb k="fauxamis.fauxAmiDesc" /></span>
                 </motion.button>
               </div>
 

@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2, Ship, Anchor } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -144,7 +145,7 @@ const PhareGame = () => {
   const speak = useCallback(() => {
     if (!current) return;
     const u = new SpeechSynthesisUtterance(current.sentence);
-    u.lang = "nl-NL";
+    u.lang = "nl-BE";
     u.rate = 0.65;
     speechSynthesis.speak(u);
     sounds.click();
@@ -219,7 +220,7 @@ const PhareGame = () => {
         <div className="container flex items-center justify-between">
           <Link to="/">
             <Button variant="ghost" size="sm" className="text-cyan-200 hover:text-white hover:bg-cyan-800/50">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <div className="flex items-center gap-3">
@@ -239,7 +240,7 @@ const PhareGame = () => {
             </span>
           </div>
           <span className="text-lg font-bold text-cyan-100">
-            {t("game.score")}: {score}/{totalRounds}
+            <Tb k="game.score" />: {score}/{totalRounds}
           </span>
         </div>
       </div>
@@ -316,14 +317,14 @@ const PhareGame = () => {
                 ))}
               </div>
 
-              <h2 className="text-3xl font-bold text-white">{t("game.bravo")}</h2>
+              <h2 className="text-3xl font-bold text-white"><Tb k="game.bravo" /></h2>
               <p className="text-xl text-cyan-200">
-                {t("game.score")}: {score}/{totalRounds}
+                <Tb k="game.score" />: {score}/{totalRounds}
               </p>
 
               {/* Boats summary */}
               <div className="bg-slate-800/50 rounded-2xl p-4 inline-block">
-                <p className="text-cyan-300 text-sm mb-2">{t("phare.boatsSaved")}</p>
+                <p className="text-cyan-300 text-sm mb-2"><Tb k="phare.boatsSaved" /></p>
                 <div className="flex items-center justify-center gap-2">
                   {boatsSaved.map((saved, i) => (
                     <motion.span
@@ -339,16 +340,16 @@ const PhareGame = () => {
                 </div>
               </div>
 
-              <p className="text-cyan-300">{t("phare.bravo")}</p>
+              <p className="text-cyan-300"><Tb k="phare.bravo" /></p>
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
 
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-white">
-                  <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4 mr-2" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" size="lg" className="border-cyan-400 text-cyan-100 hover:bg-cyan-800/50">
-                    <Home className="w-4 h-4 mr-2" /> {t("game.home")}
+                    <Home className="w-4 h-4 mr-2" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>
@@ -357,8 +358,8 @@ const PhareGame = () => {
             <motion.div key={round} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} className="space-y-6 mt-12">
               {/* Instruction */}
               <div className="text-center space-y-2">
-                <h2 className="text-xl font-bold text-white">{t("phare.instruction")}</h2>
-                <p className="text-cyan-300 text-sm">{t("phare.hint")}</p>
+                <h2 className="text-xl font-bold text-white"><BilingualInstruction k="phare.instruction" /></h2>
+                <p className="text-cyan-300 text-sm"><Tb k="phare.hint" /></p>
               </div>
 
               {/* Sentence card with fog effect */}
@@ -400,7 +401,7 @@ const PhareGame = () => {
                     onClick={speak}
                     className="gap-2 border-cyan-500/50 text-cyan-200 hover:bg-cyan-500/20"
                   >
-                    <Volume2 className="w-4 h-4" /> {t("phare.listen")}
+                    <Volume2 className="w-4 h-4" /> <Tb k="phare.listen" />
                   </Button>
                 </div>
               </div>
@@ -473,7 +474,7 @@ const PhareGame = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                       >
-                        ⛵ {t("phare.boatSaved")}
+                        ⛵ <Tb k="phare.boatSaved" />
                       </motion.p>
                     )}
                   </motion.div>

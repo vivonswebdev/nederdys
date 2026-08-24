@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -89,7 +90,7 @@ const GraphemesGame = () => {
   const speak = useCallback(() => {
     if (!current) return;
     const u = new SpeechSynthesisUtterance(current.exampleWord);
-    u.lang = "nl-NL";
+    u.lang = "nl-BE";
     u.rate = 0.7;
     speechSynthesis.speak(u);
     sounds.click();
@@ -157,7 +158,7 @@ const GraphemesGame = () => {
         <div className="container flex items-center justify-between">
           <Link to="/">
             <Button variant="ghost" size="sm" className="text-sky-100 hover:text-white hover:bg-sky-800">
-              <ArrowLeft className="w-4 h-4 mr-1" /> {t("game.back")}
+              <ArrowLeft className="w-4 h-4 mr-1" /> <Tb k="game.back" />
             </Button>
           </Link>
           <div className="flex items-center gap-3">
@@ -170,7 +171,7 @@ const GraphemesGame = () => {
             <span className="text-lg font-bold text-amber-300">🪙 {coins}</span>
             <span className="text-sky-300 text-sm">|</span>
             <span className="text-lg font-bold text-sky-100">
-              {t("game.score")}: {score}/{totalRounds}
+              <Tb k="game.score" />: {score}/{totalRounds}
             </span>
           </div>
         </div>
@@ -194,19 +195,19 @@ const GraphemesGame = () => {
           {finished ? (
             <motion.div key="done" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center space-y-6">
               <div className="text-6xl mb-4">🏴‍☠️</div>
-              <h2 className="text-3xl font-bold text-white">{t("game.bravo")}</h2>
+              <h2 className="text-3xl font-bold text-white"><Tb k="game.bravo" /></h2>
               <p className="text-xl text-sky-200">
-                {t("game.score")}: {score}/{totalRounds}
+                <Tb k="game.score" />: {score}/{totalRounds}
               </p>
-              <p className="text-lg text-amber-300 font-bold">🪙 {coins} {t("graphemes.coins")}</p>
+              <p className="text-lg text-amber-300 font-bold">🪙 {coins} <Tb k="graphemes.coins" /></p>
               <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
               <div className="flex gap-4 justify-center mt-6">
                 <Button onClick={restart} size="lg" className="bg-amber-500 hover:bg-amber-600 text-white">
-                  <RotateCcw className="w-4 h-4 mr-2" /> {t("game.replay")}
+                  <RotateCcw className="w-4 h-4 mr-2" /> <Tb k="game.replay" />
                 </Button>
                 <Link to="/">
                   <Button variant="outline" size="lg" className="border-sky-400 text-sky-100 hover:bg-sky-800">
-                    <Home className="w-4 h-4 mr-2" /> {t("game.home")}
+                    <Home className="w-4 h-4 mr-2" /> <Tb k="game.home" />
                   </Button>
                 </Link>
               </div>
@@ -222,8 +223,8 @@ const GraphemesGame = () => {
                 >
                   🦜
                 </motion.div>
-                <h2 className="text-xl font-bold text-white">{t("graphemes.instruction")}</h2>
-                <p className="text-sky-200 text-sm">{t("graphemes.listenCarefully")}</p>
+                <h2 className="text-xl font-bold text-white"><BilingualInstruction k="graphemes.instruction" /></h2>
+                <p className="text-sky-200 text-sm"><Tb k="graphemes.listenCarefully" /></p>
               </div>
 
               {/* Sound display + listen button */}
@@ -235,7 +236,7 @@ const GraphemesGame = () => {
                 >
                   <span className="text-3xl font-bold text-amber-300 font-mono">{current.sound}</span>
                   <p className="text-sky-300 text-sm mt-1">
-                    {t("graphemes.example")}: <span className="font-bold text-white">{current.exampleWord}</span>
+                    <Tb k="graphemes.example" />: <span className="font-bold text-white">{current.exampleWord}</span>
                   </p>
                 </motion.div>
                 <Button
@@ -244,7 +245,7 @@ const GraphemesGame = () => {
                   onClick={speak}
                   className="gap-2 border-amber-400 text-amber-300 hover:bg-amber-400/20 hover:text-amber-200"
                 >
-                  <Volume2 className="w-5 h-5" /> {t("graphemes.listen")}
+                  <Volume2 className="w-5 h-5" /> <Tb k="graphemes.listen" />
                 </Button>
               </div>
 
@@ -312,8 +313,8 @@ const GraphemesGame = () => {
                     }`}
                   >
                     {feedback === "correct"
-                      ? `✅ ${t("graphemes.correct")} +1 🪙`
-                      : `❌ ${t("graphemes.wrong")} → ${current.targetGrapheme}`}
+                      ? `✅ $<Tb k="graphemes.correct" /> +1 🪙`
+                      : `❌ $<Tb k="graphemes.wrong" /> → ${current.targetGrapheme}`}
                   </motion.div>
                 )}
               </AnimatePresence>

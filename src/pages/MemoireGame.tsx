@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from "react";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Star, RotateCcw, Volume2 } from "lucide-react";
@@ -127,7 +128,7 @@ const MemoireGame = () => {
   const speakWord = (word: string, e: React.MouseEvent) => {
     e.stopPropagation();
     const u = new SpeechSynthesisUtterance(word);
-    u.lang = "nl-NL";
+    u.lang = "nl-BE";
     u.rate = 0.7;
     speechSynthesis.speak(u);
   };
@@ -153,8 +154,8 @@ const MemoireGame = () => {
         <div className="container max-w-lg mx-auto px-4 py-16 text-center">
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
             <span className="text-6xl block mb-4">🎉</span>
-            <h2 className="text-3xl font-bold text-foreground mb-2">{t("memoire.found")}</h2>
-            <p className="text-xl text-muted-foreground mb-2">{t("memoire.moves")} {moves} {t("memoire.movesUnit")}</p>
+            <h2 className="text-3xl font-bold text-foreground mb-2"><Tb k="memoire.found" /></h2>
+            <p className="text-xl text-muted-foreground mb-2"><Tb k="memoire.moves" /> {moves} <Tb k="memoire.movesUnit" /></p>
             <DifficultyIndicator difficulty={difficulty} />
             <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">
@@ -164,10 +165,10 @@ const MemoireGame = () => {
             </div>
             <div className="flex gap-4 justify-center">
               <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2">
-                <RotateCcw className="w-4 h-4" /> {t("game.replay")}
+                <RotateCcw className="w-4 h-4" /> <Tb k="game.replay" />
               </button>
               <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold">
-                {t("game.home")}
+                <Tb k="game.home" />
               </Link>
             </div>
           </motion.div>
@@ -182,14 +183,14 @@ const MemoireGame = () => {
       <div className="container max-w-lg mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="w-4 h-4" /> {t("game.back")}
+            <ArrowLeft className="w-4 h-4" /> <Tb k="game.back" />
           </Link>
           <DifficultyIndicator difficulty={difficulty} />
-          <span className="text-lg font-bold text-foreground">{t("memoire.movesLabel")} : {moves}</span>
+          <span className="text-lg font-bold text-foreground"><Tb k="memoire.movesLabel" /> : {moves}</span>
         </div>
 
-        <h2 className="text-2xl font-bold text-foreground text-center mb-2">{t("memoire.title")}</h2>
-        <p className="text-center text-muted-foreground mb-6 font-dyslexic">{t("memoire.instruction")}</p>
+        <h2 className="text-2xl font-bold text-foreground text-center mb-2"><Tb k="memoire.title" /></h2>
+        <p className="text-center text-muted-foreground mb-6 font-dyslexic"><BilingualInstruction k="memoire.instruction" /></p>
 
         <div className={`grid ${gridCols} gap-3`}>
           {gameCards.map((card) => (
@@ -222,7 +223,7 @@ const MemoireGame = () => {
         </div>
 
         <div className="mt-6 text-center">
-          <p className="text-sm text-muted-foreground">{t("memoire.pairs")} : {matches}/{PAIRS.length}</p>
+          <p className="text-sm text-muted-foreground"><Tb k="memoire.pairs" /> : {matches}/{PAIRS.length}</p>
         </div>
       </div>
     </div>

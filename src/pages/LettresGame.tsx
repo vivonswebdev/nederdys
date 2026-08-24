@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Star, RotateCcw, Volume2, Check } from "lucide-react";
@@ -89,7 +90,7 @@ const LettresGame = () => {
     }
   }, [round, difficulty]);
 
-  const speakWord = () => { if (!current) return; const u = new SpeechSynthesisUtterance(current.word); u.lang = "nl-NL"; u.rate = 0.6; speechSynthesis.speak(u); };
+  const speakWord = () => { if (!current) return; const u = new SpeechSynthesisUtterance(current.word); u.lang = "nl-BE"; u.rate = 0.6; speechSynthesis.speak(u); };
   const handleLetterClick = (letter: string, index: number) => { if (feedback) return; sounds.click(); const newAvail = [...available]; newAvail.splice(index, 1); setAvailable(newAvail); setPlaced([...placed, letter]); };
   const handlePlacedClick = (letter: string, index: number) => { if (feedback) return; const newPlaced = [...placed]; newPlaced.splice(index, 1); setPlaced(newPlaced); setAvailable([...available, letter]); };
 
@@ -112,13 +113,13 @@ const LettresGame = () => {
         <div className="container max-w-lg mx-auto px-4 py-16 text-center">
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
             <span className="text-6xl block mb-4">🧲</span>
-            <h2 className="text-3xl font-bold text-foreground mb-2">{t("lettres.great")}</h2>
-            <p className="text-xl text-muted-foreground mb-2">{t("game.score")} : {score}/{ROUNDS.length}</p>
+            <h2 className="text-3xl font-bold text-foreground mb-2"><Tb k="lettres.great" /></h2>
+            <p className="text-xl text-muted-foreground mb-2"><Tb k="game.score" /> : {score}/{ROUNDS.length}</p>
             <DifficultyIndicator difficulty={difficulty} /><XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">{Array.from({ length: score }).map((_, i) => (<Star key={i} className="w-8 h-8 text-secondary fill-secondary" />))}</div>
             <div className="flex gap-4 justify-center">
-              <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2"><RotateCcw className="w-4 h-4" /> {t("game.replay")}</button>
-              <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold">{t("game.home")}</Link>
+              <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2"><RotateCcw className="w-4 h-4" /> <Tb k="game.replay" /></button>
+              <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold"><Tb k="game.home" /></Link>
             </div>
           </motion.div>
         </div>
@@ -132,7 +133,7 @@ const LettresGame = () => {
     <div className="min-h-screen bg-background"><Navbar />
       <div className="container max-w-lg mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
-          <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"><ArrowLeft className="w-4 h-4" /> {t("game.back")}</Link>
+          <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"><ArrowLeft className="w-4 h-4" /> <Tb k="game.back" /></Link>
           <DifficultyIndicator difficulty={difficulty} />
         </div>
         <div className="flex items-center gap-3 mb-8">
@@ -140,7 +141,7 @@ const LettresGame = () => {
           <span className="text-sm font-bold text-foreground">{round + 1}/{ROUNDS.length}</span>
         </div>
         <motion.div key={round} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-foreground mb-3">{t("lettres.instruction")}</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-3"><BilingualInstruction k="lettres.instruction" /></h2>
           <div className="flex items-center justify-center gap-3 mb-2">
             <span className="text-5xl">{current.emoji}</span>
             <button onClick={speakWord} className="bg-accent text-accent-foreground p-3 rounded-full hover:bg-accent/80 transition-colors"><Volume2 className="w-6 h-6" /></button>
@@ -156,12 +157,12 @@ const LettresGame = () => {
           )}
         </div>
         <AnimatePresence>
-          {feedback && (<motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-center mb-4"><span className="text-3xl">{feedback === "correct" ? t("lettres.correct") : `${t("lettres.wrong")} "${current.word}"`}</span></motion.div>)}
+          {feedback && (<motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-center mb-4"><span className="text-3xl">{feedback === "correct" ? t("lettres.correct") : `$<Tb k="lettres.wrong" /> "${current.word}"`}</span></motion.div>)}
         </AnimatePresence>
         {placed.length > 0 && !feedback && (
           <div className="text-center mb-6">
             <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleSubmit}
-              className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold inline-flex items-center gap-2"><Check className="w-5 h-5" /> {t("lettres.validate")}</motion.button>
+              className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold inline-flex items-center gap-2"><Check className="w-5 h-5" /> <Tb k="lettres.validate" /></motion.button>
           </div>
         )}
         <div className="flex flex-wrap gap-3 justify-center">

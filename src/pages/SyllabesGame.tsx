@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect, useMemo } from "react";
+import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ArrowLeft, Volume2, Star, RotateCcw } from "lucide-react";
@@ -81,7 +82,7 @@ const SyllabesGame = () => {
 
   const reset = () => { setRound(0); setSelected([]); setScore(0); setFeedback(null); setGameOver(false); errorsRef.current = 0; savedRef.current = false; resetTimer(); };
 
-  const speakWord = () => { if (!current) return; const u = new SpeechSynthesisUtterance(current.audio); u.lang = "nl-NL"; u.rate = 0.7; speechSynthesis.speak(u); };
+  const speakWord = () => { if (!current) return; const u = new SpeechSynthesisUtterance(current.audio); u.lang = "nl-BE"; u.rate = 0.7; speechSynthesis.speak(u); };
 
   if (gameOver) {
     return (
@@ -90,16 +91,16 @@ const SyllabesGame = () => {
         <div className="container max-w-lg mx-auto px-4 py-16 text-center">
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring" }}>
             <span className="text-6xl block mb-4">🎉</span>
-            <h2 className="text-3xl font-bold text-foreground mb-2">{t("game.bravo")}</h2>
-            <p className="text-xl text-muted-foreground mb-2">{t("game.score")} : {score}/{ROUNDS.length}</p>
+            <h2 className="text-3xl font-bold text-foreground mb-2"><Tb k="game.bravo" /></h2>
+            <p className="text-xl text-muted-foreground mb-2"><Tb k="game.score" /> : {score}/{ROUNDS.length}</p>
             <DifficultyIndicator difficulty={difficulty} />
             <XpGainPopup xpGained={xpGained} coinsGained={coinsGained} leveledUp={leveledUp} />
             <div className="flex justify-center gap-1 mb-6">
               {Array.from({ length: score }).map((_, i) => (<Star key={i} className="w-8 h-8 text-secondary fill-secondary" />))}
             </div>
             <div className="flex gap-4 justify-center">
-              <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2"><RotateCcw className="w-4 h-4" /> {t("game.replay")}</button>
-              <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold">{t("game.home")}</Link>
+              <button onClick={reset} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-bold flex items-center gap-2"><RotateCcw className="w-4 h-4" /> <Tb k="game.replay" /></button>
+              <Link to="/" className="bg-card text-foreground border-2 border-border px-6 py-3 rounded-full font-bold"><Tb k="game.home" /></Link>
             </div>
           </motion.div>
         </div>
@@ -114,7 +115,7 @@ const SyllabesGame = () => {
       <Navbar />
       <div className="container max-w-lg mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
-          <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"><ArrowLeft className="w-4 h-4" /> {t("game.back")}</Link>
+          <Link to="/" className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"><ArrowLeft className="w-4 h-4" /> <Tb k="game.back" /></Link>
           <DifficultyIndicator difficulty={difficulty} />
         </div>
         <div className="flex items-center gap-3 mb-8">
@@ -124,7 +125,7 @@ const SyllabesGame = () => {
           <span className="text-sm font-bold text-foreground">{round + 1}/{ROUNDS.length}</span>
         </div>
         <motion.div key={round} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-foreground mb-2">{t("syllabes.instruction")}</h2>
+          <h2 className="text-2xl font-bold text-foreground mb-2"><BilingualInstruction k="syllabes.instruction" /></h2>
           <button onClick={speakWord} className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-full text-xl font-bold font-dyslexic hover:bg-accent/80 transition-colors">
             <Volume2 className="w-5 h-5" /> {current.audio}
           </button>
@@ -135,7 +136,7 @@ const SyllabesGame = () => {
               <span className="syllable-highlight">{s.value}</span>
             </motion.div>
           ))}
-          {!selected.length && (<div className="px-5 py-3 rounded-xl border-2 border-dashed border-border text-muted-foreground text-lg">{t("syllabes.placeholder")}</div>)}
+          {!selected.length && (<div className="px-5 py-3 rounded-xl border-2 border-dashed border-border text-muted-foreground text-lg"><Tb k="syllabes.placeholder" /></div>)}
         </div>
         <AnimatePresence>
           {feedback && (<motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-center mb-6"><span className="text-4xl">{feedback === "correct" ? t("syllabes.correct") : t("syllabes.wrong")}</span></motion.div>)}
