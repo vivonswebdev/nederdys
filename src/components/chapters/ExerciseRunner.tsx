@@ -26,6 +26,10 @@ import { UI, biFromFr, speakBoth, useChildLanguage, type Bilingual } from "@/lib
 import { nlFor } from "@/data/nl/uiStringsNl";
 import type { QcmExercise } from "@/data/chapters/types";
 import { ShareAchievement } from "@/components/child/ShareAchievement";
+import { AvatarBuddy } from "@/components/child/AvatarBuddy";
+import type { ReactionTrigger } from "@/components/child/AvatarReaction";
+import type { AvatarMood } from "@/lib/avatar";
+import { getStreakDays } from "@/lib/gamification";
 import { useChild } from "@/contexts/ChildContext";
 
 interface Props {
@@ -98,6 +102,8 @@ export const ExerciseRunner = ({
   const [finished, setFinished] = useState(false);
   const [saving, setSaving] = useState(false);
   const [result, setResult] = useState<{ xp: number; pct: number; unlocked: Difficulty } | null>(null);
+  const [reaction, setReaction] = useState<ReactionTrigger | null>(null);
+  const streakAtStartRef = useRef<number | null>(null);
 
   // état des réponses selon le type
   const [textAnswer, setTextAnswer] = useState("");
@@ -121,7 +127,12 @@ export const ExerciseRunner = ({
 
   useEffect(() => {
     startedAtRef.current = Date.now();
-  }, [chapter.id, level]);
+    if (!testMode) {
+      void getStreakDays(childId).then((d) => {
+        streakAtStartRef.current = d;
+      });
+    }
+  }, [chapter.id, level, childId, testMode]);
 
   useEffect(() => {
     setTextAnswer("");
@@ -157,6 +168,13 @@ export const ExerciseRunner = ({
       return;
     }
     setResult({ xp: res.xp_awarded, pct: Number(res.score_pct), unlocked: res.unlocked_level });
+    if (res.leveled_up) {
+      setReaction("levelup");
+    } else {
+      void getStreakDays(childId).then((days) => {
+        if (streakAtStartRef.current !== null && days > streakAtStartRef.current) setReaction("streak");
+      });
+    }
     toast.success(`+${res.xp_awarded} XP et ${res.xp_awarded} pièces ! 🎉`);
     if (Number(res.score_pct) >= MASTERY_THRESHOLD && res.unlocked_level > level) {
       sounds.correct();
@@ -173,6 +191,7 @@ export const ExerciseRunner = ({
       void logMistake({ childId, chapter, exercise, level, givenAnswer });
     }
     setFeedback(isCorrect ? "correct" : "wrong");
+    if (isCorrect) setReaction("correct");
     isCorrect ? sounds.correct() : sounds.wrong();
     speakBoth(isCorrect ? UI.correct : UI.wrong, childLang);
     const nextCorrect = correctCount + (isCorrect ? 1 : 0);
