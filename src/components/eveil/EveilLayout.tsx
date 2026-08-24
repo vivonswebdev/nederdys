@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 interface Props {
   childId: string;
   title: string;
+  titleNl?: string;
   emoji: string;
   stars?: number;
   maxStars?: number;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 /** Cadre commun des activités Éveil : gros bouton retour, étoiles, zéro texte indispensable. */
-export const EveilLayout = ({ childId, title, emoji, stars = 0, maxStars = 0, children }: Props) => {
+export const EveilLayout = ({ childId, title, titleNl, emoji, stars = 0, maxStars = 0, children }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -26,8 +27,10 @@ export const EveilLayout = ({ childId, title, emoji, stars = 0, maxStars = 0, ch
           >
             <ArrowLeft className="w-7 h-7" />
           </button>
-          <h1 className="text-xl sm:text-2xl font-bold text-foreground">
-            {emoji} {title}
+          <h1 className="text-base sm:text-lg font-bold text-foreground leading-tight">
+            <span className="mr-1" aria-hidden>{emoji}</span>
+            <span className="text-primary">{titleNl ?? title}</span>
+            <span className="block text-xs sm:text-sm font-normal text-muted-foreground">{title}</span>
           </h1>
           {maxStars > 0 && (
             <span

@@ -4,19 +4,19 @@ import { Volume2 } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
 import { Confetti } from "@/components/Confetti";
 import { sounds } from "@/lib/sounds";
-import { recordEveilCompletion, speakFr } from "@/lib/eveil";
+import { PRAISE, recordEveilCompletion, speakBilingual } from "@/lib/eveil";
 
 interface Props {
   childId: string;
 }
 
 const ANIMALS = [
-  { id: "chat", visual: "🐱", cry: "Miaou, miaou !" },
-  { id: "chien", visual: "🐶", cry: "Ouaf, ouaf !" },
-  { id: "vache", visual: "🐮", cry: "Meuh !" },
-  { id: "canard", visual: "🦆", cry: "Coin, coin !" },
-  { id: "mouton", visual: "🐑", cry: "Bêêê !" },
-  { id: "coq", visual: "🐔", cry: "Cocorico !" },
+  { id: "chat", visual: "🐱", cry: { nl: "Miauw, miauw!", fr: "Miaou, miaou !" } },
+  { id: "chien", visual: "🐶", cry: { nl: "Woef, woef!", fr: "Ouaf, ouaf !" } },
+  { id: "vache", visual: "🐮", cry: { nl: "Boe!", fr: "Meuh !" } },
+  { id: "canard", visual: "🦆", cry: { nl: "Kwak, kwak!", fr: "Coin, coin !" } },
+  { id: "mouton", visual: "🐑", cry: { nl: "Bèèè!", fr: "Bêêê !" } },
+  { id: "coq", visual: "🐔", cry: { nl: "Kukeleku!", fr: "Cocorico !" } },
 ];
 
 const ROUNDS = 5;
@@ -35,7 +35,7 @@ export const QuelAnimal = ({ childId }: Props) => {
   const [done, setDone] = useState(false);
   const startedAt = useRef(Date.now());
 
-  const say = () => speakFr(target.cry);
+  const say = () => speakBilingual(target.cry);
 
   useEffect(() => {
     if (done) return;
@@ -50,12 +50,12 @@ export const QuelAnimal = ({ childId }: Props) => {
       sounds.correct();
       const nextStars = stars + 1;
       setStars(nextStars);
-      speakFr("Bravo !");
+      speakBilingual(PRAISE);
       window.setTimeout(() => {
         if (round + 1 >= ROUNDS) {
           setDone(true);
           sounds.victory();
-          speakFr("Super, tu connais les animaux !");
+          speakBilingual({ nl: "Super, je kent de dieren!", fr: "Super, tu connais les animaux !" });
           void recordEveilCompletion({
             childId,
             activityId: "quel-animal",
@@ -85,7 +85,7 @@ export const QuelAnimal = ({ childId }: Props) => {
   };
 
   return (
-    <EveilLayout childId={childId} title="Quel Animal ?" emoji="🐾" stars={stars} maxStars={ROUNDS}>
+    <EveilLayout childId={childId} title="Quel Animal ?" titleNl="Welk Dier?" emoji="🐾" stars={stars} maxStars={ROUNDS}>
       {done && <Confetti />}
       {done ? (
         <div className="text-center space-y-6 py-10">

@@ -4,17 +4,17 @@ import { Volume2 } from "lucide-react";
 import { EveilLayout } from "./EveilLayout";
 import { Confetti } from "@/components/Confetti";
 import { sounds } from "@/lib/sounds";
-import { recordEveilCompletion, speakFr } from "@/lib/eveil";
+import { PRAISE, recordEveilCompletion, speakBilingual } from "@/lib/eveil";
 
 interface Props {
   childId: string;
 }
 
 const COLORS = [
-  { name: "rouge", object: "🍎", className: "bg-red-500" },
-  { name: "bleu", object: "🐬", className: "bg-blue-500" },
-  { name: "vert", object: "🐸", className: "bg-green-500" },
-  { name: "jaune", object: "🍌", className: "bg-yellow-400" },
+  { name: "rouge", nl: "rood", object: "🍎", className: "bg-red-500" },
+  { name: "bleu", nl: "blauw", object: "🐬", className: "bg-blue-500" },
+  { name: "vert", nl: "groen", object: "🐸", className: "bg-green-500" },
+  { name: "jaune", nl: "geel", object: "🍌", className: "bg-yellow-400" },
 ] as const;
 
 const ROUNDS = 5;
@@ -28,7 +28,11 @@ export const ArcEnCiel = ({ childId }: Props) => {
   const [done, setDone] = useState(false);
   const startedAt = useRef(Date.now());
 
-  const say = () => speakFr(`Touche le ${COLORS[target].name} !`);
+  const say = () =>
+    speakBilingual({
+      nl: `Raak het ${COLORS[target].nl} aan!`,
+      fr: `Touche le ${COLORS[target].name} !`,
+    });
 
   useEffect(() => {
     if (done) return;
@@ -43,12 +47,12 @@ export const ArcEnCiel = ({ childId }: Props) => {
       sounds.correct();
       const nextStars = stars + 1;
       setStars(nextStars);
-      speakFr("Bravo !");
+      speakBilingual(PRAISE);
       window.setTimeout(() => {
         if (round + 1 >= ROUNDS) {
           setDone(true);
           sounds.victory();
-          speakFr("Super, tu as réussi !");
+          speakBilingual({ nl: "Super, het is gelukt!", fr: "Super, tu as réussi !" });
           void recordEveilCompletion({
             childId,
             activityId: "arc-en-ciel",
@@ -70,7 +74,7 @@ export const ArcEnCiel = ({ childId }: Props) => {
   };
 
   return (
-    <EveilLayout childId={childId} title="L'Arc-en-ciel" emoji="🌈" stars={stars} maxStars={ROUNDS}>
+    <EveilLayout childId={childId} title="L'Arc-en-ciel" titleNl="De Regenboog" emoji="🌈" stars={stars} maxStars={ROUNDS}>
       {done && <Confetti />}
       {done ? (
         <div className="text-center space-y-6 py-10">
