@@ -28,6 +28,7 @@ import { getAchievements } from "@/lib/gamification";
 import { getOrCreateDailyChallenge } from "@/lib/challenges";
 import { msUntilLocalMidnight } from "@/lib/date";
 import { getChildCoins } from "@/lib/database";
+import { useChildMode } from "@/contexts/ChildModeContext";
 
 const ChildDashboard = () => {
   const { id } = useParams<{ id: string }>();
