@@ -182,6 +182,7 @@ export type Database = {
           correct_count: number
           created_at: string
           difficulty_level: number
+          duration_seconds: number
           id: string
           total_count: number
           user_id: string
@@ -194,6 +195,7 @@ export type Database = {
           correct_count?: number
           created_at?: string
           difficulty_level?: number
+          duration_seconds?: number
           id?: string
           total_count?: number
           user_id: string
@@ -206,6 +208,7 @@ export type Database = {
           correct_count?: number
           created_at?: string
           difficulty_level?: number
+          duration_seconds?: number
           id?: string
           total_count?: number
           user_id?: string
@@ -780,6 +783,14 @@ export type Database = {
           total_xp: number
         }[]
       }
+      get_time_tracking: {
+        Args: { p_child_id: string; p_days?: number }
+        Returns: {
+          day: string
+          minutes_played: number
+          sessions_count: number
+        }[]
+      }
       get_top_games: {
         Args: { p_child_id: string; p_days?: number; p_limit?: number }
         Returns: {
@@ -805,6 +816,7 @@ export type Database = {
           p_child_id: string
           p_correct: number
           p_difficulty: number
+          p_duration_seconds?: number
           p_total: number
         }
         Returns: Json
