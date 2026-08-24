@@ -29,7 +29,7 @@ import { ShareAchievement } from "@/components/child/ShareAchievement";
 import { AvatarBuddy } from "@/components/child/AvatarBuddy";
 import type { ReactionTrigger } from "@/components/child/AvatarReaction";
 import type { AvatarMood } from "@/lib/avatar";
-import { getStreakDays } from "@/lib/gamification";
+import { getStreakDays, computeStreak } from "@/lib/gamification";
 import { useChild } from "@/contexts/ChildContext";
 
 interface Props {
@@ -128,8 +128,8 @@ export const ExerciseRunner = ({
   useEffect(() => {
     startedAtRef.current = Date.now();
     if (!testMode) {
-      void getStreakDays(childId).then((d) => {
-        streakAtStartRef.current = d;
+      void getStreakDays(childId).then((rows) => {
+        streakAtStartRef.current = computeStreak(rows.map((r) => String(r.date)));
       });
     }
   }, [chapter.id, level, childId, testMode]);
@@ -171,7 +171,8 @@ export const ExerciseRunner = ({
     if (res.leveled_up) {
       setReaction("levelup");
     } else {
-      void getStreakDays(childId).then((days) => {
+      void getStreakDays(childId).then((rows) => {
+        const days = computeStreak(rows.map((r) => String(r.date)));
         if (streakAtStartRef.current !== null && days > streakAtStartRef.current) setReaction("streak");
       });
     }
