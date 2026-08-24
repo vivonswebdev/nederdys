@@ -20,12 +20,14 @@ import { getChildLevel, getChildCoins } from "@/lib/database";
 import { useChild } from "@/contexts/ChildContext";
 import { LevelBadge } from "./LevelBadge";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useChildMode } from "@/contexts/ChildModeContext";
 
 export const Navbar = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
   const { lang, setLang, t } = useLanguage();
   const { activeChild } = useChild();
+  const { isChildMode } = useChildMode();
   const [open, setOpen] = useState(false);
 
   // Close the mobile menu on route change
