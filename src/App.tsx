@@ -117,9 +117,10 @@ const App = () => (
         <ChildProvider>
         <ChildModeProvider>
         <TooltipProvider>
-          <ErrorTracking />
-          <Toaster />
-          <Sonner />
+           <ErrorTracking />
+           <Toaster />
+           <Sonner />
+           <OfflineBanner />
           <BrowserRouter>
             <ChildModeGuard>
             <Routes>
