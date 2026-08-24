@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
@@ -84,10 +85,7 @@ const MiroirGame = () => {
 
   const speak = useCallback(() => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(current.sound);
-    u.lang = "nl-BE";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(current.sound, undefined, 0.6);
     sounds.click();
   }, [current]);
 

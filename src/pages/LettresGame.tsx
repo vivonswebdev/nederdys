@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -90,7 +91,7 @@ const LettresGame = () => {
     }
   }, [round, difficulty]);
 
-  const speakWord = () => { if (!current) return; const u = new SpeechSynthesisUtterance(current.word); u.lang = "nl-BE"; u.rate = 0.6; speechSynthesis.speak(u); };
+  const speakWord = () => { if (!current) return; speakTarget(current.word, undefined, 0.6); };
   const handleLetterClick = (letter: string, index: number) => { if (feedback) return; sounds.click(); const newAvail = [...available]; newAvail.splice(index, 1); setAvailable(newAvail); setPlaced([...placed, letter]); };
   const handlePlacedClick = (letter: string, index: number) => { if (feedback) return; const newPlaced = [...placed]; newPlaced.splice(index, 1); setPlaced(newPlaced); setAvailable([...available, letter]); };
 

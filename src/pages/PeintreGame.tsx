@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2, Palette } from "lucide-react";
@@ -98,10 +99,7 @@ const PeintreGame = () => {
 
   const speak = useCallback((text?: string) => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(text || current.word);
-    u.lang = "nl-BE";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(text || current.word, undefined, 0.6);
     sounds.click();
   }, [current]);
 
@@ -126,10 +124,7 @@ const PeintreGame = () => {
 
     // Speak the syllable
     if (current) {
-      const u = new SpeechSynthesisUtterance(current.syllables[index]);
-      u.lang = "nl-BE";
-      u.rate = 0.5;
-      speechSynthesis.speak(u);
+      speakTarget(current.syllables[index], undefined, 0.5);
     }
   }, [feedback, current]);
 

@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -127,10 +128,7 @@ const MemoireGame = () => {
 
   const speakWord = (word: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    const u = new SpeechSynthesisUtterance(word);
-    u.lang = "nl-BE";
-    u.rate = 0.7;
-    speechSynthesis.speak(u);
+    speakTarget(word, undefined, 0.7);
   };
 
   const reset = () => {

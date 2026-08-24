@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
@@ -93,10 +94,7 @@ const PuzzleGame = () => {
   const speak = useCallback(() => {
     if (!current) return;
     const fullSentence = current.sentence.replace("___", current.answer);
-    const u = new SpeechSynthesisUtterance(fullSentence);
-    u.lang = "nl-BE";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(fullSentence, undefined, 0.6);
     sounds.click();
   }, [current]);
 

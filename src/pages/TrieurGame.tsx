@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
@@ -289,11 +290,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 const speak = (text: string) => {
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "nl-BE";
-  u.rate = 0.85;
-  speechSynthesis.cancel();
-  speechSynthesis.speak(u);
+  speakTarget(text, undefined, 0.85);
 };
 
 const shuffle = <T,>(arr: T[]): T[] => {

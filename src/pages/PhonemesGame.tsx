@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect, useMemo } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -62,10 +63,7 @@ const PhonemesGame = () => {
 
   const speakWord = () => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(current.sound);
-    u.lang = "nl-BE";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(current.sound, undefined, 0.6);
   };
 
   const handleSelect = useCallback((ph: string) => {

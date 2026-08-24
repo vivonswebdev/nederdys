@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2, Ship, Anchor } from "lucide-react";
@@ -144,10 +145,7 @@ const PhareGame = () => {
 
   const speak = useCallback(() => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(current.sentence);
-    u.lang = "nl-BE";
-    u.rate = 0.65;
-    speechSynthesis.speak(u);
+    speakTarget(current.sentence, undefined, 0.65);
     sounds.click();
   }, [current]);
 

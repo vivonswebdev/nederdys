@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -57,10 +58,7 @@ const DicteeGame = () => {
 
   const speakSentence = () => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(current.audio);
-    u.lang = "nl-BE";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(current.audio, undefined, 0.6);
   };
 
   useEffect(() => {

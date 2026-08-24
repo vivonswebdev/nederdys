@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2 } from "lucide-react";
@@ -89,10 +90,7 @@ const PontGame = () => {
   }, [round, current]);
 
   const speak = useCallback((word: string) => {
-    const u = new SpeechSynthesisUtterance(word);
-    u.lang = "nl-BE";
-    u.rate = 0.6;
-    speechSynthesis.speak(u);
+    speakTarget(word, undefined, 0.6);
     sounds.click();
   }, []);
 

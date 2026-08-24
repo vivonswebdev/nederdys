@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect, useMemo } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
@@ -82,7 +83,7 @@ const SyllabesGame = () => {
 
   const reset = () => { setRound(0); setSelected([]); setScore(0); setFeedback(null); setGameOver(false); errorsRef.current = 0; savedRef.current = false; resetTimer(); };
 
-  const speakWord = () => { if (!current) return; const u = new SpeechSynthesisUtterance(current.audio); u.lang = "nl-BE"; u.rate = 0.7; speechSynthesis.speak(u); };
+  const speakWord = () => { if (!current) return; speakTarget(current.audio, undefined, 0.7); };
 
   if (gameOver) {
     return (

@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
+import { speakTarget } from "@/lib/bilingual";
 import { Tb, BilingualInstruction } from "@/components/ui/BilingualText";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, RotateCcw, Home, Volume2, ThumbsUp, ThumbsDown } from "lucide-react";
@@ -83,10 +84,7 @@ const FauxAmisGame = () => {
 
   const speak = useCallback(() => {
     if (!current) return;
-    const u = new SpeechSynthesisUtterance(current.word);
-    u.lang = "nl-BE";
-    u.rate = 0.7;
-    speechSynthesis.speak(u);
+    speakTarget(current.word, undefined, 0.7);
     sounds.click();
   }, [current]);
 
