@@ -82,3 +82,66 @@ export function displayToNl(display?: string): string | null {
   }
   return words.join(" ");
 }
+
+/* ------------------------------------------------------------------ */
+/* Traduction des consignes audio françaises de maths vers le NL       */
+/* ------------------------------------------------------------------ */
+
+const FR_NUMBERS: Record<string, number> = {
+  zéro: 0, zero: 0, un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6,
+  sept: 7, huit: 8, neuf: 9, dix: 10, onze: 11, douze: 12, treize: 13,
+  quatorze: 14, quinze: 15, seize: 16, vingt: 20, trente: 30, quarante: 40,
+  cinquante: 50, soixante: 60, cent: 100, mille: 1000,
+};
+
+const FR_OPERATORS: Record<string, string> = {
+  plus: "plus",
+  moins: "min",
+  fois: "maal",
+  multiplié: "maal",
+  divisé: "gedeeld door",
+  égale: "is",
+  egale: "is",
+  égal: "is",
+  font: "is",
+  est: "is",
+  quelque: "iets",
+  chose: "",
+  par: "",
+  combien: "hoeveel",
+};
+
+/**
+ * Traduit une consigne audio de maths (française, formulaire généré) en
+ * néerlandais. Renvoie `null` si un mot n'est pas reconnu : le jeu se
+ * contente alors de l'audio français.
+ */
+export function mathTextToNl(fr?: string): string | null {
+  if (!fr) return null;
+  const tokens = fr
+    .toLowerCase()
+    .replace(/[?!.,]/g, "")
+    .replace(/([+\-−*×÷/:=_])/g, " $1 ")
+    .split(/[\s-]+/)
+    .filter(Boolean);
+  if (!tokens.length) return null;
+
+  const words: string[] = [];
+  for (const token of tokens) {
+    if (/^\d+([.,]\d+)?$/.test(token)) {
+      words.push(numberToNl(Number(token.replace(",", "."))));
+    } else if (token in FR_NUMBERS) {
+      words.push(numberToNl(FR_NUMBERS[token]));
+    } else if (OPERATORS[token]) {
+      words.push(OPERATORS[token]);
+    } else if (token in FR_OPERATORS) {
+      const w = FR_OPERATORS[token];
+      if (w) words.push(w);
+    } else if (token === "_" || token === "?") {
+      words.push("iets");
+    } else {
+      return null;
+    }
+  }
+  return words.join(" ").replace(/\s+/g, " ").trim() || null;
+}
