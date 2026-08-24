@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { EVEIL_ACTIVITIES, speakFr } from "@/lib/eveil";
+import { EVEIL_ACTIVITIES, speakBilingual } from "@/lib/eveil";
+import { BilingualText } from "@/components/ui/BilingualText";
 
 const EveilHome = () => {
   const { id } = useParams<{ id: string }>();
@@ -23,7 +24,7 @@ const EveilHome = () => {
           >
             <ArrowLeft className="w-7 h-7" />
           </button>
-          <h1 className="text-xl sm:text-2xl font-bold text-foreground">🌟 Éveil (3-5 ans)</h1>
+          <h1 className="text-lg sm:text-xl font-bold text-foreground">🌟 Ontwaken / Éveil (3-5)</h1>
         </div>
       </header>
 
@@ -38,7 +39,7 @@ const EveilHome = () => {
               whileTap={{ scale: 0.97 }}
               onMouseEnter={() => undefined}
               onClick={() => {
-                speakFr(activity.name);
+                speakBilingual(activity.name);
                 navigate(`/child/${id}/eveil/${activity.id}`);
               }}
               className="min-h-[160px] rounded-3xl border-4 border-primary/25 bg-card p-6 text-center hover:border-primary transition-colors kids-shadow-card"
@@ -46,10 +47,13 @@ const EveilHome = () => {
               <span className="block text-6xl" aria-hidden>
                 {activity.emoji}
               </span>
-              <span className="block text-xl font-bold text-foreground mt-3">{activity.name}</span>
-              <span className="block font-dyslexic text-muted-foreground text-sm mt-1">
-                {activity.description}
-              </span>
+              <BilingualText nl={activity.name.nl} fr={activity.name.fr} stacked className="text-lg mt-3" />
+              <BilingualText
+                nl={activity.description.nl}
+                fr={activity.description.fr}
+                stacked
+                className="font-dyslexic text-xs mt-2"
+              />
             </motion.button>
           ))}
         </div>
