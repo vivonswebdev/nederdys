@@ -838,6 +838,70 @@ export type Database = {
           },
         ]
       }
+      season_claims: {
+        Row: {
+          child_id: string
+          created_at: string
+          id: string
+          season_id: string
+          threshold: number
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          id?: string
+          season_id: string
+          threshold: number
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          id?: string
+          season_id?: string
+          threshold?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "season_claims_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      season_snapshots: {
+        Row: {
+          child_id: string
+          coins_at_start: number
+          created_at: string
+          id: string
+          season_id: string
+        }
+        Insert: {
+          child_id: string
+          coins_at_start: number
+          created_at?: string
+          id?: string
+          season_id: string
+        }
+        Update: {
+          child_id?: string
+          coins_at_start?: number
+          created_at?: string
+          id?: string
+          season_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "season_snapshots_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -864,6 +928,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_season_reward: {
+        Args: {
+          p_bonus_coins?: number
+          p_child_id: string
+          p_item_id?: string
+          p_threshold: number
+        }
+        Returns: Json
+      }
       get_admin_stats: {
         Args: never
         Returns: {
@@ -935,6 +1008,14 @@ export type Database = {
           rank: number
           streak_days: number
           total_xp: number
+        }[]
+      }
+      get_season_progress: {
+        Args: { p_child_id: string }
+        Returns: {
+          coins_this_season: number
+          season_ends_at: string
+          season_id: string
         }[]
       }
       get_time_tracking: {
