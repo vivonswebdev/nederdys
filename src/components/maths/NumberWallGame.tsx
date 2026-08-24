@@ -161,10 +161,12 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
         </button>
 
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold">🧱 Le Mur des Nombres — Niveau {level}</h1>
+          <h1 className="text-2xl font-bold">
+            🧱 <BilingualText {...biFromFr("Le Mur des Nombres")} /> — <BilingualText {...biFromFr("Niveau")} /> {level}
+          </h1>
           <p className="text-muted-foreground font-dyslexic">
-            Défi {index + 1}/{sessionChallenges.length} · Score : {score}/{sessionChallenges.length} ·{" "}
-            {xpPerCorrect} XP par réponse
+            <BilingualText {...biFromFr("Défi")} /> {index + 1}/{sessionChallenges.length} · <BilingualText {...biFromFr("Score")} />{" "}
+            {score}/{sessionChallenges.length} · {xpPerCorrect} <BilingualText {...biFromFr("XP par réponse")} />
           </p>
           <div className="h-3 bg-muted rounded-full overflow-hidden mt-3">
             <motion.div
@@ -180,7 +182,7 @@ export const NumberWallGame = ({ childId, level, backTo }: Props) => {
             className="inline-flex items-center gap-2 bg-kids-blue text-foreground font-bold px-5 py-3 rounded-xl kids-shadow-card"
           >
             <Play className="w-5 h-5" />
-            {isPlaying ? "Écoute en cours..." : "Réécouter la consigne"}
+            <BilingualText {...biFromFr(isPlaying ? "Écoute en cours..." : "Réécouter la consigne")} />
           </button>
         </div>
 

@@ -207,7 +207,7 @@ export const ChronoCalcGame = ({ childId, level, backTo }: Props) => {
             className="inline-flex items-center gap-2 bg-kids-blue text-foreground font-bold px-5 py-3 rounded-xl kids-shadow-card"
           >
             <Play className="w-5 h-5" />
-            {isPlaying ? "Écoute en cours..." : "Réécouter"}
+            <BilingualText {...biFromFr(isPlaying ? "Écoute en cours..." : "Réécouter")} />
           </button>
         </div>
 
