@@ -10,7 +10,7 @@ import { getCodeEpisode, trackOfEpisode } from "@/data/code/curriculum";
 import { CODE_PASS_THRESHOLD, quizLevel, saveEpisodeResult } from "@/lib/codeCourse";
 import { biToast } from "@/lib/biToast";
 import { bi, speakBoth, useChildLanguage } from "@/lib/bilingual";
-import { playCorrect, playWrong } from "@/lib/sounds";
+import { sounds } from "@/lib/sounds";
 
 type Phase = "slides" | "quiz" | "result";
 
@@ -63,10 +63,10 @@ const CodeEpisodePage = () => {
     const next = correct + (isRight ? 1 : 0);
     if (isRight) {
       setCorrect(next);
-      playCorrect();
+      sounds.correct();
       biToast.success(bi("Juist! 👏", "Correct ! 👏"));
     } else {
-      playWrong();
+      sounds.wrong();
       const good = episode.quiz[qIndex].options[episode.quiz[qIndex].answer];
       biToast.error(bi(`Bijna! Antwoord: ${good.nl}`, `Presque ! Réponse : ${good.fr}`));
     }
