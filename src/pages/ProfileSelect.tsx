@@ -72,14 +72,16 @@ const ProfileSelect = () => {
               <p className="text-center text-muted-foreground mt-8">{t("profiles.empty")}</p>
             )}
 
-            <div className="text-center mt-12">
-              <Link
-                to="/parents"
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"
-              >
-                <BarChart3 className="w-4 h-4" /> {t("profiles.parents")}
-              </Link>
-            </div>
+            {!isChildMode && (
+              <div className="text-center mt-12">
+                <Link
+                  to="/parents"
+                  className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"
+                >
+                  <BarChart3 className="w-4 h-4" /> {t("profiles.parents")}
+                </Link>
+              </div>
+            )}
           </>
         )}
       </main>
