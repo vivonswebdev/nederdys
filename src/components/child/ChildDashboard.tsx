@@ -9,7 +9,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useChild } from "@/contexts/ChildContext";
 import { getChildLevel } from "@/lib/database";
 import { computeStreak, getStreakDays, recordDailyActivity } from "@/lib/gamification";
-import { getLevel } from "@/lib/levels";
+import { getLevelInfo } from "@/lib/gamification";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { gamesBySubject } from "@/lib/games";
 import { ProgressRing } from "./ProgressRing";
 import { StreakCounter } from "./StreakCounter";
@@ -104,7 +105,8 @@ const ChildDashboard = () => {
   if (!child) return <div className="min-h-screen bg-background" />;
 
   const totalXp = level?.xp ?? 0;
-  const info = getLevel(totalXp);
+  const { lang } = useLanguage();
+  const info = getLevelInfo(totalXp, lang);
   const streak = computeStreak(streakDays.map((d) => d.date as string));
 
   return (

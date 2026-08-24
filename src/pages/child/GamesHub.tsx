@@ -7,7 +7,8 @@ import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { useChild } from "@/contexts/ChildContext";
 import { getChildLevel } from "@/lib/database";
-import { getLevel } from "@/lib/levels";
+import { getLevelInfo } from "@/lib/gamification";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { gamesBySubject, Subject } from "@/lib/games";
 import { chaptersBySubject, chaptersListRoute } from "@/lib/chapters";
 
@@ -36,7 +37,8 @@ const GamesHub = () => {
   });
 
   const totalXp = levelRow?.xp ?? 0;
-  const { level, title: levelTitle, progress, emoji } = getLevel(totalXp);
+  const { lang } = useLanguage();
+  const { level, title: levelTitle, progress, emoji } = getLevelInfo(totalXp, lang);
 
   const subjects: SubjectSection[] = (["nl", "math", "fr"] as Subject[]).map((s) => {
     const meta = {

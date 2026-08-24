@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 import { supabase } from "@/integrations/supabase/client";
-import { getLevel } from "@/lib/levels";
+import { getLevelInfo } from "@/lib/gamification";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Props {
   childId: string;
@@ -44,7 +45,8 @@ export const TimeTrackingCard = ({ childId, totalXp }: Props) => {
       .reduce((sum, d) => sum + d.minutes_played, 0)
   );
 
-  const { level, title, emoji } = getLevel(totalXp);
+  const { lang } = useLanguage();
+  const { level, title, emoji } = getLevelInfo(totalXp, lang);
 
   return (
     <section className="rounded-2xl border border-border bg-card p-5">

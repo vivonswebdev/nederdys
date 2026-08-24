@@ -8,7 +8,8 @@ import { useChild } from "@/contexts/ChildContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useQuery } from "@tanstack/react-query";
 import { getChildLevel, getChildCoins, getGameSessions } from "@/lib/database";
-import { getLevel } from "@/lib/levels";
+import { getLevelInfo } from "@/lib/gamification";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { getStreakDays, computeStreak } from "@/lib/gamification";
 import { ProgressRing } from "@/components/child/ProgressRing";
 import { StreakCounter } from "@/components/child/StreakCounter";
@@ -64,7 +65,8 @@ const Home = () => {
   if (!child) return <div className="min-h-screen bg-background" />;
 
   const totalXp = level?.xp ?? 0;
-  const info = getLevel(totalXp);
+  const { lang } = useLanguage();
+  const info = getLevelInfo(totalXp, lang);
   const streak = computeStreak(streakDays.map((d) => d.date as string));
   const coins = coinsRow?.coins ?? 0;
   const gamesPlayed = level?.games_played ?? sessions.length ?? 0;

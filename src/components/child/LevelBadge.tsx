@@ -1,12 +1,14 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { getLevel } from "@/lib/levels";
+import { getLevelInfo } from "@/lib/gamification";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ChildLevelBadgeProps {
   totalXp: number;
 }
 
 export const ChildLevelBadge = ({ totalXp }: ChildLevelBadgeProps) => {
-  const info = getLevel(totalXp);
+  const { lang } = useLanguage();
+  const info = getLevelInfo(totalXp, lang);
   return (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -16,8 +18,12 @@ export const ChildLevelBadge = ({ totalXp }: ChildLevelBadgeProps) => {
       </TooltipTrigger>
       <TooltipContent>
         {info.nextAt
-          ? `Prochain niveau à ${info.nextAt} XP`
-          : "Niveau maximum atteint, bravo !"}
+          ? lang === "nl"
+            ? `Volgend niveau bij ${info.nextAt} XP`
+            : `Prochain niveau à ${info.nextAt} XP`
+          : lang === "nl"
+            ? "Hoogste niveau bereikt, goed zo!"
+            : "Niveau maximum atteint, bravo !"}
       </TooltipContent>
     </Tooltip>
   );
