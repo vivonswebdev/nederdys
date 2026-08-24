@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { useAuth } from "@/contexts/AuthContext";
+import { useChildMode } from "@/contexts/ChildModeContext";
 import { useChild } from "@/contexts/ChildContext";
 import { gamesBySubject, Subject } from "@/lib/games";
 
@@ -42,6 +43,7 @@ const PlayHub = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { children, activeChild, setActiveChildId } = useChild();
+  const { isChildMode } = useChildMode();
 
   useEffect(() => {
     document.title = "Choisis ta matière — NederDys";
@@ -71,7 +73,7 @@ const PlayHub = () => {
           </p>
         </header>
 
-        {children.length > 1 && (
+        {!isChildMode && children.length > 1 && (
           <div className="flex flex-wrap justify-center gap-2 mb-8">
             {children.map((c) => (
               <button
