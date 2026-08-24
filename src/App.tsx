@@ -89,6 +89,22 @@ import StoriesPage from "./pages/nl/StoriesPage";
 import StoryReader from "./pages/nl/StoryReader";
 import NlChapters from "./pages/nl/NlChapters";
 import FrExercises from "./pages/fr/FrExercises";
+import SyllabesEnFetePage from "./pages/fr/SyllabesEnFetePage";
+import ChasseSonsPage from "./pages/fr/ChasseSonsPage";
+import RimeMalinFrPage from "./pages/fr/RimeMalinFrPage";
+import DeSyllabesFrPage from "./pages/fr/DeSyllabesFrPage";
+import JardinMotsPage from "./pages/fr/JardinMotsPage";
+import BullesSynonymesPage from "./pages/fr/BullesSynonymesPage";
+import BullesMotsFrPage from "./pages/fr/BullesMotsFrPage";
+import CarteTresorFrPage from "./pages/fr/CarteTresorFrPage";
+import BatisseurPhrasesPage from "./pages/fr/BatisseurPhrasesPage";
+import CompleteHistoirePage from "./pages/fr/CompleteHistoirePage";
+import DialogueEclairFrPage from "./pages/fr/DialogueEclairFrPage";
+import PiegeHomophonesPage from "./pages/fr/PiegeHomophonesPage";
+import ChasseurErreursFrPage from "./pages/fr/ChasseurErreursFrPage";
+import RoueGenresFrPage from "./pages/fr/RoueGenresFrPage";
+import DicteeMuettePage from "./pages/fr/DicteeMuettePage";
+import EchoSonsFrPage from "./pages/fr/EchoSonsFrPage";
 import EveilHome from "./pages/eveil/EveilHome";
 import EveilActivity from "./pages/eveil/EveilActivity";
 import MiniGamePause from "./pages/child/MiniGamePause";
@@ -159,6 +175,40 @@ const App = () => (
               <Route path="/child/:id/nl/chapitre/:chapterId/:level" element={<ChapterSession />} />
               <Route path="/child/:id/fr/exercices" element={<FrExercises />} />
               <Route path="/child/:id/fr/exercises" element={<FrExercises />} />
+              <Route path="/child/:id/fr/chapitre/:chapterId" element={<ChapterLevelSelect />} />
+              <Route path="/child/:id/fr/chapitre/:chapterId/:level" element={<ChapterSession />} />
+              <Route path="/jeu/syllabes-fete" element={<SyllabesEnFetePage />} />
+              <Route path="/child/:id/fr/syllabes-fete" element={<SyllabesEnFetePage />} />
+              <Route path="/jeu/chasse-sons-fr" element={<ChasseSonsPage />} />
+              <Route path="/child/:id/fr/chasse-sons-fr" element={<ChasseSonsPage />} />
+              <Route path="/jeu/rime-malin-fr" element={<RimeMalinFrPage />} />
+              <Route path="/child/:id/fr/rime-malin-fr" element={<RimeMalinFrPage />} />
+              <Route path="/jeu/de-syllabes-fr" element={<DeSyllabesFrPage />} />
+              <Route path="/child/:id/fr/de-syllabes-fr" element={<DeSyllabesFrPage />} />
+              <Route path="/jeu/jardin-mots" element={<JardinMotsPage />} />
+              <Route path="/child/:id/fr/jardin-mots" element={<JardinMotsPage />} />
+              <Route path="/jeu/bulles-synonymes" element={<BullesSynonymesPage />} />
+              <Route path="/child/:id/fr/bulles-synonymes" element={<BullesSynonymesPage />} />
+              <Route path="/jeu/bulles-mots-fr" element={<BullesMotsFrPage />} />
+              <Route path="/child/:id/fr/bulles-mots-fr" element={<BullesMotsFrPage />} />
+              <Route path="/jeu/carte-tresor-fr" element={<CarteTresorFrPage />} />
+              <Route path="/child/:id/fr/carte-tresor-fr" element={<CarteTresorFrPage />} />
+              <Route path="/jeu/batisseur-phrases" element={<BatisseurPhrasesPage />} />
+              <Route path="/child/:id/fr/batisseur-phrases" element={<BatisseurPhrasesPage />} />
+              <Route path="/jeu/complete-histoire" element={<CompleteHistoirePage />} />
+              <Route path="/child/:id/fr/complete-histoire" element={<CompleteHistoirePage />} />
+              <Route path="/jeu/dialogue-eclair-fr" element={<DialogueEclairFrPage />} />
+              <Route path="/child/:id/fr/dialogue-eclair-fr" element={<DialogueEclairFrPage />} />
+              <Route path="/jeu/piege-homophones" element={<PiegeHomophonesPage />} />
+              <Route path="/child/:id/fr/piege-homophones" element={<PiegeHomophonesPage />} />
+              <Route path="/jeu/chasseur-erreurs-fr" element={<ChasseurErreursFrPage />} />
+              <Route path="/child/:id/fr/chasseur-erreurs-fr" element={<ChasseurErreursFrPage />} />
+              <Route path="/jeu/roue-genres-fr" element={<RoueGenresFrPage />} />
+              <Route path="/child/:id/fr/roue-genres-fr" element={<RoueGenresFrPage />} />
+              <Route path="/jeu/dictee-muette" element={<DicteeMuettePage />} />
+              <Route path="/child/:id/fr/dictee-muette" element={<DicteeMuettePage />} />
+              <Route path="/jeu/echo-sons-fr" element={<EchoSonsFrPage />} />
+              <Route path="/child/:id/fr/echo-sons-fr" element={<EchoSonsFrPage />} />
               <Route path="/child/:id/math/jeux" element={<MathGamesChapters />} />
               <Route path="/jeux-math" element={<MathGamesChapters />} />
               <Route path="/child/:id/math/exercices" element={<MathChapters />} />
