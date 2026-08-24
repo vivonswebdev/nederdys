@@ -13,13 +13,15 @@ interface BaseExercise {
   visualAid?: string;
   /** Étapes de résolution montrées après la réponse (problèmes multi-étapes). */
   steps?: { operation: string; description: string }[];
-  /** Audio nl-NL optionnel (chapitres néerlandais). */
+  /** Audio nl-BE optionnel (chapitres néerlandais). */
   audioUrl?: string;
 }
 
 export interface QcmExercise extends BaseExercise {
   type: "qcm";
   options: (string | number)[];
+  /** Options en néerlandais, même ordre que `options` (affichage bilingue). */
+  optionsNl?: (string | number)[];
   answer: string | number;
 }
 
