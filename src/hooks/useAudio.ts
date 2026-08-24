@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { getChildLanguage } from "@/lib/bilingual";
 
 /**
  * Lecture de consignes audio en MP3 (aucune Web Speech API).
@@ -66,10 +67,42 @@ export const useAudio = () => {
     }
   }, []);
 
+  /**
+   * Lecture bilingue : la langue de l'enfant d'abord, puis l'autre après une
+   * courte pause (même comportement que le palier Éveil).
+   */
+  const playBilingual = useCallback(
+    async (fr: { url?: string; text?: string }, nl: { url?: string; text?: string }) => {
+      const primary = getChildLanguage();
+      const order = primary === "fr" ? [fr, nl] : [nl, fr];
+      const sources: string[] = [];
+      for (const item of order) {
+        const src = await resolveMp3(item.url ?? "", item.text);
+        if (src) sources.push(src);
+      }
+      if (!sources.length) return;
+      audioRef.current?.pause();
+      setIsPlaying(true);
+      const playAt = (i: number) => {
+        if (i >= sources.length) {
+          setIsPlaying(false);
+          return;
+        }
+        const audio = new Audio(sources[i]);
+        audioRef.current = audio;
+        audio.onended = () => window.setTimeout(() => playAt(i + 1), 350);
+        audio.onerror = () => playAt(i + 1);
+        audio.play().catch(() => setIsPlaying(false));
+      };
+      playAt(0);
+    },
+    []
+  );
+
   const stopAudio = useCallback(() => {
     audioRef.current?.pause();
     setIsPlaying(false);
   }, []);
 
-  return { playAudio, stopAudio, isPlaying };
+  return { playAudio, playBilingual, stopAudio, isPlaying };
 };
