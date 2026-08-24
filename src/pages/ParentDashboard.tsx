@@ -9,6 +9,7 @@ import { BadgeGrid } from "@/components/parent/BadgeGrid";
 import { RecommendationsCard } from "@/components/parent/RecommendationsCard";
 import { ExportPDF } from "@/components/parent/ExportPDF";
 import { TimeTrackingCard } from "@/components/parent/TimeTrackingCard";
+import { GameRadarCard } from "@/components/parent/GameRadarCard";
 import { useChild } from "@/contexts/ChildContext";
 import {
   Period,
@@ -119,6 +120,7 @@ const ParentDashboard = () => {
               <div ref={chartRef}>
                 <ProgressChart data={daily} />
               </div>
+              <GameRadarCard stats={games} />
               <TimeTrackingCard childId={activeChild.id} totalXp={childLevel?.xp ?? 0} />
               <div className="grid lg:grid-cols-2 gap-6">
                 <TopGamesTable stats={games} childId={activeChild.id} />

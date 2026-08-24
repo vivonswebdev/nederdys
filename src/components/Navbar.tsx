@@ -103,20 +103,24 @@ export const Navbar = () => {
                 <ShoppingBag className="w-4 h-4" />
                 <span className="hidden lg:inline">🪙 {coinsData?.coins ?? 0}</span>
               </Link>
-              <Link
-                to="/ajouter-enfant"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-              >
-                <UserPlus className="w-4 h-4" />
-                <span className="hidden lg:inline">{t("nav.child")}</span>
-              </Link>
-              <button
-                onClick={signOut}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
-              >
-                <LogOut className="w-4 h-4" />
-                <span className="hidden lg:inline">{t("nav.logout")}</span>
-              </button>
+              {!isChildMode && (
+                <>
+                  <Link
+                    to="/ajouter-enfant"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    <span className="hidden lg:inline">{t("nav.child")}</span>
+                  </Link>
+                  <button
+                    onClick={signOut}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span className="hidden lg:inline">{t("nav.logout")}</span>
+                  </button>
+                </>
+              )}
             </>
           ) : (
             <Link
@@ -181,13 +185,15 @@ export const Navbar = () => {
                     <ShoppingBag className="w-4 h-4" />
                     <span>Boutique · 🪙 {coinsData?.coins ?? 0}</span>
                   </Link>
-                  <Link
-                    to="/ajouter-enfant"
-                    className={`${linkClass("/ajouter-enfant")} !rounded-xl py-3 text-base`}
-                  >
-                    <UserPlus className="w-4 h-4" />
-                    <span>{t("nav.child")}</span>
-                  </Link>
+                  {!isChildMode && (
+                    <Link
+                      to="/ajouter-enfant"
+                      className={`${linkClass("/ajouter-enfant")} !rounded-xl py-3 text-base`}
+                    >
+                      <UserPlus className="w-4 h-4" />
+                      <span>{t("nav.child")}</span>
+                    </Link>
+                  )}
                 </>
               ) : (
                 <Link to="/auth" className={`${linkClass("/auth")} !rounded-xl py-3 text-base`}>
@@ -204,7 +210,7 @@ export const Navbar = () => {
                   <Globe className="w-4 h-4" />
                   <span className="uppercase">{lang === "fr" ? "NL" : "FR"}</span>
                 </button>
-                {user && (
+                {user && !isChildMode && (
                   <button
                     onClick={signOut}
                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-3 rounded-xl text-sm font-bold bg-destructive/10 text-destructive"
