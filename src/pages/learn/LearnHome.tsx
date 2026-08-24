@@ -55,6 +55,9 @@ const LearnHome = () => {
           <h1 className="text-3xl font-bold text-foreground">
             {orderedPair({ nl: "Wat wil je leren?", fr: "Que veux-tu apprendre ?" }, lang)[0]}
           </h1>
+          <p className="text-lg text-muted-foreground font-dyslexic">
+            {orderedPair({ nl: "Wat wil je leren?", fr: "Que veux-tu apprendre ?" }, lang)[1]}
+          </p>
           <p className="text-muted-foreground font-dyslexic mt-1">
             {orderedPair(
               {
@@ -64,6 +67,7 @@ const LearnHome = () => {
               lang
             )[0]}
           </p>
+
         </header>
 
         <div className="grid gap-5 sm:grid-cols-2">
