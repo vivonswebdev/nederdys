@@ -183,7 +183,12 @@ const ParentsDashboard = () => {
                   <ResponsiveContainer width="100%" height={250}>
                     <RadarChart data={gameScores}>
                       <PolarGrid stroke="hsl(var(--border))" />
-                      <PolarAngleAxis dataKey="game" stroke="hsl(var(--muted-foreground))" fontSize={11} />
+                      <PolarAngleAxis
+                        dataKey="game"
+                        stroke="hsl(var(--muted-foreground))"
+                        fontSize={10}
+                        tickFormatter={(v: string) => (v?.length > 10 ? `${v.slice(0, 9)}…` : v)}
+                      />
                       <Radar name="Score %" dataKey="score" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} />
                     </RadarChart>
                   </ResponsiveContainer>
