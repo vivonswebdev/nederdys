@@ -129,6 +129,12 @@ const ParentDashboard = () => {
                 sessions={sessions}
                 achievements={achievements}
               />
+              <FrenchFocusCard
+                childId={activeChild.id}
+                sessions={sessions}
+                achievements={achievements}
+              />
+
               <div className="grid lg:grid-cols-2 gap-6">
                 <TopGamesTable stats={games} childId={activeChild.id} />
                 <RecommendationsCard
