@@ -11,6 +11,7 @@ import { ExportPDF } from "@/components/parent/ExportPDF";
 import { TimeTrackingCard } from "@/components/parent/TimeTrackingCard";
 import { GameRadarCard } from "@/components/parent/GameRadarCard";
 import { MathFocusCard } from "@/components/parent/MathFocusCard";
+import { FrenchFocusCard } from "@/components/parent/FrenchFocusCard";
 import { useChild } from "@/contexts/ChildContext";
 import {
   Period,
