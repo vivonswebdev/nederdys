@@ -146,6 +146,7 @@ const App = () => (
            <Sonner />
            <OfflineBanner />
           <BrowserRouter>
+            <SiblingChallengeNotifier />
             <ChildModeGuard>
             <Routes>
               <Route path="/" element={<Index />} />
