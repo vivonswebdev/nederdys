@@ -116,6 +116,7 @@ import EveilHome from "./pages/eveil/EveilHome";
 import EveilActivity from "./pages/eveil/EveilActivity";
 import MiniGamePause from "./pages/child/MiniGamePause";
 import SiblingChallenges from "./pages/child/SiblingChallenges";
+import { SiblingChallengeNotifier } from "@/components/child/SiblingChallengeNotifier";
 import ParentGate from "./pages/ParentGate";
 import ParentDashboard from "./pages/ParentDashboard";
 import ParentSettings from "./pages/ParentSettings";
