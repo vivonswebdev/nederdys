@@ -144,41 +144,62 @@ export type Database = {
         Row: {
           category: string
           created_at: string
+          description_fr: string | null
+          description_nl: string | null
           dicebear_option: string
           dicebear_value: string
           gender: string
           id: string
+          is_active: boolean
           is_premium: boolean
+          item_key: string | null
           name: string
           name_nl: string | null
+          preview_emoji: string | null
           price: number
           rarity: string
+          tags: string[]
+          updated_at: string
         }
         Insert: {
           category: string
           created_at?: string
+          description_fr?: string | null
+          description_nl?: string | null
           dicebear_option: string
           dicebear_value: string
           gender?: string
           id?: string
+          is_active?: boolean
           is_premium?: boolean
+          item_key?: string | null
           name: string
           name_nl?: string | null
+          preview_emoji?: string | null
           price?: number
           rarity?: string
+          tags?: string[]
+          updated_at?: string
         }
         Update: {
           category?: string
           created_at?: string
+          description_fr?: string | null
+          description_nl?: string | null
           dicebear_option?: string
           dicebear_value?: string
           gender?: string
           id?: string
+          is_active?: boolean
           is_premium?: boolean
+          item_key?: string | null
           name?: string
           name_nl?: string | null
+          preview_emoji?: string | null
           price?: number
           rarity?: string
+          tags?: string[]
+          updated_at?: string
         }
         Relationships: []
       }
@@ -491,6 +512,86 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      collection_claims: {
+        Row: {
+          child_id: string
+          collection_key: string
+          created_at: string
+          id: string
+          reward_coins: number
+          reward_xp: number
+        }
+        Insert: {
+          child_id: string
+          collection_key: string
+          created_at?: string
+          id?: string
+          reward_coins?: number
+          reward_xp?: number
+        }
+        Update: {
+          child_id?: string
+          collection_key?: string
+          created_at?: string
+          id?: string
+          reward_coins?: number
+          reward_xp?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collection_claims_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      collections: {
+        Row: {
+          collection_key: string
+          created_at: string
+          description_fr: string | null
+          description_nl: string | null
+          id: string
+          name_fr: string
+          name_nl: string
+          required_items: string[]
+          reward_badge: string | null
+          reward_coins: number
+          reward_xp: number
+          updated_at: string
+        }
+        Insert: {
+          collection_key: string
+          created_at?: string
+          description_fr?: string | null
+          description_nl?: string | null
+          id?: string
+          name_fr: string
+          name_nl: string
+          required_items: string[]
+          reward_badge?: string | null
+          reward_coins?: number
+          reward_xp?: number
+          updated_at?: string
+        }
+        Update: {
+          collection_key?: string
+          created_at?: string
+          description_fr?: string | null
+          description_nl?: string | null
+          id?: string
+          name_fr?: string
+          name_nl?: string
+          required_items?: string[]
+          reward_badge?: string | null
+          reward_coins?: number
+          reward_xp?: number
+          updated_at?: string
+        }
+        Relationships: []
       }
       daily_challenges: {
         Row: {
@@ -1045,6 +1146,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_collection_reward: {
+        Args: { p_child_id: string; p_collection_key: string }
+        Returns: Json
+      }
       claim_season_reward: {
         Args: {
           p_bonus_coins?: number
