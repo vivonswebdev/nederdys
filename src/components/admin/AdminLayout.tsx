@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 const LINKS = [
   { to: "/admin", label: "📊 Dashboard", end: true },
   { to: "/admin/utilisateurs", label: "👥 Utilisateurs" },
+  { to: "/admin/boutique", label: "🛍️ Boutique" },
   { to: "/admin/bugs", label: "🐛 Bugs" },
 ];
 
