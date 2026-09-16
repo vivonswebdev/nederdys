@@ -85,6 +85,7 @@ import GamesHub from "./pages/child/GamesHub";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminErrors from "./pages/admin/AdminErrors";
+import AdminShop from "./pages/admin/AdminShop";
 import StoriesPage from "./pages/nl/StoriesPage";
 import CodeHome from "./pages/code/CodeHome";
 import LearnHome from "./pages/learn/LearnHome";
@@ -155,6 +156,7 @@ const App = () => (
               <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/admin/utilisateurs" element={<AdminUsers />} />
               <Route path="/admin/bugs" element={<AdminErrors />} />
+              <Route path="/admin/boutique" element={<AdminShop />} />
               <Route path="/classement" element={<Leaderboard />} />
               <Route path="/auth" element={<AuthPage />} />
               <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
