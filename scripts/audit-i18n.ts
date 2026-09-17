@@ -58,8 +58,9 @@ const add = (section: string, line: string) => {
 /* 1. Dictionnaire principal : parité FR/NL ------------------------------- */
 const translationsSrc = read("src/lib/translations.ts");
 const dictKeys = new Set<string>();
+const STR = `(?:"(?:[^"\\\\]|\\\\.)*"|'(?:[^'\\\\]|\\\\.)*')`;
 for (const m of translationsSrc.matchAll(
-  /"([\w.\-]+)":\s*\{\s*fr:\s*("(?:[^"\\]|\\.)*")\s*,\s*nl:\s*("(?:[^"\\]|\\.)*")\s*\}/g,
+  new RegExp(`"([\\w.\\-]+)":\\s*\\{\\s*fr:\\s*(${STR})\\s*,\\s*nl:\\s*(${STR})\\s*\\}`, "g"),
 )) {
   const [, key, fr, nl] = m;
   dictKeys.add(key);
