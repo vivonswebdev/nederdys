@@ -5,12 +5,9 @@ import { useChild } from "@/contexts/ChildContext";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   saveGameSession,
-  calculateXpGain,
-  upsertChildLevel,
+  awardGameRewards,
   getGameDifficulty,
   updateGameDifficulty,
-  calculateCoinsGain,
-  addCoins,
   Difficulty,
 } from "@/lib/database";
 import { recordDailyActivity } from "@/lib/gamification";
