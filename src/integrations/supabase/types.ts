@@ -1146,6 +1146,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      award_game_rewards: {
+        Args: {
+          p_child_id: string
+          p_max_score: number
+          p_score: number
+          p_streak?: number
+        }
+        Returns: Json
+      }
       claim_collection_reward: {
         Args: { p_child_id: string; p_collection_key: string }
         Returns: Json
@@ -1317,9 +1326,14 @@ export type Database = {
         }
         Returns: Json
       }
+      reset_child_level: { Args: { p_child_id: string }; Returns: boolean }
       set_parent_pin: {
         Args: { new_pin: string; old_pin?: string }
         Returns: Json
+      }
+      spend_child_coins: {
+        Args: { p_amount: number; p_child_id: string }
+        Returns: boolean
       }
       verify_parent_pin: { Args: { input_pin: string }; Returns: Json }
     }
