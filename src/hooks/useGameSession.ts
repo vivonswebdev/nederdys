@@ -1,16 +1,14 @@
 import { useRef, useCallback, useState, useEffect } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useChild } from "@/contexts/ChildContext";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   saveGameSession,
-  calculateXpGain,
-  upsertChildLevel,
+  awardGameRewards,
   getGameDifficulty,
   updateGameDifficulty,
-  calculateCoinsGain,
-  addCoins,
   Difficulty,
 } from "@/lib/database";
 import { recordDailyActivity } from "@/lib/gamification";
@@ -75,16 +73,12 @@ export const useGameSession = (gameType: string) => {
         completed,
       });
 
-      // Update XP & level
-      const xp = calculateXpGain(score, maxScore);
-      const result = await upsertChildLevel(user.id, activeChild.id, xp);
+      // XP, niveau et Mouche-Coins calculés côté serveur
+      const reward = await awardGameRewards(activeChild.id, score, maxScore, streakRef.current);
+      const xp = reward?.xp ?? 0;
       setXpGained(xp);
-      setLeveledUp(result.leveledUp);
-
-      // Award Mouche-Coins
-      const coins = calculateCoinsGain(score, maxScore, streakRef.current);
-      await addCoins(user.id, activeChild.id, coins);
-      setCoinsGained(coins);
+      setLeveledUp(Boolean(reward?.leveled_up));
+      setCoinsGained(reward?.coins ?? 0);
 
       // Adapt difficulty
       const errorRate = maxScore > 0 ? errorsCount / maxScore : 0;
@@ -103,8 +97,8 @@ export const useGameSession = (gameType: string) => {
         durationSeconds,
       });
       if (challenge.completed && challenge.xpReward > 0) {
-        await upsertChildLevel(user.id, activeChild.id, challenge.xpReward);
-        toast.success(`Défi du jour réussi ! +${challenge.xpReward} XP 🎉`);
+        const { data: bonus } = await supabase.rpc("claim_daily_challenge_xp", { p_child_id: activeChild.id });
+        if (typeof bonus === "number" && bonus > 0) toast.success(`Défi du jour réussi ! +${bonus} XP 🎉`);
       }
       queryClient.invalidateQueries({ queryKey: ["dailyChallenge"] });
 

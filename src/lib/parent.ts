@@ -289,7 +289,7 @@ export const resetChildProgress = async (childId: string) => {
   await supabase.from("achievements").delete().eq("child_id", childId);
   await supabase.from("daily_streaks").delete().eq("child_id", childId);
   await supabase.from("game_difficulties").update({ difficulty: "easy", recent_error_rate: 0 }).eq("child_id", childId);
-  await supabase.from("child_levels").update({ xp: 0, level: 1, games_played: 0 }).eq("child_id", childId);
+  await supabase.rpc("reset_child_level", { p_child_id: childId });
   return true;
 };
 

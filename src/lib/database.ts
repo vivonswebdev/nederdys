@@ -76,37 +76,33 @@ export const getChildLevel = async (childId: string) => {
   return data;
 };
 
-export const upsertChildLevel = async (
-  userId: string,
+export interface GameReward {
+  ok: boolean;
+  xp: number;
+  coins: number;
+  level: number;
+  leveled_up: boolean;
+  balance: number;
+}
+
+/** XP, niveau et pièces d'une partie : calculés et enregistrés côté serveur. */
+export const awardGameRewards = async (
   childId: string,
-  xpGain: number
-) => {
-  const existing = await getChildLevel(childId);
-  if (existing) {
-    const newXp = existing.xp + xpGain;
-    const newLevel = Math.floor(newXp / XP_PER_LEVEL) + 1;
-    const { error } = await supabase
-      .from("child_levels")
-      .update({
-        xp: newXp,
-        level: newLevel,
-        games_played: existing.games_played + 1,
-      })
-      .eq("child_id", childId);
-    if (error) console.error("Error updating child level:", error);
-    return { xp: newXp, level: newLevel, gamesPlayed: existing.games_played + 1, leveledUp: newLevel > existing.level };
-  } else {
-    const newLevel = Math.floor(xpGain / XP_PER_LEVEL) + 1;
-    const { error } = await supabase.from("child_levels").insert({
-      user_id: userId,
-      child_id: childId,
-      xp: xpGain,
-      level: newLevel,
-      games_played: 1,
-    });
-    if (error) console.error("Error inserting child level:", error);
-    return { xp: xpGain, level: newLevel, gamesPlayed: 1, leveledUp: false };
+  score: number,
+  maxScore: number,
+  streak: number
+): Promise<GameReward | null> => {
+  const { data, error } = await supabase.rpc("award_game_rewards", {
+    p_child_id: childId,
+    p_score: score,
+    p_max_score: maxScore,
+    p_streak: streak,
+  });
+  if (error) {
+    console.error("Error awarding rewards:", error);
+    return null;
   }
+  return data as unknown as GameReward;
 };
 
 // --- Game Difficulty ---
@@ -199,49 +195,14 @@ export const getChildCoins = async (childId: string) => {
   return data;
 };
 
-export const addCoins = async (
-  userId: string,
-  childId: string,
-  amount: number
-) => {
-  const existing = await getChildCoins(childId);
-  if (existing) {
-    const { error } = await supabase
-      .from("child_coins")
-      .update({
-        coins: existing.coins + amount,
-        total_earned: existing.total_earned + amount,
-      })
-      .eq("child_id", childId);
-    if (error) console.error("Error updating coins:", error);
-    return existing.coins + amount;
-  } else {
-    const { error } = await supabase.from("child_coins").insert({
-      user_id: userId,
-      child_id: childId,
-      coins: amount,
-      total_earned: amount,
-    });
-    if (error) console.error("Error inserting coins:", error);
-    return amount;
-  }
-};
-
-export const spendCoins = async (
-  childId: string,
-  amount: number
-): Promise<boolean> => {
-  const existing = await getChildCoins(childId);
-  if (!existing || existing.coins < amount) return false;
-  const { error } = await supabase
-    .from("child_coins")
-    .update({ coins: existing.coins - amount })
-    .eq("child_id", childId);
+/** Dépense des pièces : vérifiée et appliquée côté serveur. */
+export const spendCoins = async (childId: string, amount: number): Promise<boolean> => {
+  const { data, error } = await supabase.rpc("spend_child_coins", { p_child_id: childId, p_amount: amount });
   if (error) {
     console.error("Error spending coins:", error);
     return false;
   }
-  return true;
+  return data === true;
 };
 
 export const getPurchasedItems = async (childId: string) => {

@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.5"
+    PostgrestVersion: "14.1"
   }
   public: {
     Tables: {
@@ -593,6 +593,35 @@ export type Database = {
         }
         Relationships: []
       }
+      daily_challenge_rewards: {
+        Row: {
+          child_id: string
+          created_at: string
+          date: string
+          xp: number
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          date: string
+          xp: number
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          date?: string
+          xp?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_challenge_rewards_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       daily_challenges: {
         Row: {
           challenge_type: string
@@ -1146,9 +1175,22 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      award_game_rewards: {
+        Args: {
+          p_child_id: string
+          p_max_score: number
+          p_score: number
+          p_streak?: number
+        }
+        Returns: Json
+      }
       claim_collection_reward: {
         Args: { p_child_id: string; p_collection_key: string }
         Returns: Json
+      }
+      claim_daily_challenge_xp: {
+        Args: { p_child_id: string }
+        Returns: number
       }
       claim_season_reward: {
         Args: {
@@ -1317,9 +1359,14 @@ export type Database = {
         }
         Returns: Json
       }
+      reset_child_level: { Args: { p_child_id: string }; Returns: boolean }
       set_parent_pin: {
         Args: { new_pin: string; old_pin?: string }
         Returns: Json
+      }
+      spend_child_coins: {
+        Args: { p_amount: number; p_child_id: string }
+        Returns: boolean
       }
       verify_parent_pin: { Args: { input_pin: string }; Returns: Json }
     }

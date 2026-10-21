@@ -6,6 +6,20 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Réservé aux comptes connectés : évite la consommation de crédits par des tiers.
+    const authHeader = req.headers.get("Authorization") ?? "";
+    const token = authHeader.replace(/^Bearer\s+/i, "");
+    const authRes = token
+      ? await fetch(`${Deno.env.get("SUPABASE_URL")}/auth/v1/user`, {
+          headers: { Authorization: `Bearer ${token}`, apikey: Deno.env.get("SUPABASE_ANON_KEY") ?? "" },
+        })
+      : null;
+    if (!authRes || !authRes.ok) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
     const apiKey = Deno.env.get("LOVABLE_API_KEY");
     if (!apiKey) {
       return new Response(JSON.stringify({ error: "LOVABLE_API_KEY is not configured" }), {
