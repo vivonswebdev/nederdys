@@ -20,7 +20,7 @@ import { WeeklyProgressWidget } from "@/components/child/WeeklyProgressWidget";
 const Home = () => {
   const { user, loading: authLoading } = useAuth();
   const { children, activeChild, loading: childLoading } = useChild();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,7 +64,6 @@ const Home = () => {
   if (!child) return <div className="min-h-screen bg-background" />;
 
   const totalXp = level?.xp ?? 0;
-  const { lang } = useLanguage();
   const info = getLevelInfo(totalXp, lang);
   const streak = computeStreak(streakDays.map((d) => d.date as string));
   const coins = coinsRow?.coins ?? 0;

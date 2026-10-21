@@ -1,8 +1,14 @@
+type AudioWindow = Window & {
+  __nederdysAudioContext?: AudioContext;
+  webkitAudioContext?: typeof AudioContext;
+};
+
 const ctx = () => {
-  if (!(window as any).__audioCtx) {
-    (window as any).__audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-  }
-  return (window as any).__audioCtx as AudioContext;
+  const browserWindow = window as AudioWindow;
+  const AudioContextConstructor = window.AudioContext ?? browserWindow.webkitAudioContext;
+  if (!AudioContextConstructor) throw new Error("Web Audio is not supported in this browser");
+  browserWindow.__nederdysAudioContext ??= new AudioContextConstructor();
+  return browserWindow.__nederdysAudioContext;
 };
 
 const play = (freq: number, type: OscillatorType, duration: number, volume = 0.3) => {
@@ -17,7 +23,9 @@ const play = (freq: number, type: OscillatorType, duration: number, volume = 0.3
     o.connect(g).connect(c.destination);
     o.start();
     o.stop(c.currentTime + duration);
-  } catch {}
+  } catch {
+    // Sound effects are optional; audio can be unavailable until the browser is unlocked.
+  }
 };
 
 export const sounds = {

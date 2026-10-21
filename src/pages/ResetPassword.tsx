@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { getErrorMessage } from "@/lib/errors";
 import { Lock } from "lucide-react";
 
 const ResetPassword = () => {
@@ -26,8 +27,8 @@ const ResetPassword = () => {
       if (error) throw error;
       toast.success("Mot de passe mis à jour !");
       navigate("/");
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      toast.error(getErrorMessage(error));
     } finally {
       setLoading(false);
     }

@@ -60,14 +60,14 @@ const translationsSrc = read("src/lib/translations.ts");
 const dictKeys = new Set<string>();
 const STR = `(?:"(?:[^"\\\\]|\\\\.)*"|'(?:[^'\\\\]|\\\\.)*')`;
 for (const m of translationsSrc.matchAll(
-  new RegExp(`"([\\w.\\-]+)":\\s*\\{\\s*fr:\\s*(${STR})\\s*,\\s*nl:\\s*(${STR})\\s*\\}`, "g"),
+  new RegExp(`"([\\w.-]+)":\\s*\\{\\s*fr:\\s*(${STR})\\s*,\\s*nl:\\s*(${STR})\\s*\\}`, "g"),
 )) {
   const [, key, fr, nl] = m;
   dictKeys.add(key);
   if (fr.length <= 2) add("Dictionnaire — valeur FR vide", key);
   if (nl.length <= 2) add("Dictionnaire — valeur NL vide", key);
 }
-for (const m of translationsSrc.matchAll(/^\s{2}"?([\w.\-]+)"?:\s*\{/gm)) {
+for (const m of translationsSrc.matchAll(/^\s{2}"?([\w.-]+)"?:\s*\{/gm)) {
   const key = m[1];
   if (!dictKeys.has(key)) add("Dictionnaire — clé incomplète (fr ou nl absent)", key);
 }
@@ -75,7 +75,7 @@ for (const m of translationsSrc.matchAll(/^\s{2}"?([\w.\-]+)"?:\s*\{/gm)) {
 /* 2. Clés t("…") utilisées mais absentes du dictionnaire ------------------ */
 for (const file of files) {
   const src = read(file);
-  for (const m of src.matchAll(/\bt\(\s*"([\w.\-]+)"/g)) {
+  for (const m of src.matchAll(/\bt\(\s*"([\w.-]+)"/g)) {
     if (!dictKeys.has(m[1])) add("Clé utilisée mais absente du dictionnaire", `${file} → t("${m[1]}")`);
   }
 }

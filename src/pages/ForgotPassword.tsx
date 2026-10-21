@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { getErrorMessage } from "@/lib/errors";
 import { Mail, ArrowLeft } from "lucide-react";
 
 const ForgotPassword = () => {
@@ -20,8 +21,8 @@ const ForgotPassword = () => {
       if (error) throw error;
       setSent(true);
       toast.success("Email de réinitialisation envoyé !");
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      toast.error(getErrorMessage(error));
     } finally {
       setLoading(false);
     }

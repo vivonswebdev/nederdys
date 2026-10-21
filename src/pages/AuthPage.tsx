@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getErrorMessage } from "@/lib/errors";
 
 const AuthPage = () => {
   const { t } = useLanguage();
@@ -39,8 +40,8 @@ const AuthPage = () => {
           navigate("/");
         }
       }
-    } catch (error: any) {
-      toast.error(error.message || "Error");
+    } catch (error: unknown) {
+      toast.error(getErrorMessage(error));
     } finally {
       setLoading(false);
     }

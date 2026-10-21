@@ -9,6 +9,8 @@ import { BADGES } from "@/lib/gamification";
 import { translations } from "@/lib/translations";
 import { gameTitleKey } from "@/lib/parent";
 
+type JsPdfWithAutoTable = jsPDF & { lastAutoTable: { finalY: number } };
+
 interface Props {
   childName: string;
   periodLabel: string;
@@ -54,7 +56,7 @@ const buildPdf = ({ childName, periodLabel, stats, games, achievements, streak, 
     ]),
   });
 
-  const afterStats = (doc as any).lastAutoTable.finalY + 10;
+  const afterStats = (doc as JsPdfWithAutoTable).lastAutoTable.finalY + 10;
   autoTable(doc, {
     startY: afterStats,
     head: [["Jeu", "Matière", "Parties", "Réussite", "Dernière session"]],
@@ -71,7 +73,7 @@ const buildPdf = ({ childName, periodLabel, stats, games, achievements, streak, 
   });
 
   const unlocked = new Set(achievements.map((a) => a.badge_name));
-  const afterGames = (doc as any).lastAutoTable.finalY + 10;
+  const afterGames = (doc as JsPdfWithAutoTable).lastAutoTable.finalY + 10;
   autoTable(doc, {
     startY: afterGames,
     head: [["Badge", "Statut"]],

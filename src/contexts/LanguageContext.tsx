@@ -15,7 +15,7 @@ const detectBrowserLanguage = (): Language => {
   const stored = localStorage.getItem("nederdys-lang");
   if (stored === "fr" || stored === "nl") return stored;
   
-  const browserLang = navigator.language || (navigator as any).userLanguage || "";
+  const browserLang = navigator.language || "";
   if (browserLang.startsWith("nl")) return "nl";
   return "fr";
 };

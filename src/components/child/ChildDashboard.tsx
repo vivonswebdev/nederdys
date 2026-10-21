@@ -42,6 +42,7 @@ const ChildDashboard = () => {
   const { id } = useParams<{ id: string }>();
   const { user, signOut } = useAuth();
   const { children, activeChild, setActiveChildId, loading } = useChild();
+  const { lang } = useLanguage();
   const { isChildMode, enterChildMode } = useChildMode();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -117,7 +118,6 @@ const ChildDashboard = () => {
   if (!child) return <div className="min-h-screen bg-background" />;
 
   const totalXp = level?.xp ?? 0;
-  const { lang } = useLanguage();
   const info = getLevelInfo(totalXp, lang);
   const streak = computeStreak(streakDays.map((d) => d.date as string));
 

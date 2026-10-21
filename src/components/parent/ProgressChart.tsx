@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import type { TooltipProps, ValueType, NameType } from "recharts";
 import { DailyPoint } from "@/lib/parent";
 
 const SERIES = [
@@ -16,15 +17,15 @@ const SERIES = [
   { key: "math", label: "Maths", color: "hsl(var(--chart-math))" },
 ] as const;
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
   if (!active || !payload?.length) return null;
-  const total = payload.reduce((a: number, p: any) => a + (p.value || 0), 0);
+  const total = payload.reduce((sum, point) => sum + (typeof point.value === "number" ? point.value : 0), 0);
   return (
     <div className="bg-popover border border-border rounded-lg p-3 shadow-md text-sm">
       <p className="font-semibold text-foreground mb-1">
         {label} : {total} XP
       </p>
-      {payload.map((p: any) => (
+      {payload.map((p) => (
         <p key={p.dataKey} style={{ color: p.color }} className="tabular-nums">
           {SERIES.find((s) => s.key === p.dataKey)?.label} : {p.value} XP
         </p>

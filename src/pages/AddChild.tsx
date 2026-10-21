@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { getErrorMessage } from "@/lib/errors";
 import { Navbar } from "@/components/Navbar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SCHOOL_LEVELS, DEFAULT_SCHOOL_LEVEL, GENDER_OPTIONS } from "@/lib/schoolLevels";
@@ -33,8 +34,8 @@ const AddChild = () => {
       if (error) throw error;
       toast.success(`${name} ${t("addChild.success")}`);
       navigate("/");
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      toast.error(getErrorMessage(error));
     } finally {
       setLoading(false);
     }
