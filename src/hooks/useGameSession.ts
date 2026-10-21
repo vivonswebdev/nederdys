@@ -1,5 +1,6 @@
 import { useRef, useCallback, useState, useEffect } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { useChild } from "@/contexts/ChildContext";
 import { useQueryClient } from "@tanstack/react-query";
@@ -96,8 +97,8 @@ export const useGameSession = (gameType: string) => {
         durationSeconds,
       });
       if (challenge.completed && challenge.xpReward > 0) {
-        await upsertChildLevel(user.id, activeChild.id, challenge.xpReward);
-        toast.success(`Défi du jour réussi ! +${challenge.xpReward} XP 🎉`);
+        const { data: bonus } = await supabase.rpc("claim_daily_challenge_xp", { p_child_id: activeChild.id });
+        if (typeof bonus === "number" && bonus > 0) toast.success(`Défi du jour réussi ! +${bonus} XP 🎉`);
       }
       queryClient.invalidateQueries({ queryKey: ["dailyChallenge"] });
 
