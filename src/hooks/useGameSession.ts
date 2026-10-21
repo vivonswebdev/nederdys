@@ -75,16 +75,12 @@ export const useGameSession = (gameType: string) => {
         completed,
       });
 
-      // Update XP & level
-      const xp = calculateXpGain(score, maxScore);
-      const result = await upsertChildLevel(user.id, activeChild.id, xp);
+      // XP, niveau et Mouche-Coins calculés côté serveur
+      const reward = await awardGameRewards(activeChild.id, score, maxScore, streakRef.current);
+      const xp = reward?.xp ?? 0;
       setXpGained(xp);
-      setLeveledUp(result.leveledUp);
-
-      // Award Mouche-Coins
-      const coins = calculateCoinsGain(score, maxScore, streakRef.current);
-      await addCoins(user.id, activeChild.id, coins);
-      setCoinsGained(coins);
+      setLeveledUp(Boolean(reward?.leveled_up));
+      setCoinsGained(reward?.coins ?? 0);
 
       // Adapt difficulty
       const errorRate = maxScore > 0 ? errorsCount / maxScore : 0;
