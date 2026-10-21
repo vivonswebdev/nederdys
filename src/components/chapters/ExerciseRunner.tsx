@@ -22,7 +22,7 @@ import {
   shuffle,
 } from "@/lib/chapters";
 import { BilingualText, Bi } from "@/components/ui/BilingualText";
-import { bi, UI, biFromFr, speakBoth, useChildLanguage, type Bilingual } from "@/lib/bilingual";
+import { bi, UI, biFromFr, speakBoth, speakTarget, useChildLanguage, type Bilingual } from "@/lib/bilingual";
 import { nlFor } from "@/data/nl/uiStringsNl";
 import type { QcmExercise } from "@/data/chapters/types";
 import { ShareAchievement } from "@/components/child/ShareAchievement";
@@ -59,6 +59,10 @@ const normalize = (value: string) =>
 function playExercise(ex: Exercise, primary: "nl" | "fr") {
   if (ex.audioUrl) {
     new Audio(ex.audioUrl).play().catch(() => undefined);
+    return;
+  }
+  if (ex.audioTextNl) {
+    speakTarget(ex.audioTextNl);
     return;
   }
   speakBoth({ nl: ex.questionNl ?? ex.question, fr: ex.question }, primary);

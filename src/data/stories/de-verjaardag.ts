@@ -6,6 +6,10 @@ export const deVerjaardagStory: Story = {
   titleFr: "L'anniversaire",
   emoji: "🎂",
   subject: "nl",
+  level: 1,
+  category: "everyday",
+  summary: "Sam maakt een taart en viert samen met vrienden.",
+  summaryFr: "Sam prépare un gâteau et fête son anniversaire avec ses amis.",
   scenes: [
     {
       id: "1",
@@ -52,6 +56,17 @@ export const deVerjaardagStory: Story = {
       text: "Iedereen zingt voor Sam!",
       textFr: "Tout le monde chante pour Sam !",
       image: "🎉",
+    },
+  ],
+  questions: [
+    {
+      id: "cake",
+      question: "Wat bakt Sam?",
+      questionFr: "Qu'est-ce que Sam prépare ?",
+      options: [
+        { id: "cake", label: "Een taart", labelFr: "Un gâteau", isCorrect: true },
+        { id: "soup", label: "Een soep", labelFr: "Une soupe", isCorrect: false },
+      ],
     },
   ],
 };

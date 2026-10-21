@@ -48,6 +48,7 @@ import { adjectifsNlExercises } from "@/data/chapters/adjectifs-nl";
 import { vraiFauxNlExercises } from "@/data/chapters/vrai-faux-nl";
 import { questionReponseNlExercises } from "@/data/chapters/question-reponse-nl";
 import { dialogueNlExercises } from "@/data/chapters/dialogue-nl";
+import { dicteeNlExercises } from "@/data/chapters/dictee-nl";
 import { kleurenExercises } from "@/data/exercises/nl/kleuren";
 import { dierenExercises } from "@/data/exercises/nl/dieren";
 import { getallenExercises } from "@/data/exercises/nl/getallen";
@@ -175,6 +176,7 @@ const NL_CHAPTER_DEFS: ChapterDef[] = [
   { id: "conjugaison-presente", name: "Conjugaison au présent", emoji: "✍️", section: "stretch", description: "ik / jij / hij + verbe", exercises: conjugaisonPresenteExercises },
   { id: "adjectifs-nl", name: "Les adjectifs", emoji: "🎨", section: "stretch", description: "de grote man, het grote huis", exercises: adjectifsNlExercises },
   { id: "dialogue-nl", name: "Petit dialogue", emoji: "🗨️", section: "stretch", description: "Compléter une conversation", exercises: dialogueNlExercises },
+  { id: "dictee-nl", name: "Dictée progressive", emoji: "🎧", section: "ce2", description: "Luister en schrijf de woorden", exercises: dicteeNlExercises },
 ];
 
 const FR_CHAPTER_DEFS: ChapterDef[] = [

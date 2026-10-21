@@ -96,6 +96,8 @@ import CodeEpisodePage from "./pages/code/CodeEpisodePage";
 
 import StoryReader from "./pages/nl/StoryReader";
 import NlChapters from "./pages/nl/NlChapters";
+import LearningActivitiesPage from "./pages/nl/LearningActivitiesPage";
+import SpeakingPracticePage from "./pages/nl/SpeakingPracticePage";
 import FrExercises from "./pages/fr/FrExercises";
 import SyllabesEnFetePage from "./pages/fr/SyllabesEnFetePage";
 import ChasseSonsPage from "./pages/fr/ChasseSonsPage";
@@ -188,6 +190,8 @@ const App = () => (
               <Route path="/child/:id/nl/histoires" element={<StoriesPage />} />
               <Route path="/child/:id/nl/histoires/:storyId" element={<StoryReader />} />
               <Route path="/child/:id/nl/exercices" element={<NlChapters />} />
+              <Route path="/child/:id/nl/activiteiten" element={<LearningActivitiesPage />} />
+              <Route path="/child/:id/nl/parler" element={<SpeakingPracticePage />} />
               <Route path="/child/:id/nl/exercises" element={<NlChapters />} />
               <Route path="/child/:id/nl/chapitre/:chapterId" element={<ChapterLevelSelect />} />
               <Route path="/child/:id/nl/chapitre/:chapterId/:level" element={<ChapterSession />} />

@@ -28,13 +28,29 @@ export interface StoryScene {
   };
 }
 
+export type StoryLevel = 1 | 2 | 3;
+export type StoryCategory = "adventure" | "animals" | "everyday" | "bedtime";
+
+export interface StoryQuestion {
+  id: string;
+  question: string;
+  questionFr: string;
+  options: StoryChoice[];
+}
+
 export interface Story {
   id: string;
   title: string;
   titleFr: string;
   emoji: string;
   subject: "nl";
+  /** Reading difficulty: 1 = beginner, 3 = confident reader. */
+  level: StoryLevel;
+  category: StoryCategory;
+  summary: string;
+  summaryFr: string;
   scenes: StoryScene[];
+  questions?: StoryQuestion[];
 }
 
 /** XP accordée pour une histoire terminée (via record_game_completion). */

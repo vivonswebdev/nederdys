@@ -15,6 +15,8 @@ interface BaseExercise {
   steps?: { operation: string; description: string }[];
   /** Audio nl-BE optionnel (chapitres néerlandais). */
   audioUrl?: string;
+  /** Texte néerlandais à dicter au lecteur audio. */
+  audioTextNl?: string;
 }
 
 export interface QcmExercise extends BaseExercise {

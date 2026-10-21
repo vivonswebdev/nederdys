@@ -16,6 +16,8 @@ interface Props {
   childName?: string;
   childGender?: string | null;
   onComplete: () => void;
+  initialSceneIndex?: number;
+  onSceneChange?: (index: number) => void;
 }
 
 const UI_STORY = {
@@ -29,8 +31,8 @@ const UI_STORY = {
   nice: bi("Goed geluisterd!", "Bien écouté !"),
 };
 
-export function StoryPlayer({ story, childId, childName, childGender, onComplete }: Props) {
-  const [index, setIndex] = useState(0);
+export function StoryPlayer({ story, childId, childName, childGender, onComplete, initialSceneIndex = 0, onSceneChange }: Props) {
+  const [index, setIndex] = useState(() => Math.min(story.scenes.length - 1, Math.max(0, initialSceneIndex)));
   const [selected, setSelected] = useState<string | null>(null);
   const [choiceFeedback, setChoiceFeedback] = useState<"correct" | "wrong" | null>(null);
   const [reaction, setReaction] = useState<ReactionTrigger | null>(null);
@@ -41,11 +43,12 @@ export function StoryPlayer({ story, childId, childName, childGender, onComplete
 
   useEffect(() => {
     if (!scene) return;
+    onSceneChange?.(index);
     setSelected(null);
     setChoiceFeedback(null);
     const timer = window.setTimeout(() => speakStory(scene.text, scene.audioUrl, scene.textFr), 300);
     return () => window.clearTimeout(timer);
-  }, [scene]);
+  }, [scene, index, onSceneChange]);
 
   const goNext = () => {
     if (isLastScene) {

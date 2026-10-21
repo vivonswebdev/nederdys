@@ -27,6 +27,10 @@ const NlChapters = () => {
           <p className="text-muted-foreground font-dyslexic mt-1"><BilingualText {...biFromFr("Choisis ton chapitre :")} /></p>
         </header>
 
+        <Link to={`/child/${childId}/nl/activiteiten`} className="mb-8 flex min-h-[88px] items-center gap-4 rounded-3xl border-4 border-kids-purple bg-kids-purple/15 p-5 kids-shadow-card hover:kids-shadow-hover">
+          <span className="text-4xl" aria-hidden>🧩</span><span><strong className="block text-lg"><BilingualText nl="Kies een activiteit" fr="Choisir une activité" stacked /></strong><span className="text-sm text-muted-foreground"><BilingualText nl="Spelletjes, huiswerk en spreken" fr="Jeux, devoirs et expression orale" /></span></span>
+        </Link>
+
         <Link
           to={`/child/${childId}/test-placement/nl`}
           className="block mb-8 border-4 border-kids-orange bg-kids-orange/30 rounded-3xl p-5 kids-shadow-card hover:kids-shadow-hover transition-shadow"

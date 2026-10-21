@@ -368,6 +368,51 @@ export type Database = {
           },
         ]
       }
+      child_story_reading: {
+        Row: {
+          bookmarked: boolean
+          child_id: string
+          completed_at: string | null
+          current_scene: number
+          story_id: string
+          updated_at: string
+        }
+        Insert: {
+          bookmarked?: boolean
+          child_id: string
+          completed_at?: string | null
+          current_scene?: number
+          story_id: string
+          updated_at?: string
+        }
+        Update: {
+          bookmarked?: boolean
+          child_id?: string
+          completed_at?: string | null
+          current_scene?: number
+          story_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      story_catalog: {
+        Row: {
+          active: boolean
+          scene_count: number
+          story_id: string
+        }
+        Insert: {
+          active?: boolean
+          scene_count: number
+          story_id: string
+        }
+        Update: {
+          active?: boolean
+          scene_count?: number
+          story_id?: string
+        }
+        Relationships: []
+      }
       child_settings: {
         Row: {
           child_id: string
@@ -1322,6 +1367,10 @@ export type Database = {
         Args: { p_chapter_id: string; p_child_id: string }
         Returns: number
       }
+      complete_story_reading: {
+        Args: { p_child_id: string; p_story_id: string }
+        Returns: Json
+      }
       has_parent_pin: { Args: never; Returns: boolean }
       has_role: {
         Args: {
@@ -1367,6 +1416,15 @@ export type Database = {
       spend_child_coins: {
         Args: { p_amount: number; p_child_id: string }
         Returns: boolean
+      }
+      save_story_reading_progress: {
+        Args: {
+          p_bookmarked: boolean
+          p_child_id: string
+          p_current_scene: number
+          p_story_id: string
+        }
+        Returns: Json
       }
       verify_parent_pin: { Args: { input_pin: string }; Returns: Json }
     }

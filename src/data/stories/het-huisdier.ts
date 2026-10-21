@@ -6,6 +6,10 @@ export const hetHuisdierStory: Story = {
   titleFr: "L'animal de compagnie",
   emoji: "🐶",
   subject: "nl",
+  level: 1,
+  category: "animals",
+  summary: "Lisa ontmoet Max, een hond die haar nieuwe vriend wordt.",
+  summaryFr: "Lisa rencontre Max, un chien qui devient son nouvel ami.",
   scenes: [
     {
       id: "1",
@@ -52,6 +56,17 @@ export const hetHuisdierStory: Story = {
       text: "Max is nu de beste vriend van Lisa.",
       textFr: "Max est maintenant le meilleur ami de Lisa.",
       image: "❤️",
+    },
+  ],
+  questions: [
+    {
+      id: "pet",
+      question: "Welk dier wordt Lisa's vriend?",
+      questionFr: "Quel animal devient l'ami de Lisa ?",
+      options: [
+        { id: "dog", label: "Een hond", labelFr: "Un chien", isCorrect: true },
+        { id: "bird", label: "Een vogel", labelFr: "Un oiseau", isCorrect: false },
+      ],
     },
   ],
 };
