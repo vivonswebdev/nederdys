@@ -593,6 +593,35 @@ export type Database = {
         }
         Relationships: []
       }
+      daily_challenge_rewards: {
+        Row: {
+          child_id: string
+          created_at: string
+          date: string
+          xp: number
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          date: string
+          xp: number
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          date?: string
+          xp?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_challenge_rewards_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       daily_challenges: {
         Row: {
           challenge_type: string
@@ -1158,6 +1187,10 @@ export type Database = {
       claim_collection_reward: {
         Args: { p_child_id: string; p_collection_key: string }
         Returns: Json
+      }
+      claim_daily_challenge_xp: {
+        Args: { p_child_id: string }
+        Returns: number
       }
       claim_season_reward: {
         Args: {
