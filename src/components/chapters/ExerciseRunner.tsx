@@ -200,7 +200,8 @@ export const ExerciseRunner = ({
     }
     setFeedback(isCorrect ? "correct" : "wrong");
     if (isCorrect) setReaction("correct");
-    isCorrect ? sounds.correct() : sounds.wrong();
+    if (isCorrect) sounds.correct();
+    else sounds.wrong();
     speakBoth(isCorrect ? UI.correct : UI.wrong, childLang);
     const nextCorrect = correctCount + (isCorrect ? 1 : 0);
     if (isCorrect) setCorrectCount(nextCorrect);
